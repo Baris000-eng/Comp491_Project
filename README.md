@@ -1,5 +1,5 @@
 # Comp491_Project
-This is the repository of our comp491 senior design project.
+This is the repository of our Comp491 Computer Engineering Senior Design Project.
 
 Group Members:
 
