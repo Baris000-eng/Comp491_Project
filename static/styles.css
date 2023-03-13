@@ -1,0 +1,163 @@
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: #F5F5F5;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+	font-size: 48px;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 50px;
+	text-shadow: 2px 2px #888888;
+	color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.2);
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0;
+}
+
+
+label {
+	color: #333;
+	font-size: 24px;
+	font-weight: bold;
+	margin-top: 20px;
+	display: inline-block;
+	text-align: right;
+	margin-right: 20px;
+	min-width: 200px;
+}
+
+select {
+	width: 100%;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-bottom: 2px solid #45a049;
+	font-size: 20px;
+	appearance: none;
+	background-color: #FFF;
+	color: #555;
+	font-family: inherit;
+}
+
+input[type=submit] {
+	background-color: #45a049;
+	color: #FFF;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	align-items: center;
+	font-size: 20px;
+	transition: background-color 0.3s;
+	font-family: inherit;
+	text-transform: uppercase;
+}
+
+input[type=submit]:hover {
+	background-color: #4CAF50;
+	align-items: center;
+}
+
+form > * {
+	width: 100%;
+	max-width: 400px;
+}
+
+@media screen and (max-width: 600px) {
+	h1 {
+	  font-size: 36px;
+	}
+	label {
+	  min-width: 100px;
+	}
+}
+
+button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #3e8e41;
+}
+
+input[type="button"][value="Login"] {
+	/* Your CSS styles here */
+	background-color: #4CAF50; 
+	border: none;
+	border-radius: 4px;
+	color: white;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+  }
+
+  input[type="button"][value="Signup"] {
+	/* Your CSS styles here */
+	background-color: #4CAF50; 
+	border: none;
+	border-radius: 4px;
+	color: white;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+  }
+   
+  label {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    display: block; /* change to block element to take up full width */
+    text-align: left; /* align label text to the left */
+}
+
+input[type=text], input[type=password] {
+    width: 100%; /* take up full width */
+    padding: 14px 20px;
+	border-radius: 4px;
+    margin: 8px 0;
+    border: none;
+    border-bottom: 2px solid #45a049;
+    font-size: 20px;
+    appearance: none;
+    background-color: #FFF;
+    color: #555;
+    font-family: inherit;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    outline: none;
+    border-bottom: 2px solid #4CAF50; 
+}
+

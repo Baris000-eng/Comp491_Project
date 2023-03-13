@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('templates', filename='styles.css') }}">
+{% endblock %}
+{% block content %}
+  <div class="container">
+    <h2>IT Staff Login</h2>
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+    <form method="POST" action="">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+      <input type="submit" value="Log In">
+    </form>
+  </div>
+{% endblock %}
