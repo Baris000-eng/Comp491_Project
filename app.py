@@ -34,55 +34,37 @@ def it_staff_screen():
 
 @app.route('/student_signup', methods=['GET', 'POST'])
 def student_signup():
-    if request.method == 'POST':
-        # Handle form submission here
-        return redirect('/student_screen')
-    else:
+    if request.method == 'GET':
         return render_template('student_signup.html')
     
 
 @app.route('/student_login', methods=['GET', 'POST'])
 def student_login():
-    if request.method == 'POST':
-        # Handle form submission here
-        return redirect('/student_screen')
-    else:
+    if request.method == 'GET':
         return render_template('student_login.html')
     
 @app.route('/it_staff_signup', methods=['GET', 'POST'])
 def it_staff_signup():
-    if request.method == 'POST':
-        # Handle form submission here
-        return redirect('/it_staff_screen')
-    else:
+      if request.method == 'GET':
         return render_template('it_staff_signup.html')
     
 
 @app.route('/it_staff_login', methods=['GET', 'POST'])
 def it_staff_login():
-    if request.method == 'POST':
-        # Handle form submission here
-        return redirect('/it_staff_screen')
-    else:
+    if request.method == 'GET':
         return render_template('it_staff_login.html')
     
 @app.route('/teacher_signup', methods=['GET', 'POST'])
 def teacher_signup():
-    if request.method == 'POST':
-        # Handle form submission here
-        return redirect('/teacher_screen')
-    else:
+     if request.method == 'GET':
         return render_template('teacher_signup.html')
-    
 
 @app.route('/teacher_login', methods=['GET', 'POST'])
 def teacher_login():
-    if request.method == 'POST':
-        # Handle form submission here
-        return redirect('/teacher_screen')
-    else:
+    if request.method == 'GET':
         return render_template('teacher_login.html')
-    
+
+          
 if __name__=='main':
     app.run(debug=True, host="127.0.0.1", port="5000")
 
