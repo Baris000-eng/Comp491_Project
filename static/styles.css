@@ -17,6 +17,43 @@ h1 {
 	color: #333;
 }
 
+#description {
+	background-color: darkcyan;
+	padding: 20px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	font-size: 11px;
+	display: none;
+	line-height: 1.5;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+}
+
+
+#description p:first-child {
+	margin-top: 0px;
+}
+
+#description p:last-child {
+	margin-bottom: 0px;
+}
+
+
+#help-text {
+	background-color: darkcyan;
+	padding: 20px;
+	font-size: 11px;
+	display: none;
+	line-height: 1.5;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+#help-text,#description {
+	display: none;
+}
+
+
 form {
     display: flex;
     flex-direction: column;
@@ -161,3 +198,50 @@ input[type=text]:focus, input[type=password]:focus {
     border-bottom: 2px solid #4CAF50; 
 }
 
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	max-width: 600px;
+	margin: auto;
+	padding: 20px;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+}
+h1 {
+	text-align: center;
+}
+button {
+	margin-bottom: 20px;
+}
+
+form {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.2);
+    padding: 20px;
+    width: 100%;
+    max-width: 750px;
+    margin: 0;
+}
+label, select {
+	margin-bottom: 10px;
+}
+input[type=submit] {
+	padding: 10px 20px;
+	font-size: 16px;
+	font-weight: bold;
+	color: white;
+	background-color: blue;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+}
+input[type=submit]:hover {
+	background-color: darkblue;
+}
