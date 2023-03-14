@@ -50,7 +50,6 @@ def student_dashboard():
 @app.route('/student_signup', methods=['GET', 'POST'])
 def student_signup():
     if request.method == 'POST':
-        # Handle form submission here
         # Get the username and password from the form data
         username = request.form['username']
         password = request.form['password']
@@ -77,7 +76,6 @@ def student_signup():
             conn.commit()
             conn.close()
 
-            # Define a JavaScript alert message
             alert_message = "Signup successful! Now you can go to student dashboard by clicking below button."
 
             return render_template('student_signup.html', alert_message=alert_message)
@@ -130,6 +128,8 @@ def teacher_login():
     
 if __name__=='main':
     app.run(debug=True, host="127.0.0.1", port="5000")
+
+
 
 
 
