@@ -3,17 +3,34 @@
 
 <head>
     <title>Student DashBoard</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: black
+        }
+    </style>
     <link rel="stylesheet" type="text/css" href="../static/dashboard.css">
 </head>
 
 <body>
     <h1>Student DashBoard</h1>
     <div>
-        <form action="" class="right-div">
+        <h1>
+
+            <pre>{{ n|safe }}</pre>
+        </h1>
+
+    </div>
+    <div class="left_half">
+        <form action="/reservingClass" method="POST">>
 
             <h2>RESERVE A CLASS</h2>
             <label for="Class-Codes">Select your class code</label>
-            <input type="text" placeholder="Enter your class code">
+            <input type="text" name="class_num" placeholder="Enter your class code">
             <label for="">or select one from the drop down list</label>
 
             <select id="class-selector" name="class-code">
@@ -32,12 +49,12 @@
             <br>
             <br>
             <label for="Please specify time">Please specify date and time</label>
-            <input type="time" Specify time>
-            <input type="date">
+            <input type="time" name="time" Specify time>
+            <input type="date" name="date_input">
             <br>
             <label for="">Specift wheter you want to study alone or with other people</label>
             <label>
-                <input type="radio" name="option" value="private">
+                <input type="radio" name="option" value="private" checked>
                 I want private class
             </label>
 
@@ -73,6 +90,23 @@
         </form>
 
     </div>
+
+
+
+
+
+    <div class="left_half">
+        <h2>Here Are The Reserved Classes</h2>
+        <form action="/getIT" method="POST">
+            <div class="container">
+                <pre>{{ content|safe }}</pre>
+            </div>
+            <button type="submit">Click to see the reserved classes.</button>
+        </form>
+
+    </div>
+
+
 
 
 </body>
