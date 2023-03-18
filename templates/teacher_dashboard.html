@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="../static/dashboard.css">
+</head>
+
+<body>
+
+
+
+
+    <h1>Welcome To Teacher Dashboard</h1>
+
+    <div>
+        <form action="" class="right-div">
+
+            <h2>Reserving a class</h2>
+            <label for="Class-Codes">Select your class code</label>
+            <input type="text" placeholder="Enter your class code">
+            <label for="">or select one from the drop down list</label>
+
+            <select id="class-selector" name="class-code">
+                <!--
+                    sınıfların api'ı alındıktan sonra arr1 dan sınıflar çekilip select elementlar for loop içinde doldurulacak
+                    const arr1 = ['Option 1', 'Option 2', 'Option 3'];
+                -->
+                <option value="engz50">engz50</option>
+                <option value="sci124">sci124</option>
+                <option value="sosb08">sosb08</option>
+                <option value="sosb09">sosb09</option>
+            </select>
+            <br>
+
+
+
+
+            <br>
+            <br>
+            <label for="Please specify time">Please specify date and time</label>
+            <input type="time" Specify time>
+            <input type="date">
+            <br>
+            <label for="">Please specify your purpose of reservation.</label>
+            <label>
+                <input type="radio" name="option" value="private">
+                I want to reserve for an exam.
+            </label>
+            <label>
+                <input type="radio" name="option" value="private">
+                I want to reserve for a lecture.
+            </label>
+            <label>
+                <input type="radio" name="option" value="public">
+                I want to reserve for a ps.
+            </label>
+            <button>Click to submit reservation</button>
+        </form>
+    </div>
+
+    <div>
+
+
+
+
+        <br>
+        <div class="left_half">
+            <h2>Report An IT Problem From Here</h2>
+            <form action="/reportingIT" method="POST">
+                <h2>RESERVE A CLASS</h2>
+                <label for="room_number">Enter information about rooms</label>
+                <h4>Information of the Room</h4>
+                <input type="text" name="room_number" placeholder="Enter Room Number">
+                <h4>Information of the Faculty</h4>
+                <input type="text" name="faculty_name" placeholder="Enter Faculty Name">
+
+                <label for="problem_description">What is the problem? Describe the problem in detail. Thank you.</label>
+                <br>
+                <textarea name="problem_description"></textarea>
+                <br>
+                <label for="date">Please specify date and time</label>
+                <input type="date" name="date">
+                <input type="time" name="time">
+                <br>
+                <button type="submit">Click to submit the problem to IT</button>
+            </form>
+
+
+           
+
+</body>
+
+</html>
