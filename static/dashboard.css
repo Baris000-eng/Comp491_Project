@@ -120,7 +120,7 @@ input[type="text"] {
 
     border: none;
     border-radius: 4px;
-    color: white;
+    color: black;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -143,4 +143,13 @@ input {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+}
+
+.left_half {
+  width: 50%;
+  height: 100%;
+  float: left;
+  background-color: orangered;
+  box-sizing: border-box;
+  padding: 20px;
 }
