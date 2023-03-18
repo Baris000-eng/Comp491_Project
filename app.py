@@ -1,3 +1,5 @@
+import glob
+import os
 import sqlite3
 from flask import Flask, render_template, request, redirect, url_for
 from flask import Flask, request, render_template, url_for, redirect
@@ -179,9 +181,35 @@ def report_it():
     return 'Thank you for reporting the problem to IT!'
 
 
+@app.route('/reservingClass', methods=['POST'])
+def reserve_class():
+    class_num = request.form['class_num']
+    class_code = request.form['class-code']
+    date_input = request.form['date_input']
+    option = request.form['option']
+    time = request.form['time']
+
+    # Write the form data to the file
+    with open('reserved_classes.txt', 'a') as f:
+        f.write(f'Class Number: {class_num}\n')
+        f.write(f'Class Code: {class_code}\n')
+        f.write(f'Option: {option}\n')
+        f.write(f'Date: {date_input}\n')
+        f.write(f'Time: {time}\n\n')
+
+    # Return a response to the user
+    return 'Reservation submitted successfully'
+
+
+@app.route('/getIT', methods=['POST'])
+def getIT():
+    with open("classes_teacher.txt", "r") as f:
+        content = f.read()
+        content = content.replace('\n', '<br>')
+
+    # Return a response to the user
+    return render_template("student_dashboard.html", content=content)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
