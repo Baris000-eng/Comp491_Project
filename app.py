@@ -98,9 +98,29 @@ def student_signup():
 @app.route('/student_login', methods=['GET', 'POST'])
 def student_login():
     if request.method == 'POST':
-        return redirect('/student_dashboard')
-    else:
-        return render_template('student_login.html')
+        # Get the username and password from the form data
+        username = request.form['username']
+        password = request.form['password']
+
+        conn = sqlite3.connect('students_signup_db.db')
+        c = conn.cursor()
+
+        # Check if the username-password pair already exists in the database
+        c.execute(f"SELECT * FROM students_signup_db WHERE username = '{username}' AND password = '{password}'")
+        existing_student = c.fetchone()
+        if existing_student:
+            # Redirect to dashboard if student already exists
+            return redirect('/student_dashboard')
+        else:
+            # Render template with message and button to go to signup screen
+            message = "You haven't signed up yet. Please go to student signup screen by clicking below button."
+            button_text = "Go To Student Signup Screen"
+            button_url = "/student_signup"
+            return render_template('student_login.html', message=message, button_text=button_text, button_url=button_url)
+
+    # Render the student login form
+    return render_template('student_login.html')
+
 
 
 @app.route('/it_staff_signup', methods=['GET', 'POST'])

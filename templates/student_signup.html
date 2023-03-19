@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Student Signup</title>
     <link rel="stylesheet" type="text/css" href="../static/styles.css">
 </head>
+
 <body>
+    <button onclick="hideOrOpenSignupHelp()" name="student-signup-guide" value="student-signup-guide"
+        id="student-signup-guide">Open Student Signup Guide</button>
+    <p id="student-signup-help-text" style="display: none;">
+        Please enter your username and password in the below textboxes. To close the student signup guide,
+        press the button of student signup guide again.
+    </p>
     <h1>Student Signup</h1>
     <form action="/student_signup" method="post">
         <label for="username">Username</label>
@@ -12,33 +20,23 @@
 
         <label for="password">Password</label>
         <input type="password" id="password" name="password" required>
-        <br>
-        <br>
-        <button type="submit">Signup</button>
+        <br><br>
+        <input type="submit" value="Signup">
     </form>
 
-    {% if alert_message %}
-        <p>{{ alert_message }}</p>
-        <!-- Button to go to student dashboard -->
-        <button onclick="goToStudentDashboard()" class="button">Go To Student Dashboard</button>
-        <script>
-            // Function to redirect to student dashboard
-            function goToStudentDashboard() {
-                window.location.href = "{{ url_for('student_dashboard') }}";
+    <script>
+        function hideOrOpenSignupHelp() {
+            var signupHelpText = document.getElementById("student-signup-help-text");
+            var signupGuideButton = document.getElementById("student-signup-guide");
+            if (signupHelpText.style.display === "none") {
+                signupHelpText.style.display = "block";
+                signupGuideButton.textContent = "Close Student Signup Guide";
+            } else {
+                signupHelpText.style.display = "none";
+                signupGuideButton.textContent = "Open Student Signup Guide";
             }
-        </script>
-    {% endif %}
-
-    {% if error_message %}
-        <p>{{ error_message }}</p>
-        <!-- Button to go to student login screen -->
-        <button onclick="goToStudentLogin()" class="button">Go To Student Login Screen</button>
-        <script>
-            // Function to redirect to student login screen
-            function goToStudentLogin() {
-                window.location.href = "{{ url_for('student_login') }}";
-            }
-        </script>
-    {% endif %}
+        }
+    </script>
 </body>
+
 </html>
