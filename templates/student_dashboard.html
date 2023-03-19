@@ -2,113 +2,212 @@
 <html>
 
 <head>
-    <title>Student DashBoard</title>
-    <style>
-        .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: black
-        }
-    </style>
+    <title>Student Dashboard</title>
     <link rel="stylesheet" type="text/css" href="../static/dashboard.css">
 </head>
 
 <body>
-    <h1>Student DashBoard</h1>
-    <div>
-        <h1>
+    <h1>Student Dashboard</h1>
+    <div class="container">
+        <div class="buttons">
+            <button onclick="toggleReservation()">Reserve Class</button>
+            <button onclick="toggleIT()">Report to IT</button>
+            <button name="see-reserved-classrooms">See Reserved Classrooms</button>
+            <button name="customize-student-dashboard" onclick="toggleCustomize()">Customize Student Dashboard</button>
+        </div>
 
-            <pre>{{ n|safe }}</pre>
-        </h1>
 
-    </div>
-    <div class="left_half">
-        <form action="/reservingClass" method="POST">>
+        <!----------------Left Half Div *-------------------------------------------------->
+        <div class="left_half" id="reservationForm" style="display:none;">
+            <form action="/reservingClass" method="POST" style="text-align:center;">
+                <h2>RESERVE A CLASS</h2>
+                <label for="Class-Codes">Select your class code</label>
+                <input type="text" name="class_num" placeholder="Enter your class code">
+                <label for="">or select one from the drop down list</label>
+                <select id="class-selector" name="class-code">
+                    <option value="engz50">engz50</option>
+                    <option value="sci124">sci124</option>
+                    <option value="sosb08">sosb08</option>
+                    <option value="sosb09">sosb09</option>
+                </select>
+                <br>
+                <br>
+                <label for="Please specify time">Please specify date and time</label>
+                <input type="time" name="time" Specify time>
+                <input type="date" name="date_input">
+                <br>
+                <label for="">Specify whether you want to study alone or with other people</label>
+                <label>
+                    <input type="radio" name="option" value="private" checked>
+                    I want private class
+                </label>
+                <label>
+                    <input type="radio" name="option" value="public">
+                    I want public class
+                </label>
+                <br>
+                <button type="submit">Click to submit reservation</button>
+            </form>
+        </div>
+        <!----------------Left Half Div *-------------------------------------------------->
 
-            <h2>RESERVE A CLASS</h2>
-            <label for="Class-Codes">Select your class code</label>
-            <input type="text" name="class_num" placeholder="Enter your class code">
-            <label for="">or select one from the drop down list</label>
 
-            <select id="class-selector" name="class-code">
-                <!--
-                    sınıfların api'ı alındıktan sonra arr1 dan sınıflar çekilip select elementlar for loop içinde doldurulacak
-                    const arr1 = ['Option 1', 'Option 2', 'Option 3'];
-                -->
-                <option value="engz50">engz50</option>
-                <option value="sci124">sci124</option>
-                <option value="sosb08">sosb08</option>
-                <option value="sosb09">sosb09</option>
+
+        <!----------------Right Half Div *-------------------------------------------------->
+        <div class="right_half" id="itForm" style="display:none;">
+            <form action="/reportingIT" method="POST" style="text-align:center;">
+                <h2>REPORT AN IT PROBLEM</h2>
+                <label for="room_number">Enter information about rooms</label>
+                <h4>Information of the Room</h4>
+                <input type="text" name="room_number" placeholder="Enter Room Number">
+                <h4>Information of the Faculty</h4>
+                <input type="text" name="faculty_name" placeholder="Enter Faculty Name">
+                <label for="problem_description">What is the problem? Describe the problem in detail. Thank you.</label>
+                <br>
+                <textarea name="problem_description"></textarea>
+                <br>
+                <label for="date">Please specify date and time</label>
+                <input type="date" name="date">
+                <input type="time" name="time">
+                <br>
+                <button type="submit">Click to submit the problem to IT</button>
+            </form>
+        </div>
+        <!----------------Right Half Div *-------------------------------------------------->
+
+
+
+
+        <!----------------customized_student_dashboard Div *-------------------------------------------------->
+        <div class="customized_student_dashboard" id="customizedForm" style="display:none;">
+            <h2>Customize Student Dashboard</h2>
+            <h4>Adjust Screen Brightness</h4>
+            <div id="brightnessControl">
+                <input type="range" min="0" max="100" value="100" id="brightnessSlider">
+            </div>
+            <h4>Select Background Color</h4>
+            <select id="bgColorSelector">
+                <option value="white">White</option>
+                <option value="lightgray">Light Gray</option>
+                <option value="beige">Beige</option>
+                <option value="lightblue">Light Blue</option>
             </select>
             <br>
+            <br>
+            <button onclick="applyBgColor()">Apply Background Color</button>
 
+            <h4>Toggle Music</h4>
+            <button onclick="playMusic()">Play Music</button>
+            <button onclick="pauseMusic()">Pause Music</button>
+            <button onclick="stopMusic()">Stop Music</button>
 
-            <br>
-            <br>
-            <label for="Please specify time">Please specify date and time</label>
-            <input type="time" name="time" Specify time>
-            <input type="date" name="date_input">
-            <br>
-            <label for="">Specift wheter you want to study alone or with other people</label>
-            <label>
-                <input type="radio" name="option" value="private" checked>
-                I want private class
+            <h4>Toggle Dark Mode</h4>
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider round"></span>
             </label>
+        </div>
+        <!----------------customized_student_dashboard Div *-------------------------------------------------->
 
-            <label>
-                <input type="radio" name="option" value="public">
-                I want public class
-            </label>
-            <button>Click to submit reservation</button>
-        </form>
-    </div>
-    <div>
+        <!----------------Javascript Code *-------------------------------------------------->
+        <script>
+            var brightnessSlider = document.getElementById("brightnessSlider");
+            var bodyElement = document.getElementsByTagName("body")[0];
 
-    </div>
-    <div class="left_half">
-        <h2>Report An IT Problem From Here</h2>
-        <form action="/reportingIT" method="POST">
-            <h2>RESERVE A CLASS</h2>
-            <label for="room_number">Enter information about rooms</label>
-            <h4>Information of the Room</h4>
-            <input type="text" name="room_number" placeholder="Enter Room Number">
-            <h4>Information of the Faculty</h4>
-            <input type="text" name="faculty_name" placeholder="Enter Faculty Name">
+            brightnessSlider.addEventListener("input", function () {
+                var brightnessValue = this.value;
+                var cssRule = "background-color: hsl(0, 0%, " + brightnessValue + "%);";
+                bodyElement.style.cssText += cssRule;
+                if(brightnessValue >= 50) {
+                    bodyElement.style.color="black";
+                } else {
+                    bodyElement.style.color="white";
+                }
+            });
 
-            <label for="problem_description">What is the problem? Describe the problem in detail. Thank you.</label>
-            <br>
-            <textarea name="problem_description"></textarea>
-            <br>
-            <label for="date">Please specify date and time</label>
-            <input type="date" name="date">
-            <input type="time" name="time">
-            <br>
-            <button type="submit">Click to submit the problem to IT</button>
-        </form>
+            var bgColorSelector = document.getElementById("bgColorSelector");
+            var applyBgColorButton = document.querySelector("button");
 
-    </div>
+            applyBgColorButton.addEventListener("click", function () {
+                var bgColor = bgColorSelector.value;
+                bodyElement.style.backgroundColor = bgColor;
+            });
 
+            bgColorSelector.addEventListener("change", function () {
+                var bgColor = bgColorSelector.value;
+                bodyElement.style.backgroundColor = bgColor;
+            });
 
-
-
-
-    <div class="left_half">
-        <h2>Here Are The Reserved Classes</h2>
-        <form action="/getIT" method="POST">
-            <div class="container">
-                <pre>{{ content|safe }}</pre>
-            </div>
-            <button type="submit">Click to see the reserved classes.</button>
-        </form>
-
-    </div>
+            function applyBgColor() {
+                var bgColor = bgColorSelector.value;
+                bodyElement.style.backgroundColor = bgColor;
+            }
 
 
+            var audioElement = document.createElement("audio");
+            audioElement.src = "../static/c.mp3";
+            audioElement.loop = true;
+
+            function playMusic() {
+                audioElement.play(); // play the audio music
+            }
+
+            function stopMusic() {
+                audioElement.currentTime = 0;  // Reset the audio to the beginning
+                audioElement.pause();          // Pause the audio music
+            }
+
+            function pauseMusic() {
+                audioElement.pause(); // pausing the audio music
+            }
 
 
+            var darkModeToggle = document.getElementById("darkModeToggle");
+            var bodyElement = document.getElementsByTagName("body")[0];
+
+            darkModeToggle.addEventListener("change", function () {
+                if (this.checked) {
+                    bodyElement.style.backgroundColor = "black";
+                    bodyElement.style.color = "white";
+                } else {
+                    bodyElement.style.backgroundColor = "white";
+                    bodyElement.style.color = "black";
+                }
+            });
+
+            function toggleReservation() {
+                var x = document.getElementById("reservationForm");
+                var y = document.getElementById("itForm");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                    y.style.display = "none";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+
+            function toggleIT() {
+                var x = document.getElementById("reservationForm");
+                var y = document.getElementById("itForm");
+                if (y.style.display === "none") {
+                    y.style.display = "block";
+                    x.style.display = "none";
+                } else {
+                    y.style.display = "none";
+                }
+            }
+
+            function toggleCustomize() {
+                var customizedForm = document.getElementById("customizedForm");
+                if (customizedForm.style.display === "none") {
+                    customizedForm.style.display = "block";
+                } else {
+                    customizedForm.style.display = "none";
+                }
+            }
+
+        </script>
+        <!----------------Javascript Code *-------------------------------------------------->
 </body>
 
 </html>

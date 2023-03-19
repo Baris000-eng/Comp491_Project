@@ -98,9 +98,7 @@ def student_signup():
 @app.route('/student_login', methods=['GET', 'POST'])
 def student_login():
     if request.method == 'POST':
-        # Handle form submission here
-        # burdda student dashboardduna redirect etmesi gerekiyor (chat kısmı, sınıf bilgisi falan bburda olcak)
-        return redirect('/student_screen')
+        return redirect('/student_dashboard')
     else:
         return render_template('student_login.html')
 
