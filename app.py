@@ -87,9 +87,14 @@ def student_signup():
             conn.commit()
             conn.close()
 
-            alert_message = "Signup successful! Now you can go to student dashboard by clicking below button."
+            success_message = "You have successfully signed up. Please press the below button to go to the student dashboard."
+            button_text = "Go To Student Dashboard"
+            button_url = "/student_dashboard"
+            return render_template('student_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
 
-            return render_template('student_signup.html', alert_message=alert_message)
+    # Render the student signup form
+    return render_template('student_signup.html')
+
 
     # Render the student signup form
     return render_template('student_signup.html')

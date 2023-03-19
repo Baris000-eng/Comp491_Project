@@ -3,7 +3,7 @@
 
 <head>
     <title>Student Signup</title>
-    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 
 <body>
@@ -14,7 +14,7 @@
         press the button of student signup guide again.
     </p>
     <h1>Student Signup</h1>
-    <form action="/student_signup" method="post">
+    <form action="{{ url_for('student_signup') }}" method="post">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" required>
 
@@ -23,6 +23,18 @@
         <br><br>
         <input type="submit" value="Signup">
     </form>
+
+    {% if error_message %}
+    <p>{{ error_message }}</p>
+    <button onclick="window.location.href='/student_login'" name="student-login" value="student-login"
+        id="student-login">Go to Student Login</button>
+    {% endif %}
+
+    {% if success_message %}
+    <p>{{ success_message }}</p>
+    <button onclick="window.location.href='{{ button_url }}'" name="student-dashboard" value="student-dashboard"
+        id="student-dashboard">{{ button_text }}</button>
+    {% endif %}
 
     <script>
         function hideOrOpenSignupHelp() {
