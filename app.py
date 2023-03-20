@@ -96,10 +96,6 @@ def student_signup():
     return render_template('student_signup.html')
 
 
-    # Render the student signup form
-    return render_template('student_signup.html')
-
-
 @app.route('/student_login', methods=['GET', 'POST'])
 def student_login():
     if request.method == 'POST':
