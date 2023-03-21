@@ -206,6 +206,20 @@ def report_it():
     return 'Thank you for reporting the problem to IT!'
 
 
+@app.route('/reportingChat', methods=['POST'])
+def report_chat():
+
+    problem_description = request.form['problem_description']
+
+    # Write the form data to the file
+    with open('IT_Problems.txt', 'a') as f:
+        #f.write(f'chatUser: {chatUser}\n')
+        f.write(f'Problem Description: {problem_description}\n\n')
+
+    # Return a response to the user
+    return 'Thank you for reporting the problem to IT!'
+
+
 @app.route('/reservingClass', methods=['POST'])
 def reserve_class():
     class_num = request.form['class_num']
