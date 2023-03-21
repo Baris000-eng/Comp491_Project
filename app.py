@@ -3,9 +3,12 @@ import os
 import sqlite3
 from flask import Flask, render_template, request, redirect, url_for
 from flask import Flask, request, render_template, url_for, redirect
+from flask import session
 
 app = Flask(__name__)
-#push test
+# push test
+app.secret_key = '491'
+
 
 @app.route('/signup_success')
 def signup_success():
@@ -87,6 +90,9 @@ def student_signup():
             conn.commit()
             conn.close()
 
+            # Store the username in a session variable
+            session['username'] = username
+
             success_message = "You have successfully signed up. Please press the below button to go to the student dashboard."
             button_text = "Go To Student Dashboard"
             button_url = "/student_dashboard"
@@ -107,7 +113,8 @@ def student_login():
         c = conn.cursor()
 
         # Check if the username-password pair already exists in the database
-        c.execute(f"SELECT * FROM students_signup_db WHERE username = '{username}' AND password = '{password}'")
+        c.execute(
+            f"SELECT * FROM students_signup_db WHERE username = '{username}' AND password = '{password}'")
         existing_student = c.fetchone()
         if existing_student:
             # Redirect to dashboard if student already exists
@@ -121,7 +128,6 @@ def student_login():
 
     # Render the student login form
     return render_template('student_login.html')
-
 
 
 @app.route('/it_staff_signup', methods=['GET', 'POST'])

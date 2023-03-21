@@ -4,6 +4,7 @@
 <head>
     <title>Student Dashboard</title>
     <link rel="stylesheet" type="text/css" href="../static/dashboard.css">
+
 </head>
 
 <body>
@@ -109,6 +110,37 @@
         </div>
         <!----------------customized_student_dashboard Div *-------------------------------------------------->
 
+
+        <!----------------Chat *-------------------------------------------------->
+        <div id="chatForm">
+            <form action="" method="POST" style="text-align:center;">
+                <h1>Welcome, {{ session['username'] }}</h1>
+                <h2>Chat Here</h2>
+                <button
+                    onclick="alert('Be nice in chat. You should be conducting to all the rules of the Koc University.')">Chat
+                    Rules:</button>
+                <div class="chat-history-box">
+                    <label for="class-select">Which class reservation are you chatting for?</label>
+                    <select id="class-select" name="class">
+                        <option value="engz50">engz50</option>
+                        <option value="sci120">sci120</option>
+                        <option value="sosb10">sosb10</option>
+                        <option value="sosb09">sosb09</option>
+                    </select>
+
+                </div>
+
+
+                <input type="text" name="message_to_be_sent" placeholder="Enter the message to be sent.">
+
+                <button type="submit">Send message</button>
+            </form>
+        </div>
+        <!----------------Chat *-------------------------------------------------->
+
+
+
+
         <!----------------Javascript Code *-------------------------------------------------->
         <script>
             var brightnessSlider = document.getElementById("brightnessSlider");
@@ -118,10 +150,10 @@
                 var brightnessValue = this.value;
                 var cssRule = "background-color: hsl(0, 0%, " + brightnessValue + "%);";
                 bodyElement.style.cssText += cssRule;
-                if(brightnessValue >= 50) {
-                    bodyElement.style.color="black";
+                if (brightnessValue >= 50) {
+                    bodyElement.style.color = "black";
                 } else {
-                    bodyElement.style.color="white";
+                    bodyElement.style.color = "white";
                 }
             });
 
@@ -205,6 +237,19 @@
                     customizedForm.style.display = "none";
                 }
             }
+
+
+            function toggleChat() {
+                var x = document.getElementById("chatForm");
+                var y = document.getElementById("chatForm");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                    y.style.display = "none";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+
 
         </script>
         <!----------------Javascript Code *-------------------------------------------------->
