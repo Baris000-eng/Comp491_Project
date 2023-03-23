@@ -250,5 +250,12 @@ def getIT():
     return render_template("student_dashboard.html", content=content)
 
 
+@app.route('/chat_action')
+def chat_action():
+    class_no = request.args.get("classroom")
+    session['classroom'] = class_no
+    return render_template("chat_room.html", class_no=class_no)
+
+
 if __name__ == '__main__':
     app.run(debug=True)

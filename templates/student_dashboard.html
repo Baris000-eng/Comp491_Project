@@ -112,157 +112,167 @@
 
 
         <!----------------Chat *-------------------------------------------------->
-        <div id="chatForm">
-            <form action="" method="POST" style="text-align:center;">
-                <h1>Welcome, {{ session['username'] }}</h1>
-                <h2>Chat Here</h2>
-                <button
-                    onclick="alert('Be nice in chat. You should be conducting to all the rules of the Koc University.')">Chat
-                    Rules:</button>
-                <div class="chat-history-box">
-                    <label for="class-select">Which class reservation are you chatting for?</label>
-                    <select id="class-select" name="class">
-                        <option value="engz50">engz50</option>
-                        <option value="sci120">sci120</option>
-                        <option value="sosb10">sosb10</option>
-                        <option value="sosb09">sosb09</option>
-                    </select>
-
-                </div>
-
-
-                <input type="text" name="message_to_be_sent" placeholder="Enter the message to be sent.">
-
-                <button type="submit">Send message</button>
-            </form>
-        </div>
-        <form action="/reportingChat" method="POST">
-            <label for="report-label">Report Unethical Chat Users From Here:</label>
+        <div id="chatForm"></div>
+        <form action="chat_action">
+            <label for="Please select class to chat"></label>
+            <input type="text" name="classroom" placeholder="Enter the class to chat.">
             <br>
-            <label for="problem-label">Please describe problem here:</label>
-            <br>
-            <textarea id="problem_description" name="problem_description" rows="4" cols="50"></textarea>
-            <br>
-            <button type="submit">report_to_chat</button>
+            <button type="submit">Go to chat.</button>
         </form>
-
-        <!----------------Chat *-------------------------------------------------->
-
+    </div>
 
 
+    <div id="chatForm">
+        <form action="" method="POST" style="text-align:center;">
+            <h1>Welcome, {{ session['username'] }}</h1>
+            <h2>Chat Here</h2>
+            <button
+                onclick="alert('Be nice in chat. You should be conducting to all the rules of the Koc University.')">Chat
+                Rules:</button>
+            <div class="chat-history-box">
+                <label for="class-select">Which class reservation are you chatting for?</label>
+                <select id="class-select" name="class">
+                    <option value="engz50">engz50</option>
+                    <option value="sci120">sci120</option>
+                    <option value="sosb10">sosb10</option>
+                    <option value="sosb09">sosb09</option>
+                </select>
 
-        <!----------------Javascript Code *-------------------------------------------------->
-        <script>
-            var brightnessSlider = document.getElementById("brightnessSlider");
-            var bodyElement = document.getElementsByTagName("body")[0];
+            </div>
 
-            brightnessSlider.addEventListener("input", function () {
-                var brightnessValue = this.value;
-                var cssRule = "background-color: hsl(0, 0%, " + brightnessValue + "%);";
-                bodyElement.style.cssText += cssRule;
-                if (brightnessValue >= 50) {
-                    bodyElement.style.color = "black";
-                } else {
-                    bodyElement.style.color = "white";
-                }
-            });
 
-            var bgColorSelector = document.getElementById("bgColorSelector");
-            var applyBgColorButton = document.querySelector("button");
+            <input type="text" name="message_to_be_sent" placeholder="Enter the message to be sent.">
 
-            applyBgColorButton.addEventListener("click", function () {
-                var bgColor = bgColorSelector.value;
-                bodyElement.style.backgroundColor = bgColor;
-            });
+            <button type="submit">Send message</button>
+        </form>
+    </div>
+    <form action="/reportingChat" method="POST">
+        <label for="report-label">Report Unethical Chat Users From Here:</label>
+        <br>
+        <label for="problem-label">Please describe problem here:</label>
+        <br>
+        <textarea id="problem_description" name="problem_description" rows="4" cols="50"></textarea>
+        <br>
+        <button type="submit">report_to_chat</button>
+    </form>
 
-            bgColorSelector.addEventListener("change", function () {
-                var bgColor = bgColorSelector.value;
-                bodyElement.style.backgroundColor = bgColor;
-            });
+    <!----------------Chat *-------------------------------------------------->
 
-            function applyBgColor() {
-                var bgColor = bgColorSelector.value;
-                bodyElement.style.backgroundColor = bgColor;
+
+
+
+    <!----------------Javascript Code *-------------------------------------------------->
+    <script>
+        var brightnessSlider = document.getElementById("brightnessSlider");
+        var bodyElement = document.getElementsByTagName("body")[0];
+
+        brightnessSlider.addEventListener("input", function () {
+            var brightnessValue = this.value;
+            var cssRule = "background-color: hsl(0, 0%, " + brightnessValue + "%);";
+            bodyElement.style.cssText += cssRule;
+            if (brightnessValue >= 50) {
+                bodyElement.style.color = "black";
+            } else {
+                bodyElement.style.color = "white";
             }
+        });
+
+        var bgColorSelector = document.getElementById("bgColorSelector");
+        var applyBgColorButton = document.querySelector("button");
+
+        applyBgColorButton.addEventListener("click", function () {
+            var bgColor = bgColorSelector.value;
+            bodyElement.style.backgroundColor = bgColor;
+        });
+
+        bgColorSelector.addEventListener("change", function () {
+            var bgColor = bgColorSelector.value;
+            bodyElement.style.backgroundColor = bgColor;
+        });
+
+        function applyBgColor() {
+            var bgColor = bgColorSelector.value;
+            bodyElement.style.backgroundColor = bgColor;
+        }
 
 
-            var audioElement = document.createElement("audio");
-            audioElement.src = "../static/c.mp3";
-            audioElement.loop = true;
+        var audioElement = document.createElement("audio");
+        audioElement.src = "../static/c.mp3";
+        audioElement.loop = true;
 
-            function playMusic() {
-                audioElement.play(); // play the audio music
+        function playMusic() {
+            audioElement.play(); // play the audio music
+        }
+
+        function stopMusic() {
+            audioElement.currentTime = 0;  // Reset the audio to the beginning
+            audioElement.pause();          // Pause the audio music
+        }
+
+        function pauseMusic() {
+            audioElement.pause(); // pausing the audio music
+        }
+
+
+        var darkModeToggle = document.getElementById("darkModeToggle");
+        var bodyElement = document.getElementsByTagName("body")[0];
+
+        darkModeToggle.addEventListener("change", function () {
+            if (this.checked) {
+                bodyElement.style.backgroundColor = "black";
+                bodyElement.style.color = "white";
+            } else {
+                bodyElement.style.backgroundColor = "white";
+                bodyElement.style.color = "black";
             }
+        });
 
-            function stopMusic() {
-                audioElement.currentTime = 0;  // Reset the audio to the beginning
-                audioElement.pause();          // Pause the audio music
+        function toggleReservation() {
+            var x = document.getElementById("reservationForm");
+            var y = document.getElementById("itForm");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                y.style.display = "none";
+            } else {
+                x.style.display = "none";
             }
+        }
 
-            function pauseMusic() {
-                audioElement.pause(); // pausing the audio music
+        function toggleIT() {
+            var x = document.getElementById("reservationForm");
+            var y = document.getElementById("itForm");
+            if (y.style.display === "none") {
+                y.style.display = "block";
+                x.style.display = "none";
+            } else {
+                y.style.display = "none";
             }
+        }
 
-
-            var darkModeToggle = document.getElementById("darkModeToggle");
-            var bodyElement = document.getElementsByTagName("body")[0];
-
-            darkModeToggle.addEventListener("change", function () {
-                if (this.checked) {
-                    bodyElement.style.backgroundColor = "black";
-                    bodyElement.style.color = "white";
-                } else {
-                    bodyElement.style.backgroundColor = "white";
-                    bodyElement.style.color = "black";
-                }
-            });
-
-            function toggleReservation() {
-                var x = document.getElementById("reservationForm");
-                var y = document.getElementById("itForm");
-                if (x.style.display === "none") {
-                    x.style.display = "block";
-                    y.style.display = "none";
-                } else {
-                    x.style.display = "none";
-                }
+        function toggleCustomize() {
+            var customizedForm = document.getElementById("customizedForm");
+            if (customizedForm.style.display === "none") {
+                customizedForm.style.display = "block";
+            } else {
+                customizedForm.style.display = "none";
             }
+        }
 
-            function toggleIT() {
-                var x = document.getElementById("reservationForm");
-                var y = document.getElementById("itForm");
-                if (y.style.display === "none") {
-                    y.style.display = "block";
-                    x.style.display = "none";
-                } else {
-                    y.style.display = "none";
-                }
+
+        function toggleChat() {
+            var x = document.getElementById("chatForm");
+            var y = document.getElementById("chatForm");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                y.style.display = "none";
+            } else {
+                x.style.display = "none";
             }
-
-            function toggleCustomize() {
-                var customizedForm = document.getElementById("customizedForm");
-                if (customizedForm.style.display === "none") {
-                    customizedForm.style.display = "block";
-                } else {
-                    customizedForm.style.display = "none";
-                }
-            }
+        }
 
 
-            function toggleChat() {
-                var x = document.getElementById("chatForm");
-                var y = document.getElementById("chatForm");
-                if (x.style.display === "none") {
-                    x.style.display = "block";
-                    y.style.display = "none";
-                } else {
-                    x.style.display = "none";
-                }
-            }
-
-
-        </script>
-        <!----------------Javascript Code *-------------------------------------------------->
+    </script>
+    <!----------------Javascript Code *-------------------------------------------------->
 </body>
 
 </html>
