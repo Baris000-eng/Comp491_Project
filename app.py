@@ -4,10 +4,16 @@ import sqlite3
 from flask import Flask, render_template, request, redirect, url_for
 from flask import Flask, request, render_template, url_for, redirect
 from flask import session
+from flask_socketio import SocketIO
+import socketio
 
 app = Flask(__name__)
-# push test
+# push testf
+
 app.secret_key = '491'
+
+
+socket_chat = SocketIO(app)
 
 
 @app.route('/signup_success')
@@ -257,5 +263,11 @@ def chat_action():
     return render_template("chat_room.html", class_no=class_no)
 
 
+@socket_chat.on('student_joined_chat')
+def handle_join_room_event(data):
+    app.logger.info("New student joined chat.")
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
+    socket_chat.run(app, debug=True)

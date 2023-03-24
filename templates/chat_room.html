@@ -12,12 +12,27 @@
     <div id="chat_history">
 
     </div>
-    <form action="">
+    <form>
         <label for="">Enter text to chat</label>
         <input type="text" placeholder="Enter message">
         <button type="submit">Send message</button>
 
     </form>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+"></script>
+
+<script>
+
+    //connect the socket
+    const socket = io.connect("http://127.0.0.1:5000");
+
+    socket.on('connect', function () {
+        socket.emit('student_joined_chat', {
+            username: "hi",
+            room: "hi"
+        })
+    });
+</script>
 
 </html>
