@@ -6,6 +6,7 @@ from flask import Flask, request, render_template, url_for, redirect
 from flask import session
 from flask_socketio import SocketIO
 import socketio
+from flask_socketio import send
 
 app = Flask(__name__)
 # push testf
@@ -258,14 +259,30 @@ def getIT():
 
 @app.route('/chat_action')
 def chat_action():
+
     class_no = request.args.get("classroom")
     session['classroom'] = class_no
     return render_template("chat_room.html", class_no=class_no)
 
 
-@socket_chat.on('student_joined_chat')
-def handle_join_room_event(data):
-    app.logger.info("New student joined chat.")
+@socket_chat.on("connect")
+def user_connected(info):
+    # send
+    with open('chat_data.txt', 'a') as f:
+        f.write(session['username'] + " entered the chat to room " +
+                session['classroom'] + " \n")
+    print(session['username'] +
+          " joined the chat (room : " + session['classroom'] + ")")
+
+
+@socket_chat.on("disconnect")
+def user_disconnected():
+    with open('chat_data.txt', 'a') as f:
+        f.write(session['username'] + " exited the chat to room " +
+                session['classroom'] + " \n")
+    print(session['username'] +
+          " left the chat room (room : " + session['classroom'] + ")")
+    # send()
 
 
 if __name__ == '__main__':

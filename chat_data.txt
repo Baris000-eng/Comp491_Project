@@ -1,0 +1,2 @@
+chat_data.txtasdfentered the chat to room a 
+asdfexited the chat to room a 

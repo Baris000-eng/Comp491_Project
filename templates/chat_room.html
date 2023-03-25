@@ -3,36 +3,50 @@
 
 <head>
     <title>{{class_no}}</title>
-    <link rel="stylesheet" type="text/css" href="../static/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="../static/chat_room_theme.css">
 
 </head>
 
 <body>
     <h1>Welcome to chatroom for {{class_no}}. Please be nice.</h1>
-    <div id="chat_history">
 
-    </div>
+
+    <div class="message_hist" id="message_hist">Chat history</div>
+
     <form>
         <label for="">Enter text to chat</label>
-        <input type="text" placeholder="Enter message">
-        <button type="submit">Send message</button>
+        <input type="text" name="message_input" placeholder="Enter message">
+        <button type="submit" onClick="send_the_message()"></button>>Send message</button>
 
     </form>
+    <form action="/reportingChat" method="POST" class="chat_report" id="chat_report">
+        <label for="report-label">Report Unethical Chat Users From Here:</label>
+        <br>
+        <label for="problem-label">Please describe problem here:</label>
+        <br>
+        <textarea id="problem_description" name="problem_description" rows="4" cols="50"></textarea>
+        <br>
+        <button type="submit">report_to_chat</button>
+    </form>
+
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
-"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+    integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+    crossorigin="anonymous"></script>
 
 <script>
 
     //connect the socket
     const socket = io.connect("http://127.0.0.1:5000");
 
-    socket.on('connect', function () {
-        socket.emit('student_joined_chat', {
-            username: "hi",
-            room: "hi"
-        })
-    });
+
+    const send_clicked = () => {
+        const message = document.getElementById("message_input");
+
+    };
+
+
+
 </script>
 
 </html>
