@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Teacher Login</title>
 	<link rel="stylesheet" type="text/css" href="../static/styles.css">
 </head>
+
 <body>
 	<h1>Teacher Login</h1>
-		<form action="/teacher_login" method="post">
-			<label for="username">Username</label>
-			<input type="text" id="username" name="username" required>
+	<form action="/teacher_login" method="post">
+		<label for="username">Username</label>
+		<input type="text" id="username" name="username" required>
 
-			<label for="password">Password</label>
-			<input type="password" id="password" name="password" required>
-			<br>
-			<br>
-			<button type="submit">Login</button>
-		</form>
+		<label for="password">Password</label>
+		<input type="password" id="password" name="password" required>
+		<br>
+		<br>
+		<button type="submit">Login</button>
+	</form>
+	<form action="/it_staff_login" method="post">
+		<label for="changePassword">If you forgot your password, change it here.</label>
+		<button type="password_change">Forgot Password</button>
+	</form>
 </body>
+
 </html>
