@@ -9,17 +9,19 @@ def initializeUserTable():
     # Create the students_signup_db table if it doesn't exist yet
     c.execute('''CREATE TABLE IF NOT EXISTS students_signup_db
                 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                    username TEXT NOT NULL, 
-                    password TEXT NOT NULL)''')
+                 username TEXT NOT NULL, 
+                 password TEXT NOT NULL,
+                 email TEXT NOT NULL)''')
 
-def createUser(username, password):
+def createUser(username, password, email):
     """
-    Given a username and password, insert new user into the database
+    Given a username, password, and email, insert new user into the database
     """
     conn = sqlite3.connect('students_signup_db.db')
     c = conn.cursor()
     c.execute(
-            "INSERT INTO students_signup_db (username, password) VALUES (?, ?)", (username, encrypt_password(password)))
+            "INSERT INTO students_signup_db (username, password, email) VALUES (?, ?, ?)", 
+            (username, encrypt_password(password), email))
     conn.commit()
     conn.close()
 
