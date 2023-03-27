@@ -10,16 +10,17 @@
     <button onclick="hideOrOpenSignupHelp()" name="student-signup-guide" value="student-signup-guide"
         id="student-signup-guide">Open Student Signup Guide</button>
     <p id="student-signup-help-text" style="display: none;">
-        Please enter your username and password in the below textboxes. To close the student signup guide,
+        Please enter your username, password, and email in the below textboxes. To close the student signup guide,
         press the button of student signup guide again.
     </p>
     <h1>Student Signup</h1>
     <form action="{{ url_for('student_signup') }}" method="post">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" required>
-
         <label for="password">Password</label>
         <input type="password" id="password" name="password" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" required autocomplete="email" maxlength="50">
         <br><br>
         <input type="submit" value="Signup">
     </form>
