@@ -9,6 +9,13 @@ from flask_socketio import SocketIO
 import socketio
 from flask_socketio import send
 
+import bcrypt
+
+import service.UserService as US
+
+DEBUG = True
+
+
 app = Flask(__name__)
 # push testf
 
@@ -270,6 +277,18 @@ def teacher_login():
         return redirect('/teacher_screen')
     else:
         return render_template('teacher_login.html')
+    
+
+def encrypt_password(password: str):
+    # return hashlib.sha256(password.encode()).hexdigest()
+    salt = bcrypt.gensalt()
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+    return hashed_password
+
+def check_password(input_password: str, hashed_password: str):
+    # return actual_password == encrypt_password(input_password)
+    return bcrypt.checkpw(input_password.encode('utf-8'), hashed_password)
+
 
 
 @app.route('/reserve', methods=['POST'])
