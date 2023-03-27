@@ -25,16 +25,6 @@ app.config['SECRET_KEY'] = '491'
 
 socket_chat = SocketIO(app)
 
-from flask import Flask, request
-import sqlite3
-import random
-import string
-import smtplib
-from email.mime.text import MIMEText
-
-app = Flask(__name__)
-
-
 @app.route('/password_change', methods=['POST'])
 def password_change():
     email = request.form.get('email')
@@ -50,6 +40,7 @@ def password_change():
 
     # Redirect the user to the password change screen
     return redirect(url_for('password_change_screen', email=email))
+
 
 @app.route('/password_change_screen', methods=['GET'])
 def password_change_screen():
@@ -94,11 +85,6 @@ def student_password_change():
 @app.route('/password_change_success')
 def password_change_success():
     return render_template('password_change_success.html')
-
-
-
-
-socket_chat = SocketIO(app)
 
 
 @app.route('/signup_success')
