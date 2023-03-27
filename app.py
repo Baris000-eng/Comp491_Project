@@ -4,10 +4,16 @@ import sqlite3
 from flask import Flask, render_template, request, redirect, url_for
 from flask import Flask, request, render_template, url_for, redirect
 from flask import session
+from flask import session
+from flask_socketio import SocketIO
+import socketio
+from flask_socketio import send
+
 
 app = Flask(__name__)
 # push test
 app.secret_key = '491'
+socket_chat = SocketIO(app)
 
 
 @app.route('/signup_success')
@@ -250,6 +256,33 @@ def getIT():
     return render_template("student_dashboard.html", content=content)
 
 
+@app.route('/chat_action')
+def chat_action():
+
+    class_no = request.args.get("classroom")
+    session['classroom'] = class_no
+    return render_template("chat_room.html", class_no=class_no)
+
+
+@socket_chat.on("connect")
+def user_connected(info):
+    # send
+    with open('chat_data.txt', 'a') as f:
+        f.write(session['username'] + " entered the chat to room " +
+                session['classroom'] + " \n")
+    print(session['username'] +
+          " joined the chat (room : " + session['classroom'] + ")")
+
+
+@socket_chat.on("disconnect")
+def user_disconnected():
+    with open('chat_data.txt', 'a') as f:
+        f.write(session['username'] + " exited the chat to room " +
+                session['classroom'] + " \n")
+    print(session['username'] +
+          " left the chat room (room : " + session['classroom'] + ")")
+    # send()
+
 
 @app.route('/showTheClassroomAndInfo')
 def showTheClassroomAndInfo():
@@ -295,7 +328,6 @@ def showTheClassroomAndInfo():
     return render_template("classrooms_and_info.html")
 
 
-
-
 if __name__ == '__main__':
     app.run(debug=True)
+    socket_chat.run(app, debug=True)
