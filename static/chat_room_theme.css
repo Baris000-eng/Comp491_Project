@@ -1,0 +1,77 @@
+/* Set the body background color to blue */
+body {
+    background-color: #1eb600;
+}
+
+
+
+/* Style the h1 element */
+h1 {
+    font-size: 50px;
+    text-align: center;
+    margin: 50px 0;
+}
+
+.message_hist {
+    font-size: 50px;
+    text-align: center;
+    margin: 50px 0;
+    padding-bottom: 100px;
+
+}
+
+.chat_report {
+    font-size: 50px;
+    text-align: center;
+    margin: 50px 0;
+    padding-top: 100px;
+
+}
+
+/* Style the div element */
+div {
+    border: 2px solid #fca311;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 0 auto;
+    text-align: center;
+    align-items: center;
+    max-width: 600px;
+    background: #fc11e1;
+}
+
+/* Style the form element */
+form {
+    padding-bottom: 100px;
+    flex-direction: column;
+}
+
+/* Style the label element */
+label {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+/* Style the input element */
+input {
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 20px;
+}
+
+/* Style the button element */
+button {
+    font-size: 24px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #fc11e1;
+    cursor: pointer;
+}
+
+/* Change the button background color when hovered */
+button:hover {
+    background-color: #d98c10;
+}
