@@ -1,2 +1,2 @@
-chat_data.txtasdfentered the chat to room a 
-asdfexited the chat to room a 
+131231213212 entered the chat to room 12312 
+131231213212 exited the chat to room 12312 

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Student Login</title>
 	<link rel="stylesheet" type="text/css" href="../static/styles.css">
 </head>
+
 <body>
 	<h1>Student Login</h1>
 	<form action="/student_login" method="post">
@@ -17,14 +19,19 @@
 		<button type="submit">Login</button>
 	</form>
 	{% if message %}
-		<p>{{ message }}</p>
-		<button id="signup-btn">{{ button_text }}</button>
-		<script>
-			var buttonSignUp = document.getElementById("signup-btn");
-			buttonSignUp.addEventListener("click", function() {
-				location.href= "/student_signup";
-			});
-		</script>
+	<p>{{ message }}</p>
+	<button id="signup-btn">{{ button_text }}</button>
+	<script>
+		var buttonSignUp = document.getElementById("signup-btn");
+		buttonSignUp.addEventListener("click", function () {
+			location.href = "/student_signup";
+		});
+	</script>
 	{% endif %}
+	<form action="/it_staff_login" method="post">
+		<label for="changePassword">If you forgot your password, change it here.</label>
+		<button type="password_change">Forgot Password</button>
+	</form>
 </body>
+
 </html>

@@ -4,14 +4,17 @@ import sqlite3
 from flask import Flask, render_template, request, redirect, url_for
 from flask import Flask, request, render_template, url_for, redirect
 from flask import session
+from flask import session
 from flask_socketio import SocketIO
 import socketio
 from flask_socketio import send
+
 
 app = Flask(__name__)
 # push testf
 
 app.secret_key = '491'
+socket_chat = SocketIO(app)
 
 
 socket_chat = SocketIO(app)
@@ -285,6 +288,50 @@ def user_disconnected():
     # send()
 
 
+@app.route('/showTheClassroomAndInfo')
+def showTheClassroomAndInfo():
+    import openpyxl
+
+    def load_classes_with_info(filename):
+        # Load workbook
+        workBook = openpyxl.load_workbook(filename)
+
+        # Select active worksheet
+        workBookActive = workBook.active
+
+        # Get column headers
+        columns = workBookActive[1][:8]
+        heads = [collumn.value for collumn in columns]
+
+        # Get data from columns A to H
+        rows = workBookActive.iter_rows(min_row=2)
+        info = []
+        for row in rows:
+            row_values = []
+            for column in row[:8]:
+                row_values.append(column.value)
+            info.append(row_values)
+
+        def create_html_file(txt_string):
+            file = open("templates/classrooms_and_info.html", "w")
+            file.write(txt_string)
+            file.close()
+        beginning = '<!DOCTYPE html> <html> <head> <title>Student Dashboard</title> <link rel="stylesheet" type="text/css" href="../static/styles.css"> </head><body>'
+        html = ""
+        html += beginning
+        html += "<table>\n<thead>\n<tr>\n"
+        html += "".join([f"<th>{header}</th>\n" for header in heads])
+        html += "</tr>\n</thead>\n<tbody>\n"
+        html += "".join(
+            [f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}</tr>\n" for row in info])
+        html += "</tbody>\n</table>"
+        html += "</body></html>"
+        create_html_file(html)
+        return html
+    html = load_classes_with_info('KU_Classrooms.xlsx')
+    return render_template("classrooms_and_info.html")
+
+
 if __name__ == '__main__':
-    # app.run(debug=True)
+    app.run(debug=True)
     socket_chat.run(app, debug=True)

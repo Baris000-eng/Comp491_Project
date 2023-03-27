@@ -112,6 +112,44 @@
 
 
         <!----------------Chat *-------------------------------------------------->
+        <div id="chatForm">
+            <form action="" method="POST" style="text-align:center;">
+                <h1>Welcome, {{ session['username'] }}</h1>
+                <h2>Chat Here</h2>
+                <button
+                    onclick="alert('Be nice in chat. You should be conducting to all the rules of the Koc University.')">Chat
+                    Rules:</button>
+                <div class="chat-history-box">
+                    <label for="class-select">Which class reservation are you chatting for?</label>
+                    <select id="class-select" name="class">
+                        <option value="engz50">engz50</option>
+                        <option value="sci120">sci120</option>
+                        <option value="sosb10">sosb10</option>
+                        <option value="sosb09">sosb09</option>
+                    </select>
+
+                </div>
+
+
+                <input type="text" name="message_to_be_sent" placeholder="Enter the message to be sent.">
+
+                <button type="submit">Send message</button>
+            </form>
+        </div>
+        <form action="/reportingChat" method="POST">
+            <label for="report-label">Report Unethical Chat Users From Here:</label>
+            <br>
+            <label for="problem-label">Please describe problem here:</label>
+            <br>
+            <textarea id="problem_description" name="problem_description" rows="4" cols="50"></textarea>
+            <br>
+            <button type="submit">report_to_chat</button>
+        </form>
+
+        <!----------------Chat *-------------------------------------------------->
+
+
+        <!----------------Chat *-------------------------------------------------->
         <div id="chatForm"></div>
         <form action="chat_action">
             <label for="Please select class to chat"></label>
@@ -148,6 +186,12 @@
     </div>
 
     <!----------------Chat *-------------------------------------------------->
+
+    <form action="/showTheClassroomAndInfo">
+        <input type="submit" value="Show Classroom and Info">
+    </form>
+
+
 
 
 
