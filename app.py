@@ -8,6 +8,7 @@ from flask import session
 from flask_socketio import SocketIO
 import socketio
 from flask_socketio import send
+from service.UserService import student_signup, student_login
 
 import bcrypt
 
@@ -59,7 +60,8 @@ def student_password_change():
         # Check if email is a KU domain email
         suffix_ku = '@ku.edu.tr'
         upper_suffix_ku = suffix_ku.upper()
-        ku_email_detected = email.endswith(suffix_ku) or email.endswith(upper_suffix_ku)
+        casefold_suffix = suffix_ku.casefold()
+        ku_email_detected = email.endswith(suffix_ku) or email.endswith(upper_suffix_ku) or email.endswith(casefold_suffix)
 
         if not ku_email_detected:
             return {'error': 'Please enter a valid KU domain email.'}, 400
@@ -136,92 +138,8 @@ def student_dashboard():
     return render_template('student_dashboard.html')
 
 
-@app.route('/student_signup', methods=['GET', 'POST'])
-def student_signup():
-    if request.method == 'POST':
-        # Get the username, password, and email from the form data
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
-
-        suffix_ku = '@ku.edu.tr'
-        upper_suffix_ku = suffix_ku.upper()
-        ku_email_detected = email.endswith(suffix_ku) or email.endswith(upper_suffix_ku)
-
-        if not ku_email_detected:
-            return """
-            <script>
-                alert('This email address is not from the KU Domain');
-                window.location.href = '/student_signup';
-            </script>
-            """
-
-        conn = sqlite3.connect('students_signup_db.db')
-        c = conn.cursor()
-
-        # Create the students_signup_db table if it doesn't exist yet
-        c.execute('''CREATE TABLE IF NOT EXISTS students_signup_db
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                     username TEXT NOT NULL, 
-                     password TEXT NOT NULL,
-                     email TEXT NOT NULL)''')
-
-        # Check if the username-password pair already exists in the database
-        c.execute(
-            "SELECT * FROM students_signup_db WHERE username = ? AND password = ? AND email = ?", (username, password, email))
-        existing_student = c.fetchone()
-        if existing_student:
-            # Display error message if student already exists
-            error_message = "You have already signed up. Please go to the login screen by clicking below button."
-            return render_template('student_signup.html', error_message=error_message)
-        else:
-            # Insert the new student into the database
-            c.execute(
-                "INSERT INTO students_signup_db (username, password, email) VALUES (?, ?, ?)", (username, password, email))
-            conn.commit()
-            conn.close()
-
-            success_message = "You have successfully signed up. Please press the below button to go to the student dashboard."
-            button_text = "Go To Student Dashboard"
-            button_url = "/student_dashboard"
-            return render_template('student_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
-
-    # Render the student signup form
-    return render_template('student_signup.html')
-
-
-
-@app.route('/student_login', methods=['GET', 'POST'])
-def student_login():
-    if request.method == 'POST':
-        # Get the username and password from the form data
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
-
-        if not email.endswith('@ku.edu.tr') and not email.endswith('@KU.EDU.TR'):
-            flash("This email address is not from the KU Domain")
-            return redirect('/student_login')
-
-        conn = sqlite3.connect('students_signup_db.db')
-        c = conn.cursor()
-
-        # Check if the username-password pair already exists in the database
-        c.execute(
-            f"SELECT * FROM students_signup_db WHERE username = '{username}' AND password = '{password}' AND email = '{email}'")
-        existing_student = c.fetchone()
-        if existing_student:
-            # Redirect to dashboard if student already exists
-            return redirect('/student_dashboard')
-        else:
-            # Render template with message and button to go to signup screen
-            message = "You haven't signed up yet. Please go to student signup screen by clicking below button."
-            button_text = "Go To Student Signup Screen"
-            button_url = "/student_signup"
-            return render_template('student_login.html', message=message, button_text=button_text, button_url=button_url)
-
-    # Render the student login form
-    return render_template('student_login.html')
+app.route('/student_signup', methods=['GET', 'POST'])(student_signup)
+app.route('/student_login', methods=['GET', 'POST'])(student_login)
 
 
 
@@ -263,18 +181,6 @@ def teacher_login():
         return redirect('/teacher_screen')
     else:
         return render_template('teacher_login.html')
-    
-
-def encrypt_password(password: str):
-    # return hashlib.sha256(password.encode()).hexdigest()
-    salt = bcrypt.gensalt()
-    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
-    return hashed_password
-
-def check_password(input_password: str, hashed_password: str):
-    # return actual_password == encrypt_password(input_password)
-    return bcrypt.checkpw(input_password.encode('utf-8'), hashed_password)
-
 
 
 @app.route('/reserve', methods=['POST'])
