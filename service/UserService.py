@@ -78,7 +78,8 @@ def student_login():
         existing_student = c.fetchone()
 
         if not existing_student:
-            return render_template('student_login.html')
+            notExistMessage = "Username does not exist."
+            return render_template('student_login.html',notExistMessage=notExistMessage)
         password_check = UR.check_password(existing_student, password)
      
         if existing_student and password_check:
@@ -234,7 +235,8 @@ def teacher_login():
         existing_student = c.fetchone()
 
         if not existing_student:
-            return render_template('teacher_login.html')
+            notExistMessage = "Username does not exist."
+            return render_template('teacher_login.html',notExistMessage=notExistMessage)
         
         password_check = UR.check_password(existing_student, password)
 
@@ -324,7 +326,8 @@ def it_staff_login():
         existing_student = c.fetchone()
 
         if not existing_student:
-            return render_template('it_staff_login.html')
+            notExistMessage = "Username does not exist."
+            return render_template('it_staff_login.html',notExistMessage=notExistMessage)
         
         password_check = UR.check_password(existing_student, password)
 

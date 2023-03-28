@@ -19,6 +19,11 @@
 		<br>
 		<button type="submit">Login</button>
 	</form>
+
+	{% if notExistMessage %}
+	<p>{{ notExistMessage }}</p>
+	{% endif %}
+
 	<form action="/it_staff_login" method="post">
 		<label for="changePassword">If you forgot your password, change it here.</label>
 		<button type="password_change">Forgot Password</button>
