@@ -25,7 +25,8 @@ socket_chat = SocketIO(app)
 
 
 app.route('/password_change_screen', methods=['GET'])(password_change_screen)
-app.route('/student_password_change', methods=['GET', 'POST'])(student_password_change)
+app.route('/student_password_change',
+          methods=['GET', 'POST'])(student_password_change)
 app.route('/password_change_success')(password_change_success)
 app.route('/password_change', methods=['POST'])(password_change)
 app.route('/it_staff_login', methods=['GET', 'POST'])(it_staff_login)
@@ -52,11 +53,10 @@ app.route('/it_staff_screen')(US.it_staff_screen)
 app.route('/student_dashboard')(US.student_dashboard)
 app.route('/teacher_dashboard')(US.teacher_dashboard)
 app.route('/it_staff_dashboard')(US.it_staff_dashboard)
-
+app.route('/StudentReservesAClass', methods=['POST'])(US.StudentReservesAClass)
 
 socket_chat.on("connect")(US.user_connected)
 socket_chat.on("disconnect")(US.user_disconnected)
-
 
 
 if __name__ == '__main__':

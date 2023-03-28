@@ -293,38 +293,3 @@ input[type=submit]:hover {
 	background-color: darkblue;
 }
 
-
-table {
-	border-collapse: collapse;
-	width: 100%;
-	margin-bottom: 1rem;
-	background-color: #ffffff;
-	color: #212529;
-	font-size: 0.9rem;
-	line-height: 1.6;
-}
-
-th,
-td {
-	padding: 2rem;
-	vertical-align: top;
-	border-top: 1px solid #891199;
-}
-
-thead th {
-	background-color: #14477b;
-	border-color: #253d55;
-	font-weight: bold;
-	text-align: center;
-}
-
-tbody tr:nth-child(odd) {
-	background-color: rgba(97, 5, 154, 0.05);
-}
-
-tbody td {
-	text-align: center;
-}
-
-
-

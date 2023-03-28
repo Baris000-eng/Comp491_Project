@@ -1,0 +1,44 @@
+body {
+    background-color: #198e42;
+    font-family: 'Goudy Old Style', serif;
+    color: #ffffff;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 10px;
+}
+
+th {
+    background-color: #8b0000;
+    color: #ffffff;
+}
+
+td {
+    border-bottom: 1px solid #ddd;
+}
+
+.reserved {
+    background-color: #8b0000;
+    color: #ffffff;
+}
+
+button {
+    background-color: #8b0000;
+    color: #ffffff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #b22222;
+}

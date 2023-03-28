@@ -10,6 +10,7 @@ app.config['SECRET_KEY'] = '491'
 
 ###############STUDENT #####################################################################################
 
+
 def student_signup():
     if request.method == 'POST':
         # Get the username, password, and email from the form data
@@ -31,8 +32,8 @@ def student_signup():
         # Check if a user with the same username already exists in the database
         existing_user = UR.getUserByUsername(username)
         if existing_user is not None:
-             username_taken_error = "This username is already taken. Please choose a different one."
-             return render_template('student_signup.html', username_taken_error=username_taken_error)
+            username_taken_error = "This username is already taken. Please choose a different one."
+            return render_template('student_signup.html', username_taken_error=username_taken_error)
 
         # Check if a user with the same email already exists in the database
         existing_user = UR.getUserByEmail(email)
@@ -51,14 +52,12 @@ def student_signup():
     return render_template('student_signup.html')
 
 
-
 def student_login():
     if request.method == 'POST':
         # Get the username and password from the form data
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-
 
         email_suffix = '@ku.edu.tr'
         casefold_suffix = email_suffix.casefold()
@@ -79,13 +78,13 @@ def student_login():
 
         if not existing_student:
             notExistMessage = "Username does not exist."
-            return render_template('student_login.html',notExistMessage=notExistMessage)
+            return render_template('student_login.html', notExistMessage=notExistMessage)
         password_check = UR.check_password(existing_student, password)
-     
+
         if existing_student and password_check:
             # Redirect to dashboard if student already exists
             return redirect('/student_dashboard')
-        
+
         else:
             # Render template with message and button to go to signup screen
             message = "You haven't signed up yet. Please go to student signup screen by clicking below button."
@@ -96,13 +95,15 @@ def student_login():
     # Render the student login form
     return render_template('student_login.html')
 
+
 def password_change():
     email = request.form.get('email')
 
     ku_suffix = '@ku.edu.tr'
     upper_ku_suffix = ku_suffix.upper()
 
-    belong_to_KU = (email.endswith(upper_ku_suffix) or email.endswith(ku_suffix))
+    belong_to_KU = (email.endswith(upper_ku_suffix)
+                    or email.endswith(ku_suffix))
 
     # Check if the email has a valid domain
     if not belong_to_KU:
@@ -119,7 +120,6 @@ def password_change_screen():
     return render_template('password_change_screen.html', email=email)
 
 
-
 def student_password_change():
     if request.method == 'POST':
         # Get the email, new password, and confirm password from the request body
@@ -131,21 +131,24 @@ def student_password_change():
         suffix_ku = '@ku.edu.tr'
         upper_suffix_ku = suffix_ku.upper()
         casefold_suffix = suffix_ku.casefold()
-        ku_email_detected = email.endswith(suffix_ku) or email.endswith(upper_suffix_ku) or email.endswith(casefold_suffix)
+        ku_email_detected = email.endswith(suffix_ku) or email.endswith(
+            upper_suffix_ku) or email.endswith(casefold_suffix)
 
         if not ku_email_detected:
             flash('Please enter a valid KU domain email.', 'error')
             return redirect(url_for('student_password_change'))
 
         if new_password != confirm_password or new_password == '' or confirm_password == '':
-            flash('New password and confirm password must match and be non-empty.', 'error')
+            flash(
+                'New password and confirm password must match and be non-empty.', 'error')
             return redirect(url_for('student_password_change'))
 
         conn = sqlite3.connect('students_signup_db.db')
         c = conn.cursor()
 
         # Update the password for the student with the given email
-        c.execute("UPDATE students_signup_db SET password = ? WHERE email = ?", (UR.encrypt_password(new_password), email))
+        c.execute("UPDATE students_signup_db SET password = ? WHERE email = ?",
+                  (UR.encrypt_password(new_password), email))
         conn.commit()
         conn.close()
 
@@ -162,6 +165,7 @@ def student_password_change():
 
 def password_change_success():
     return render_template('password_change_success.html')
+
 
 def go_to_opening_screen():
     return render_template('opening_screen.html')
@@ -189,8 +193,8 @@ def teacher_signup():
         # Check if a user with the same username already exists in the database
         existing_user = UR.getUserByUsername(username)
         if existing_user is not None:
-             username_taken_error = "This username is already taken. Please choose a different one."
-             return render_template('teacher_signup.html', username_taken_error=username_taken_error)
+            username_taken_error = "This username is already taken. Please choose a different one."
+            return render_template('teacher_signup.html', username_taken_error=username_taken_error)
 
         # Check if a user with the same email already exists in the database
         existing_user = UR.getUserByEmail(email)
@@ -216,7 +220,6 @@ def teacher_login():
         password = request.form['password']
         email = request.form['email']
 
-
         email_suffix = '@ku.edu.tr'
         casefold_suffix = email_suffix.casefold()
         bigger_suffix = email_suffix.upper()
@@ -231,13 +234,13 @@ def teacher_login():
 
         c.execute(
             f"SELECT * FROM teachers_signup_db WHERE username = '{username}' AND email = '{email}'")
-        
+
         existing_student = c.fetchone()
 
         if not existing_student:
             notExistMessage = "Username does not exist."
-            return render_template('teacher_login.html',notExistMessage=notExistMessage)
-        
+            return render_template('teacher_login.html', notExistMessage=notExistMessage)
+
         password_check = UR.check_password(existing_student, password)
 
         if existing_student and password_check:
@@ -254,9 +257,6 @@ def teacher_login():
     return render_template('teacher_login.html')
 
 ################TEACHER##############################################################################
-
-
-
 
 
 ###################IT STAFF######################################################################
@@ -281,8 +281,8 @@ def it_staff_signup():
         # Check if a user with the same username already exists in the database
         existing_user = UR.getUserByUsername(username)
         if existing_user is not None:
-             username_taken_error = "This username is already taken. Please choose a different one."
-             return render_template('it_staff_signup.html', username_taken_error=username_taken_error)
+            username_taken_error = "This username is already taken. Please choose a different one."
+            return render_template('it_staff_signup.html', username_taken_error=username_taken_error)
 
         # Check if a user with the same email already exists in the database
         existing_user = UR.getUserByEmail(email)
@@ -300,13 +300,13 @@ def it_staff_signup():
     # Render the student signup form
     return render_template('it_staff_signup.html')
 
+
 def it_staff_login():
     if request.method == 'POST':
         # Get the username and password from the form data
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-
 
         email_suffix = '@ku.edu.tr'
         casefold_suffix = email_suffix.casefold()
@@ -322,16 +322,15 @@ def it_staff_login():
 
         c.execute(
             f"SELECT * FROM it_staff_signup_db WHERE username = '{username}' AND email = '{email}'")
-        
+
         existing_student = c.fetchone()
 
         if not existing_student:
             notExistMessage = "Username does not exist."
-            return render_template('it_staff_login.html',notExistMessage=notExistMessage)
-        
+            return render_template('it_staff_login.html', notExistMessage=notExistMessage)
+
         password_check = UR.check_password(existing_student, password)
 
-       
         if existing_student and password_check:
             # Redirect to dashboard if student already exists
             return redirect('/it_staff_dashboard')
@@ -346,10 +345,7 @@ def it_staff_login():
     return render_template('it_staff_login.html')
 
 
-
-
 ###################IT STAFF######################################################################
-
 
 
 #########OTHER SCREENS #######################################################
@@ -363,7 +359,7 @@ def select_role():
         return redirect(url_for('it_staff_screen'))
     else:
         return render_template('opening_screen.html')
-    
+
 
 def showTheClassroomAndInfo():
     import openpyxl
@@ -389,23 +385,25 @@ def showTheClassroomAndInfo():
             info.append(row_values)
 
         def create_html_file(txt_string):
-            file = open("templates/classrooms_and_info.html", "w")
+            file = open(
+                "templates/Classroom_reservation_students_view.html", "w")
             file.write(txt_string)
             file.close()
-        beginning = '<!DOCTYPE html> <html> <head> <title>Student Dashboard</title> <link rel="stylesheet" type="text/css" href="../static/styles.css"> </head><body>'
+        beginning = '<!DOCTYPE html><html><head><title>Student Dashboard</title><link rel="stylesheet" type="text/css" href="../static/classroom_infos.css"><script> window.addEventListener("DOMContentLoaded", function() { var reserveButtons=document.querySelectorAll("button[action=\'/StudentReservesAClass\']"); reserveButtons.forEach(function(button) { button.addEventListener("click", function() {  var parentRow=button.parentElement.parentElement; parentRow.classList.add(\'reserved\'); });       });     }); </script></head><body>'
+
         html = ""
         html += beginning
         html += "<table>\n<thead>\n<tr>\n"
         html += "".join([f"<th>{header}</th>\n" for header in heads])
         html += "</tr>\n</thead>\n<tbody>\n"
-        html += "".join(
-            [f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}</tr>\n" for row in info])
+        html += "".join([f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><button action='/StudentReservesAClass' method='POST'>Reserve</button></td></tr>\n" for row in info])
+
         html += "</tbody>\n</table>"
         html += "</body></html>"
         create_html_file(html)
         return html
     html = load_classes_with_info('KU_Classrooms.xlsx')
-    return render_template("classrooms_and_info.html")
+    return render_template("Classroom_reservation_students_view.html")
 
 
 def reserve():
@@ -446,10 +444,11 @@ def report_chat():
     problem_description = request.form['problem_description']
 
     with open('IT_Problems.txt', 'a') as f:
-        #f.write(f'chatUser: {chatUser}\n')
+        # f.write(f'chatUser: {chatUser}\n')
         f.write(f'Problem Description: {problem_description}\n\n')
 
     return 'Thank you for reporting the problem to IT!'
+
 
 def reserve_class():
     class_num = request.form['class_num']
@@ -501,25 +500,41 @@ def user_disconnected():
     print(session['username'] +
           " left the chat room (room : " + session['classroom'] + ")")
 
+
 def opening_screen():
     return render_template("opening_screen.html")
+
 
 def teacher_screen():
     return render_template('teacher_screen.html')
 
+
 def student_screen():
     return render_template('student_screen.html')
+
 
 def it_staff_screen():
     return render_template('it_staff_screen.html')
 
+
 def student_dashboard():
     return render_template('student_dashboard.html')
+
 
 def teacher_dashboard():
     return render_template('teacher_dashboard.html')
 
+
 def it_staff_dashboard():
     return render_template('it_staff_dashboard.html')
+
+
+def StudentReservesAClass():
+    # Write the form data to the file
+    with open('Students_reserved_classes_.txt', 'a') as f:
+        f.write(f'Reserved_classes : \n\n')
+
+    # Return a response to the user
+    return 'Reservation submitted successfully'
 
 #########OTHER SCREENS #######################################################
