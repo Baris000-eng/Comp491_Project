@@ -1,6 +1,7 @@
-from flask import render_template, redirect, session,  flash, request, Flask
+from flask import render_template, redirect, session,  flash, request, Flask, url_for, jsonify
 import sqlite3
 import repository.UserRepository as UR
+from flask import flash
 
 app = Flask(__name__)
 
@@ -78,6 +79,7 @@ def student_login():
         
         existing_student = c.fetchone()
         password_check = UR.check_password(existing_student, password)
+
        
         if existing_student and password_check:
             # Redirect to dashboard if student already exists
@@ -91,3 +93,73 @@ def student_login():
 
     # Render the student login form
     return render_template('student_login.html')
+
+@app.route('/password_change', methods=['POST'])
+def password_change():
+    email = request.form.get('email')
+
+    ku_suffix = '@ku.edu.tr'
+    upper_ku_suffix = ku_suffix.upper()
+
+    belong_to_KU = (email.endswith(upper_ku_suffix) or email.endswith(ku_suffix))
+
+    # Check if the email has a valid domain
+    if not belong_to_KU:
+        return jsonify({'error': 'This email address does not belong to the KU domain'})
+
+    # Redirect the user to the password change screen
+    return redirect(url_for('password_change_screen', email=email))
+
+
+@app.route('/password_change_screen', methods=['GET'])
+def password_change_screen():
+    email = request.args.get('email')
+
+    # Render the password change screen with email as parameter
+    return render_template('password_change_screen.html', email=email)
+
+from flask import flash
+
+@app.route('/student_password_change', methods=['GET', 'POST'])
+def student_password_change():
+    if request.method == 'POST':
+        # Get the email, new password, and confirm password from the request body
+        email = request.form['email']
+        new_password = request.form['new_password']
+        confirm_password = request.form['confirm_password']
+
+        # Check if email is a KU domain email
+        suffix_ku = '@ku.edu.tr'
+        upper_suffix_ku = suffix_ku.upper()
+        casefold_suffix = suffix_ku.casefold()
+        ku_email_detected = email.endswith(suffix_ku) or email.endswith(upper_suffix_ku) or email.endswith(casefold_suffix)
+
+        if not ku_email_detected:
+            flash('Please enter a valid KU domain email.', 'error')
+            return redirect(url_for('student_password_change'))
+
+        if new_password != confirm_password or new_password == '' or confirm_password == '':
+            flash('New password and confirm password must match and be non-empty.', 'error')
+            return redirect(url_for('student_password_change'))
+
+        conn = sqlite3.connect('students_signup_db.db')
+        c = conn.cursor()
+
+        # Update the password for the student with the given email
+        c.execute(
+            "UPDATE students_signup_db SET password = ? WHERE email = ?", (UR.encrypt_password(password=new_password), email))
+        conn.commit()
+        conn.close()
+
+        # Redirect to the password_change_success screen
+        flash('Password changed successfully!', 'success')
+        return redirect(url_for('password_change_success'))
+
+    # Render the password change form
+    email = session.get('email', '')
+    return render_template('student_password_change.html', email=email)
+
+
+@app.route('/password_change_success')
+def password_change_success():
+    return render_template('password_change_success.html')

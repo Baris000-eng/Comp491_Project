@@ -2,6 +2,7 @@ import sqlite3
 import bcrypt
 
 
+
 def initializeUserTable():
     conn = sqlite3.connect('students_signup_db.db')
     c = conn.cursor()
@@ -77,6 +78,10 @@ def check_username(user, username: str):
 def check_email(user, email: str):
     email_str = user[3]
     return email_str == email
+
+
+
+
 
 
 

@@ -8,7 +8,7 @@ from flask import session
 from flask_socketio import SocketIO
 import socketio
 from flask_socketio import send
-from service.UserService import student_signup, student_login
+from service.UserService import student_signup, student_login, password_change, password_change_screen, student_password_change, password_change_success
 
 import bcrypt
 
@@ -25,68 +25,6 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 
 socket_chat = SocketIO(app)
-
-@app.route('/password_change', methods=['POST'])
-def password_change():
-    email = request.form.get('email')
-
-    ku_suffix = '@ku.edu.tr'
-    upper_ku_suffix = ku_suffix.upper()
-
-    belong_to_KU = (email.endswith(upper_ku_suffix) or email.endswith(ku_suffix))
-
-    # Check if the email has a valid domain
-    if not belong_to_KU:
-        return jsonify({'error': 'This email address does not belong to the KU domain'})
-
-    # Redirect the user to the password change screen
-    return redirect(url_for('password_change_screen', email=email))
-
-
-@app.route('/password_change_screen', methods=['GET'])
-def password_change_screen():
-    email = request.args.get('email')
-
-    # Render the password change screen with email as parameter
-    return render_template('password_change_screen.html', email=email)
-
-@app.route('/student_password_change', methods=['GET', 'POST'])
-def student_password_change():
-    if request.method == 'POST':
-        # Get the email and new password from the request body
-        email = request.form['email']
-        new_password = request.form['new_password']
-
-        # Check if email is a KU domain email
-        suffix_ku = '@ku.edu.tr'
-        upper_suffix_ku = suffix_ku.upper()
-        casefold_suffix = suffix_ku.casefold()
-        ku_email_detected = email.endswith(suffix_ku) or email.endswith(upper_suffix_ku) or email.endswith(casefold_suffix)
-
-        if not ku_email_detected:
-            return {'error': 'Please enter a valid KU domain email.'}, 400
-
-        conn = sqlite3.connect('students_signup_db.db')
-        c = conn.cursor()
-
-        # Update the password for the student with the given email
-        c.execute(
-            "UPDATE students_signup_db SET password = ? WHERE email = ?", (new_password, email))
-        conn.commit()
-        conn.close()
-
-        # Redirect to the password_change_success screen
-        return redirect(url_for('password_change_success'))
-
-    # Render the password change form
-    email = session.get('email', '')
-    return render_template('student_password_change.html', email=email)
-
-
-
-@app.route('/password_change_success')
-def password_change_success():
-    return render_template('password_change_success.html')
 
 
 @app.route('/signup_success')
@@ -141,6 +79,11 @@ def student_dashboard():
 app.route('/student_signup', methods=['GET', 'POST'])(student_signup)
 app.route('/student_login', methods=['GET', 'POST'])(student_login)
 
+# Routes for password change functionality
+app.route('/password_change_screen', methods=['GET'])(password_change_screen)
+app.route('/student_password_change', methods=['GET', 'POST'])(student_password_change)
+app.route('/password_change_success')(password_change_success)
+app.route('/password_change', methods=['POST'])(password_change)
 
 
 @app.route('/it_staff_signup', methods=['GET', 'POST'])
