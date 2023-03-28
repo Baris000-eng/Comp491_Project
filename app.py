@@ -288,7 +288,12 @@ def getBackFromClassroomInfo():
 
 @app.route('/StudentReservesAClass')
 def StudentReservesAClass():
-    
+    # Write the form data to the file
+    with open('Students_reserved_classes_.txt', 'a') as f:
+        f.write(f'Reserved_classes : \n\n')
+
+    # Return a response to the user
+    return 'Reservation submitted successfully'
 
 
 if __name__ == '__main__':
