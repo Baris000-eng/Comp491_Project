@@ -81,7 +81,8 @@ app.route('/student_login', methods=['GET', 'POST'])(student_login)
 
 # Routes for password change functionality
 app.route('/password_change_screen', methods=['GET'])(password_change_screen)
-app.route('/student_password_change', methods=['GET', 'POST'])(student_password_change)
+app.route('/student_password_change',
+          methods=['GET', 'POST'])(student_password_change)
 app.route('/password_change_success')(password_change_success)
 app.route('/password_change', methods=['POST'])(password_change)
 
@@ -265,17 +266,24 @@ def showTheClassroomAndInfo():
         beginning = '<!DOCTYPE html> <html> <head> <title>Student Dashboard</title> <link rel="stylesheet" type="text/css" href="../static/styles.css"> </head><body>'
         html = ""
         html += beginning
+        html += '! <form action="/getBackFromClassroomInfo" style="padding-top: 20px; padding-bottom: 20px;> <input type="submit" value="Go Back"> </form>'
         html += "<table>\n<thead>\n<tr>\n"
         html += "".join([f"<th>{header}</th>\n" for header in heads])
         html += "</tr>\n</thead>\n<tbody>\n"
         html += "".join(
             [f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}</tr>\n" for row in info])
         html += "</tbody>\n</table>"
+        html += '! <form action="/getBackFromClassroomInfo" > <input type="submit" value="Go Back"> </form>'
         html += "</body></html>"
         create_html_file(html)
         return html
     html = load_classes_with_info('KU_Classrooms.xlsx')
     return render_template("classrooms_and_info.html")
+
+
+@app.route('/getBackFromClassroomInfo')
+def getBackFromClassroomInfo():
+    return render_template("student_dashboard.html")
 
 
 if __name__ == '__main__':
