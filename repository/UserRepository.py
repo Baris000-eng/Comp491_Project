@@ -95,6 +95,7 @@ def check_password(user, password: str):
     """
     Given a user and a raw password, checks if password is correct
     """
+    
     hashed_password = user[2]
     return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
 

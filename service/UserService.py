@@ -74,14 +74,17 @@ def student_login():
 
         c.execute(
             f"SELECT * FROM students_signup_db WHERE username = '{username}' AND email = '{email}'")
-        
-        existing_student = c.fetchone()
-        password_check = UR.check_password(existing_student, password)
 
-       
+        existing_student = c.fetchone()
+
+        if not existing_student:
+            return render_template('student_login.html')
+        password_check = UR.check_password(existing_student, password)
+     
         if existing_student and password_check:
             # Redirect to dashboard if student already exists
             return redirect('/student_dashboard')
+        
         else:
             # Render template with message and button to go to signup screen
             message = "You haven't signed up yet. Please go to student signup screen by clicking below button."
@@ -152,6 +155,7 @@ def student_password_change():
     # Render the password change form
     email = session.get('email', '')
     return render_template('student_password_change.html', email=email)
+
 ###############STUDENT #####################################################################################
 
 
@@ -228,9 +232,12 @@ def teacher_login():
             f"SELECT * FROM teachers_signup_db WHERE username = '{username}' AND email = '{email}'")
         
         existing_student = c.fetchone()
+
+        if not existing_student:
+            return render_template('teacher_login.html')
+        
         password_check = UR.check_password(existing_student, password)
 
-       
         if existing_student and password_check:
             # Redirect to dashboard if student already exists
             return redirect('/teacher_dashboard')
@@ -242,7 +249,7 @@ def teacher_login():
             return render_template('teacher_login.html', message=message, button_text=button_text, button_url=button_url)
 
     # Render the student login form
-    return render_template('student_login.html')
+    return render_template('teacher_login.html')
 
 ################TEACHER##############################################################################
 
@@ -315,6 +322,10 @@ def it_staff_login():
             f"SELECT * FROM it_staff_signup_db WHERE username = '{username}' AND email = '{email}'")
         
         existing_student = c.fetchone()
+
+        if not existing_student:
+            return render_template('it_staff_login.html')
+        
         password_check = UR.check_password(existing_student, password)
 
        
