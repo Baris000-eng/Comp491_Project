@@ -270,8 +270,8 @@ def showTheClassroomAndInfo():
         html += "<table>\n<thead>\n<tr>\n"
         html += "".join([f"<th>{header}</th>\n" for header in heads])
         html += "</tr>\n</thead>\n<tbody>\n"
-        html += "".join(
-            [f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}</tr>\n" for row in info])
+        html += "".join([f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><button>Reserve</button></td></tr>\n" for row in info])
+
         html += "</tbody>\n</table>"
         html += '! <form action="/getBackFromClassroomInfo" > <input type="submit" value="Go Back"> </form>'
         html += "</body></html>"
@@ -284,6 +284,11 @@ def showTheClassroomAndInfo():
 @app.route('/getBackFromClassroomInfo')
 def getBackFromClassroomInfo():
     return render_template("student_dashboard.html")
+
+
+@app.route('/StudentReservesAClass')
+def StudentReservesAClass():
+    
 
 
 if __name__ == '__main__':
