@@ -2,12 +2,36 @@ import sqlite3
 import bcrypt
 
 
-def initializeUserTable():
+def initializeStudentTable():
     conn = sqlite3.connect('students_signup_db.db')
     c = conn.cursor()
 
     # Create the students_signup_db table if it doesn't exist yet
     c.execute('''CREATE TABLE IF NOT EXISTS students_signup_db
+                (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                 username TEXT NOT NULL, 
+                 password TEXT NOT NULL,
+                 email TEXT NOT NULL)''')
+    
+
+def initializeTeachersTable():
+    conn = sqlite3.connect('teachers_signup_db.db')
+    c = conn.cursor()
+
+    # Create the students_signup_db table if it doesn't exist yet
+    c.execute('''CREATE TABLE IF NOT EXISTS teachers_signup_db
+                (id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                 username TEXT NOT NULL, 
+                 password TEXT NOT NULL,
+                 email TEXT NOT NULL)''')
+    
+
+def initializeItStaffTable():
+    conn = sqlite3.connect('it_staff_signup_db.db')
+    c = conn.cursor()
+
+    # Create the students_signup_db table if it doesn't exist yet
+    c.execute('''CREATE TABLE IF NOT EXISTS it_staff_signup_db
                 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                  username TEXT NOT NULL, 
                  password TEXT NOT NULL,
