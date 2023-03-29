@@ -292,16 +292,16 @@ def teacher_login():
         c.execute(
             f"SELECT * FROM teachers_signup_db WHERE username = '{username}' AND email = '{email}'")
 
-        existing_student = c.fetchone()
+        existing_teacher = c.fetchone()
 
-        if not existing_student:
+        if not existing_teacher:
             notExistMessage = "Username does not exist."
             return render_template('teacher_login.html', notExistMessage=notExistMessage)
 
-        password_check = UR.check_password(existing_student, password)
+        password_check = UR.check_password(existing_teacher, password)
 
-        if existing_student and password_check:
-            # Redirect to dashboard if student already exists
+        if existing_teacher and password_check:
+            # Redirect to dashboard if teacher already exists
             session['priority'] = 20
             return redirect('/teacher_dashboard')
         else:
@@ -311,7 +311,7 @@ def teacher_login():
             button_url = "/teacher_signup"
             return render_template('teacher_login.html', message=message, button_text=button_text, button_url=button_url)
 
-    # Render the student login form
+    # Render the teacher login form
     return render_template('teacher_login.html')
 
 ################TEACHER##############################################################################
@@ -336,26 +336,26 @@ def it_staff_signup():
             </script>
             """
 
-        # Check if a user with the same username already exists in the database
+        # Check if an it staff with the same username already exists in the database
         existing_user = UR.getItStaffByUsername(username)
         if existing_user is not None:
             username_taken_error = "This username is already taken. Please choose a different one."
             return render_template('it_staff_signup.html', username_taken_error=username_taken_error)
 
-        # Check if a user with the same email already exists in the database
+        # Check if an it staff with the same email already exists in the database
         existing_user = UR.getItStaffByEmail(email)
         if existing_user is not None:
             email_taken_error = "An account with this email already exists. Please choose a different email or try logging in."
             return render_template('it_staff_signup.html', email_taken_error=email_taken_error)
 
-        # Insert the new user into the database
+        # Insert the new it staff into the database
         UR.createItStaff(username=username, password=password, email=email)
         success_message = "You have successfully signed up. Please press the below button to go to the it staff dashboard."
         button_text = "Go To It Staff Dashboard"
         button_url = "/it_staff_dashboard"
         return render_template('it_staff_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
 
-    # Render the student signup form
+    # Render the it staff signup form
     return render_template('it_staff_signup.html')
 
 

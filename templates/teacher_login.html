@@ -21,8 +21,22 @@
 		<button type="submit">Login</button>
 	</form>
 
+
 	{% if notExistMessage %}
 	<p>{{ notExistMessage }}</p>
+	{% endif %}
+
+
+
+	{% if message %}
+	<p>{{ message }}</p>
+	<button id="signup-btn">{{ button_text }}</button>
+	<script>
+		var buttonSignUp = document.getElementById("signup-btn");
+		buttonSignUp.addEventListener("click", function () {
+			location.href = "/teacher_signup";
+		});
+	</script>
 	{% endif %}
 
 	<form id="password-change-form" action="/password_change_screen" method="get">
