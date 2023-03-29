@@ -1,0 +1,50 @@
+form {
+    border: 3px solid #944747;
+    padding: 40px;
+    width: 1000px;
+    margin: 0 auto;
+    font-size: 24px;
+    background-color: #54c0dc;
+
+}
+
+body {
+    background-color: rgba(84, 192, 220, 255);
+    ;
+}
+
+h2 {
+    font-size: 48px;
+    margin-top: 0;
+}
+
+label {
+    display: inline-block;
+    width: 300px;
+    margin-bottom: 20px;
+    font-size: 36px;
+}
+
+select,
+input[type="radio"] {
+    margin-bottom: 20px;
+    font-size: 26px;
+    transform: scale(1.5);
+
+
+
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 36px;
+}
+
+input[type="submit"]:hover {
+    background-color: #3e8e41;
+}

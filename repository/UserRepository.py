@@ -11,8 +11,9 @@ def initializeStudentTable():
                 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                  username TEXT NOT NULL, 
                  password TEXT NOT NULL,
-                 email TEXT NOT NULL)''')
-    
+                 email TEXT NOT NULL
+                 password 10)''')
+
 
 def initializeTeachersTable():
     conn = sqlite3.connect('teachers_signup_db.db')
@@ -23,8 +24,9 @@ def initializeTeachersTable():
                 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                  username TEXT NOT NULL, 
                  password TEXT NOT NULL,
-                 email TEXT NOT NULL)''')
-    
+                 email TEXT NOT NULL
+                 priority INTEGER DEFAULT 20)''')
+
 
 def initializeItStaffTable():
     conn = sqlite3.connect('it_staff_signup_db.db')
@@ -35,7 +37,8 @@ def initializeItStaffTable():
                 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                  username TEXT NOT NULL, 
                  password TEXT NOT NULL,
-                 email TEXT NOT NULL)''')
+                 email TEXT NOT NULL
+                 priority INTEGER DEFAULT 10)''')
 
 
 def createUser(username, password, email):
@@ -81,6 +84,7 @@ def getUserByEmail(email: str):
     student = c.fetchone()
     return student
 
+
 def existsByUsername(username: str):
     """
     Return true if a user exists in database with this username, false otherwise.
@@ -89,6 +93,7 @@ def existsByUsername(username: str):
 
     return not (user is None)
 
+
 def existsByEmail(email: str):
     """
     Return true if a user exists in database with this email, false otherwise.
@@ -96,6 +101,7 @@ def existsByEmail(email: str):
     user = getUserByEmail(email)
 
     return not (user is None)
+
 
 def encrypt_password(password: str):
     """
@@ -110,7 +116,7 @@ def check_password(user, password: str):
     """
     Given a user and a raw password, checks if password is correct
     """
-    
+
     hashed_password = user[2]
     return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
 
@@ -131,6 +137,6 @@ def change_password(email: str, password: str):
 
     # Update the password for the student with the given email
     c.execute("UPDATE students_signup_db SET password = ? WHERE email = ?",
-                (encrypt_password(password), email))
+              (encrypt_password(password), email))
     conn.commit()
     conn.close()

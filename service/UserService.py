@@ -46,6 +46,7 @@ def student_signup():
         success_message = "You have successfully signed up. Please press the below button to go to the student dashboard."
         button_text = "Go To Student Dashboard"
         button_url = "/student_dashboard"
+
         return render_template('student_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
 
     # Render the student signup form
@@ -83,6 +84,8 @@ def student_login():
 
         if existing_student and password_check:
             # Redirect to dashboard if student already exists
+            session["username"] = username
+
             return redirect('/student_dashboard')
 
         else:
@@ -127,7 +130,8 @@ def student_password_change():
             return redirect(url_for('student_password_change'))
 
         if new_password != confirm_password or new_password == '' or confirm_password == '':
-            flash('New password and confirm password must match and be non-empty.', 'error')
+            flash(
+                'New password and confirm password must match and be non-empty.', 'error')
             return redirect(url_for('student_password_change'))
 
         UR.change_password(email, new_password)
@@ -150,6 +154,7 @@ def password_change_success():
 
 def go_to_opening_screen():
     return render_template('opening_screen.html')
+
 
 def validate_credentials(username, password, email):
     """
@@ -186,6 +191,7 @@ def validate_credentials(username, password, email):
         return render_template('student_signup.html', username_taken_error=username_taken_error)
 
     return (is_valid, error_message)
+
 
 def is_ku_email(email: str):
     """
@@ -232,6 +238,7 @@ def teacher_signup():
         success_message = "You have successfully signed up. Please press the below button to go to the teacher dashboard."
         button_text = "Go To Teacher Dashboard"
         button_url = "/teacher_dashboard"
+
         return render_template('teacher_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
 
     # Render the student signup form
@@ -270,6 +277,7 @@ def teacher_login():
 
         if existing_student and password_check:
             # Redirect to dashboard if student already exists
+            session['priority'] = 20
             return redirect('/teacher_dashboard')
         else:
             # Render template with message and button to go to signup screen
@@ -421,7 +429,7 @@ def showTheClassroomAndInfo():
         html += "<table>\n<thead>\n<tr>\n"
         html += "".join([f"<th>{header}</th>\n" for header in heads])
         html += "</tr>\n</thead>\n<tbody>\n"
-        html += "".join([f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><button action='/StudentReservesAClass' method='POST'>Reserve</button></td></tr>\n" for row in info])
+        html += "".join([f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><form action='/StudentReservesAClass' method='POST'><button >Reserve</button></form></td></tr>\n" for row in info])
 
         html += "</tbody>\n</table>"
         html += "</body></html>"
@@ -561,5 +569,17 @@ def StudentReservesAClass():
 
     # Return a response to the user
     return 'Reservation submitted successfully'
+
+
+def student_reserving_class():
+    # Write the form data to the file
+    with open('Students_reserved_classes_.txt', 'a') as f:
+        f.write(f'Reserved_classes : \n\n')
+
+    # Return a response to the user
+    return 'Reservation submitted successfully'
+
+#########OTHER SCREENS #######################################################
+
 
 #########OTHER SCREENS #######################################################

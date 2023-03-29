@@ -54,6 +54,9 @@ app.route('/student_dashboard')(US.student_dashboard)
 app.route('/teacher_dashboard')(US.teacher_dashboard)
 app.route('/it_staff_dashboard')(US.it_staff_dashboard)
 app.route('/StudentReservesAClass', methods=['POST'])(US.StudentReservesAClass)
+app.route('/student_reserving_class',
+          methods=['POST'])(US.student_reserving_class)
+
 
 socket_chat.on("connect")(US.user_connected)
 socket_chat.on("disconnect")(US.user_disconnected)
