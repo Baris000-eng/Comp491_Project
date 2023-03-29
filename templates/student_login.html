@@ -10,16 +10,17 @@
 	<h1>Student Login</h1>
 	<form action="/student_login" method="post">
 		<label for="username">Username</label>
-		<input type="text" id="username" name="username" placeholder = "Please enter your login username here" required>
+		<input type="text" id="username" name="username" placeholder="Please enter your login username here" required>
 		<label for="password">Password</label>
-		<input type="password" id="password" name="password" placeholder = "Please enter your login password here" required>
+		<input type="password" id="password" name="password" placeholder="Please enter your login password here"
+			required>
 		<label for="email">Email</label>
-		<input type="email" id="email" name="email" placeholder = "Please enter your login email here" required>
+		<input type="email" id="email" name="email" placeholder="Please enter your login email here" required>
 		<br>
 		<br>
 		<button type="submit">Login</button>
 	</form>
-	
+
 	{% if notExistMessage %}
 	<p>{{ notExistMessage }}</p>
 	{% endif %}
@@ -35,9 +36,9 @@
 	</script>
 	{% endif %}
 	<form id="password-change-form" action="/password_change_screen" method="get">
-		<label for="changePassword">If you forgot your password, change it here.</label>
+
 		<button type="submit" name="password_change_button" id="password_change_button">Forgot Password</button>
-	</form>	
+	</form>
 </body>
 
 </html>
