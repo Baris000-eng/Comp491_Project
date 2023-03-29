@@ -128,7 +128,7 @@ def password_change():
     email = request.form.get('email')
 
     # Check if a user exists with given email
-    if not UR.existsByEmail(email):
+    if not UR.studentExistsByEmail(email):
         return jsonify({'error': 'No user exists with this email.'})
 
     # Redirect the user to the password change screen
@@ -170,11 +170,10 @@ def student_password_change():
     return render_template('password_change_student.html', email=email)
 
 
-###############STUDENT #####################################################################################
-
 
 def password_change_success():
     return render_template('password_change_success.html')
+###############STUDENT #####################################################################################
 
 
 def go_to_opening_screen():
@@ -402,6 +401,7 @@ def it_staff_login():
 
     # Render the student login form
     return render_template('it_staff_login.html')
+
 
 
 ###################IT STAFF######################################################################

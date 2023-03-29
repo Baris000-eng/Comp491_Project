@@ -260,3 +260,27 @@ def change_student_password(email: str, password: str):
               (encrypt_password(password), email))
     conn.commit()
     conn.close()
+
+
+def change_teacher_password(email: str, password: str):
+    conn = sqlite3.connect('teachers_signup_db.db')
+    c = conn.cursor()
+
+    # Update the password for the student with the given email
+    c.execute("UPDATE teachers_signup_db SET password = ? WHERE email = ?",
+              (encrypt_password(password), email))
+    conn.commit()
+    conn.close()
+
+
+def change_student_password(email: str, password: str):
+    conn = sqlite3.connect('it_staff_signup_db.db')
+    c = conn.cursor()
+
+    # Update the password for the student with the given email
+    c.execute("UPDATE it_staff_signup_db SET password = ? WHERE email = ?",
+              (encrypt_password(password), email))
+    conn.commit()
+    conn.close()
+
+
