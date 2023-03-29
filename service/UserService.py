@@ -170,6 +170,50 @@ def password_change_success():
 def go_to_opening_screen():
     return render_template('opening_screen.html')
 
+def validate_credentials(username, password, email):
+    """
+    Checks if current credentials are valid based on:
+    1. KU Domain requirement
+    2. Email uniqueness
+    3. Username uniqueness
+
+    :param username: Username of the user
+    :param password: Password of the user
+    :param email: Email of the user
+    """
+
+    # TODO: May add validations for password
+
+    is_valid = True
+    error_message = ""
+    if not is_ku_email(email):
+        is_valid = False
+        error_message = """
+        <script>
+            alert('This email address is not from the KU Domain');
+            window.location.href = '/student_signup';
+        </script>
+        """
+        return (is_valid, error_message)
+    elif UR.existsByEmail(email):
+        is_valid = False
+        error_message = "An account with this email already exists. Please choose a different email or try logging in."
+        return is_valid, render_template('student_signup.html', email_taken_error=error_message)
+    elif UR.existsByUsername(username):
+        is_valid = False
+        error_message = "This username is already taken. Please choose a different one."
+        return render_template('student_signup.html', username_taken_error=error_message)
+
+    return (is_valid, error_message)
+
+def is_ku_email(email: str):
+    """
+    Given an string, checks if it belongs to KU Domain (case insensitive)
+    """
+    suffix_ku = '@ku.edu.tr'
+    is_ku_email = email.lower().endswith(suffix_ku)
+    return is_ku_email
+
 
 ################TEACHER##############################################################################
 def teacher_signup():

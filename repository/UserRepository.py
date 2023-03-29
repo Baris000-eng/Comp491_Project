@@ -81,6 +81,21 @@ def getUserByEmail(email: str):
     student = c.fetchone()
     return student
 
+def existsByUsername(username: str):
+    """
+    Return true if a user exists in database with this username, false otherwise.
+    """
+    user = getUserByUsername(username)
+
+    return not (user is None)
+
+def existsByEmail(email: str):
+    """
+    Return true if a user exists in database with this email, false otherwise.
+    """
+    user = getUserByEmail(email)
+
+    return not (user is None)
 
 def encrypt_password(password: str):
     """
@@ -108,3 +123,14 @@ def check_username(user, username: str):
 def check_email(user, email: str):
     email_str = user[3]
     return email_str == email
+
+
+def change_password(email: str, password: str):
+    conn = sqlite3.connect('students_signup_db.db')
+    c = conn.cursor()
+
+    # Update the password for the student with the given email
+    c.execute("UPDATE students_signup_db SET password = ? WHERE email = ?",
+                (encrypt_password(password), email))
+    conn.commit()
+    conn.close()
