@@ -99,15 +99,9 @@ def student_login():
 def password_change():
     email = request.form.get('email')
 
-    ku_suffix = '@ku.edu.tr'
-    upper_ku_suffix = ku_suffix.upper()
-
-    belong_to_KU = (email.endswith(upper_ku_suffix)
-                    or email.endswith(ku_suffix))
-
-    # Check if the email has a valid domain
-    if not belong_to_KU:
-        return jsonify({'error': 'This email address does not belong to the KU domain'})
+    # Check if a user exists with given email
+    if not UR.existsByEmail(email):
+        return jsonify({'error': 'No user exists with this email.'})
 
     # Redirect the user to the password change screen
     return redirect(url_for('password_change_screen', email=email))
@@ -128,14 +122,8 @@ def student_password_change():
         confirm_password = request.form['confirm_password']
 
         # Check if email is a KU domain email
-        suffix_ku = '@ku.edu.tr'
-        upper_suffix_ku = suffix_ku.upper()
-        casefold_suffix = suffix_ku.casefold()
-        ku_email_detected = email.endswith(suffix_ku) or email.endswith(
-            upper_suffix_ku) or email.endswith(casefold_suffix)
-
-        if not ku_email_detected:
-            flash('Please enter a valid KU domain email.', 'error')
+        if not UR.existsByEmail(email):
+            flash('No user exists with this email.', 'error')
             return redirect(url_for('student_password_change'))
 
         if new_password != confirm_password or new_password == '' or confirm_password == '':
@@ -143,14 +131,7 @@ def student_password_change():
                 'New password and confirm password must match and be non-empty.', 'error')
             return redirect(url_for('student_password_change'))
 
-        conn = sqlite3.connect('students_signup_db.db')
-        c = conn.cursor()
-
-        # Update the password for the student with the given email
-        c.execute("UPDATE students_signup_db SET password = ? WHERE email = ?",
-                  (UR.encrypt_password(new_password), email))
-        conn.commit()
-        conn.close()
+        UR.change_password(email, new_password)
 
         # Redirect to the password_change_success screen
         flash('Password changed successfully!', 'success')
@@ -197,12 +178,12 @@ def validate_credentials(username, password, email):
         return (is_valid, error_message)
     elif UR.existsByEmail(email):
         is_valid = False
-        error_message = "An account with this email already exists. Please choose a different email or try logging in."
-        return is_valid, render_template('student_signup.html', email_taken_error=error_message)
+        email_taken_error = "An account with this email already exists. Please choose a different email or try logging in."
+        return is_valid, render_template('student_signup.html', email_taken_error=email_taken_error)
     elif UR.existsByUsername(username):
         is_valid = False
-        error_message = "This username is already taken. Please choose a different one."
-        return render_template('student_signup.html', username_taken_error=error_message)
+        username_taken_error = "This username is already taken. Please choose a different one."
+        return render_template('student_signup.html', username_taken_error=username_taken_error)
 
     return (is_valid, error_message)
 
