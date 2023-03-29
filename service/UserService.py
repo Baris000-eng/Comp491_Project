@@ -381,15 +381,15 @@ def it_staff_login():
         c.execute(
             f"SELECT * FROM it_staff_signup_db WHERE username = '{username}' AND email = '{email}'")
 
-        existing_student = c.fetchone()
+        existing_it_staff = c.fetchone()
 
-        if not existing_student:
+        if not existing_it_staff:
             notExistMessage = "Username does not exist."
             return render_template('it_staff_login.html', notExistMessage=notExistMessage)
 
-        password_check = UR.check_password(existing_student, password)
+        password_check = UR.check_password(existing_it_staff, password)
 
-        if existing_student and password_check:
+        if existing_it_staff and password_check:
             # Redirect to dashboard if student already exists
             return redirect('/it_staff_dashboard')
         else:
