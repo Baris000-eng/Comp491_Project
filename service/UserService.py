@@ -11,6 +11,29 @@ app.config['SECRET_KEY'] = '491'
 ###############STUDENT #####################################################################################
 
 
+###########for checking security ###########################
+def password_security_check(password):
+    # Define the minimum password length
+    min_length = 8
+
+    # Check if the password meets the minimum length requirement
+    if len(password) < min_length:
+        return False
+
+    # Check if the password contains at least one lowercase letter, one uppercase letter, one digit, and one special character
+    has_lower = any(c.islower() for c in password)
+    has_upper = any(c.isupper() for c in password)
+    has_digit = any(c.isdigit() for c in password)
+    has_special = any(not c.isalnum() for c in password)
+    if not (has_lower and has_upper and has_digit and has_special):
+        return False
+
+    # If the password passes all the checks, return True
+    return True
+
+###########for checking security ############################
+
+
 def student_signup():
     if request.method == 'POST':
         # Get the username, password, and email from the form data
