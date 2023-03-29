@@ -1,21 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>IT Staff Signup</title>
 	<link rel="stylesheet" type="text/css" href="../static/styles.css">
 </head>
+
 <body>
 	<h1>IT Staff Signup</h1>
-		<form action="/it_staff_signup" method="post">
-			<label for="username">Username</label>
-			<input type="text" id="username" name="username" placeholder = "Please enter your username to signup" required>
-			<label for="password">Password</label>
-			<input type="password" id="password" name="password" placeholder = "Please enter your password to signup" required>
-			<label for="email">Email:</label>
-<input type="email" id="email" name="email" required = "email" placeholder = "Please enter your email to signup" maxlength="50">
-			<br>
-			<br>
-			<button type="submit">Login</button>
-		</form>
+	<form action="/it_staff_signup" method="post">
+		<label for="username">Username</label>
+		<input type="text" id="username" name="username" placeholder="Please enter your username to signup" required>
+		<label for="password">Password</label>
+		<input type="password" id="password" name="password" placeholder="Please enter your password to signup"
+			required>
+		<label for="email">Email:</label>
+		<input type="email" id="email" name="email" required="email" placeholder="Please enter your email to signup"
+			maxlength="50">
+		<br>
+		<br>
+		<button type="submit">Login</button>
+	</form>
+	{% if username_taken_error %}
+	<p>{{ username_taken_error }} </p>
+	{% endif %}
+	{% if email_taken_error %}
+	<p>{{ email_taken_error }} </p>
+	{% endif %}
+	{% if error_message %}
+	<p>{{ error_message }}</p>
+	<button onclick="window.location.href='/it_staff_login'" name="it-staff-login" value="it-staff-login"
+		id="it-staff-login">Go to It Staff Login</button>
+	{% endif %}
+
+	{% if success_message %}
+	<p>{{ success_message }}</p>
+	<button onclick="window.location.href='{{ button_url }}'" name="it-staff-dashboard" value="it-staff-dashboard"
+		id="it-staff-dashboard">{{ button_text }}</button>
+	{% endif %}
+
 </body>
+
 </html>
