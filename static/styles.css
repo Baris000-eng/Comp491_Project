@@ -158,7 +158,6 @@ button:hover {
 }
 
 input[type="button"][value="Login"] {
-	/* Your CSS styles here */
 	background-color: #4CAF50;
 	border: none;
 	border-radius: 4px;
@@ -173,7 +172,6 @@ input[type="button"][value="Login"] {
 }
 
 input[type="button"][value="Signup"] {
-	/* Your CSS styles here */
 	background-color: #4CAF50;
 	border: none;
 	border-radius: 4px;
@@ -187,7 +185,7 @@ input[type="button"][value="Signup"] {
 	cursor: pointer;
 }
 
-input[type="button"][value="Logout"] {
+input[type="button"][value="Go Back"] {
 	/* Your CSS styles here */
 	background-color: #4CAF50;
 	border: none;

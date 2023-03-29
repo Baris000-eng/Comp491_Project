@@ -127,19 +127,19 @@ def student_password_change():
             return redirect(url_for('student_password_change'))
 
         if new_password != confirm_password or new_password == '' or confirm_password == '':
-            flash(
-                'New password and confirm password must match and be non-empty.', 'error')
+            flash('New password and confirm password must match and be non-empty.', 'error')
             return redirect(url_for('student_password_change'))
 
         UR.change_password(email, new_password)
 
         # Redirect to the password_change_success screen
         flash('Password changed successfully!', 'success')
-        return redirect(url_for('password_change_success', email=email))
+        return redirect(url_for('password_change_success'))
 
     # Render the password change form
     email = session.get('email', '')
-    return render_template('student_password_change.html', email=email)
+    return render_template('password_change_student.html', email=email)
+
 
 ###############STUDENT #####################################################################################
 
