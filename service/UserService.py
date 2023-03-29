@@ -194,6 +194,7 @@ def validate_credentials(username, password, email):
     """
 
     # TODO: May add validations for password
+    ### See the password_security_check function above. Integrate that function here.
 
     is_valid = True
     error_message = ""
@@ -206,11 +207,11 @@ def validate_credentials(username, password, email):
         </script>
         """
         return (is_valid, error_message)
-    elif UR.existsByEmail(email):
+    elif UR.studentExistsByEmail(email) or UR.teacherExistsByEmail(email) or UR.itStaffExistsByEmail(email):
         is_valid = False
         email_taken_error = "An account with this email already exists. Please choose a different email or try logging in."
         return is_valid, render_template('student_signup.html', email_taken_error=email_taken_error)
-    elif UR.existsByUsername(username):
+    elif UR.studentExistsByUsername(username) or UR.teacherExistsByUsername(username) or UR.itStaffExistsByUsername(username):
         is_valid = False
         username_taken_error = "This username is already taken. Please choose a different one."
         return render_template('student_signup.html', username_taken_error=username_taken_error)
