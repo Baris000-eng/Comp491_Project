@@ -193,8 +193,8 @@ def validate_credentials(username, password, email):
     :param email: Email of the user
     """
 
-    # TODO: May add validations for password
-    ### See the password_security_check function above. Integrate that function here.
+    ### TODO: May add validations for password
+    ### TODO: See the password_security_check function above. Integrate that function here.
 
     is_valid = True
     error_message = ""
