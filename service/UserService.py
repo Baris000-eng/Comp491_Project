@@ -12,6 +12,8 @@ app.config['SECRET_KEY'] = '491'
 
 
 ###########for checking security ###########################
+#######TO DO: Integrate this in the validate credentials function. also, check credential validity with the validate_credential function.
+#####TO DO: Add a parameter of screen in validate_credentials function so that it can be used for all types of users #########
 def password_security_check(password):
     # Define the minimum password length
     min_length = 8
@@ -32,7 +34,7 @@ def password_security_check(password):
     return True
 
 ###########for checking security ############################
-
+##############################################################################
 
 def student_signup():
     if request.method == 'POST':
@@ -53,19 +55,19 @@ def student_signup():
             """
 
         # Check if a user with the same username already exists in the database
-        existing_user = UR.getUserByUsername(username)
+        existing_user = UR.getStudentByUsername(username)
         if existing_user is not None:
             username_taken_error = "This username is already taken. Please choose a different one."
             return render_template('student_signup.html', username_taken_error=username_taken_error)
 
         # Check if a user with the same email already exists in the database
-        existing_user = UR.getUserByEmail(email)
+        existing_user = UR.getStudentByEmail(email)
         if existing_user is not None:
             email_taken_error = "An account with this email already exists. Please choose a different email or try logging in."
             return render_template('student_signup.html', email_taken_error=email_taken_error)
 
         # Insert the new user into the database
-        UR.createUser(username=username, password=password, email=email)
+        UR.createStudent(username=username, password=password, email=email)
         success_message = "You have successfully signed up. Please press the below button to go to the student dashboard."
         button_text = "Go To Student Dashboard"
         button_url = "/student_dashboard"
@@ -148,7 +150,7 @@ def student_password_change():
         confirm_password = request.form['confirm_password']
 
         # Check if email is a KU domain email
-        if not UR.existsByEmail(email):
+        if not UR.studentExistsByEmail(email):
             flash('No user exists with this email.', 'error')
             return redirect(url_for('student_password_change'))
 
@@ -157,7 +159,7 @@ def student_password_change():
                 'New password and confirm password must match and be non-empty.', 'error')
             return redirect(url_for('student_password_change'))
 
-        UR.change_password(email, new_password)
+        UR.change_student_password(email, new_password)
 
         # Redirect to the password_change_success screen
         flash('Password changed successfully!', 'success')
@@ -245,19 +247,19 @@ def teacher_signup():
             """
 
         # Check if a user with the same username already exists in the database
-        existing_user = UR.getUserByUsername(username)
+        existing_user = UR.getTeacherByUsername(username)
         if existing_user is not None:
             username_taken_error = "This username is already taken. Please choose a different one."
             return render_template('teacher_signup.html', username_taken_error=username_taken_error)
 
         # Check if a user with the same email already exists in the database
-        existing_user = UR.getUserByEmail(email)
+        existing_user = UR.getTeacherByEmail(email)
         if existing_user is not None:
             email_taken_error = "An account with this email already exists. Please choose a different email or try logging in."
             return render_template('teacher_signup.html', email_taken_error=email_taken_error)
 
         # Insert the new user into the database
-        UR.createUser(username=username, password=password, email=email)
+        UR.createTeacher(username=username, password=password, email=email)
         success_message = "You have successfully signed up. Please press the below button to go to the teacher dashboard."
         button_text = "Go To Teacher Dashboard"
         button_url = "/teacher_dashboard"
@@ -335,19 +337,19 @@ def it_staff_signup():
             """
 
         # Check if a user with the same username already exists in the database
-        existing_user = UR.getUserByUsername(username)
+        existing_user = UR.getItStaffByUsername(username)
         if existing_user is not None:
             username_taken_error = "This username is already taken. Please choose a different one."
             return render_template('it_staff_signup.html', username_taken_error=username_taken_error)
 
         # Check if a user with the same email already exists in the database
-        existing_user = UR.getUserByEmail(email)
+        existing_user = UR.getItStaffByEmail(email)
         if existing_user is not None:
             email_taken_error = "An account with this email already exists. Please choose a different email or try logging in."
             return render_template('it_staff_signup.html', email_taken_error=email_taken_error)
 
         # Insert the new user into the database
-        UR.createUser(username=username, password=password, email=email)
+        UR.createItStaff(username=username, password=password, email=email)
         success_message = "You have successfully signed up. Please press the below button to go to the it staff dashboard."
         button_text = "Go To It Staff Dashboard"
         button_url = "/it_staff_dashboard"

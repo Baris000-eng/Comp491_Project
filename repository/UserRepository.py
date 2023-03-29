@@ -41,9 +41,9 @@ def initializeItStaffTable():
                  priority INTEGER DEFAULT 10)''')
 
 
-def createUser(username, password, email):
+def createStudent(username, password, email):
     """
-    Given a username, password, and email, insert new user into the database
+    Given a username, password, and email, insert new student into the student database
     """
     conn = sqlite3.connect('students_signup_db.db')
     c = conn.cursor()
@@ -54,8 +54,33 @@ def createUser(username, password, email):
     conn.commit()
     conn.close()
 
+def createTeacher(username, password, email):
+    """
+    Given a username, password, and email, insert new teacher into the teacher database
+    """
+    conn = sqlite3.connect('teachers_signup_db.db')
+    c = conn.cursor()
+    c.execute(
+        "INSERT INTO teachers_signup_db (username, password, email) VALUES (?, ?, ?)",
+        (username, encrypt_password(password=password), email)
+    )
+    conn.commit()
+    conn.close()
 
-def getUserByUsername(username: str):
+def createItStaff(username, password, email):
+    """
+    Given a username, password, and email, insert new it staff into the it staff database
+    """
+    conn = sqlite3.connect('it_staff_signup_db.db')
+    c = conn.cursor()
+    c.execute(
+        "INSERT INTO it_staff_signup_db (username, password, email) VALUES (?, ?, ?)",
+        (username, encrypt_password(password=password), email)
+    )
+    conn.commit()
+    conn.close()
+
+def getStudentByUsername(username: str):
     """
     Return a user from the database by its username
     """
@@ -70,7 +95,7 @@ def getUserByUsername(username: str):
     return student
 
 
-def getUserByEmail(email: str):
+def getStudentByEmail(email: str):
     """
     Return a user from the database by its email
     """
@@ -84,23 +109,118 @@ def getUserByEmail(email: str):
     student = c.fetchone()
     return student
 
-
-def existsByUsername(username: str):
+def getTeacherByUsername(username: str):
     """
-    Return true if a user exists in database with this username, false otherwise.
+    Return a teacher from the teacher database by its username
     """
-    user = getUserByUsername(username)
+    conn = sqlite3.connect('teachers_signup_db.db')
+    c = conn.cursor()
 
-    return not (user is None)
+    # Check if the username exists in the database
+    c.execute(
+        "SELECT * FROM teachers_signup_db WHERE username = ?", (username,))
+
+    teach = c.fetchone()
+    return teach
 
 
-def existsByEmail(email: str):
+def getTeacherByEmail(email: str):
     """
-    Return true if a user exists in database with this email, false otherwise.
+    Return a teacher from the teacher database by its email
     """
-    user = getUserByEmail(email)
+    conn = sqlite3.connect('teachers_signup_db.db')
+    c = conn.cursor()
 
-    return not (user is None)
+    # Check if the email exists in the database
+    c.execute(
+        "SELECT * FROM teachers_signup_db WHERE email = ?", (email,))
+
+    teach = c.fetchone()
+    return teach
+
+
+###### for it staff ##########################
+def getItStaffByUsername(username: str):
+    """
+    Return a it staff from the it staff database by its username
+    """
+    conn = sqlite3.connect('it_staff_signup_db.db')
+    c = conn.cursor()
+
+    # Check if the username exists in the database
+    c.execute(
+        "SELECT * FROM it_staff_signup_db WHERE username = ?", (username,))
+
+    itStaff = c.fetchone()
+    return itStaff
+
+def getItStaffByEmail(email: str):
+    """
+    Return a it staff from the it staff database by its email
+    """
+    conn = sqlite3.connect('it_staff_signup_db.db')
+    c = conn.cursor()
+
+    # Check if the email exists in the database
+    c.execute("SELECT * FROM it_staff_signup_db WHERE email = ?", (email,))
+
+    itStaff = c.fetchone()
+    return itStaff
+###### for it staff ##########################
+
+
+
+def teacherExistsByUsername(username: str):
+    """
+    Return true if a teacher exists in teacher database with this username, false otherwise.
+    """
+    teacher = getTeacherByUsername(username)
+
+    return not (teacher is None)
+
+
+def teacherExistsByEmail(email: str):
+    """
+    Return true if a teacher exists in teacher database with this email, false otherwise.
+    """
+    teacher = getTeacherByEmail(email)
+
+    return not (teacher is None)
+
+
+def studentExistsByUsername(username: str):
+    """
+    Return true if a student exists in database with this username, false otherwise.
+    """
+    student = getStudentByUsername(username)
+
+    return not (student is None)
+
+
+def studentExistsByEmail(email: str):
+    """
+    Return true if a student exists in database with this email, false otherwise.
+    """
+    student = getStudentByEmail(email)
+
+    return not (student is None)
+
+def itStaffExistsByUsername(username: str):
+    """
+    Return true if a it staff exists in database with this username, false otherwise.
+    """
+    it_staff = getItStaffByUsername(username)
+
+    return not (it_staff is None)
+
+
+def itStaffExistsByEmail(email: str):
+    """
+    Return true if a it staff exists in database with this email, false otherwise.
+    """
+    it_staff = getItStaffByEmail(email)
+
+    return not (it_staff is None)
 
 
 def encrypt_password(password: str):
@@ -131,7 +251,7 @@ def check_email(user, email: str):
     return email_str == email
 
 
-def change_password(email: str, password: str):
+def change_student_password(email: str, password: str):
     conn = sqlite3.connect('students_signup_db.db')
     c = conn.cursor()
 
