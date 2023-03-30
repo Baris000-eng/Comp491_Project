@@ -12,8 +12,13 @@
 <body>
     <form action="/student_reserving_class" method="post">
         <h2>Reserveing your Class</h2>
-        <label for="classroom">Classroom:</label>
-        <select id="classroom" name="classroom">
+        <label for="classroom">Reservation date:</label>
+        <input type="date" id="classroom-date" name="classroom-date" style="font-size: 24px; background-color: yellow;"
+            required>
+
+        <br><br>
+        <label for="">Reservation Time</label>
+        <select id="classroom" name="classroom" style="margin-left: 100px;">
             <option value="08:30">8:30 AM - 9:45 AM</option>
             <option value="10:00">10:00 AM - 11:15 AM</option>
             <option value="11:30">11:30 AM - 12:45 PM</option>

@@ -11,7 +11,7 @@ app.config['SECRET_KEY'] = '491'
 
 
 ###########for checking security ###########################
-#######TO DO: Integrate this in the validate credentials function. also, check credential validity with the validate_credential function.
+# TO DO: Integrate this in the validate credentials function. also, check credential validity with the validate_credential function.
 #####TO DO: Add a parameter of screen in validate_credentials function so that it can be used for all types of users #########
 def validate_password(password):
     # Define the minimum password length
@@ -35,6 +35,7 @@ def validate_password(password):
 ###########for checking security ############################
 ##############################################################################
 
+
 def student_signup():
     if request.method == 'POST':
         # Get the username, password, and email from the form data
@@ -42,7 +43,8 @@ def student_signup():
         password = request.form['password']
         email = request.form['email']
 
-        is_valid, error_template = validate_credentials(username, password, email)
+        is_valid, error_template = validate_credentials(
+            username, password, email)
         if not is_valid:
             return error_template
 
@@ -51,9 +53,9 @@ def student_signup():
         success_message = "You have successfully signed up. Please press the below button to go to the student dashboard."
         button_text = "Go To Student Dashboard"
         button_url = "/student_dashboard"
-
+        session["username"] = username
+        session["priority"] = 10
         return render_template('student_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
-
     # Render the student signup form
     return render_template('student_signup.html')
 
@@ -90,7 +92,7 @@ def student_login():
         if existing_student and password_check:
             # Redirect to dashboard if student already exists
             session["username"] = username
-
+            session["priority"] = 10
             return redirect('/student_dashboard')
 
         else:
@@ -149,7 +151,6 @@ def change_student_password():
     return render_template('password_change_student.html', email=email)
 
 
-
 def password_change_success():
     return render_template('password_change_success.html')
 ###############STUDENT #####################################################################################
@@ -171,8 +172,8 @@ def validate_credentials(username, password, email):
     :param email: Email of the user
     """
 
-    ### TODO: May add validations for password
-    ### TODO: See the password_security_check function above. Integrate that function here.
+    # TODO: May add validations for password
+    # TODO: See the password_security_check function above. Integrate that function here.
 
     is_valid = True
     if not is_ku_email(email):
@@ -386,7 +387,6 @@ def it_staff_login():
     return render_template('it_staff_login.html')
 
 
-
 ###################IT STAFF######################################################################
 
 
@@ -577,13 +577,46 @@ def StudentReservesAClass():
         f.write(f'Reserved_classes : \n\n')
 
     # Return a response to the user
-    return 'Reservation submitted successfully'
+    return render_template("classroom_inside_reservation.html")
 
 
 def student_reserving_class():
     # Write the form data to the file
     with open('Students_reserved_classes_.txt', 'a') as f:
         f.write(f'Reserved_classes : \n\n')
+    # Read the form data
+
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+
+    # Create the students_signup_db table if it doesn't exist yet
+    c.execute('''CREATE TABLE IF NOT EXISTS reservations_db 
+             (date DATE NOT NULL, 
+              time TIME NOT NULL, 
+              username TEXT, 
+              public_or_private TEXT,
+              classroom TEXT,
+              priority_reserved INTEGER)''')
+    classroom_time = request.form['classroom']
+    classroom_type = request.form['classroom-type']
+    classroom_date = request.form['classroom-date']
+
+    # Insert the new reservation into the database
+    if classroom_type == "private":
+        c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom ,priority_reserved) 
+                    VALUES (?, ?, ?, ?, ?, ?)''', (classroom_date, classroom_time, session["username"], session["priority"], "sci142", "Private"))
+    else:
+        c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom ,priority_reserved) 
+                    VALUES (?, ?, ?, ?, ?, ?)''', (classroom_date, classroom_time, session["username"], session["priority"], "sci142", "Public"))
+
+    # Save the changes to the database
+    conn.commit()
+
+    # Close the database connection
+    conn.close()
+
+    # Return a response to the user
+    return 'Your reservation has been created!'
 
     # Return a response to the user
     return 'Reservation submitted successfully'

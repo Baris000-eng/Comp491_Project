@@ -41,6 +41,34 @@ def initializeItStaffTable():
                  priority INTEGER DEFAULT 10)''')
 
 
+def initializeReservationsTable():
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+
+    # Create the students_signup_db table if it doesn't exist yet
+    c.execute('''CREATE TABLE IF NOT EXISTS reservations_db 
+             (date DATE NOT NULL, 
+              time TIME NOT NULL, 
+              username TEXT, 
+              public_or_private TEXT,
+              classroom TEXT,
+              priority_reserved INTEGER)''')
+
+
+def createReservation(date, time, username, priority, public_or_private, classroom):
+    """
+    Given a date, time, username, priority, insert new reservation into the reservation database
+    """
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+
+    c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom, priority_reserved) 
+             VALUES (?, ?, ?, ?, ?, ?)''', (date, time, username, public_or_private, classroom, priority))
+
+    conn.commit()
+    conn.close()
+
+
 def createStudent(username, password, email):
     """
     Given a username, password, and email, insert new student into the student database
@@ -53,6 +81,7 @@ def createStudent(username, password, email):
     )
     conn.commit()
     conn.close()
+
 
 def createTeacher(username, password, email):
     """
@@ -67,6 +96,7 @@ def createTeacher(username, password, email):
     conn.commit()
     conn.close()
 
+
 def createItStaff(username, password, email):
     """
     Given a username, password, and email, insert new it staff into the it staff database
@@ -79,6 +109,7 @@ def createItStaff(username, password, email):
     )
     conn.commit()
     conn.close()
+
 
 def getStudentByUsername(username: str):
     """
@@ -108,6 +139,7 @@ def getStudentByEmail(email: str):
 
     student = c.fetchone()
     return student
+
 
 def getTeacherByUsername(username: str):
     """
@@ -154,6 +186,7 @@ def getItStaffByUsername(username: str):
     itStaff = c.fetchone()
     return itStaff
 
+
 def getItStaffByEmail(email: str):
     """
     Return a it staff from the it staff database by its email
@@ -167,7 +200,6 @@ def getItStaffByEmail(email: str):
     itStaff = c.fetchone()
     return itStaff
 ###### for it staff ##########################
-
 
 
 def teacherExistsByUsername(username: str):
@@ -204,6 +236,7 @@ def studentExistsByEmail(email: str):
     student = getStudentByEmail(email)
 
     return not (student is None)
+
 
 def itStaffExistsByUsername(username: str):
     """
@@ -282,5 +315,3 @@ def change_it_staff_password(email: str, password: str):
               (encrypt_password(password), email))
     conn.commit()
     conn.close()
-
-
