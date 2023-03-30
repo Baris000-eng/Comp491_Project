@@ -159,18 +159,17 @@ def change_student_password():
             # Check if user exists with email
 
         if not UR.studentExistsByEmail(email):
-            flash('No user exists with this email.', 'error')
-            return redirect(url_for('get_password_change_screen'))
+            email_not_found_error = "No account exists with this email."
+            # return render_template('student_signup.html', username_taken_error=username_taken_error)
+            return render_template('password_change_screen.html', email_not_found_error=email_not_found_error)
 
         if new_password != confirm_password or new_password == '' or confirm_password == '':
-            flash(
-                'New password and confirm password must match and be non-empty.', 'error')
-            return redirect(url_for('get_password_change_screen'))
+            invalid_password_error = "Make sure new password and confirm password match and are valid."
+            return render_template('password_change_screen.html', invalid_password_error=invalid_password_error)
 
         UR.change_student_password(email, new_password)
 
         # Redirect to the password_change_success screen
-        flash('Password changed successfully!', 'success')
         return redirect(url_for('password_change_success'))
 
     # Render the password change form
