@@ -273,7 +273,7 @@ def change_teacher_password(email: str, password: str):
     conn.close()
 
 
-def change_student_password(email: str, password: str):
+def change_it_staff_password(email: str, password: str):
     conn = sqlite3.connect('it_staff_signup_db.db')
     c = conn.cursor()
 
