@@ -29,9 +29,15 @@
     {% if username_taken_error %}
     <p>{{ username_taken_error }} </p>
     {% endif %}
+    {% if not_ku_error %}
+    <p>{{ not_ku_error }} </p>
+    {% endif %}
     {% if email_taken_error %}
     <p>{{ email_taken_error }} </p>
     {% endif %}
+    {% if invalid_password_error %}
+    <p>{{ invalid_password_error|safe }} </p>
+    {% endif %}    
     {% if error_message %}
     <p>{{ error_message }}</p>
     <button onclick="window.location.href='/student_login'" name="student-login" value="student-login"
