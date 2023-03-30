@@ -11,8 +11,8 @@ def initializeStudentTable():
                 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                  username TEXT NOT NULL, 
                  password TEXT NOT NULL,
-                 email TEXT NOT NULL
-                 password 10)''')
+                 email TEXT NOT NULL,
+                 priority INTEGER DEFAULT 10)''')
 
 
 def initializeTeachersTable():
@@ -24,7 +24,7 @@ def initializeTeachersTable():
                 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                  username TEXT NOT NULL, 
                  password TEXT NOT NULL,
-                 email TEXT NOT NULL
+                 email TEXT NOT NULL,
                  priority INTEGER DEFAULT 20)''')
 
 
@@ -37,7 +37,7 @@ def initializeItStaffTable():
                 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                  username TEXT NOT NULL, 
                  password TEXT NOT NULL,
-                 email TEXT NOT NULL
+                 email TEXT NOT NULL,
                  priority INTEGER DEFAULT 10)''')
 
 

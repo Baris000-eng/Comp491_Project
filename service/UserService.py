@@ -1,9 +1,8 @@
 from flask import render_template, redirect, session,  flash, request, Flask, url_for, jsonify
 import sqlite3
 import repository.UserRepository as UR
-from flask import flash
-from flask import flash
 
+DEBUG = True
 app = Flask(__name__)
 app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
@@ -124,40 +123,49 @@ def student_login():
     return render_template('student_login.html')
 
 
-def password_change():
-    email = request.form.get('email')
+def get_password_change_screen():
+    # email = request.form.get('email')
 
-    # Check if a user exists with given email
-    if not UR.studentExistsByEmail(email):
-        return jsonify({'error': 'No user exists with this email.'})
+    # # Check if a user exists with given email
+    # if not UR.studentExistsByEmail(email):
+    #     return jsonify({'error': 'No user exists with this email.'})
 
     # Redirect the user to the password change screen
-    return redirect(url_for('password_change_screen', email=email))
+    # return render_template('password_change_screen.html', email=email)
+    return render_template('password_change_screen.html')
 
 
-def password_change_screen():
-    email = request.args.get('email')
+# def password_change_screen():
+#     email = request.args.get('email')
 
-    # Render the password change screen with email as parameter
-    return render_template('password_change_screen.html', email=email)
+#     # Render the password change screen with email as parameter
+#     return render_template('password_change_screen.html', email=email)
 
 
-def student_password_change():
+def change_student_password():
+    if DEBUG:
+        print(request.method)
     if request.method == 'POST':
         # Get the email, new password, and confirm password from the request body
         email = request.form['email']
         new_password = request.form['new_password']
         confirm_password = request.form['confirm_password']
 
-        # Check if email is a KU domain email
+
+        if DEBUG:
+            print("****************************************************")
+            exists = UR.studentExistsByEmail(email)
+            print('Exists: ' +  str(exists))
+            # Check if user exists with email
+
         if not UR.studentExistsByEmail(email):
             flash('No user exists with this email.', 'error')
-            return redirect(url_for('student_password_change'))
+            return redirect(url_for('get_password_change_screen'))
 
         if new_password != confirm_password or new_password == '' or confirm_password == '':
             flash(
                 'New password and confirm password must match and be non-empty.', 'error')
-            return redirect(url_for('student_password_change'))
+            return redirect(url_for('get_password_change_screen'))
 
         UR.change_student_password(email, new_password)
 

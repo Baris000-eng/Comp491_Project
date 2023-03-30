@@ -8,11 +8,11 @@ from flask import session
 from flask_socketio import SocketIO
 import socketio
 from flask_socketio import send
-from service.UserService import student_signup, student_login, password_change
+from service.UserService import student_signup, student_login
 from repository.UserRepository import initializeItStaffTable, initializeTeachersTable, initializeStudentTable
 from service.UserService import it_staff_login, it_staff_signup, teacher_login, teacher_signup, student_login, student_signup
 import bcrypt
-from service.UserService import password_change_screen, student_password_change, password_change_success, go_to_opening_screen
+from service.UserService import password_change_success, go_to_opening_screen
 from service.UserService import select_role, showTheClassroomAndInfo, chat_action, report_chat, report_it
 from service.UserService import reserve, reserve_class, getIT
 import service.UserService as US
@@ -24,11 +24,11 @@ app.config['SECRET_KEY'] = '491'
 socket_chat = SocketIO(app)
 
 
-app.route('/password_change_screen', methods=['GET'])(password_change_screen)
-app.route('/student_password_change',
-          methods=['GET', 'POST'])(student_password_change)
+app.route('/get_password_change_screen', methods=['GET'])(US.get_password_change_screen)
+app.route('/change_student_password', methods=['POST'])(US.change_student_password)
 app.route('/password_change_success')(password_change_success)
-app.route('/password_change', methods=['POST'])(password_change)
+# app.route('/password_change', methods=['POST'])(password_change)
+
 app.route('/it_staff_login', methods=['GET', 'POST'])(it_staff_login)
 app.route('/it_staff_signup', methods=['GET', 'POST'])(it_staff_signup)
 app.route('/teacher_login', methods=['GET', 'POST'])(teacher_login)
