@@ -7,9 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/reservation_single_class.css">
     <title>Document</title>
+    <style>
+
+    </style>
 </head>
 
 <body>
+
+    <div class="box">
+        <div class="content">
+            <h2>These slots are taken.</h2>
+
+            {% for row in rows %}
+            <h3>--------------- Reservation --------------------</h3>
+            <ul>
+                <li>Date: {{ row[0] }}</li>
+                <li>Time: {{ row[1] }}</li>
+                <li>Username: {{ row[2] }}</li>
+                <li>Public or Private: {{ row[3] }}</li>
+                <li>Classroom: {{ row[4] }}</li>
+                <li>Priority Reserved: {{ row[5] }}</li>
+            </ul>
+            {% endfor %}
+        </div>
+    </div>
     <form action="/student_reserving_class" method="post">
         <h2>Reserveing your Class</h2>
         <label for="classroom">Reservation date:</label>
@@ -45,6 +66,10 @@
         <br><br>
         <input type="submit" value="Reserve">
     </form>
+
+
+
 </body>
+
 
 </html>

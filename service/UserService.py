@@ -577,7 +577,11 @@ def StudentReservesAClass():
         f.write(f'Reserved_classes : \n\n')
 
     # Return a response to the user
-    return render_template("classroom_inside_reservation.html")
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM reservations_db')
+    rows = c.fetchall()
+    return render_template('classroom_inside_reservation.html', rows=rows)
 
 
 def student_reserving_class():
