@@ -5,110 +5,22 @@
 
     <title>Student Dashboard</title>
     <link rel="stylesheet" type="text/css" href="../static/dashboard.css">
-    <style>
-        #chatForm {
-            display: inline-block;
-            vertical-align: top;
-            margin: 20px;
-            padding: 20px;
-            background-color: #f7f7f7;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-            width: 400px;
-        }
 
-        #chatForm h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        #chatForm h2 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        #chatForm label {
-            font-size: 16px;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        #chatForm select,
-        #chatForm input[type="text"] {
-            font-size: 16px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        #chatForm button[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        #chatForm button[type="submit"]:hover {
-            background-color: #3e8e41;
-        }
-
-        #class-select {
-            width: 100%;
-        }
-    </style>
 </head>
 
 <body>
     <h1>Student Dashboard</h1>
     <div class="container">
         <div class="buttons">
-            <button onclick="toggleReservation()">Reserve Class</button>
+            <form action="/openReserveClass" method="POST"> <button onclick="toggleReservation()">Report to IT</button>
+            </form>
             <button onclick="toggleIT()">Report to IT</button>
             <button name="see-reserved-classrooms">See Reserved Classrooms</button>
-            <button name="customize-student-dashboard" onclick="toggleCustomize()">Customize Student Dashboard</button>
+            <button name="customize-student-dashboard" onclick="toggleCustomize()">Customize Student
+                Dashboard</button>
         </div>
 
 
-        <!----------------Left Half Div *-------------------------------------------------->
-        <div class="left_half" id="reservationForm" style="display:none;">
-            <form action="/reservingClass" method="POST" style="text-align:center;">
-                <h2>RESERVE A CLASS</h2>
-                <label for="Class-Codes">Select your class code</label>
-                <input type="text" name="class_num" placeholder="Enter your class code">
-                <label for="">or select one from the drop down list</label>
-                <select id="class-selector" name="class-code">
-                    <option value="engz50">engz50</option>
-                    <option value="sci124">sci124</option>
-                    <option value="sosb08">sosb08</option>
-                    <option value="sosb09">sosb09</option>
-                </select>
-                <br>
-                <br>
-                <label for="Please specify time">Please specify date and time</label>
-                <input type="time" name="time" Specify time>
-                <input type="date" name="date_input">
-                <br>
-                <label for="">Specify whether you want to study alone or with other people</label>
-                <label>
-                    <input type="radio" name="option" value="private" checked>
-                    I want private class
-                </label>
-                <label>
-                    <input type="radio" name="option" value="public">
-                    I want public class
-                </label>
-                <br>
-                <button type="submit">Click to submit reservation</button>
-            </form>
-        </div>
-        <!----------------Left Half Div *-------------------------------------------------->
 
 
 
@@ -169,71 +81,7 @@
         <!----------------customized_student_dashboard Div *-------------------------------------------------->
 
 
-        <!----------------Chat *-------------------------------------------------->
-        <div id="chatForm">
-            <form action="" method="POST" style="text-align:center;">
-                <h1>Welcome, {{ session['username'] }}</h1>
-                <h2>Chat Here</h2>
-                <button
-                    onclick="alert('Be nice in chat. You should be conducting to all the rules of the Koc University.')">Chat
-                    Rules:</button>
-                <div class="chat-history-box">
-                    <label for="class-select">Which class reservation are you chatting for?</label>
-                    <select id="class-select" name="class">
-                        <option value="engz50">engz50</option>
-                        <option value="sci120">sci120</option>
-                        <option value="sosb10">sosb10</option>
-                        <option value="sosb09">sosb09</option>
-                    </select>
 
-                </div>
-
-
-                <input type="text" name="message_to_be_sent" placeholder="Enter the message to be sent.">
-
-                <button type="submit">Send message</button>
-            </form>
-        </div>
-
-
-        <!----------------Chat *-------------------------------------------------->
-
-
-        <!----------------Chat *-------------------------------------------------->
-        <div id="chatForm"></div>
-        <form action="chat_action">
-            <label for="Please select class to chat"></label>
-            <input type="text" name="classroom" placeholder="Enter the class to chat.">
-            <br>
-            <button type="submit">Go to chat.</button>
-        </form>
-    </div>
-
-
-    <div id="chatForm">
-        <form action="" method="POST" style="text-align:center;">
-            <h1>Welcome, {{ session['username'] }}</h1>
-            <h2>Chat Here</h2>
-            <button
-                onclick="alert('Be nice in chat. You should be conducting to all the rules of the Koc University.')">Chat
-                Rules:</button>
-            <div class="chat-history-box">
-                <label for="class-select">Which class reservation are you chatting for?</label>
-                <select id="class-select" name="class">
-                    <option value="engz50">engz50</option>
-                    <option value="sci120">sci120</option>
-                    <option value="sosb10">sosb10</option>
-                    <option value="sosb09">sosb09</option>
-                </select>
-
-            </div>
-
-
-            <input type="text" name="message_to_be_sent" placeholder="Enter the message to be sent.">
-
-            <button type="submit">Send message</button>
-        </form>
-    </div>
 
     <!----------------Chat *-------------------------------------------------->
 

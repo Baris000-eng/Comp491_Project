@@ -21,11 +21,12 @@ import service.UserService as US
 app = Flask(__name__)
 app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
-socket_chat = SocketIO(app)
 
 
-app.route('/get_password_change_screen', methods=['GET'])(US.get_password_change_screen)
-app.route('/change_student_password', methods=['POST'])(US.change_student_password)
+app.route('/get_password_change_screen',
+          methods=['GET'])(US.get_password_change_screen)
+app.route('/change_student_password',
+          methods=['POST'])(US.change_student_password)
 app.route('/password_change_success')(password_change_success)
 # app.route('/password_change', methods=['POST'])(password_change)
 
@@ -57,9 +58,12 @@ app.route('/StudentReservesAClass', methods=['POST'])(US.StudentReservesAClass)
 app.route('/student_reserving_class',
           methods=['POST'])(US.student_reserving_class)
 
+app.route('/openReserveClass',
+          methods=['POST'])(US.openReserveClass)
 
-socket_chat.on("connect")(US.user_connected)
-socket_chat.on("disconnect")(US.user_disconnected)
+
+# socket_chat.on("connect")(US.user_connected)
+# socket_chat.on("disconnect")(US.user_disconnected)
 
 
 if __name__ == '__main__':
@@ -67,4 +71,4 @@ if __name__ == '__main__':
     initializeItStaffTable()
     initializeTeachersTable()
     app.run(debug=True)
-    socket_chat.run(app, debug=True)
+    app.debug = True

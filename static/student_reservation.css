@@ -1,0 +1,71 @@
+div#reservationForm {
+    display: block;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #888888;
+    padding: 20px;
+    margin: 0 auto;
+    width: 50%;
+    max-width: 600px;
+    text-align: left;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+
+div#reservationForm h2 {
+    margin-top: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #555555;
+    text-align: center;
+}
+
+div#reservationForm label {
+    font-size: 16px;
+    color: #555555;
+}
+
+div#reservationForm input[type="text"],
+div#reservationForm input[type="time"],
+div#reservationForm input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 2px solid #dddddd;
+    font-size: 16px;
+    color: #555555;
+}
+
+div#reservationForm select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 2px solid #dddddd;
+    font-size: 16px;
+    color: #555555;
+    background-color: #ffffff;
+}
+
+div#reservationForm button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+div#reservationForm button[type="submit"]:hover {
+    background-color: #3e8e41;
+}

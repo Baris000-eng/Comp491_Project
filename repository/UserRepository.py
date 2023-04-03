@@ -79,6 +79,7 @@ def createStudent(username, password, email):
         "INSERT INTO students_signup_db (username, password, email) VALUES (?, ?, ?)",
         (username, encrypt_password(password=password), email)
     )
+
     conn.commit()
     conn.close()
 

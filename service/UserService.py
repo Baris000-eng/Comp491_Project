@@ -6,6 +6,7 @@ DEBUG = True
 app = Flask(__name__)
 app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
+app.debug = True
 
 ###############STUDENT #####################################################################################
 
@@ -571,6 +572,11 @@ def it_staff_dashboard():
     return render_template('it_staff_dashboard.html')
 
 
+def it_staff_signup():
+    if request.method == 'POST':
+        return render_template('reserve_class_page.html')
+
+
 def StudentReservesAClass():
     # Write the form data to the file
     with open('Students_reserved_classes_.txt', 'a') as f:
@@ -582,6 +588,11 @@ def StudentReservesAClass():
     c.execute('SELECT * FROM reservations_db')
     rows = c.fetchall()
     return render_template('classroom_inside_reservation.html', rows=rows)
+
+
+def openReserveClass():
+    # Write the form data to the file
+    return render_template('reserving_class_page.html')
 
 
 def student_reserving_class():
