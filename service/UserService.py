@@ -426,7 +426,7 @@ def reserve():
         f.write(f'Date: {date}\n')
         f.write(f'Option: {option}\n\n')
 
-    return 'Reservation submitted successfully!'
+    return render_template("return_success_message_classroom_reserved.html")
 
 
 def report_it():
@@ -591,7 +591,7 @@ def student_reserving_class():
     conn.close()
 
     # Return a response to the user
-    return 'Your reservation has been created!'
+    return render_template("return_success_message_classroom_reserved.html")
 
 
 #########OTHER SCREENS #######################################################

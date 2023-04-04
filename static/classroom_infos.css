@@ -2,6 +2,7 @@ body {
     background-color: #198e42;
     font-family: 'Goudy Old Style', serif;
     color: #ffffff;
+
 }
 
 table {
@@ -37,8 +38,10 @@ button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+
 }
 
 button:hover {
     background-color: #b22222;
 }
+
