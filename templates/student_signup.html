@@ -14,7 +14,7 @@
         press the button of student signup guide again.
     </p>
     <h1>Student Signup</h1>
-    <form action="{{ url_for('student_signup') }}" method="post">
+    <form action="{{ url_for('student_signup') }}" autocomplete = "off" method="post">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" placeholder="Please enter your username to signup" required>
         <label for="password">Password</label>
@@ -35,6 +35,15 @@
     {% if email_taken_error %}
     <p>{{ email_taken_error }} </p>
     {% endif %}
+    {% if username_password_equal_error %}
+    <p>{{ username_password_equal_error }} </p>
+    {% endif %}
+	{% if username_email_equal_error %}
+    <p>{{ username_email_equal_error }} </p>
+    {% endif %}
+    {% if password_email_equal_error %}
+    <p>{{password_email_equal_error}} </p>
+    {% endif %}  
     {% if invalid_password_error %}
     <p>{{ invalid_password_error|safe }} </p>
     {% endif %}    

@@ -8,6 +8,19 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
+def equals_ignore_case(s1: str, s2: str) -> bool:
+    return s1.lower() == s2.lower()
+
+def check_username_password_equality(username: str, password: str) -> bool:
+    return equals_ignore_case(username, password)
+
+def check_username_email_equality(username: str, email: str) -> bool:
+    return equals_ignore_case(username, email)
+
+def check_password_email_equality(password: str, email: str) -> bool:
+    return equals_ignore_case(password, email)
+
+
 ###############STUDENT #####################################################################################
 
 
@@ -45,7 +58,7 @@ def student_signup():
         email = request.form['email']
 
         is_valid, error_template = validate_credentials(
-            username, password, email)
+            username = username, password = password, email = email, role = "student")
         if not is_valid:
             return error_template
 
@@ -108,23 +121,7 @@ def student_login():
 
 
 def get_password_change_screen():
-    # email = request.form.get('email')
-
-    # # Check if a user exists with given email
-    # if not UR.studentExistsByEmail(email):
-    #     return jsonify({'error': 'No user exists with this email.'})
-
-    # Redirect the user to the password change screen
-    # return render_template('password_change_screen.html', email=email)
     return render_template('password_change_screen.html')
-
-
-# def password_change_screen():
-#     email = request.args.get('email')
-
-#     # Render the password change screen with email as parameter
-#     return render_template('password_change_screen.html', email=email)
-
 
 def change_student_password():
     if request.method == 'POST':
@@ -135,7 +132,6 @@ def change_student_password():
 
         if not UR.studentExistsByEmail(email):
             email_not_found_error = "No account exists with this email."
-            # return render_template('student_signup.html', username_taken_error=username_taken_error)
             return render_template('password_change_screen.html', email_not_found_error=email_not_found_error)
 
         if new_password != confirm_password or new_password == '' or confirm_password == '':
@@ -161,7 +157,7 @@ def go_to_opening_screen():
     return render_template('opening_screen.html')
 
 
-def validate_credentials(username, password, email):
+def validate_credentials(username, password, email, role):
     """
     Checks if current credentials are valid based on:
     1. KU Domain requirement
@@ -176,29 +172,56 @@ def validate_credentials(username, password, email):
     # TODO: May add validations for password
     # TODO: See the password_security_check function above. Integrate that function here.
 
+    exists_by_email = UR.studentExistsByEmail(email=email)
+    exists_by_username = UR.studentExistsByUsername(username=username)
+    if role == "student":
+        page_rendered = "student_signup.html"
+        exists_by_email = UR.studentExistsByEmail(email=email)
+        exists_by_username = UR.studentExistsByUsername(username=username)
+    elif role == "teacher":
+        page_rendered = "teacher_signup.html"
+        exists_by_email = UR.teacherExistsByEmail(email=email)
+        exists_by_username = UR.teacherExistsByUsername(username=username)
+    elif role == "itstaff":
+        page_rendered = "it_staff_signup.html"
+        exists_by_email = UR.itStaffExistsByEmail(email=email)
+        exists_by_username = UR.itStaffExistsByUsername(username=username)
+
+
     is_valid = True
     if not is_ku_email(email):
         is_valid = False
         not_ku_error = "This email address is not from the KU Domain."
-        return is_valid, render_template('student_signup.html', not_ku_error=not_ku_error)
-    elif UR.studentExistsByEmail(email):
+        return is_valid, render_template(page_rendered, not_ku_error=not_ku_error)
+    elif exists_by_email:
         is_valid = False
         email_taken_error = "An account with this email already exists. Please choose a different email or try logging in."
-        return is_valid, render_template('student_signup.html', email_taken_error=email_taken_error)
-    elif UR.studentExistsByUsername(username):
+        return is_valid, render_template(page_rendered, email_taken_error=email_taken_error)
+    elif exists_by_username:
         is_valid = False
         username_taken_error = "This username is already taken. Please choose a different one."
-        return is_valid, render_template('student_signup.html', username_taken_error=username_taken_error)
+        return is_valid, render_template(page_rendered, username_taken_error=username_taken_error)
+    elif check_username_email_equality(username=username, email=email):
+        is_valid = False
+        username_email_equal_error = "Since it is confidential, make sure that your email is different from your username in any case"
+        return is_valid, render_template(page_rendered, username_email_equal_error = username_email_equal_error)
+    elif check_username_password_equality(username = username, password = password):
+        is_valid = False
+        username_password_equal_error = "Since it is confidential, make sure that your password is different from your username in any case"
+        return is_valid, render_template(page_rendered, username_password_equal_error = username_password_equal_error)
+    elif check_password_email_equality(password = password, email = email):
+        is_valid = False
+        password_email_equal_error = "Since it is confidential, make sure that your password is different from your email in any case"
+        return is_valid, render_template(page_rendered, password_email_equal_error = password_email_equal_error)
     elif not validate_password(password):
         is_valid = False
-        invalid_password_error = "Password must be atleast 8 characters and must include at least:\n \
+        invalid_password_error = "Password must be at least 8 characters and must include at least:\n \
         1 lower case character\n\
         1 upper case character\n\
         1 digit\n\
         1 special character"
-        if DEBUG:
-            print(invalid_password_error)
-        return is_valid, render_template('student_signup.html', invalid_password_error=invalid_password_error)
+        return is_valid, render_template(page_rendered, invalid_password_error=invalid_password_error)
+    
 
     return is_valid, ""
 
@@ -220,28 +243,9 @@ def teacher_signup():
         password = request.form['password']
         email = request.form['email']
 
-        is_ku_email = email.endswith('@ku.edu.tr'.casefold())
-
-        # Check if the email belongs to the KU domain
-        if not is_ku_email:
-            return """
-            <script>
-                alert('This email address is not from the KU Domain');
-                window.location.href = '/teacher_signup';
-            </script>
-            """
-
-        # Check if a user with the same username already exists in the database
-        existing_user = UR.getTeacherByUsername(username)
-        if existing_user is not None:
-            username_taken_error = "This username is already taken. Please choose a different one."
-            return render_template('teacher_signup.html', username_taken_error=username_taken_error)
-
-        # Check if a user with the same email already exists in the database
-        existing_user = UR.getTeacherByEmail(email)
-        if existing_user is not None:
-            email_taken_error = "An account with this email already exists. Please choose a different email or try logging in."
-            return render_template('teacher_signup.html', email_taken_error=email_taken_error)
+        is_valid, error_template = validate_credentials(username=username,password=password,email=email, role="teacher")
+        if not is_valid:
+            return error_template
 
         # Insert the new user into the database
         UR.createTeacher(username=username, password=password, email=email)
@@ -309,30 +313,9 @@ def it_staff_signup():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-
-        is_ku_email = email.endswith('@ku.edu.tr'.casefold())
-
-        # Check if the email belongs to the KU domain
-        if not is_ku_email:
-            return """
-            <script>
-                alert('This email address is not from the KU Domain');
-                window.location.href = '/it_staff_signup';
-            </script>
-            """
-
-        # Check if an it staff with the same username already exists in the database
-        existing_user = UR.getItStaffByUsername(username)
-        if existing_user is not None:
-            username_taken_error = "This username is already taken. Please choose a different one."
-            return render_template('it_staff_signup.html', username_taken_error=username_taken_error)
-
-        # Check if an it staff with the same email already exists in the database
-        existing_user = UR.getItStaffByEmail(email)
-        if existing_user is not None:
-            email_taken_error = "An account with this email already exists. Please choose a different email or try logging in."
-            return render_template('it_staff_signup.html', email_taken_error=email_taken_error)
-
+        valid_bool, error_temp = validate_credentials(username=username, password=password, email=email, role="itstaff")
+        if not valid_bool:
+            return error_temp
         # Insert the new it staff into the database
         UR.createItStaff(username=username, password=password, email=email)
         success_message = "You have successfully signed up. Please press the below button to go to the it staff dashboard."
@@ -572,11 +555,6 @@ def it_staff_dashboard():
     return render_template('it_staff_dashboard.html')
 
 
-def it_staff_signup():
-    if request.method == 'POST':
-        return render_template('reserve_class_page.html')
-
-
 def StudentReservesAClass():
     # Write the form data to the file
     with open('Students_reserved_classes_.txt', 'a') as f:
@@ -633,8 +611,6 @@ def student_reserving_class():
     # Return a response to the user
     return 'Your reservation has been created!'
 
-    # Return a response to the user
-    return 'Reservation submitted successfully'
 
 #########OTHER SCREENS #######################################################
 

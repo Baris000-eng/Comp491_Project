@@ -28,7 +28,6 @@ app.route('/get_password_change_screen',
 app.route('/change_student_password',
           methods=['POST'])(US.change_student_password)
 app.route('/password_change_success')(password_change_success)
-# app.route('/password_change', methods=['POST'])(password_change)
 
 app.route('/it_staff_login', methods=['GET', 'POST'])(it_staff_login)
 app.route('/it_staff_signup', methods=['GET', 'POST'])(it_staff_signup)
