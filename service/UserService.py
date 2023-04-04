@@ -81,15 +81,6 @@ def student_login():
         password = request.form['password']
         email = request.form['email']
 
-        email_suffix = '@ku.edu.tr'
-        casefold_suffix = email_suffix.casefold()
-        bigger_suffix = email_suffix.upper()
-        ku_domain_email = email_suffix or casefold_suffix or bigger_suffix
-
-        if not ku_domain_email:
-            flash("This email address is not from the KU Domain")
-            return redirect('/student_login')
-
         conn = sqlite3.connect('students_signup_db.db')
         c = conn.cursor()
 
@@ -266,15 +257,6 @@ def teacher_login():
         password = request.form['password']
         email = request.form['email']
 
-        email_suffix = '@ku.edu.tr'
-        casefold_suffix = email_suffix.casefold()
-        bigger_suffix = email_suffix.upper()
-        ku_domain_email = email_suffix or casefold_suffix or bigger_suffix
-
-        if not ku_domain_email:
-            flash("This email address is not from the KU Domain")
-            return redirect('/teacher_login')
-
         conn = sqlite3.connect('teachers_signup_db.db')
         c = conn.cursor()
 
@@ -333,15 +315,6 @@ def it_staff_login():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-
-        email_suffix = '@ku.edu.tr'
-        casefold_suffix = email_suffix.casefold()
-        bigger_suffix = email_suffix.upper()
-        ku_domain_email = email_suffix or casefold_suffix or bigger_suffix
-
-        if not ku_domain_email:
-            flash("This email address is not from the KU Domain")
-            return redirect('/it_staff_login')
 
         conn = sqlite3.connect('it_staff_signup_db.db')
         c = conn.cursor()
