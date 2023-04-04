@@ -59,6 +59,8 @@ app.route('/student_reserving_class',
 
 app.route('/openReserveClass',
           methods=['POST'])(US.openReserveClass)
+app.route('/openITReportScreen',
+          methods=['POST'])(US.openITReportScreen)
 
 
 # socket_chat.on("connect")(US.user_connected)

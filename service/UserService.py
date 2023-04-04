@@ -8,14 +8,18 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
+
 def equals_ignore_case(s1: str, s2: str) -> bool:
     return s1.lower() == s2.lower()
+
 
 def check_username_password_equality(username: str, password: str) -> bool:
     return equals_ignore_case(username, password)
 
+
 def check_username_email_equality(username: str, email: str) -> bool:
     return equals_ignore_case(username, email)
+
 
 def check_password_email_equality(password: str, email: str) -> bool:
     return equals_ignore_case(password, email)
@@ -58,7 +62,7 @@ def student_signup():
         email = request.form['email']
 
         is_valid, error_template = validate_credentials(
-            username = username, password = password, email = email, role = "student")
+            username=username, password=password, email=email, role="student")
         if not is_valid:
             return error_template
 
@@ -113,6 +117,7 @@ def student_login():
 
 def get_password_change_screen():
     return render_template('password_change_screen.html')
+
 
 def change_student_password():
     if request.method == 'POST':
@@ -178,7 +183,6 @@ def validate_credentials(username, password, email, role):
         exists_by_email = UR.itStaffExistsByEmail(email=email)
         exists_by_username = UR.itStaffExistsByUsername(username=username)
 
-
     is_valid = True
     if not is_ku_email(email):
         is_valid = False
@@ -195,15 +199,15 @@ def validate_credentials(username, password, email, role):
     elif check_username_email_equality(username=username, email=email):
         is_valid = False
         username_email_equal_error = "Since it is confidential, make sure that your email is different from your username in any case"
-        return is_valid, render_template(page_rendered, username_email_equal_error = username_email_equal_error)
-    elif check_username_password_equality(username = username, password = password):
+        return is_valid, render_template(page_rendered, username_email_equal_error=username_email_equal_error)
+    elif check_username_password_equality(username=username, password=password):
         is_valid = False
         username_password_equal_error = "Since it is confidential, make sure that your password is different from your username in any case"
-        return is_valid, render_template(page_rendered, username_password_equal_error = username_password_equal_error)
-    elif check_password_email_equality(password = password, email = email):
+        return is_valid, render_template(page_rendered, username_password_equal_error=username_password_equal_error)
+    elif check_password_email_equality(password=password, email=email):
         is_valid = False
         password_email_equal_error = "Since it is confidential, make sure that your password is different from your email in any case"
-        return is_valid, render_template(page_rendered, password_email_equal_error = password_email_equal_error)
+        return is_valid, render_template(page_rendered, password_email_equal_error=password_email_equal_error)
     elif not validate_password(password):
         is_valid = False
         invalid_password_error = "Password must be at least 8 characters and must include at least:\n \
@@ -212,7 +216,6 @@ def validate_credentials(username, password, email, role):
         1 digit\n\
         1 special character"
         return is_valid, render_template(page_rendered, invalid_password_error=invalid_password_error)
-    
 
     return is_valid, ""
 
@@ -234,7 +237,8 @@ def teacher_signup():
         password = request.form['password']
         email = request.form['email']
 
-        is_valid, error_template = validate_credentials(username=username,password=password,email=email, role="teacher")
+        is_valid, error_template = validate_credentials(
+            username=username, password=password, email=email, role="teacher")
         if not is_valid:
             return error_template
 
@@ -295,7 +299,8 @@ def it_staff_signup():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-        valid_bool, error_temp = validate_credentials(username=username, password=password, email=email, role="itstaff")
+        valid_bool, error_temp = validate_credentials(
+            username=username, password=password, email=email, role="itstaff")
         if not valid_bool:
             return error_temp
         # Insert the new it staff into the database
@@ -307,6 +312,10 @@ def it_staff_signup():
 
     # Render the it staff signup form
     return render_template('it_staff_signup.html')
+
+
+def openITReportScreen():
+    return render_template('report_to_IT.html')
 
 
 def it_staff_login():
@@ -435,7 +444,7 @@ def report_it():
         f.write(f'Date: {date}\n')
         f.write(f'Time: {time}\n\n')
 
-    return 'Thank you for reporting the problem to IT!'
+    return render_template("IT_report_success_screen.html")
 
 
 def report_chat():
