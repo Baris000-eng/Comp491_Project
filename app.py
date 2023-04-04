@@ -5,11 +5,10 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask import Flask, request, render_template, url_for, redirect, jsonify
 from flask import session, flash
 from flask import session
-from flask_socketio import SocketIO
-import socketio
+import setup
 from flask_socketio import send
 from service.UserService import student_signup, student_login
-from repository.UserRepository import initializeItStaffTable, initializeTeachersTable, initializeStudentTable
+from repository.UserRepository import initializeItStaffTable, initializeTeachersTable, initializeStudentTable, intializeITReportLog, initializeReservationsTable
 from service.UserService import it_staff_login, it_staff_signup, teacher_login, teacher_signup, student_login, student_signup
 import bcrypt
 from service.UserService import password_change_success, go_to_opening_screen
@@ -61,6 +60,8 @@ app.route('/openReserveClass',
           methods=['POST'])(US.openReserveClass)
 app.route('/openITReportScreen',
           methods=['POST'])(US.openITReportScreen)
+app.route('/seeITReport',
+          methods=['POST'])(US.seeITReport)
 
 
 # socket_chat.on("connect")(US.user_connected)
@@ -68,8 +69,6 @@ app.route('/openITReportScreen',
 
 
 if __name__ == '__main__':
-    initializeStudentTable()
-    initializeItStaffTable()
-    initializeTeachersTable()
+    setup
     app.run(debug=True)
     app.debug = True

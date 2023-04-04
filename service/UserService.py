@@ -60,12 +60,6 @@ def student_signup():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-
-        is_valid, error_template = validate_credentials(
-            username=username, password=password, email=email, role="student")
-        if not is_valid:
-            return error_template
-
         # Insert the new user into the database
         UR.createStudent(username=username, password=password, email=email)
         success_message = "You have successfully signed up. Please press the below button to go to the student dashboard."
@@ -435,14 +429,8 @@ def report_it():
     problem_description = request.form['problem_description']
     date = request.form['date']
     time = request.form['time']
-
-    # Write the form data to the file
-    with open('IT_Problems.txt', 'a') as f:
-        f.write(f'Room Number: {room_number}\n')
-        f.write(f'Faculty Name: {faculty_name}\n')
-        f.write(f'Problem Description: {problem_description}\n')
-        f.write(f'Date: {date}\n')
-        f.write(f'Time: {time}\n\n')
+    UR.createITReport(room_number, faculty_name,
+                      problem_description, date, time)
 
     return render_template("IT_report_success_screen.html")
 
@@ -548,6 +536,17 @@ def StudentReservesAClass():
     c.execute('SELECT * FROM reservations_db')
     rows = c.fetchall()
     return render_template('classroom_inside_reservation.html', rows=rows)
+
+
+def seeITReport():
+    # Write the form data to the file
+
+    # Return a response to the user
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM IT_Report_logdb')
+    rows = c.fetchall()
+    return render_template('IT_Report_list.html', rows=rows)
 
 
 def openReserveClass():

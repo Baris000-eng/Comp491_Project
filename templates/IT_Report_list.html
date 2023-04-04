@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Report List</title>
+
+    <link rel="stylesheet" type="text/css" href="../static/IT_Report_list.css">
+</head>
+
+<body>
+    <div class="box">
+        <div class="content">
+            <h2>Reported IT Problems.</h2>
+
+            {% for row in rows %}
+            <h3>--------------- Reservation --------------------</h3>
+            <ul>
+                <li>IT Report_no : {{ row[0] }}</li>
+                <li>Room Name: {{ row[1] }}</li>
+                <li>Faculty Name: {{ row[2] }}</li>
+                <li>Problem Description: {{ row[3] }}</li>
+                <li>Date: {{ row[4] }}</li>
+                <li>Time: {{ row[5] }}</li>
+
+            </ul>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

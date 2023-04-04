@@ -15,20 +15,21 @@
             <h2>REPORT AN IT PROBLEM</h2>
             <label for="room_number">Enter information about rooms</label>
             <h4>Information of the Room</h4>
-            <input type="text" name="room_number" placeholder="Enter Room Number">
+            <input type="text" name="room_number" required placeholder="Enter Room Number">
             <h4>Information of the Faculty</h4>
-            <input type="text" name="faculty_name" placeholder="Enter Faculty Name">
+            <input type="text" required name="faculty_name" placeholder="Enter Faculty Name">
             <label for="problem_description">What is the problem? Describe the problem in detail. Thank you.</label>
             <br>
-            <textarea name="problem_description"></textarea>
+            <textarea required name="problem_description"></textarea>
             <br>
             <label for="date">Please specify date and time</label>
-            <input type="date" name="date">
-            <input type="time" name="time">
+            <input required type="date" name="date">
+            <input required type="time" name="time">
             <br>
             <button type="submit">Click to submit the problem to IT</button>
         </form>
     </div>
 </body>
+
 
 </html>

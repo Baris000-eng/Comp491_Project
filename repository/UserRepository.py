@@ -41,6 +41,32 @@ def initializeItStaffTable():
                  priority INTEGER DEFAULT 10)''')
 
 
+def intializeITReportLog():
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+
+    # Create the students_signup_db table if it doesn't exist yet
+    c.execute('''CREATE TABLE IF NOT EXISTS IT_Report_logdb
+                (it_report_no INTEGER PRIMARY KEY AUTOINCREMENT, 
+                 room_name TEXT  NOT NULL, 
+                 faculty_name TEXT NOT NULL,
+                 problem_description TEXT NOT NULL,
+                 date DATE NOT NULL, 
+                 time TIME NOT NULL
+                 )''')
+
+
+def createITReport(room_name, faculty_name, problem_description, date, time):
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+
+    # Create the students_signup_db table if it doesn't exist yet
+    c.execute('''INSERT INTO IT_Report_logdb (room_name, faculty_name, problem_description, date, time) 
+             VALUES (?, ?, ?, ?, ?)''', (room_name, faculty_name, problem_description, date, time))
+    conn.commit()
+    conn.close()
+
+
 def initializeReservationsTable():
     conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
