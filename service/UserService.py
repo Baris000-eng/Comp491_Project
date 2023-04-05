@@ -8,7 +8,6 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
-
 def equals_ignore_case(s1: str, s2: str) -> bool:
     return s1.lower() == s2.lower()
 
@@ -27,10 +26,7 @@ def check_password_email_equality(password: str, email: str) -> bool:
 
 ###############STUDENT #####################################################################################
 
-
-###########for checking security ###########################
-# TO DO: Integrate this in the validate credentials function. also, check credential validity with the validate_credential function.
-#####TO DO: Add a parameter of screen in validate_credentials function so that it can be used for all types of users #########
+#####for checking security ######################
 def validate_password(password):
     # Define the minimum password length
     min_length = 8
@@ -53,25 +49,37 @@ def validate_password(password):
 ###########for checking security ############################
 ##############################################################################
 
-
+###################student signup #############################
+#############Student Signup ####################################################################
 def student_signup():
     if request.method == 'POST':
         # Get the username, password, and email from the form data
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-        # Insert the new user into the database
+
+        is_valid, error_template = validate_credentials(
+            username=username, password=password, email=email, role="student"
+        )
+
+        if not is_valid:
+            return error_template 
+    
         UR.createStudent(username=username, password=password, email=email)
         success_message = "You have successfully signed up. Please press the below button to go to the student dashboard."
         button_text = "Go To Student Dashboard"
         button_url = "/student_dashboard"
         session["username"] = username
         session["priority"] = 10
-        return render_template('student_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
+        return render_template("student_signup.html", success_message=success_message, button_text=button_text, button_url=button_url)
     # Render the student signup form
-    return render_template('student_signup.html')
+    return render_template("student_signup.html")
+###################student signup #############################
+#############Student Signup ####################################################################
 
 
+###################student login #############################
+#############Student Login ####################################################################
 def student_login():
     if request.method == 'POST':
         # Get the username and password from the form data
@@ -89,7 +97,8 @@ def student_login():
 
         if not existing_student:
             notExistMessage = "Username does not exist."
-            return render_template('student_login.html', notExistMessage=notExistMessage)
+            return render_template("student_login.html", notExistMessage=notExistMessage)
+        
         password_check = UR.check_password(existing_student, password)
 
         if existing_student and password_check:
@@ -107,6 +116,8 @@ def student_login():
 
     # Render the student login form
     return render_template('student_login.html')
+###################student login #############################
+#############Student Login ####################################################################
 
 
 def get_password_change_screen():
@@ -141,10 +152,6 @@ def change_student_password():
 def password_change_success():
     return render_template('password_change_success.html')
 ###############STUDENT #####################################################################################
-
-
-def go_to_opening_screen():
-    return render_template('opening_screen.html')
 
 
 def validate_credentials(username, password, email, role):
@@ -345,12 +352,12 @@ def it_staff_login():
 
     # Render the student login form
     return render_template('it_staff_login.html')
-
-
 ###################IT STAFF######################################################################
 
 
 #########OTHER SCREENS #######################################################
+
+##########Role Selection Function ######################################
 def select_role():
     role = request.form.get('roles')
     if role == 'teacher':
@@ -361,6 +368,8 @@ def select_role():
         return redirect(url_for('it_staff_screen'))
     else:
         return render_template('opening_screen.html')
+
+##########Role Selection Function ######################################
 
 
 def showTheClassroomAndInfo():
@@ -391,7 +400,7 @@ def showTheClassroomAndInfo():
                 "templates/Classroom_reservation_students_view.html", "w")
             file.write(txt_string)
             file.close()
-        beginning = '<!DOCTYPE html><html><head><title>Student Dashboard</title><link rel="stylesheet" type="text/css" href="../static/classroom_infos.css"><script> window.addEventListener("DOMContentLoaded", function() { var reserveButtons=document.querySelectorAll("button[action=\'/StudentReservesAClass\']"); reserveButtons.forEach(function(button) { button.addEventListener("click", function() {  var parentRow=button.parentElement.parentElement; parentRow.classList.add(\'reserved\'); });       });     }); </script></head><body>'
+        beginning = '<!DOCTYPE html><html><head><title>Classroom Information</title><link rel="stylesheet" type="text/css" href="../static/classroom_infos.css"><script> window.addEventListener("DOMContentLoaded", function() { var reserveButtons=document.querySelectorAll("button[action=\'/StudentReservesAClass\']"); reserveButtons.forEach(function(button) { button.addEventListener("click", function() {  var parentRow=button.parentElement.parentElement; parentRow.classList.add(\'reserved\'); });       });     }); </script></head><body>'
 
         html = ""
         html += beginning
@@ -406,20 +415,42 @@ def showTheClassroomAndInfo():
         return html
     html = load_classes_with_info('KU_Classrooms.xlsx')
     return render_template("Classroom_reservation_students_view.html")
+############################################################################################################################################################################################################
 
-
-def reserve():
+def reserve_class():
+    class_num = request.form['class_num']
     class_code = request.form['class-code']
     time = request.form['time']
     date = request.form['date']
     option = request.form['option']
 
-    with open('class_reservations.txt', 'a') as f:
+    with open('class_reservations_of_students.txt', 'a') as f:
+        f.write(f'Class Number: {class_num}\n')
         f.write(f'Class Code: {class_code}\n')
         f.write(f'Time: {time}\n')
         f.write(f'Date: {date}\n')
         f.write(f'Option: {option}\n\n')
 
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+
+    c.execute('''CREATE TABLE IF NOT EXISTS reservations_db 
+             (date DATE NOT NULL, 
+              time TIME NOT NULL, 
+              username TEXT, 
+              public_or_private TEXT,
+              classroom TEXT,
+              priority_reserved INTEGER)''')
+
+    if option == "private":
+        c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom ,priority_reserved) 
+                    VALUES (?, ?, ?, ?, ?, ?)''', (date, time, session["username"], "Private", class_num, session['priority']))
+    else:
+        c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom ,priority_reserved) 
+                    VALUES (?, ?, ?, ?, ?, ?)''', (date, time, session["username"], "Public", class_num, session['priority']))
+
+    conn.commit()
+    conn.close()
     return render_template("return_success_message_classroom_reserved.html")
 
 
@@ -429,48 +460,34 @@ def report_it():
     problem_description = request.form['problem_description']
     date = request.form['date']
     time = request.form['time']
-    UR.createITReport(room_number, faculty_name,
-                      problem_description, date, time)
-
+    UR.createITReport(
+        room_number, 
+        faculty_name,
+        problem_description, 
+        date, 
+        time
+    )
     return render_template("IT_report_success_screen.html")
 
+def seeITReport():
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM IT_Report_logdb')
+    rows = c.fetchall()
+    return render_template('IT_Report_list.html', rows=rows)
 
 def report_chat():
-
     problem_description = request.form['problem_description']
-
-    with open('IT_Problems.txt', 'a') as f:
-        # f.write(f'chatUser: {chatUser}\n')
+    with open('IT_Chat_Problems.txt', 'a') as f:
         f.write(f'Problem Description: {problem_description}\n\n')
-
     return 'Thank you for reporting the problem to IT!'
 
 
-def reserve_class():
-    class_num = request.form['class_num']
-    class_code = request.form['class-code']
-    date_input = request.form['date_input']
-    option = request.form['option']
-    time = request.form['time']
-
-    # Write the form data to the file
-    with open('reserved_classes.txt', 'a') as f:
-        f.write(f'Class Number: {class_num}\n')
-        f.write(f'Class Code: {class_code}\n')
-        f.write(f'Option: {option}\n')
-        f.write(f'Date: {date_input}\n')
-        f.write(f'Time: {time}\n\n')
-
-    # Return a response to the user
-    return 'Reservation submitted successfully'
-
-
 def getIT():
-    with open("classes_teacher.txt", "r") as f:
+    with open("classes_of_teachers.txt", "r") as f:
         content = f.read()
         content = content.replace('\n', '<br>')
 
-    # Return a response to the user
     return render_template("student_dashboard.html", content=content)
 
 
@@ -481,7 +498,6 @@ def chat_action():
 
 
 def user_connected(info):
-    # send
     with open('chat_data.txt', 'a') as f:
         f.write(session['username'] + " entered the chat to room " +
                 session['classroom'] + " \n")
@@ -496,6 +512,15 @@ def user_disconnected():
     print(session['username'] +
           " left the chat room (room : " + session['classroom'] + ")")
 
+def student_reserves_a_class():
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM reservations_db')
+    rows = c.fetchall()
+    return render_template('classroom_inside_reservation.html', rows=rows)
+#########################################################################################################################################################################
+def openReserveClass():
+    return render_template('reserving_class_page.html')
 
 def opening_screen():
     return render_template("opening_screen.html")
@@ -524,76 +549,5 @@ def teacher_dashboard():
 def it_staff_dashboard():
     return render_template('it_staff_dashboard.html')
 
-
-def StudentReservesAClass():
-    # Write the form data to the file
-    with open('Students_reserved_classes_.txt', 'a') as f:
-        f.write(f'Reserved_classes : \n\n')
-
-    # Return a response to the user
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
-    c.execute('SELECT * FROM reservations_db')
-    rows = c.fetchall()
-    return render_template('classroom_inside_reservation.html', rows=rows)
-
-
-def seeITReport():
-    # Write the form data to the file
-
-    # Return a response to the user
-    conn = sqlite3.connect('IT_Report_logdb.db')
-    c = conn.cursor()
-    c.execute('SELECT * FROM IT_Report_logdb')
-    rows = c.fetchall()
-    return render_template('IT_Report_list.html', rows=rows)
-
-
-def openReserveClass():
-    # Write the form data to the file
-    return render_template('reserving_class_page.html')
-
-
-def student_reserving_class():
-    # Write the form data to the file
-    with open('Students_reserved_classes_.txt', 'a') as f:
-        f.write(f'Reserved_classes : \n\n')
-    # Read the form data
-
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
-
-    # Create the students_signup_db table if it doesn't exist yet
-    c.execute('''CREATE TABLE IF NOT EXISTS reservations_db 
-             (date DATE NOT NULL, 
-              time TIME NOT NULL, 
-              username TEXT, 
-              public_or_private TEXT,
-              classroom TEXT,
-              priority_reserved INTEGER)''')
-    classroom_time = request.form['classroom']
-    classroom_type = request.form['classroom-type']
-    classroom_date = request.form['classroom-date']
-
-    # Insert the new reservation into the database
-    if classroom_type == "private":
-        c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom ,priority_reserved) 
-                    VALUES (?, ?, ?, ?, ?, ?)''', (classroom_date, classroom_time, session["username"], session["priority"], "sci142", "Private"))
-    else:
-        c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom ,priority_reserved) 
-                    VALUES (?, ?, ?, ?, ?, ?)''', (classroom_date, classroom_time, session["username"], session["priority"], "sci142", "Public"))
-
-    # Save the changes to the database
-    conn.commit()
-
-    # Close the database connection
-    conn.close()
-
-    # Return a response to the user
-    return render_template("return_success_message_classroom_reserved.html")
-
-
-#########OTHER SCREENS #######################################################
-
-
-#########OTHER SCREENS #######################################################
+def go_to_opening_screen():
+    return render_template('opening_screen.html')

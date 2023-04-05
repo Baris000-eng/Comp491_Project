@@ -59,8 +59,6 @@ def intializeITReportLog():
 def createITReport(room_name, faculty_name, problem_description, date, time):
     conn = sqlite3.connect('IT_Report_logdb.db')
     c = conn.cursor()
-
-    # Create the students_signup_db table if it doesn't exist yet
     c.execute('''INSERT INTO IT_Report_logdb (room_name, faculty_name, problem_description, date, time) 
              VALUES (?, ?, ?, ?, ?)''', (room_name, faculty_name, problem_description, date, time))
     conn.commit()
