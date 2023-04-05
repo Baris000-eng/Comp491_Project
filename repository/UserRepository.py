@@ -1,6 +1,8 @@
 import sqlite3
 import bcrypt
 
+class DB():
+    db = dict(student='students_signup_db', teacher='teachers_signup_db', it='it_staff_signup_db')
 
 def initializeStudentTable():
     conn = sqlite3.connect('students_signup_db.db')
@@ -137,6 +139,19 @@ def createItStaff(username, password, email):
     conn.commit()
     conn.close()
 
+# Testing role-based signup
+def createUser(username: str, password: str, email: str, role: str):
+    """
+    Given a username, password, email, and role, insert user into corresponding database
+    """
+    conn = sqlite3.connect(DB.db[role] + '.db')
+    c = conn.cursor()
+    c.execute(
+        f"INSERT INTO {DB.db[role]} (username, password, email) VALUES (?, ?, ?)",
+        (username, encrypt_password(password), email)
+    )
+    conn.commit()
+    conn.close()
 
 def getStudentByUsername(username: str):
     """
@@ -150,6 +165,8 @@ def getStudentByUsername(username: str):
         "SELECT * FROM students_signup_db WHERE username = ?", (username,))
 
     student = c.fetchone()
+    conn.commit()
+    conn.close()
     return student
 
 
@@ -165,6 +182,8 @@ def getStudentByEmail(email: str):
         "SELECT * FROM students_signup_db WHERE email = ?", (email,))
 
     student = c.fetchone()
+    conn.commit()
+    conn.close()
     return student
 
 

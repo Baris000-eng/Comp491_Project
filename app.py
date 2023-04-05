@@ -64,6 +64,11 @@ app.route('/seeITReport',
           methods=['POST'])(US.seeITReport)
 
 
+# Testing out role-based signup request
+@app.route('/<role>/signup', methods=['POST'])
+def signup(role):
+    return US.signup(request, role)
+
 # socket_chat.on("connect")(US.user_connected)
 # socket_chat.on("disconnect")(US.user_disconnected)
 

@@ -8,6 +8,8 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
+class User():
+    priority = dict(student=10, teacher=20, it=10)
 
 def equals_ignore_case(s1: str, s2: str) -> bool:
     return s1.lower() == s2.lower()
@@ -24,6 +26,28 @@ def check_username_email_equality(username: str, email: str) -> bool:
 def check_password_email_equality(password: str, email: str) -> bool:
     return equals_ignore_case(password, email)
 
+
+# Testing role-based signup
+def signup(request, role: str):
+    username = request.form['username']
+    password = request.form['password']
+    email = request.form['email']
+
+    is_valid, error_template = validate_credentials(username, password, email, role)
+
+    if not is_valid:
+        return error_template
+
+    UR.createUser(username, password, email, role)
+
+    # TODO: Modify success messages according to role
+    success_message = f"You have successfully signed up. Please press the below button to go to the {role} dashboard."
+    button_text = f"Go To {role} Dashboard"
+    button_url = f"/{role}_dashboard"
+
+    session["username"] = username
+    session["priority"] = User.priority[role]
+    return render_template(f'{role}_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
 
 ###############STUDENT #####################################################################################
 
