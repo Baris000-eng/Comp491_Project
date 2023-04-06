@@ -1,6 +1,3 @@
-import glob
-import os
-import sqlite3
 from flask import Flask, render_template, request, redirect, url_for
 from flask import Flask, request, render_template, url_for, redirect, jsonify
 from flask import session, flash
@@ -10,12 +7,10 @@ from flask_socketio import send
 from service.UserService import student_signup, student_login
 from repository.UserRepository import initializeItStaffTable, initializeTeachersTable, initializeStudentTable, intializeITReportLog, initializeReservationsTable
 from service.UserService import it_staff_login, it_staff_signup, teacher_login, teacher_signup, student_login, student_signup
-import bcrypt
 from service.UserService import password_change_success, go_to_opening_screen
 from service.UserService import select_role, showTheClassroomAndInfo, chat_action, report_chat, report_it
 from service.UserService import reserve_class, getIT
 import service.UserService as US
-from service.UserService import reserve_teacher_class
 
 
 app = Flask(__name__)
@@ -60,8 +55,7 @@ app.route('/it_staff_dashboard')(US.it_staff_dashboard)
 
 
 app.route('/reserve_class', methods=['POST'])(US.reserve_class)
-app.route('/reserve_teacher_class', methods=['POST'])(US.reserve_teacher_class)
-app.route('/StudentReservesAClass', methods=['POST'])(US.student_reserves_a_class)
+app.route('/already_reserved_classes', methods=['POST'])(US.see_already_reserved_classes)
 ###########################################################################################################
 
 

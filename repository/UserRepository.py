@@ -87,9 +87,9 @@ def initializeReservationsTable():
     conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
 
-    # Create the students_signup_db table if it doesn't exist yet
     c.execute('''CREATE TABLE IF NOT EXISTS reservations_db 
-             (date DATE NOT NULL, 
+             (role TEXT NOT NULL,
+              date DATE NOT NULL, 
               time TIME NOT NULL, 
               username TEXT, 
               public_or_private TEXT,

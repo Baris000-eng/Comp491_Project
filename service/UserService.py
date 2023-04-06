@@ -467,84 +467,23 @@ def reserve_class():
         f.write(f'Date: {date}\n')
         f.write(f'Option: {option}\n\n')
 
-    
-
     conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
 
-    c.execute('''CREATE TABLE IF NOT EXISTS reservations_db 
-             (role TEXT NOT NULL,
-              date DATE NOT NULL, 
-              time TIME NOT NULL, 
-              username TEXT, 
-              public_or_private TEXT,
-              classroom TEXT,
-              priority_reserved INTEGER)''')
-    
     preference = str()
-    if option == "private":
-        preference = "Private"
-    elif option == "public":
-        preference = "Public"
-    elif option == "exam":
+    if option == "exam":
         preference = "Exam"
     elif option == "lecture":
         preference = "Lecture"
     elif option == "ps":
         preference = "PS"
-
-    c.execute('''INSERT INTO reservations_db (role, date, time, username, public_or_private, classroom, priority_reserved) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?)''', (role, date, time, session["username"], preference, class_num, session['priority']))
-    
-    conn.commit()
-    conn.close()
-    return render_template("return_success_message_classroom_reserved.html")
-
-
-def reserve_teacher_class():
-    role = request.form['role']
-    class_num = request.form['class_num']
-    class_code = request.form['class-code']
-    time = request.form['time']
-    date = request.form['date']
-    option = request.form['option']
-
-    with open('class_reservations.txt', 'a') as f:
-        f.write(f'Role: {role}\n')
-        f.write(f'Class Number: {class_num}\n')
-        f.write(f'Class Code: {class_code}\n')
-        f.write(f'Time: {time}\n')
-        f.write(f'Date: {date}\n')
-        f.write(f'Option: {option}\n\n')
-
-    
-
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
-
-    c.execute('''CREATE TABLE IF NOT EXISTS reservations_db 
-             (role TEXT NOT NULL,
-              date DATE NOT NULL, 
-              time TIME NOT NULL, 
-              username TEXT, 
-              public_or_private TEXT,
-              classroom TEXT,
-              priority_reserved INTEGER)''')
-    
-    preference = str()
-    if option == "private":
+    elif option == "private":
         preference = "Private"
     elif option == "public":
         preference = "Public"
-    elif option == "exam":
-        preference = "Exam"
-    elif option == "lecture":
-        preference = "Lecture"
-    elif option == "ps":
-        preference = "PS"
 
     c.execute('''INSERT INTO reservations_db (role, date, time, username, public_or_private, classroom, priority_reserved) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?)''', (role, date, time, session["username"], preference, class_num, session['priority']))
+                    VALUES (?, ?, ?, ?, ?, ?, ?)''', (role, date, time, session["username"], preference, class_code, session['priority']))
     
     conn.commit()
     conn.close()
@@ -609,13 +548,14 @@ def user_disconnected():
     print(session['username'] +
           " left the chat room (room : " + session['classroom'] + ")")
 
-def student_reserves_a_class():
+def see_already_reserved_classes():
     conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
     c.execute('SELECT * FROM reservations_db')
     rows = c.fetchall()
     return render_template('classroom_inside_reservation.html', rows=rows)
 #########################################################################################################################################################################
+
 def openReserveClass():
     return render_template('reserving_class_page.html')
 

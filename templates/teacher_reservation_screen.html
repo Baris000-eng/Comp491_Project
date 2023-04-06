@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="../static/teacher_reservation_screen.css">
 </head>
 <body>
-    <div>
-        <form action="/reserve_teacher_class" method="POST" class="right-div">
+    <div class="my_div" id="reservationForm">
+        <form action="/reserve_class" method="POST">
             <h2>Reserving a class</h2>
             <label for="role">Select your role</label>
             <select id="class-selector" name="role">
@@ -33,8 +33,8 @@
             <br>
             <br>
             <label for="Please specify time">Please specify date and time</label>
-            <input type="time" Specify time>
-            <input type="date">
+            <input name="time" type="time">
+            <input name="date" type="date">
             <br>
             <label for="">Please specify your purpose of reservation.</label>
             <label>
@@ -50,7 +50,9 @@
                 I want to reserve for a ps.
             </label>
             <button type="submit">Click to submit reservation</button>
-        </form>
-    </div>
+    </form>
+</div>
 </body>
+
+
 </html>
