@@ -197,6 +197,13 @@ def getUserByEmail(email: str, role: str):
 def getUserByUsernameAndEmail(username: str, email: str, role: str):
     conn = sqlite3.connect(f'{ROLES[role].db}.db')
     c = conn.cursor()
+<<<<<<< HEAD
+=======
+
+    # Check if the username exists in the database
+    c.execute(
+        f"SELECT * FROM {ROLES[role].db} WHERE email = ?", (email,))
+>>>>>>> b5a8ff882caf06338b17d72bf5a854edc33d6cd8
     
     c.execute(
         f"SELECT * FROM {ROLES[role].db} WHERE username = ? AND email = ?", (username, email))

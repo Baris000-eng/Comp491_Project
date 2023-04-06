@@ -75,6 +75,11 @@ app.route('/openTeacherReservationScreen', methods = ['GET'])(US.openTeacherRese
 
 
 
+# Testing out role-based signup request
+@app.route('/<role>/signup', methods=['POST'])
+def signup(role):
+    return US.user_signup(request, role)
+
 # socket_chat.on("connect")(US.user_connected)
 # socket_chat.on("disconnect")(US.user_disconnected)
 

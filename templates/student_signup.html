@@ -45,6 +45,9 @@
     {% if password_email_equal_error %}
     <p>{{password_email_equal_error}} </p>
     {% endif %}
+    {% if credentials_coincide_error %}
+    <p>{{credentials_coincide_error}} </p>
+    {% endif %}
     {% if invalid_password_error %}
     <p>{{ invalid_password_error|safe }} </p>
     {% endif %}

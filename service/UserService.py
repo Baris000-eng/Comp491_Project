@@ -225,7 +225,23 @@ def validate_credentials(username, password, email, role):
     :param email: Email of the user
     """
 
-    page_rendered = f'{role}_signup.html'
+    # TODO: May add validations for password
+    # TODO: See the password_security_check function above. Integrate that function here.
+
+    exists_by_email = UR.studentExistsByEmail(email=email)
+    exists_by_username = UR.studentExistsByUsername(username=username)
+    if role == "student":
+        page_rendered = "student_signup.html"
+        exists_by_email = UR.studentExistsByEmail(email=email)
+        exists_by_username = UR.studentExistsByUsername(username=username)
+    elif role == "teacher":
+        page_rendered = "teacher_signup.html"
+        exists_by_email = UR.teacherExistsByEmail(email=email)
+        exists_by_username = UR.teacherExistsByUsername(username=username)
+    elif role == "itstaff":
+        page_rendered = "it_staff_signup.html"
+        exists_by_email = UR.itStaffExistsByEmail(email=email)
+        exists_by_username = UR.itStaffExistsByUsername(username=username)
 
     is_valid = True
     if not is_ku_email(email):
@@ -240,7 +256,7 @@ def validate_credentials(username, password, email, role):
         is_valid = False
         username_taken_error = "This username is already taken. Please choose a different one."
         return is_valid, render_template(page_rendered, username_taken_error=username_taken_error)
-    elif check_includes([username, password, email]):
+    elif check_username_email_equality(username=username, email=email):
         is_valid = False
         credentials_coincide_error = "Make sure that your credentials do not contain each other"
         return is_valid, render_template(page_rendered, credentials_coincide_error=credentials_coincide_error)        
