@@ -360,7 +360,7 @@ def it_staff_signup():
         password = request.form['password']
         email = request.form['email']
         valid_bool, error_temp = validate_credentials(
-            username=username, password=password, email=email, role="itstaff")
+            username=username, password=password, email=email, role="it_staff")
         if not valid_bool:
             return error_temp
         # Insert the new it staff into the database
