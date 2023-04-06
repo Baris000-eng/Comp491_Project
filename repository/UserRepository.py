@@ -4,9 +4,6 @@ import deprecation
 
 from constants import ROLES
 
-class DB():
-    db = dict(student='students_signup_db', teacher='teachers_signup_db', it='it_staff_signup_db')
-
 def initializeUserTables():
     for role_obj in ROLES.values():
         conn = sqlite3.connect(role_obj.db + '.db')
@@ -79,6 +76,7 @@ def createITReport(room_name, faculty_name, problem_description, date, time):
     conn = sqlite3.connect('IT_Report_logdb.db')
     c = conn.cursor()
 
+    # Create the students_signup_db table if it doesn't exist yet
     c.execute('''INSERT INTO IT_Report_logdb (room_name, faculty_name, problem_description, date, time) 
              VALUES (?, ?, ?, ?, ?)''', (room_name, faculty_name, problem_description, date, time))
     conn.commit()
@@ -91,8 +89,7 @@ def initializeReservationsTable():
 
     # Create the students_signup_db table if it doesn't exist yet
     c.execute('''CREATE TABLE IF NOT EXISTS reservations_db 
-             (role TEXT NOT NULL,
-              date DATE NOT NULL, 
+             (date DATE NOT NULL, 
               time TIME NOT NULL, 
               username TEXT, 
               public_or_private TEXT,
@@ -100,15 +97,15 @@ def initializeReservationsTable():
               priority_reserved INTEGER)''')
 
 
-def createReservation(role, date, time, username, priority, public_or_private, classroom):
+def createReservation(date, time, username, priority, public_or_private, classroom):
     """
-    Given a role, date, time, username, priority; insert new reservation into the reservation database
+    Given a date, time, username, priority, insert new reservation into the reservation database
     """
     conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
 
-    c.execute('''INSERT INTO reservations_db (role, date, time, username, public_or_private, classroom, priority_reserved) 
-             VALUES (?, ?, ?, ?, ?, ?, ?)''', (role, date, time, username, public_or_private, classroom, priority))
+    c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom, priority_reserved) 
+             VALUES (?, ?, ?, ?, ?, ?)''', (date, time, username, public_or_private, classroom, priority))
 
     conn.commit()
     conn.close()
@@ -172,12 +169,12 @@ def createUser(username: str, password: str, email: str, role: str):
 
 # Role-based get methods
 def getUserByUsername(username: str, role: str):
-    conn = sqlite3.connect(DB.db[role] + '.db')
+    conn = sqlite3.connect(f'{ROLES[role].db}.db')
     c = conn.cursor()
 
     # Check if the username exists in the database
     c.execute(
-        f"SELECT * FROM {DB.db[role]} WHERE username = ?", (username,))
+        f"SELECT * FROM {ROLES[role].db} WHERE username = ?", (username,))
 
     user = c.fetchone()
     conn.commit()
@@ -185,12 +182,24 @@ def getUserByUsername(username: str, role: str):
     return user
 
 def getUserByEmail(email: str, role: str):
-    conn = sqlite3.connect(DB.db[role] + '.db')
+    conn = sqlite3.connect(f'{ROLES[role].db}.db')
     c = conn.cursor()
 
     # Check if the username exists in the database
     c.execute(
-        f"SELECT * FROM {DB.db[role]} WHERE email = ?", (email,))
+        f"SELECT * FROM {ROLES[role].db} WHERE email = ?", (email,))
+
+    user = c.fetchone()
+    conn.commit()
+    conn.close()
+    return user
+
+def getUserByUsernameAndEmail(username: str, email: str, role: str):
+    conn = sqlite3.connect(f'{ROLES[role].db}.db')
+    c = conn.cursor()
+    
+    c.execute(
+        f"SELECT * FROM {ROLES[role].db} WHERE username = ? AND email = ?", (username, email))
 
     user = c.fetchone()
     conn.commit()

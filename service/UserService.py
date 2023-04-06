@@ -1,6 +1,9 @@
+from typing import List
 from flask import render_template, redirect, session,  flash, request, Flask, url_for, jsonify
 import sqlite3
+from constants import ROLES
 import repository.UserRepository as UR
+import deprecation
 
 DEBUG = True
 app = Flask(__name__)
@@ -8,25 +11,61 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
+
 def equals_ignore_case(s1: str, s2: str) -> bool:
     return s1.lower() == s2.lower()
 
-
+@deprecation.deprecated("Use check_includes() instead")
 def check_username_password_equality(username: str, password: str) -> bool:
     return equals_ignore_case(username, password)
 
-
+@deprecation.deprecated("Use check_includes() instead")
 def check_username_email_equality(username: str, email: str) -> bool:
     return equals_ignore_case(username, email)
 
-
+@deprecation.deprecated("Use check_includes() instead")
 def check_password_email_equality(password: str, email: str) -> bool:
     return equals_ignore_case(password, email)
 
+def includes_ignore_case(s1: str, s2: str) -> bool:
+    return s1.lower() in s2.lower()
+
+def check_includes(credentials: List[str]):
+    for i, cred1 in enumerate(credentials):
+        for j, cred2 in enumerate(credentials):
+            if i != j and includes_ignore_case(cred1, cred2):
+                return True
+    return False
+
+
+# Testing role-based signup
+def user_signup(request, role: str):
+    username = request.form['username']
+    password = request.form['password']
+    email = request.form['email']
+
+    is_valid, error_template = validate_credentials(username, password, email, role)
+
+    if not is_valid:
+        return error_template
+
+    UR.createUser(username, password, email, role)
+
+    # TODO: Modify success messages according to role
+    success_message = f"You have successfully signed up. Please press the below button to go to the {role} dashboard."
+    button_text = f"Go To {role} Dashboard"
+    button_url = f"/{role}_dashboard"
+
+    session["username"] = username
+    session["priority"] = ROLES[role].priority
+    return render_template(f'{role}_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
 
 ###############STUDENT #####################################################################################
 
-#####for checking security ######################
+
+###########for checking security ###########################
+# TO DO: Integrate this in the validate credentials function. also, check credential validity with the validate_credential function.
+#####TO DO: Add a parameter of screen in validate_credentials function so that it can be used for all types of users #########
 def validate_password(password):
     # Define the minimum password length
     min_length = 8
@@ -49,37 +88,57 @@ def validate_password(password):
 ###########for checking security ############################
 ##############################################################################
 
-###################student signup #############################
-#############Student Signup ####################################################################
+@deprecation.deprecated("Use user_signup() instead")
 def student_signup():
     if request.method == 'POST':
         # Get the username, password, and email from the form data
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-
-        is_valid, error_template = validate_credentials(
-            username=username, password=password, email=email, role="student"
-        )
-
-        if not is_valid:
-            return error_template 
-    
+        # Insert the new user into the database
         UR.createStudent(username=username, password=password, email=email)
         success_message = "You have successfully signed up. Please press the below button to go to the student dashboard."
         button_text = "Go To Student Dashboard"
         button_url = "/student_dashboard"
         session["username"] = username
         session["priority"] = 10
-        return render_template("student_signup.html", success_message=success_message, button_text=button_text, button_url=button_url)
+        return render_template('student_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
     # Render the student signup form
-    return render_template("student_signup.html")
-###################student signup #############################
-#############Student Signup ####################################################################
+    return render_template('student_signup.html')
 
 
-###################student login #############################
-#############Student Login ####################################################################
+def user_login(role: str):
+    if request.method == 'POST':
+        # Get the username and password from the form data
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+      
+        existing_user = UR.getUserByUsernameAndEmail(username, email, role)
+
+        if not existing_user:
+            notExistMessage = "Username/Email pair does not exist."
+            return render_template(f'{role}_login.html', notExistMessage=notExistMessage)
+        
+        password_check = UR.check_password(existing_user, password)
+
+        if password_check:
+            # Redirect to dashboard if student already exists
+            session["username"] = username
+            session["priority"] = ROLES[role].priority
+            return redirect(f'/{role}_dashboard')
+
+        else:
+            # Render template with message and button to go to signup screen
+            message = f"You haven't signed up yet. Please go to {role} signup screen by clicking below button."
+            button_text = f"Go To {role} Signup Screen"
+            button_url = f"/{role}_signup"
+            return render_template(f'{role}_login.html', message=message, button_text=button_text, button_url=button_url)
+
+    # Render the student login form
+    return render_template(f'{role}_login.html')
+
+@deprecation.deprecated("Use user_login() instead")
 def student_login():
     if request.method == 'POST':
         # Get the username and password from the form data
@@ -97,8 +156,7 @@ def student_login():
 
         if not existing_student:
             notExistMessage = "Username does not exist."
-            return render_template("student_login.html", notExistMessage=notExistMessage)
-        
+            return render_template('student_login.html', notExistMessage=notExistMessage)
         password_check = UR.check_password(existing_student, password)
 
         if existing_student and password_check:
@@ -116,8 +174,6 @@ def student_login():
 
     # Render the student login form
     return render_template('student_login.html')
-###################student login #############################
-#############Student Login ####################################################################
 
 
 def get_password_change_screen():
@@ -154,61 +210,40 @@ def password_change_success():
 ###############STUDENT #####################################################################################
 
 
+def go_to_opening_screen():
+    return render_template('opening_screen.html')
+
+
 def validate_credentials(username, password, email, role):
     """
     Checks if current credentials are valid based on:
     1. KU Domain requirement
     2. Email uniqueness
     3. Username uniqueness
-
     :param username: Username of the user
     :param password: Password of the user
     :param email: Email of the user
     """
 
-    # TODO: May add validations for password
-    # TODO: See the password_security_check function above. Integrate that function here.
-
-    exists_by_email = UR.studentExistsByEmail(email=email)
-    exists_by_username = UR.studentExistsByUsername(username=username)
-    if role == "student":
-        page_rendered = "student_signup.html"
-        exists_by_email = UR.studentExistsByEmail(email=email)
-        exists_by_username = UR.studentExistsByUsername(username=username)
-    elif role == "teacher":
-        page_rendered = "teacher_signup.html"
-        exists_by_email = UR.teacherExistsByEmail(email=email)
-        exists_by_username = UR.teacherExistsByUsername(username=username)
-    elif role == "itstaff":
-        page_rendered = "it_staff_signup.html"
-        exists_by_email = UR.itStaffExistsByEmail(email=email)
-        exists_by_username = UR.itStaffExistsByUsername(username=username)
+    page_rendered = f'{role}_signup.html'
 
     is_valid = True
     if not is_ku_email(email):
         is_valid = False
         not_ku_error = "This email address is not from the KU Domain."
         return is_valid, render_template(page_rendered, not_ku_error=not_ku_error)
-    elif exists_by_email:
+    elif UR.userExistsByEmail(email, role):
         is_valid = False
         email_taken_error = "An account with this email already exists. Please choose a different email or try logging in."
         return is_valid, render_template(page_rendered, email_taken_error=email_taken_error)
-    elif exists_by_username:
+    elif UR.userExistsByUsername(username, role):
         is_valid = False
         username_taken_error = "This username is already taken. Please choose a different one."
         return is_valid, render_template(page_rendered, username_taken_error=username_taken_error)
-    elif check_username_email_equality(username=username, email=email):
+    elif check_includes([username, password, email]):
         is_valid = False
-        username_email_equal_error = "Since it is confidential, make sure that your email is different from your username in any case"
-        return is_valid, render_template(page_rendered, username_email_equal_error=username_email_equal_error)
-    elif check_username_password_equality(username=username, password=password):
-        is_valid = False
-        username_password_equal_error = "Since it is confidential, make sure that your password is different from your username in any case"
-        return is_valid, render_template(page_rendered, username_password_equal_error=username_password_equal_error)
-    elif check_password_email_equality(password=password, email=email):
-        is_valid = False
-        password_email_equal_error = "Since it is confidential, make sure that your password is different from your email in any case"
-        return is_valid, render_template(page_rendered, password_email_equal_error=password_email_equal_error)
+        credentials_coincide_error = "Make sure that your credentials do not contain each other"
+        return is_valid, render_template(page_rendered, credentials_coincide_error=credentials_coincide_error)        
     elif not validate_password(password):
         is_valid = False
         invalid_password_error = "Password must be at least 8 characters and must include at least:\n \
@@ -231,6 +266,7 @@ def is_ku_email(email: str):
 
 
 ################TEACHER##############################################################################
+@deprecation.deprecated("Use user_signup() instead")
 def teacher_signup():
     if request.method == 'POST':
         # Get the username, password, and email from the form data
@@ -254,7 +290,7 @@ def teacher_signup():
     # Render the student signup form
     return render_template('teacher_signup.html')
 
-
+@deprecation.deprecated("Use user_login() instead")
 def teacher_login():
     if request.method == 'POST':
         # Get the username and password from the form data
@@ -294,6 +330,7 @@ def teacher_login():
 
 
 ###################IT STAFF######################################################################
+@deprecation.deprecated("Use user_signup() instead")
 def it_staff_signup():
     if request.method == 'POST':
         # Get the username, password, and email from the form data
@@ -318,7 +355,7 @@ def it_staff_signup():
 def openITReportScreen():
     return render_template('report_to_IT.html')
 
-
+@deprecation.deprecated("Use user_login() instead")
 def it_staff_login():
     if request.method == 'POST':
         # Get the username and password from the form data
@@ -352,12 +389,12 @@ def it_staff_login():
 
     # Render the student login form
     return render_template('it_staff_login.html')
+
+
 ###################IT STAFF######################################################################
 
 
 #########OTHER SCREENS #######################################################
-
-##########Role Selection Function ######################################
 def select_role():
     role = request.form.get('roles')
     if role == 'teacher':
@@ -368,8 +405,6 @@ def select_role():
         return redirect(url_for('it_staff_screen'))
     else:
         return render_template('opening_screen.html')
-
-##########Role Selection Function ######################################
 
 
 def showTheClassroomAndInfo():
@@ -400,7 +435,7 @@ def showTheClassroomAndInfo():
                 "templates/Classroom_reservation_students_view.html", "w")
             file.write(txt_string)
             file.close()
-        beginning = '<!DOCTYPE html><html><head><title>Classroom Information</title><link rel="stylesheet" type="text/css" href="../static/classroom_infos.css"><script> window.addEventListener("DOMContentLoaded", function() { var reserveButtons=document.querySelectorAll("button[action=\'/StudentReservesAClass\']"); reserveButtons.forEach(function(button) { button.addEventListener("click", function() {  var parentRow=button.parentElement.parentElement; parentRow.classList.add(\'reserved\'); });       });     }); </script></head><body>'
+        beginning = '<!DOCTYPE html><html><head><title>Student Dashboard</title><link rel="stylesheet" type="text/css" href="../static/classroom_infos.css"><script> window.addEventListener("DOMContentLoaded", function() { var reserveButtons=document.querySelectorAll("button[action=\'/StudentReservesAClass\']"); reserveButtons.forEach(function(button) { button.addEventListener("click", function() {  var parentRow=button.parentElement.parentElement; parentRow.classList.add(\'reserved\'); });       });     }); </script></head><body>'
 
         html = ""
         html += beginning
