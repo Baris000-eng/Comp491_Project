@@ -138,7 +138,7 @@ def user_login(role: str):
     # Render the student login form
     return render_template(f'{role}_login.html')
 
-@deprecation.deprecated("Use user_signup() instead")
+@deprecation.deprecated("Use user_login() instead")
 def student_login():
     if request.method == 'POST':
         # Get the username and password from the form data
@@ -321,7 +321,7 @@ def teacher_signup():
     # Render the student signup form
     return render_template('teacher_signup.html')
 
-@deprecation.deprecated("Use user_signup() instead")
+@deprecation.deprecated("Use user_login() instead")
 def teacher_login():
     if request.method == 'POST':
         # Get the username and password from the form data
@@ -386,7 +386,7 @@ def it_staff_signup():
 def openITReportScreen():
     return render_template('report_to_IT.html')
 
-@deprecation.deprecated("Use user_signup() instead")
+@deprecation.deprecated("Use user_login() instead")
 def it_staff_login():
     if request.method == 'POST':
         # Get the username and password from the form data
