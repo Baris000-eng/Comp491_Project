@@ -59,13 +59,14 @@ app.route('/already_reserved_classes', methods=['POST'])(US.see_already_reserved
 ###########################################################################################################
 
 
-app.route('/openReserveClass',
-          methods=['GET'])(US.openReserveClass)
+app.route('/openStudentReservationScreen',
+          methods=['GET'])(US.openStudentReservationScreen)
 app.route('/openITReportScreen',
           methods=['GET'])(US.openITReportScreen)
+app.route('/openTeacherReservationScreen', methods = ['GET'])(US.openTeacherReservationScreen)
+
 app.route('/seeITReport',
           methods=['POST'])(US.seeITReport)
-app.route('/openTeacherReservationScreen', methods = ['GET'])(US.openTeacherReservationScreen)
 
 
 

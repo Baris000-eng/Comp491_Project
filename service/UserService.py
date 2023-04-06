@@ -38,7 +38,6 @@ def check_includes(credentials: List[str]):
     return False
 
 
-# Testing role-based signup
 def user_signup(request, role: str):
     username = request.form['username']
     password = request.form['password']
@@ -58,7 +57,9 @@ def user_signup(request, role: str):
 
     session["username"] = username
     session["priority"] = ROLES[role].priority
-    return render_template(f'{role}_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
+    
+    return render_template(f'{role}_signup.html', success_message=success_message, button_text=button_text, button_url=button_url, username=username)
+
 
 ###############STUDENT #####################################################################################
 
@@ -133,7 +134,7 @@ def user_login(role: str):
             message = f"You haven't signed up yet. Please go to {role} signup screen by clicking below button."
             button_text = f"Go To {role} Signup Screen"
             button_url = f"/{role}_signup"
-            return render_template(f'{role}_login.html', message=message, button_text=button_text, button_url=button_url)
+            return render_template(f'{role}_login.html', message=message, button_text=button_text, button_url=button_url, username=username)
 
     # Render the student login form
     return render_template(f'{role}_login.html')
@@ -556,8 +557,8 @@ def see_already_reserved_classes():
     return render_template('classroom_inside_reservation.html', rows=rows)
 #########################################################################################################################################################################
 
-def openReserveClass():
-    return render_template('reserving_class_page.html')
+def openStudentReservationScreen():
+    return render_template('student_reservation_screen.html')
 
 def openTeacherReservationScreen():
     return render_template("teacher_reservation_screen.html")
