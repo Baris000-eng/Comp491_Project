@@ -2,6 +2,7 @@ from typing import List
 from flask import render_template, redirect, session,  flash, request, Flask, url_for, jsonify
 import sqlite3
 from constants import ROLES
+import pandas as pd
 import repository.UserRepository as UR
 import deprecation
 
@@ -451,6 +452,12 @@ def showTheClassroomAndInfo():
         return html
     html = load_classes_with_info('KU_Classrooms.xlsx')
     return render_template("Classroom_reservation_students_view.html")
+
+
+def extract_first_column_of_ku_class_data():
+    df = pd.read_excel('KU_Classrooms.xlsx')
+    options = [x for x in df.iloc[:, 0].dropna().tolist() if x not in ['CASE', 'SOS', 'SNA', 'ENG','SCI']]
+    return options
 ############################################################################################################################################################################################################
 def reserve_class():
     role = request.form['role']
@@ -558,10 +565,12 @@ def see_already_reserved_classes():
 #########################################################################################################################################################################
 
 def openStudentReservationScreen():
-    return render_template('student_reservation_screen.html')
+    options = extract_first_column_of_ku_class_data()
+    return render_template('student_reservation_screen.html', options = options)
 
 def openTeacherReservationScreen():
-    return render_template("teacher_reservation_screen.html")
+    options = extract_first_column_of_ku_class_data()
+    return render_template("teacher_reservation_screen.html", options = options)
 
 def opening_screen():
     return render_template("opening_screen.html")

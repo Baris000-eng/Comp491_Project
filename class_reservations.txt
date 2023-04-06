@@ -68,3 +68,24 @@ Time: 12:00
 Date: 2002-03-12
 Option: lecture
 
+Role: teacher
+Class Number: SNA153
+Class Code: sci124
+Time: 20:00
+Date: 2023-04-20
+Option: exam
+
+Role: teacher
+Class Number: SOSB01
+Class Code: SNA B149
+Time: 19:09
+Date: 2022-09-19
+Option: exam
+
+Role: student
+Class Number: SOSZ27
+Class Code: CASE B35
+Time: 15:00
+Date: 2022-02-14
+Option: private
+
