@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teacher Reservation Screen</title>
-  <link rel="stylesheet" href="../static/teacher_reservation_screen.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Reservation Screen</title>
+    <link rel="stylesheet" href="../static/teacher_reservation_screen.css">
 </head>
+
 <body>
     <div class="my_div" id="reservationForm">
         <form action="/reserve_class" method="POST">
@@ -37,7 +39,7 @@
             <br>
             <label for="">Please specify your purpose of reservation.</label>
             <label>
-                <input type="radio" name="option" value="exam">
+                <input type="radio" name="option" value="exam" required>
                 I want to reserve for an exam.
             </label>
             <label>
@@ -49,8 +51,8 @@
                 I want to reserve for a ps.
             </label>
             <button type="submit">Click to submit reservation</button>
-    </form>
-</div>
+        </form>
+    </div>
 </body>
 
 

@@ -8,10 +8,11 @@
     <link rel="stylesheet" type="text/css" href="../static/reservation_single_class.css">
     <title>Already-Reserved Classrooms</title>
 </head>
+
 <body>
     <div class="box">
         <div class="content">
-            <h2>These slots are taken.</h2>
+
             {% for row in rows %}
             <h3>--------------- Reservation --------------------</h3>
             <ul>
@@ -27,10 +28,51 @@
         </div>
     </div>
 </body>
+
+
+
+<div class="left_half" id="reservationForm">
+    <form action="/reserve_class" method="POST" style="text-align:center;">
+        <h2>Reserve A Class</h2>
+        <label for="role">Select your role</label>
+        <select id="class-selector" name="role">
+            <option value="student">student</option>
+            <option value="teacher">teacher</option>
+            <option value="it_staff">it_staff</option>
+        </select>
+        <label for="Class-Codes">Select your class code</label>
+        <input type="text" name="class_num" placeholder="Enter your class code">
+        <label for="">or select one from the drop down list</label>
+        <select id="class-selector" name="class-code">
+            {% for option in options %}
+            <option value="{{ option }}">{{ option }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <br>
+        <label for="Please specify time">Please specify date and time</label>
+        <input type="time" name="time">
+        <input type="date" name="date">
+        <br>
+        <label for="">Specify whether you want to study alone or with other people</label>
+        <label>
+            <input type="radio" name="option" value="private" checked>
+            I will study individually.
+        </label>
+        <label>
+            <input type="radio" name="option" value="public">
+            Other students can also join.
+        </label>
+        <br>
+        <button type="submit">Click to submit reservation</button>
+    </form>
+</div>
+</body>
+
+
 <form action="/student_dashboard">
     <button>Go To Student Dashboard</button>
 </form>
-<form action="/teacher_dashboard">
-    <button>Go To Teacher Dashboard</button>
-</form>
+
+
 </html>

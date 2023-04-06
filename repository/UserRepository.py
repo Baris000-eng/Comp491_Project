@@ -1,8 +1,10 @@
 import sqlite3
 import bcrypt
 import deprecation
+from flask import session
 
 from constants import ROLES
+
 
 def initializeUserTables():
     for role_obj in ROLES.values():
@@ -15,7 +17,8 @@ def initializeUserTables():
                     username TEXT NOT NULL, 
                     password TEXT NOT NULL,
                     email TEXT NOT NULL,
-                    priority INTEGER DEFAULT {role_obj.priority})''')       
+                    priority INTEGER DEFAULT {role_obj.priority})''')
+
 
 @deprecation.deprecated("Use initializeUserTables() instead")
 def initializeStudentTable():
@@ -30,6 +33,7 @@ def initializeStudentTable():
                  email TEXT NOT NULL,
                  priority INTEGER DEFAULT 10)''')
 
+
 @deprecation.deprecated("Use initializeUserTables() instead")
 def initializeTeachersTable():
     conn = sqlite3.connect('teachers_signup_db.db')
@@ -42,6 +46,7 @@ def initializeTeachersTable():
                  password TEXT NOT NULL,
                  email TEXT NOT NULL,
                  priority INTEGER DEFAULT 20)''')
+
 
 @deprecation.deprecated("Use initializeUserTables() instead")
 def initializeItStaffTable():
@@ -91,7 +96,7 @@ def initializeReservationsTable():
              (role TEXT NOT NULL,
               date DATE NOT NULL, 
               time TIME NOT NULL, 
-              username TEXT, 
+              username TEXT DEFAULT "NO_NAME_GIVEN", 
               public_or_private TEXT,
               classroom TEXT,
               priority_reserved INTEGER)''')
@@ -110,6 +115,7 @@ def createReservation(date, time, username, priority, public_or_private, classro
     conn.commit()
     conn.close()
 
+
 @deprecation.deprecated("Use createUser() instead")
 def createStudent(username, password, email):
     """
@@ -125,11 +131,14 @@ def createStudent(username, password, email):
     conn.commit()
     conn.close()
 
+
 @deprecation.deprecated("Use createUser() instead")
 def createTeacher(username, password, email):
     """
     Given a username, password, and email, insert new teacher into the teacher database
     """
+    print("hi from previous teacher")
+    session["username"] = username
     conn = sqlite3.connect('teachers_signup_db.db')
     c = conn.cursor()
     c.execute(
@@ -139,6 +148,7 @@ def createTeacher(username, password, email):
     conn.commit()
     conn.close()
 
+
 @deprecation.deprecated("Use createUser() instead")
 def createItStaff(username, password, email):
     """
@@ -146,6 +156,7 @@ def createItStaff(username, password, email):
     """
     conn = sqlite3.connect('it_staff_signup_db.db')
     c = conn.cursor()
+    session["username"] = username
     c.execute(
         "INSERT INTO it_staff_signup_db (username, password, email) VALUES (?, ?, ?)",
         (username, encrypt_password(password=password), email)
@@ -154,10 +165,15 @@ def createItStaff(username, password, email):
     conn.close()
 
 # Role-based signup
+
+
 def createUser(username: str, password: str, email: str, role: str):
     """
     Given a username, password, email, and role, insert user into corresponding database
     """
+
+    session["username"] = username
+    print("hi")
     conn = sqlite3.connect(f'{ROLES[role].db}.db')
     c = conn.cursor()
     c.execute(
@@ -168,6 +184,8 @@ def createUser(username: str, password: str, email: str, role: str):
     conn.close()
 
 # Role-based get methods
+
+
 def getUserByUsername(username: str, role: str):
     conn = sqlite3.connect(f'{ROLES[role].db}.db')
     c = conn.cursor()
@@ -180,6 +198,7 @@ def getUserByUsername(username: str, role: str):
     conn.commit()
     conn.close()
     return user
+
 
 def getUserByEmail(email: str, role: str):
     conn = sqlite3.connect(f'{ROLES[role].db}.db')
@@ -194,10 +213,11 @@ def getUserByEmail(email: str, role: str):
     conn.close()
     return user
 
+
 def getUserByUsernameAndEmail(username: str, email: str, role: str):
     conn = sqlite3.connect(f'{ROLES[role].db}.db')
     c = conn.cursor()
-    
+
     c.execute(
         f"SELECT * FROM {ROLES[role].db} WHERE username = ? AND email = ?", (username, email))
 
@@ -205,6 +225,7 @@ def getUserByUsernameAndEmail(username: str, email: str, role: str):
     conn.commit()
     conn.close()
     return user
+
 
 def userExistsByUsername(username: str, role: str):
     """
@@ -214,6 +235,7 @@ def userExistsByUsername(username: str, role: str):
 
     return not (user is None)
 
+
 def userExistsByEmail(email: str, role: str):
     """
     Return true if a user exists in corresponding database with this email, false otherwise.
@@ -221,6 +243,7 @@ def userExistsByEmail(email: str, role: str):
     user = getUserByEmail(email, role)
 
     return not (user is None)
+
 
 @deprecation.deprecated("Use getUserByUsername() instead")
 def getStudentByUsername(username: str):
@@ -239,6 +262,7 @@ def getStudentByUsername(username: str):
     conn.close()
     return student
 
+
 @deprecation.deprecated("Use getUserByEmail() instead")
 def getStudentByEmail(email: str):
     """
@@ -256,6 +280,7 @@ def getStudentByEmail(email: str):
     conn.close()
     return student
 
+
 @deprecation.deprecated("Use getUserByUsername() instead")
 def getTeacherByUsername(username: str):
     """
@@ -270,6 +295,7 @@ def getTeacherByUsername(username: str):
 
     teach = c.fetchone()
     return teach
+
 
 @deprecation.deprecated("Use getUserByEmail() instead")
 def getTeacherByEmail(email: str):
@@ -287,6 +313,8 @@ def getTeacherByEmail(email: str):
     return teach
 
 ###### for it staff ##########################
+
+
 @deprecation.deprecated("Use getUserByUsername() instead")
 def getItStaffByUsername(username: str):
     """
@@ -301,6 +329,7 @@ def getItStaffByUsername(username: str):
 
     itStaff = c.fetchone()
     return itStaff
+
 
 @deprecation.deprecated("Use getUserByEmail() instead")
 def getItStaffByEmail(email: str):
@@ -317,6 +346,7 @@ def getItStaffByEmail(email: str):
     return itStaff
 ###### for it staff ##########################
 
+
 @deprecation.deprecated("Use userExistsByUsername() instead")
 def teacherExistsByUsername(username: str):
     """
@@ -325,6 +355,7 @@ def teacherExistsByUsername(username: str):
     teacher = getTeacherByUsername(username)
 
     return not (teacher is None)
+
 
 @deprecation.deprecated("Use userExistsByEmail() instead")
 def teacherExistsByEmail(email: str):
@@ -335,6 +366,7 @@ def teacherExistsByEmail(email: str):
 
     return not (teacher is None)
 
+
 @deprecation.deprecated("Use userExistsByUsername() instead")
 def studentExistsByUsername(username: str):
     """
@@ -343,6 +375,7 @@ def studentExistsByUsername(username: str):
     student = getStudentByUsername(username)
 
     return not (student is None)
+
 
 @deprecation.deprecated("Use userExistsByEmail() instead")
 def studentExistsByEmail(email: str):
@@ -353,6 +386,7 @@ def studentExistsByEmail(email: str):
 
     return not (student is None)
 
+
 @deprecation.deprecated("Use userExistsByUsername() instead")
 def itStaffExistsByUsername(username: str):
     """
@@ -361,6 +395,7 @@ def itStaffExistsByUsername(username: str):
     it_staff = getItStaffByUsername(username)
 
     return not (it_staff is None)
+
 
 @deprecation.deprecated("Use userExistsByEmail() instead")
 def itStaffExistsByEmail(email: str):
@@ -401,7 +436,7 @@ def check_email(user, email: str):
 
 
 def change_user_password(email: str, password: str, role):
-    
+
     conn = sqlite3.connect(f'{ROLES[role].db}.db')
     c = conn.cursor()
 
@@ -410,6 +445,7 @@ def change_user_password(email: str, password: str, role):
               (encrypt_password(password), email))
     conn.commit()
     conn.close()
+
 
 @deprecation.deprecated("Use change_user_password() instead")
 def change_student_password(email: str, password: str):
@@ -422,6 +458,7 @@ def change_student_password(email: str, password: str):
     conn.commit()
     conn.close()
 
+
 @deprecation.deprecated("Use change_user_password() instead")
 def change_teacher_password(email: str, password: str):
     conn = sqlite3.connect('teachers_signup_db.db')
@@ -432,6 +469,7 @@ def change_teacher_password(email: str, password: str):
               (encrypt_password(password), email))
     conn.commit()
     conn.close()
+
 
 @deprecation.deprecated("Use change_user_password() instead")
 def change_it_staff_password(email: str, password: str):

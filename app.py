@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask import Flask, request, render_template, url_for, redirect, jsonify
 from flask import session, flash
-from flask import session
+
 import setup
 from flask_socketio import send
 from service.UserService import student_signup, student_login
@@ -56,7 +56,9 @@ app.route('/it_staff_dashboard')(US.it_staff_dashboard)
 
 
 app.route('/reserve_class', methods=['POST'])(US.reserve_class)
-app.route('/already_reserved_classes', methods=['POST'])(US.see_already_reserved_classes)
+app.route('/already_reserved_classes',
+          methods=['POST'])(US.see_already_reserved_classes)
+app.route('/OpenReserveScreen', methods=['POST'])(US.OpenReserveScreen)
 ###########################################################################################################
 
 
@@ -64,10 +66,10 @@ app.route('/openStudentReservationScreen',
           methods=['GET'])(US.openStudentReservationScreen)
 app.route('/openITReportScreen',
           methods=['GET'])(US.openITReportScreen)
-app.route('/openTeacherReservationScreen', methods = ['GET'])(US.openTeacherReservationScreen)
+app.route('/openTeacherReservationScreen',
+          methods=['GET'])(US.openTeacherReservationScreen)
 app.route('/seeITReport',
           methods=['POST'])(US.seeITReport)
-
 
 
 # Testing out role-based signup request
@@ -77,7 +79,6 @@ def signup(role):
 
 # socket_chat.on("connect")(US.user_connected)
 # socket_chat.on("disconnect")(US.user_disconnected)
-
 
 
 if __name__ == '__main__':

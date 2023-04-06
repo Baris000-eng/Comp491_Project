@@ -6,6 +6,7 @@ import pandas as pd
 import repository.UserRepository as UR
 import deprecation
 
+
 DEBUG = True
 app = Flask(__name__)
 app.secret_key = '491'
@@ -16,20 +17,25 @@ app.debug = True
 def equals_ignore_case(s1: str, s2: str) -> bool:
     return s1.lower() == s2.lower()
 
+
 @deprecation.deprecated("Use check_includes() instead")
 def check_username_password_equality(username: str, password: str) -> bool:
     return equals_ignore_case(username, password)
+
 
 @deprecation.deprecated("Use check_includes() instead")
 def check_username_email_equality(username: str, email: str) -> bool:
     return equals_ignore_case(username, email)
 
+
 @deprecation.deprecated("Use check_includes() instead")
 def check_password_email_equality(password: str, email: str) -> bool:
     return equals_ignore_case(password, email)
 
+
 def includes_ignore_case(s1: str, s2: str) -> bool:
     return s1.lower() in s2.lower()
+
 
 def check_includes(credentials: List[str]):
     for i, cred1 in enumerate(credentials):
@@ -44,7 +50,8 @@ def user_signup(request, role: str):
     password = request.form['password']
     email = request.form['email']
 
-    is_valid, error_template = validate_credentials(username, password, email, role)
+    is_valid, error_template = validate_credentials(
+        username, password, email, role)
 
     if not is_valid:
         return error_template
@@ -58,7 +65,7 @@ def user_signup(request, role: str):
 
     session["username"] = username
     session["priority"] = ROLES[role].priority
-    
+
     return render_template(f'{role}_signup.html', success_message=success_message, button_text=button_text, button_url=button_url, username=username)
 
 
@@ -90,6 +97,7 @@ def validate_password(password):
 ###########for checking security ############################
 ##############################################################################
 
+
 @deprecation.deprecated("Use user_signup() instead")
 def student_signup():
     if request.method == 'POST':
@@ -115,13 +123,13 @@ def user_login(role: str):
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-      
+
         existing_user = UR.getUserByUsernameAndEmail(username, email, role)
 
         if not existing_user:
             notExistMessage = "Username/Email pair does not exist."
             return render_template(f'{role}_login.html', notExistMessage=notExistMessage)
-        
+
         password_check = UR.check_password(existing_user, password)
 
         if password_check:
@@ -139,6 +147,7 @@ def user_login(role: str):
 
     # Render the student login form
     return render_template(f'{role}_login.html')
+
 
 @deprecation.deprecated("Use user_login() instead")
 def student_login():
@@ -245,7 +254,7 @@ def validate_credentials(username, password, email, role):
     elif check_includes([username, password, email]):
         is_valid = False
         credentials_coincide_error = "Make sure that your credentials do not contain each other"
-        return is_valid, render_template(page_rendered, credentials_coincide_error=credentials_coincide_error)        
+        return is_valid, render_template(page_rendered, credentials_coincide_error=credentials_coincide_error)
     elif not validate_password(password):
         is_valid = False
         invalid_password_error = "Password must be at least 8 characters and must include at least:\n \
@@ -291,6 +300,7 @@ def teacher_signup():
 
     # Render the student signup form
     return render_template('teacher_signup.html')
+
 
 @deprecation.deprecated("Use user_login() instead")
 def teacher_login():
@@ -356,6 +366,7 @@ def it_staff_signup():
 
 def openITReportScreen():
     return render_template('report_to_IT.html')
+
 
 @deprecation.deprecated("Use user_login() instead")
 def it_staff_login():
@@ -437,14 +448,14 @@ def showTheClassroomAndInfo():
                 "templates/Classroom_reservation_students_view.html", "w")
             file.write(txt_string)
             file.close()
-        beginning = '<!DOCTYPE html><html><head><title>Student Dashboard</title><link rel="stylesheet" type="text/css" href="../static/classroom_infos.css"><script> window.addEventListener("DOMContentLoaded", function() { var reserveButtons=document.querySelectorAll("button[action=\'/StudentReservesAClass\']"); reserveButtons.forEach(function(button) { button.addEventListener("click", function() {  var parentRow=button.parentElement.parentElement; parentRow.classList.add(\'reserved\'); });       });     }); </script></head><body>'
+        beginning = '<!DOCTYPE html><html><head><title>Student Dashboard</title><link rel="stylesheet" type="text/css" href="../static/classroom_infos.css"><script> window.addEventListener("DOMContentLoaded", function() { var reserveButtons=document.querySelectorAll("button[action=\'/OpenReserveScreen\']"); reserveButtons.forEach(function(button) { button.addEventListener("click", function() {  var parentRow=button.parentElement.parentElement; parentRow.classList.add(\'reserved\'); });       });     }); </script></head><body>'
 
         html = ""
         html += beginning
         html += "<table>\n<thead>\n<tr>\n"
         html += "".join([f"<th>{header}</th>\n" for header in heads])
         html += "</tr>\n</thead>\n<tbody>\n"
-        html += "".join([f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><form action='/StudentReservesAClass' method='POST'><button >Reserve</button></form></td></tr>\n" for row in info])
+        html += "".join([f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><form action='/openStudentReservationScreen' method='GET'><button >Reserve</button></form></td></tr>\n" for row in info])
 
         html += "</tbody>\n</table>"
         html += "</body></html>"
@@ -456,9 +467,12 @@ def showTheClassroomAndInfo():
 
 def extract_first_column_of_ku_class_data():
     df = pd.read_excel('KU_Classrooms.xlsx')
-    options = [x for x in df.iloc[:, 0].dropna().tolist() if x not in ['CASE', 'SOS', 'SNA', 'ENG','SCI']]
+    options = [x for x in df.iloc[:, 0].dropna().tolist() if x not in [
+        'CASE', 'SOS', 'SNA', 'ENG', 'SCI']]
     return options
 ############################################################################################################################################################################################################
+
+
 def reserve_class():
     role = request.form['role']
     class_num = request.form['class_num']
@@ -492,7 +506,7 @@ def reserve_class():
 
     c.execute('''INSERT INTO reservations_db (role, date, time, username, public_or_private, classroom, priority_reserved) 
                     VALUES (?, ?, ?, ?, ?, ?, ?)''', (role, date, time, session["username"], preference, class_code, session['priority']))
-    
+
     conn.commit()
     conn.close()
     return render_template("return_success_message_classroom_reserved.html")
@@ -505,13 +519,14 @@ def report_it():
     date = request.form['date']
     time = request.form['time']
     UR.createITReport(
-        room_number, 
+        room_number,
         faculty_name,
-        problem_description, 
-        date, 
+        problem_description,
+        date,
         time
     )
     return render_template("IT_report_success_screen.html")
+
 
 def seeITReport():
     conn = sqlite3.connect('IT_Report_logdb.db')
@@ -519,6 +534,7 @@ def seeITReport():
     c.execute('SELECT * FROM IT_Report_logdb')
     rows = c.fetchall()
     return render_template('IT_Report_list.html', rows=rows)
+
 
 def report_chat():
     problem_description = request.form['problem_description']
@@ -556,6 +572,7 @@ def user_disconnected():
     print(session['username'] +
           " left the chat room (room : " + session['classroom'] + ")")
 
+
 def see_already_reserved_classes():
     conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
@@ -564,13 +581,16 @@ def see_already_reserved_classes():
     return render_template('classroom_inside_reservation.html', rows=rows)
 #########################################################################################################################################################################
 
+
 def openStudentReservationScreen():
     options = extract_first_column_of_ku_class_data()
-    return render_template('student_reservation_screen.html', options = options)
+    return render_template('student_reservation_screen.html', options=options)
+
 
 def openTeacherReservationScreen():
     options = extract_first_column_of_ku_class_data()
-    return render_template("teacher_reservation_screen.html", options = options)
+    return render_template("teacher_reservation_screen.html", options=options)
+
 
 def opening_screen():
     return render_template("opening_screen.html")
@@ -599,5 +619,10 @@ def teacher_dashboard():
 def it_staff_dashboard():
     return render_template('it_staff_dashboard.html')
 
+
 def go_to_opening_screen():
     return render_template('opening_screen.html')
+
+
+def OpenReserveScreen():
+    return render_template("student_reservation_screen.html")
