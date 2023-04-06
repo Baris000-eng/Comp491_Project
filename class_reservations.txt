@@ -1,25 +1,7 @@
-
-
-Role: student
-
+Role: teacher
 Class Number: SNAA52
-Class Code: sci124
-Time: 09:26
-Date: 2023-05-03
-Option: public
-
-Role: student
-
-Class Number: qwwqqwqw
-Class Code: sosb08
-Time: 04:35
-Date: 2023-05-06
-Option: private
-
-Role: student
-Class Number: SNAA99
-Class Code: sosb09
-Time: 04:57
-Date: 2023-04-30
-Option: public
+Class Code: engz50
+Time: 19:23
+Date: 2023-04-22
+Option: exam
 
