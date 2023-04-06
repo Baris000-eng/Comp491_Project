@@ -111,6 +111,7 @@ def student_signup():
         button_text = "Go To Student Dashboard"
         button_url = "/student_dashboard"
         session["username"] = username
+        session["role"] = "Student"
         session["priority"] = 10
         return render_template('student_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
     # Render the student signup form
@@ -156,7 +157,7 @@ def student_login():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-
+        session["role"] = "Student"
         conn = sqlite3.connect('students_signup_db.db')
         c = conn.cursor()
 
@@ -173,6 +174,7 @@ def student_login():
         if existing_student and password_check:
             # Redirect to dashboard if student already exists
             session["username"] = username
+            session["role"] = "Student"
             session["priority"] = 10
             return redirect('/student_dashboard')
 
