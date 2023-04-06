@@ -418,3 +418,31 @@ Time: 11:12
 Date: 0312-02-11
 Option: public
 
+Role: student
+Class Number: qe
+Class Code: CASE B31
+Time: 12:13
+Date: 0123-03-12
+Option: private
+
+Role: student
+Class Number: 32234324234423
+Class Code: CASE B31
+Time: 01:12
+Date: 0031-12-13
+Option: private
+
+Role: student
+Class Number: 32234324234423
+Class Code: CASE B31
+Time: 01:12
+Date: 0031-12-13
+Option: private
+
+Role: student
+Class Number: qeqew
+Class Code: CASE B39
+Time: 23:42
+Date: 234234-03-22
+Option: private
+

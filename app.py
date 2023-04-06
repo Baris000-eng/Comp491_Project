@@ -9,7 +9,7 @@ from repository.UserRepository import initializeItStaffTable, initializeTeachers
 from service.UserService import it_staff_login, it_staff_signup, teacher_login, teacher_signup, student_login, student_signup
 from service.UserService import password_change_success, go_to_opening_screen
 from service.UserService import select_role, showTheClassroomAndInfo, chat_action, report_chat, report_it
-from service.UserService import reserve_class, getIT
+from service.UserService import reserve_class
 import service.UserService as US
 from service.UserService import extract_first_column_of_ku_class_data
 
@@ -42,7 +42,7 @@ app.route('/chat_action')(chat_action)
 
 app.route('/reportingChat', methods=['POST'])(report_chat)
 app.route('/reportingIT', methods=['POST'])(report_it)
-app.route('/getIT', methods=['POST'])(getIT)
+
 app.route('/logout')(go_to_opening_screen)
 app.route('/', methods=['GET', 'POST'])(US.opening_screen)
 

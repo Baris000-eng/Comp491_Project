@@ -113,9 +113,9 @@ def student_signup():
         session["username"] = username
         session["role"] = "Student"
         session["priority"] = 10
-        return render_template('student_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
+        return render_template('student_pages/student_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
     # Render the student signup form
-    return render_template('student_signup.html')
+    return render_template('student_pages/student_signup.html')
 
 
 def user_login(role: str):
@@ -172,7 +172,7 @@ def student_login():
 
         if not existing_student:
             notExistMessage = "Username does not exist."
-            return render_template('student_login.html', notExistMessage=notExistMessage)
+            return render_template('student_pages/student_login.html', notExistMessage=notExistMessage)
         password_check = UR.check_password(existing_student, password)
 
         if existing_student and password_check:
@@ -187,10 +187,10 @@ def student_login():
             message = "You haven't signed up yet. Please go to student signup screen by clicking below button."
             button_text = "Go To Student Signup Screen"
             button_url = "/student_signup"
-            return render_template('student_login.html', message=message, button_text=button_text, button_url=button_url)
+            return render_template('student_pages/student_login.html', message=message, button_text=button_text, button_url=button_url)
 
     # Render the student login form
-    return render_template('student_login.html')
+    return render_template('student_pages/student_login.html')
 
 
 def get_password_change_screen():
@@ -304,10 +304,10 @@ def teacher_signup():
         button_text = "Go To Teacher Dashboard"
         button_url = "/teacher_dashboard"
 
-        return render_template('teacher_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
+        return render_template('teacher_pages/teacher_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
 
     # Render the student signup form
-    return render_template('teacher_signup.html')
+    return render_template('teacher_pages/teacher_signup.html')
 
 
 @deprecation.deprecated("Use user_login() instead")
@@ -328,7 +328,7 @@ def teacher_login():
 
         if not existing_teacher:
             notExistMessage = "Username does not exist."
-            return render_template('teacher_login.html', notExistMessage=notExistMessage)
+            return render_template('teacher_pages/teacher_login.html', notExistMessage=notExistMessage)
 
         password_check = UR.check_password(existing_teacher, password)
 
@@ -343,10 +343,10 @@ def teacher_login():
             message = "You haven't signed up yet. Please go to teacher signup screen by clicking below button."
             button_text = "Go To Teacher Signup Screen"
             button_url = "/teacher_signup"
-            return render_template('teacher_login.html', message=message, button_text=button_text, button_url=button_url)
+            return render_template('teacher_pages/teacher_login.html', message=message, button_text=button_text, button_url=button_url)
 
     # Render the teacher login form
-    return render_template('teacher_login.html')
+    return render_template('teacher_pages/teacher_login.html')
 
 ################TEACHER##############################################################################
 
@@ -371,10 +371,10 @@ def it_staff_signup():
         session["username"] = username
         session["priority"] = 10
         session["role"] = "It_staff"
-        return render_template('it_staff_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
+        return render_template('it_pages/it_staff_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
 
     # Render the it staff signup form
-    return render_template('it_staff_signup.html')
+    return render_template('it_pages/it_staff_signup.html')
 
 
 def openITReportScreen():
@@ -399,7 +399,7 @@ def it_staff_login():
 
         if not existing_it_staff:
             notExistMessage = "Username does not exist."
-            return render_template('it_staff_login.html', notExistMessage=notExistMessage)
+            return render_template('it_pages/it_staff_login.html', notExistMessage=notExistMessage)
 
         password_check = UR.check_password(existing_it_staff, password)
 
@@ -411,10 +411,10 @@ def it_staff_login():
             message = "You haven't signed up yet. Please go to it staff signup screen by clicking below button."
             button_text = "Go To It Staff Signup Screen"
             button_url = "/it_staff_signup"
-            return render_template('it_staff_login.html', message=message, button_text=button_text, button_url=button_url)
+            return render_template('it_pages/it_staff_login.html', message=message, button_text=button_text, button_url=button_url)
 
     # Render the student login form
-    return render_template('it_staff_login.html')
+    return render_template('it_pages/it_staff_login.html')
 
 
 ###################IT STAFF######################################################################
@@ -538,7 +538,7 @@ def report_it():
         date,
         time
     )
-    return render_template("IT_report_success_screen.html")
+    return render_template("it_pages/IT_report_success_screen.html")
 
 
 def seeITReport():
@@ -546,7 +546,7 @@ def seeITReport():
     c = conn.cursor()
     c.execute('SELECT * FROM IT_Report_logdb')
     rows = c.fetchall()
-    return render_template('IT_Report_list.html', rows=rows)
+    return render_template('it_pages/IT_Report_list.html', rows=rows)
 
 
 def report_chat():
@@ -556,13 +556,10 @@ def report_chat():
     return 'Thank you for reporting the problem to IT!'
 
 
-
-
-
 def chat_action():
     class_no = request.args.get("classroom")
     session['classroom'] = class_no
-    return render_template("chat_room.html", class_no=class_no)
+    return render_template("chat_pages/chat_room.html", class_no=class_no)
 
 
 def user_connected(info):
@@ -605,15 +602,15 @@ def opening_screen():
 
 
 def teacher_screen():
-    return render_template('teacher_screen.html')
+    return render_template('teacher_pages/teacher_screen.html')
 
 
 def student_screen():
-    return render_template('student_screen.html')
+    return render_template('student_pages/student_screen.html')
 
 
 def it_staff_screen():
-    return render_template('it_staff_screen.html')
+    return render_template('it_pages/it_staff_screen.html')
 
 
 def student_dashboard():
@@ -621,11 +618,11 @@ def student_dashboard():
 
 
 def teacher_dashboard():
-    return render_template('teacher_dashboard.html')
+    return render_template('teacher_pages/teacher_dashboard.html')
 
 
 def it_staff_dashboard():
-    return render_template('it_staff_dashboard.html')
+    return render_template('it_pages/it_staff_dashboard.html')
 
 
 def go_to_opening_screen():
