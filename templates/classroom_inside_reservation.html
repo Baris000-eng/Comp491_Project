@@ -15,15 +15,19 @@
             {% for row in rows %}
             <h3>--------------- Reservation --------------------</h3>
             <ul>
-                <li>Date: {{ row[0] }}</li>
-                <li>Time: {{ row[1] }}</li>
-                <li>Username: {{ row[2] }}</li>
-                <li>Public or Private: {{ row[3] }}</li>
-                <li>Classroom: {{ row[4] }}</li>
-                <li>Priority Reserved: {{ row[5] }}</li>
+                <li>Role: {{ row[0] }}</li>
+                <li>Date: {{ row[1] }}</li>
+                <li>Time: {{ row[2] }}</li>
+                <li>Username: {{ row[3] }}</li>
+                <li>Public or Private: {{ row[4] }}</li>
+                <li>Classroom: {{ row[5] }}</li>
+                <li>Priority Reserved: {{ row[6] }}</li>
             </ul>
             {% endfor %}
         </div>
     </div>
 </body>
+<form action="/student_dashboard">
+    <button>Go To Student Dashboard</button>
+</form>
 </html>

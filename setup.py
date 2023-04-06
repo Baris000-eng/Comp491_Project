@@ -1,7 +1,5 @@
 import repository.UserRepository as UR
 
-UR.initializeStudentTable()
-UR.initializeItStaffTable()
-UR.initializeTeachersTable()
+UR.initializeUserTables()
 UR.initializeReservationsTable()
 UR.intializeITReportLog()

@@ -416,39 +416,51 @@ def showTheClassroomAndInfo():
     html = load_classes_with_info('KU_Classrooms.xlsx')
     return render_template("Classroom_reservation_students_view.html")
 ############################################################################################################################################################################################################
-
 def reserve_class():
+    role = request.form['role']
     class_num = request.form['class_num']
     class_code = request.form['class-code']
     time = request.form['time']
     date = request.form['date']
     option = request.form['option']
 
-    with open('class_reservations_of_students.txt', 'a') as f:
+    with open('class_reservations.txt', 'a') as f:
+        f.write(f'Role: {role}\n')
         f.write(f'Class Number: {class_num}\n')
         f.write(f'Class Code: {class_code}\n')
         f.write(f'Time: {time}\n')
         f.write(f'Date: {date}\n')
         f.write(f'Option: {option}\n\n')
 
+    
+
     conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
 
     c.execute('''CREATE TABLE IF NOT EXISTS reservations_db 
-             (date DATE NOT NULL, 
+             (role TEXT NOT NULL,
+              date DATE NOT NULL, 
               time TIME NOT NULL, 
               username TEXT, 
               public_or_private TEXT,
               classroom TEXT,
               priority_reserved INTEGER)''')
-
+    
+    preference = str()
     if option == "private":
-        c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom ,priority_reserved) 
-                    VALUES (?, ?, ?, ?, ?, ?)''', (date, time, session["username"], "Private", class_num, session['priority']))
-    else:
-        c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom ,priority_reserved) 
-                    VALUES (?, ?, ?, ?, ?, ?)''', (date, time, session["username"], "Public", class_num, session['priority']))
+        preference = "Private"
+    elif option == "public":
+        preference = "Public"
+    elif option == "exam":
+        preference = "Exam"
+    elif option == "lecture":
+        preference = "Lecture"
+    elif option == "ps":
+        preference = "PS"
 
+    c.execute('''INSERT INTO reservations_db (role, date, time, username, public_or_private, classroom, priority_reserved) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?)''', (role, date, time, session["username"], preference, class_num, session['priority']))
+    
     conn.commit()
     conn.close()
     return render_template("return_success_message_classroom_reserved.html")
@@ -521,6 +533,9 @@ def student_reserves_a_class():
 #########################################################################################################################################################################
 def openReserveClass():
     return render_template('reserving_class_page.html')
+
+def openTeacherReservationScreen():
+    return render_template("teacher_reservation_screen.html")
 
 def opening_screen():
     return render_template("opening_screen.html")

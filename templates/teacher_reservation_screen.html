@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reserving Class Page</title>
-    <link rel="stylesheet" type="text/css" href="../static/student_reservation.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teacher Reservation Screen</title>
+  <link rel="stylesheet" href="../static/teacher_reservation_screen.css">
 </head>
-
 <body>
+    <div>
 
-    <div class="left_half" id="reservationForm" style="display:block;">
-        <form action="/reserve_class" method="POST" style="text-align:center;">
-            <h2>Reserve A Class</h2>
+
+        <form action="/reserve_teacher_class" method = "POST" class="right-div">
+            <h2>Reserving a class</h2>
             <label for="role">Select your role</label>
             <select id="class-selector" name="role">
                 <option value="student">student</option>
@@ -23,6 +22,10 @@
             <input type="text" name="class_num" placeholder="Enter your class code">
             <label for="">or select one from the drop down list</label>
             <select id="class-selector" name="class-code">
+                <!--
+                    sınıfların api'ı alındıktan sonra arr1 dan sınıflar çekilip select elementlar for loop içinde doldurulacak
+                    const arr1 = ['Option 1', 'Option 2', 'Option 3'];
+                -->
                 <option value="engz50">engz50</option>
                 <option value="sci124">sci124</option>
                 <option value="sosb08">sosb08</option>
@@ -30,24 +33,31 @@
             </select>
             <br>
             <br>
+            <br>
             <label for="Please specify time">Please specify date and time</label>
-            <input type="time" name="time">
-            <input type="date" name="date">
+            <input type="time" Specify time>
+            <input type="date">
             <br>
-            <label for="">Specify whether you want to study alone or with other people</label>
+            <label for="">Please specify your purpose of reservation.</label>
             <label>
-                <input type="radio" name="option" value="private" checked>
-                I will study individually.
+                <input type="radio" name="option" value="exam">
+                I want to reserve for an exam.
             </label>
             <label>
-                <input type="radio" name="option" value="public">
-                Other students can also join.
+                <input type="radio" name="option" value="lecture">
+                I want to reserve for a lecture.
             </label>
-            <br>
+            <label>
+                <input type="radio" name="option" value="ps">
+                I want to reserve for a ps.
+            </label>
             <button type="submit">Click to submit reservation</button>
         </form>
+
+
+
+        
     </div>
+  
 </body>
-
-
 </html>

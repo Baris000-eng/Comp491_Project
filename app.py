@@ -59,6 +59,7 @@ app.route('/it_staff_dashboard')(US.it_staff_dashboard)
 
 
 app.route('/reserve_class', methods=['POST'])(reserve_class)
+app.route('/reserve_teacher_class', methods=['POST'])(reserve_class)
 app.route('/StudentReservesAClass', methods=['POST'])(US.student_reserves_a_class)
 ###########################################################################################################
 
@@ -69,6 +70,7 @@ app.route('/openITReportScreen',
           methods=['GET'])(US.openITReportScreen)
 app.route('/seeITReport',
           methods=['POST'])(US.seeITReport)
+app.route('/openTeacherReservationScreen', methods = ['GET'])(US.openTeacherReservationScreen)
 
 
 
