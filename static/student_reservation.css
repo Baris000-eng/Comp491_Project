@@ -1,71 +1,140 @@
-div#reservationForm {
-    display: block;
-    background-color: #f2f2f2;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px #888888;
-    padding: 20px;
-    margin: 0 auto;
-    width: 50%;
-    max-width: 600px;
-    text-align: left;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-}
-
-
-div#reservationForm h2 {
-    margin-top: 0;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+  }
+  
+  h2 {
     font-size: 24px;
     font-weight: bold;
-    color: #555555;
-    text-align: center;
-}
-
-div#reservationForm label {
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: block;
     font-size: 16px;
-    color: #555555;
-}
-
-div#reservationForm input[type="text"],
-div#reservationForm input[type="time"],
-div#reservationForm input[type="date"] {
-    width: 100%;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="time"],
+  input[type="date"],
+  select {
+    display: block;
     padding: 10px;
-    margin: 10px 0;
-    box-sizing: border-box;
-    border-radius: 5px;
-    border: 2px solid #dddddd;
     font-size: 16px;
-    color: #555555;
-}
-
-div#reservationForm select {
+    border: 1px solid #ccc;
+    border-radius: 4px;
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
     box-sizing: border-box;
-    border-radius: 5px;
-    border: 2px solid #dddddd;
-    font-size: 16px;
-    color: #555555;
-    background-color: #ffffff;
-}
-
-div#reservationForm button[type="submit"] {
+    margin-bottom: 20px;
+  }
+  
+  select {
+    margin-bottom: 30px;
+  }
+  
+  input[type="radio"] {
+    margin-right: 10px;
+  }
+  
+  button {
+    display: block;
     background-color: #4CAF50;
     color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
     font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
     cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s ease-in-out;
-}
-
-div#reservationForm button[type="submit"]:hover {
-    background-color: #3e8e41;
-}
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .right-div {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 500px;
+  }
+  
+  @media screen and (max-width: 500px) {
+    button {
+      margin-bottom: 10px;
+    }
+  }
+  
+  select option:first-child {
+    display:none;
+  }
+  
+  select::-ms-expand {
+    display: none;
+  }
+  
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  
+  select:focus {
+    outline: none;
+  }
+  
+  select option {
+    background-color: white;
+    color: #333;
+  }
+  
+  select option:checked {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  select option:checked:hover {
+    background-color: #0069d9;
+    color: white;
+  }
+  
+  select:focus ~ ul {
+    display: block;
+    bottom: -200px;
+  }
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 2;
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: -1px;
+  }
+  
+  ul li {
+    padding: 5px;
+    cursor: pointer;
+  }
+  
+  ul li:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  

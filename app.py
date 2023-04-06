@@ -11,6 +11,7 @@ from service.UserService import password_change_success, go_to_opening_screen
 from service.UserService import select_role, showTheClassroomAndInfo, chat_action, report_chat, report_it
 from service.UserService import reserve_class, getIT
 import service.UserService as US
+from service.UserService import extract_first_column_of_ku_class_data
 
 
 app = Flask(__name__)
@@ -64,7 +65,6 @@ app.route('/openStudentReservationScreen',
 app.route('/openITReportScreen',
           methods=['GET'])(US.openITReportScreen)
 app.route('/openTeacherReservationScreen', methods = ['GET'])(US.openTeacherReservationScreen)
-
 app.route('/seeITReport',
           methods=['POST'])(US.seeITReport)
 

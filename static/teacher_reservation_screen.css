@@ -66,4 +66,61 @@ body {
       margin-bottom: 10px;
     }
   }
+
+  select option:first-child {
+    display:none;
+  }
+  select::-ms-expand {
+    display: none;
+  }
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    width: 200px;
+    position: relative;
+    z-index: 1;
+  }
+  select:focus {
+    outline: none;
+  }
+  select option {
+    background-color: white;
+    color: #333;
+  }
+  select option:checked {
+    background-color: #007bff;
+    color: white;
+  }
+  select option:checked:hover {
+    background-color: #0069d9;
+    color: white;
+  }
+  select:focus ~ ul {
+    display: block;
+    bottom: -200px;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    z-index: 2;
+    display: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  ul li {
+    padding: 5px;
+    cursor: pointer;
+  }
+  ul li:hover {
+    background-color: #007bff;
+    color: white;
+  }
   

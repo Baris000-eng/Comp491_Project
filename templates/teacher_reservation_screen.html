@@ -24,10 +24,9 @@
                     sınıfların api'ı alındıktan sonra arr1 dan sınıflar çekilip select elementlar for loop içinde doldurulacak
                     const arr1 = ['Option 1', 'Option 2', 'Option 3'];
                 -->
-                <option value="engz50">engz50</option>
-                <option value="sci124">sci124</option>
-                <option value="sosb08">sosb08</option>
-                <option value="sosb09">sosb09</option>
+                {% for option in options %}
+                <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
             </select>
             <br>
             <br>
