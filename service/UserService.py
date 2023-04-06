@@ -220,7 +220,6 @@ def validate_credentials(username, password, email, role):
     1. KU Domain requirement
     2. Email uniqueness
     3. Username uniqueness
-
     :param username: Username of the user
     :param password: Password of the user
     :param email: Email of the user
@@ -229,22 +228,20 @@ def validate_credentials(username, password, email, role):
     # TODO: May add validations for password
     # TODO: See the password_security_check function above. Integrate that function here.
 
-    # exists_by_email = UR.studentExistsByEmail(email=email)
-    # exists_by_username = UR.studentExistsByUsername(username=username)
-    # if role == "student":
-    #     page_rendered = "student_signup.html"
-    #     exists_by_email = UR.studentExistsByEmail(email=email)
-    #     exists_by_username = UR.studentExistsByUsername(username=username)
-    # elif role == "teacher":
-    #     page_rendered = "teacher_signup.html"
-    #     exists_by_email = UR.teacherExistsByEmail(email=email)
-    #     exists_by_username = UR.teacherExistsByUsername(username=username)
-    # elif role == "itstaff":
-    #     page_rendered = "it_staff_signup.html"
-    #     exists_by_email = UR.itStaffExistsByEmail(email=email)
-    #     exists_by_username = UR.itStaffExistsByUsername(username=username)
-
-    page_rendered = f'{role}_signup.html'
+    exists_by_email = UR.studentExistsByEmail(email=email)
+    exists_by_username = UR.studentExistsByUsername(username=username)
+    if role == "student":
+        page_rendered = "student_signup.html"
+        exists_by_email = UR.studentExistsByEmail(email=email)
+        exists_by_username = UR.studentExistsByUsername(username=username)
+    elif role == "teacher":
+        page_rendered = "teacher_signup.html"
+        exists_by_email = UR.teacherExistsByEmail(email=email)
+        exists_by_username = UR.teacherExistsByUsername(username=username)
+    elif role == "itstaff":
+        page_rendered = "it_staff_signup.html"
+        exists_by_email = UR.itStaffExistsByEmail(email=email)
+        exists_by_username = UR.itStaffExistsByUsername(username=username)
 
     is_valid = True
     if not is_ku_email(email):
@@ -259,19 +256,7 @@ def validate_credentials(username, password, email, role):
         is_valid = False
         username_taken_error = "This username is already taken. Please choose a different one."
         return is_valid, render_template(page_rendered, username_taken_error=username_taken_error)
-    # elif check_username_email_equality(username=username, email=email):
-    #     is_valid = False
-    #     username_email_equal_error = "Since it is confidential, make sure that your email is different from your username in any case"
-    #     return is_valid, render_template(page_rendered, username_email_equal_error=username_email_equal_error)
-    # elif check_username_password_equality(username=username, password=password):
-    #     is_valid = False
-    #     username_password_equal_error = "Since it is confidential, make sure that your password is different from your username in any case"
-    #     return is_valid, render_template(page_rendered, username_password_equal_error=username_password_equal_error)
-    # elif check_password_email_equality(password=password, email=email):
-    #     is_valid = False
-    #     password_email_equal_error = "Since it is confidential, make sure that your password is different from your email in any case"
-    #     return is_valid, render_template(page_rendered, password_email_equal_error=password_email_equal_error)
-    elif check_includes([username, password, email]):
+    elif check_username_email_equality(username=username, email=email):
         is_valid = False
         credentials_coincide_error = "Make sure that your credentials do not contain each other"
         return is_valid, render_template(page_rendered, credentials_coincide_error=credentials_coincide_error)        
@@ -481,20 +466,104 @@ def showTheClassroomAndInfo():
         return html
     html = load_classes_with_info('KU_Classrooms.xlsx')
     return render_template("Classroom_reservation_students_view.html")
-
-
-def reserve():
+############################################################################################################################################################################################################
+def reserve_class():
+    role = request.form['role']
+    class_num = request.form['class_num']
     class_code = request.form['class-code']
     time = request.form['time']
     date = request.form['date']
     option = request.form['option']
 
     with open('class_reservations.txt', 'a') as f:
+        f.write(f'Role: {role}\n')
+        f.write(f'Class Number: {class_num}\n')
         f.write(f'Class Code: {class_code}\n')
         f.write(f'Time: {time}\n')
         f.write(f'Date: {date}\n')
         f.write(f'Option: {option}\n\n')
 
+    
+
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+
+    c.execute('''CREATE TABLE IF NOT EXISTS reservations_db 
+             (role TEXT NOT NULL,
+              date DATE NOT NULL, 
+              time TIME NOT NULL, 
+              username TEXT, 
+              public_or_private TEXT,
+              classroom TEXT,
+              priority_reserved INTEGER)''')
+    
+    preference = str()
+    if option == "private":
+        preference = "Private"
+    elif option == "public":
+        preference = "Public"
+    elif option == "exam":
+        preference = "Exam"
+    elif option == "lecture":
+        preference = "Lecture"
+    elif option == "ps":
+        preference = "PS"
+
+    c.execute('''INSERT INTO reservations_db (role, date, time, username, public_or_private, classroom, priority_reserved) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?)''', (role, date, time, session["username"], preference, class_num, session['priority']))
+    
+    conn.commit()
+    conn.close()
+    return render_template("return_success_message_classroom_reserved.html")
+
+
+def reserve_teacher_class():
+    role = request.form['role']
+    class_num = request.form['class_num']
+    class_code = request.form['class-code']
+    time = request.form['time']
+    date = request.form['date']
+    option = request.form['option']
+
+    with open('class_reservations.txt', 'a') as f:
+        f.write(f'Role: {role}\n')
+        f.write(f'Class Number: {class_num}\n')
+        f.write(f'Class Code: {class_code}\n')
+        f.write(f'Time: {time}\n')
+        f.write(f'Date: {date}\n')
+        f.write(f'Option: {option}\n\n')
+
+    
+
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+
+    c.execute('''CREATE TABLE IF NOT EXISTS reservations_db 
+             (role TEXT NOT NULL,
+              date DATE NOT NULL, 
+              time TIME NOT NULL, 
+              username TEXT, 
+              public_or_private TEXT,
+              classroom TEXT,
+              priority_reserved INTEGER)''')
+    
+    preference = str()
+    if option == "private":
+        preference = "Private"
+    elif option == "public":
+        preference = "Public"
+    elif option == "exam":
+        preference = "Exam"
+    elif option == "lecture":
+        preference = "Lecture"
+    elif option == "ps":
+        preference = "PS"
+
+    c.execute('''INSERT INTO reservations_db (role, date, time, username, public_or_private, classroom, priority_reserved) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?)''', (role, date, time, session["username"], preference, class_num, session['priority']))
+    
+    conn.commit()
+    conn.close()
     return render_template("return_success_message_classroom_reserved.html")
 
 
@@ -504,48 +573,34 @@ def report_it():
     problem_description = request.form['problem_description']
     date = request.form['date']
     time = request.form['time']
-    UR.createITReport(room_number, faculty_name,
-                      problem_description, date, time)
-
+    UR.createITReport(
+        room_number, 
+        faculty_name,
+        problem_description, 
+        date, 
+        time
+    )
     return render_template("IT_report_success_screen.html")
 
+def seeITReport():
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM IT_Report_logdb')
+    rows = c.fetchall()
+    return render_template('IT_Report_list.html', rows=rows)
 
 def report_chat():
-
     problem_description = request.form['problem_description']
-
-    with open('IT_Problems.txt', 'a') as f:
-        # f.write(f'chatUser: {chatUser}\n')
+    with open('IT_Chat_Problems.txt', 'a') as f:
         f.write(f'Problem Description: {problem_description}\n\n')
-
     return 'Thank you for reporting the problem to IT!'
 
 
-def reserve_class():
-    class_num = request.form['class_num']
-    class_code = request.form['class-code']
-    date_input = request.form['date_input']
-    option = request.form['option']
-    time = request.form['time']
-
-    # Write the form data to the file
-    with open('reserved_classes.txt', 'a') as f:
-        f.write(f'Class Number: {class_num}\n')
-        f.write(f'Class Code: {class_code}\n')
-        f.write(f'Option: {option}\n')
-        f.write(f'Date: {date_input}\n')
-        f.write(f'Time: {time}\n\n')
-
-    # Return a response to the user
-    return 'Reservation submitted successfully'
-
-
 def getIT():
-    with open("classes_teacher.txt", "r") as f:
+    with open("classes_of_teachers.txt", "r") as f:
         content = f.read()
         content = content.replace('\n', '<br>')
 
-    # Return a response to the user
     return render_template("student_dashboard.html", content=content)
 
 
@@ -556,7 +611,6 @@ def chat_action():
 
 
 def user_connected(info):
-    # send
     with open('chat_data.txt', 'a') as f:
         f.write(session['username'] + " entered the chat to room " +
                 session['classroom'] + " \n")
@@ -571,6 +625,18 @@ def user_disconnected():
     print(session['username'] +
           " left the chat room (room : " + session['classroom'] + ")")
 
+def student_reserves_a_class():
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM reservations_db')
+    rows = c.fetchall()
+    return render_template('classroom_inside_reservation.html', rows=rows)
+#########################################################################################################################################################################
+def openReserveClass():
+    return render_template('reserving_class_page.html')
+
+def openTeacherReservationScreen():
+    return render_template("teacher_reservation_screen.html")
 
 def opening_screen():
     return render_template("opening_screen.html")
@@ -599,76 +665,5 @@ def teacher_dashboard():
 def it_staff_dashboard():
     return render_template('it_staff_dashboard.html')
 
-
-def StudentReservesAClass():
-    # Write the form data to the file
-    with open('Students_reserved_classes_.txt', 'a') as f:
-        f.write(f'Reserved_classes : \n\n')
-
-    # Return a response to the user
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
-    c.execute('SELECT * FROM reservations_db')
-    rows = c.fetchall()
-    return render_template('classroom_inside_reservation.html', rows=rows)
-
-
-def seeITReport():
-    # Write the form data to the file
-
-    # Return a response to the user
-    conn = sqlite3.connect('IT_Report_logdb.db')
-    c = conn.cursor()
-    c.execute('SELECT * FROM IT_Report_logdb')
-    rows = c.fetchall()
-    return render_template('IT_Report_list.html', rows=rows)
-
-
-def openReserveClass():
-    # Write the form data to the file
-    return render_template('reserving_class_page.html')
-
-
-def student_reserving_class():
-    # Write the form data to the file
-    with open('Students_reserved_classes_.txt', 'a') as f:
-        f.write(f'Reserved_classes : \n\n')
-    # Read the form data
-
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
-
-    # Create the students_signup_db table if it doesn't exist yet
-    c.execute('''CREATE TABLE IF NOT EXISTS reservations_db 
-             (date DATE NOT NULL, 
-              time TIME NOT NULL, 
-              username TEXT, 
-              public_or_private TEXT,
-              classroom TEXT,
-              priority_reserved INTEGER)''')
-    classroom_time = request.form['classroom']
-    classroom_type = request.form['classroom-type']
-    classroom_date = request.form['classroom-date']
-
-    # Insert the new reservation into the database
-    if classroom_type == "private":
-        c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom ,priority_reserved) 
-                    VALUES (?, ?, ?, ?, ?, ?)''', (classroom_date, classroom_time, session["username"], session["priority"], "sci142", "Private"))
-    else:
-        c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom ,priority_reserved) 
-                    VALUES (?, ?, ?, ?, ?, ?)''', (classroom_date, classroom_time, session["username"], session["priority"], "sci142", "Public"))
-
-    # Save the changes to the database
-    conn.commit()
-
-    # Close the database connection
-    conn.close()
-
-    # Return a response to the user
-    return render_template("return_success_message_classroom_reserved.html")
-
-
-#########OTHER SCREENS #######################################################
-
-
-#########OTHER SCREENS #######################################################
+def go_to_opening_screen():
+    return render_template('opening_screen.html')

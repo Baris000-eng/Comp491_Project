@@ -1,45 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IT-Staff Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="../static/dashboard.css">
-
-
-
+    <link rel="stylesheet" type="text/css" href="../static/it_staff_dashboard.css">
 </head>
 
 <body>
-
-
     <h1>IT-Staff Dashboard</h1>
     <div class="container">
         <div class="buttons">
-            <form action="/openITProblems" method="POST"> <button onclick="toggleReservation()">Reserve A
-                    Classroom</button>
+            <form action="/seeITReport" method="POST"> <button>Open IT Problems</button>
             </form>
-
-
-
-
         </div>
-        <div class="buttons">
-            <form action="/seeITReport" method="POST"> <button>Report To IT</button></form>
-        </div>
-
         <div class="buttons">
             <form action="/showTheClassroomAndInfo" method="GET"> <button>Show Classroom Info</button></form>
         </div>
-
-
     </div>
-
-
 </body>
-
-
 
 </html>

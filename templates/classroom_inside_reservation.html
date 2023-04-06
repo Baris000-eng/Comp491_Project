@@ -6,70 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/reservation_single_class.css">
-    <title>Document</title>
-    <style>
-
-    </style>
+    <title>Already-Reserved Classrooms</title>
 </head>
-
 <body>
-
     <div class="box">
         <div class="content">
             <h2>These slots are taken.</h2>
-
             {% for row in rows %}
             <h3>--------------- Reservation --------------------</h3>
             <ul>
-                <li>Date: {{ row[0] }}</li>
-                <li>Time: {{ row[1] }}</li>
-                <li>Username: {{ row[2] }}</li>
-                <li>Public or Private: {{ row[3] }}</li>
-                <li>Classroom: {{ row[4] }}</li>
-                <li>Priority Reserved: {{ row[5] }}</li>
+                <li>Role: {{ row[0] }}</li>
+                <li>Date: {{ row[1] }}</li>
+                <li>Time: {{ row[2] }}</li>
+                <li>Username: {{ row[3] }}</li>
+                <li>Public or Private: {{ row[4] }}</li>
+                <li>Classroom: {{ row[5] }}</li>
+                <li>Priority Reserved: {{ row[6] }}</li>
             </ul>
             {% endfor %}
         </div>
     </div>
-    <form action="/student_reserving_class" method="post">
-        <h2>Reserveing your Class</h2>
-        <label for="classroom">Reservation date:</label>
-        <input type="date" id="classroom-date" name="classroom-date" style="font-size: 24px; background-color: yellow;"
-            required>
-
-        <br><br>
-        <label for="">Reservation Time</label>
-        <select id="classroom" name="classroom" style="margin-left: 100px;">
-            <option value="08:30">8:30 AM - 9:45 AM</option>
-            <option value="10:00">10:00 AM - 11:15 AM</option>
-            <option value="11:30">11:30 AM - 12:45 PM</option>
-            <option value="01:00">1:00 PM - 2:15 PM</option>
-            <option value="02:30">2:30 PM - 3:45 PM</option>
-            <option value="04:00">4:00 PM - 5:15 PM</option>
-            <option value="05:30">5:30 PM - 6:45 PM</option>
-            <option value="07:00">7:00 PM - 8:15 PM</option>
-            <option value="08:30">8:30 PM - 9:45 PM</option>
-            <option value="10:00">10:00 PM - 11:15 PM</option>
-            <option value="23:30">11:30 PM - 12:45 AM</option>
-            <option value="24:00">12:00 AM - 1:15 AM</option>
-            <option value="24:00">1:30 AM - 2:45 AM</option>
-            <option value="24:00">3:00 AM - 4:15 AM</option>
-            <option value="24:00">4:30 AM - 5:45 AM</option>
-            <option value="24:00">6:00 AM - 7:15 AM</option>
-        </select>
-        <br><br>
-        <label>Classroom Type:</label>
-        <input type="radio" id="private" name="classroom-type" value="private" checked>
-        <label for="private">I will study individually.</label>
-        <input type="radio" id="public" name="classroom-type" value="public">
-        <label for="public">Other students can also join.</label>
-        <br><br>
-        <input type="submit" value="Reserve">
-    </form>
-
-
-
 </body>
-
-
+<form action="/student_dashboard">
+    <button>Go To Student Dashboard</button>
+</form>
 </html>

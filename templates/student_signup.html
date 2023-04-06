@@ -4,6 +4,7 @@
 <head>
     <title>Student Signup</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="static/student_signup.js"></script>
 </head>
 
 <body>
@@ -55,28 +56,10 @@
     <button onclick="window.location.href='/student_login'" name="student-login" value="student-login"
         id="student-login">Go to Student Login</button>
     {% endif %}
-
     {% if success_message %}
     <p>{{ success_message }}</p>
     <button onclick="window.location.href='{{ button_url }}'" name="student-dashboard" value="student-dashboard"
         id="student-dashboard">{{ button_text }}</button>
     {% endif %}
-
-    <script>
-        function hideOrOpenSignupHelp() {
-            var signupHelpText = document.getElementById("student-signup-help-text");
-            var signupGuideButton = document.getElementById("student-signup-guide");
-            if (signupHelpText.style.display === "none") {
-                signupHelpText.style.display = "block";
-                signupGuideButton.textContent = "Close Student Signup Guide";
-                signupGuideButton.style.marginTop = "75px";
-            } else {
-                signupHelpText.style.display = "none";
-                signupGuideButton.textContent = "Open Student Signup Guide";
-                signupGuideButton.style.marginTop = "10px";
-            }
-        }
-    </script>
 </body>
-
 </html>

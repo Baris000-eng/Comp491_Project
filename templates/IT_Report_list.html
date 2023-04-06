@@ -16,7 +16,7 @@
             <h2>Reported IT Problems.</h2>
 
             {% for row in rows %}
-            <h3>--------------- Reservation --------------------</h3>
+            <h3>--------------- Reported IT Problem--------------------</h3>
             <ul>
                 <li>IT Report_no : {{ row[0] }}</li>
                 <li>Room Name: {{ row[1] }}</li>
@@ -24,11 +24,14 @@
                 <li>Problem Description: {{ row[3] }}</li>
                 <li>Date: {{ row[4] }}</li>
                 <li>Time: {{ row[5] }}</li>
-
             </ul>
             {% endfor %}
         </div>
     </div>
+    <form action="/it_staff_dashboard">
+        <button>Go To IT Staff Dashboard</button>
+    </form>
+
 </body>
 
 </html>
