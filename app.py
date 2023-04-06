@@ -15,6 +15,7 @@ from service.UserService import password_change_success, go_to_opening_screen
 from service.UserService import select_role, showTheClassroomAndInfo, chat_action, report_chat, report_it
 from service.UserService import reserve_class, getIT
 import service.UserService as US
+from service.UserService import reserve_teacher_class
 
 
 app = Flask(__name__)
@@ -58,8 +59,8 @@ app.route('/teacher_dashboard')(US.teacher_dashboard)
 app.route('/it_staff_dashboard')(US.it_staff_dashboard)
 
 
-app.route('/reserve_class', methods=['POST'])(reserve_class)
-app.route('/reserve_teacher_class', methods=['POST'])(reserve_class)
+app.route('/reserve_class', methods=['POST'])(US.reserve_class)
+app.route('/reserve_teacher_class', methods=['POST'])(US.reserve_teacher_class)
 app.route('/StudentReservesAClass', methods=['POST'])(US.student_reserves_a_class)
 ###########################################################################################################
 

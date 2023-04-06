@@ -16,3 +16,10 @@ Time: 04:35
 Date: 2023-05-06
 Option: private
 
+Role: student
+Class Number: SNAA99
+Class Code: sosb09
+Time: 04:57
+Date: 2023-04-30
+Option: public
+
