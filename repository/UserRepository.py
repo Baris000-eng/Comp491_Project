@@ -4,9 +4,6 @@ import deprecation
 
 from constants import ROLES
 
-class DB():
-    db = dict(student='students_signup_db', teacher='teachers_signup_db', it='it_staff_signup_db')
-
 def initializeUserTables():
     for role_obj in ROLES.values():
         conn = sqlite3.connect(role_obj.db + '.db')
@@ -172,12 +169,12 @@ def createUser(username: str, password: str, email: str, role: str):
 
 # Role-based get methods
 def getUserByUsername(username: str, role: str):
-    conn = sqlite3.connect(DB.db[role] + '.db')
+    conn = sqlite3.connect(f'{ROLES[role].db}.db')
     c = conn.cursor()
 
     # Check if the username exists in the database
     c.execute(
-        f"SELECT * FROM {DB.db[role]} WHERE username = ?", (username,))
+        f"SELECT * FROM {ROLES[role].db} WHERE username = ?", (username,))
 
     user = c.fetchone()
     conn.commit()
@@ -185,12 +182,28 @@ def getUserByUsername(username: str, role: str):
     return user
 
 def getUserByEmail(email: str, role: str):
-    conn = sqlite3.connect(DB.db[role] + '.db')
+    conn = sqlite3.connect(f'{ROLES[role].db}.db')
     c = conn.cursor()
 
     # Check if the username exists in the database
     c.execute(
-        f"SELECT * FROM {DB.db[role]} WHERE email = ?", (email,))
+        f"SELECT * FROM {ROLES[role].db} WHERE email = ?", (email,))
+
+    user = c.fetchone()
+    conn.commit()
+    conn.close()
+    return user
+
+def getUserByUsernameAndEmail(username: str, email: str, role: str):
+    conn = sqlite3.connect(f'{ROLES[role].db}.db')
+    c = conn.cursor()
+
+    # Check if the username exists in the database
+    c.execute(
+        f"SELECT * FROM {ROLES[role].db} WHERE email = ?", (email,))
+    
+    c.execute(
+        f"SELECT * FROM {ROLES[role].db} WHERE username = ? AND email = ?", (username, email))
 
     user = c.fetchone()
     conn.commit()
