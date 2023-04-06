@@ -5,3 +5,66 @@ Time: 19:23
 Date: 2023-04-22
 Option: exam
 
+Role: teacher
+Class Number: SNAB09
+Class Code: sci124
+Time: 12:12
+Date: 2022-12-12
+Option: lecture
+
+Role: teacher
+Class Number: SNAB09
+Class Code: sci124
+Time: 12:12
+Date: 2022-12-12
+Option: lecture
+
+Role: teacher
+Class Number: SOSB19
+Class Code: engz50
+Time: 18:09
+Date: 2022-09-18
+Option: exam
+
+Role: teacher
+Class Number: SOSB29
+Class Code: sci124
+Time: 18:18
+Date: 2023-11-18
+Option: ps
+
+Role: teacher
+Class Number: SOSB33
+Class Code: sci124
+Time: 19:00
+Date: 2021-02-19
+Option: lecture
+
+Role: teacher
+Class Number: SNAB09
+Class Code: sci124
+Time: 12:12
+Date: 2022-12-12
+Option: lecture
+
+Role: student
+Class Number: SNAA52
+Class Code: sosb08
+Time: 14:00
+Date: 2022-03-14
+Option: private
+
+Role: student
+Class Number: SOSB39
+Class Code: sci124
+Time: 13:00
+Date: 2023-04-27
+Option: public
+
+Role: teacher
+Class Number: SNAA59
+Class Code: engz50
+Time: 12:00
+Date: 2002-03-12
+Option: lecture
+
