@@ -355,3 +355,66 @@ Time:
 Date: 
 Option: private
 
+Role: student
+Class Number: 
+Class Code: CASE B31
+Time: 
+Date: 
+Option: exam
+
+Role: student
+Class Number: 
+Class Code: CASE B31
+Time: 
+Date: 
+Option: ps
+
+Role: student
+Class Number: 
+Class Code: CASE B31
+Time: 
+Date: 
+Option: exam
+
+Role: student
+Class Number: 
+Class Code: CASE B31
+Time: 
+Date: 
+Option: exam
+
+Role: student
+Class Number: 
+Class Code: CASE B31
+Time: 12:12
+Date: 0001-11-11
+Option: exam
+
+Role: student
+Class Number: 112312312
+Class Code: CASE B31
+Time: 11:01
+Date: 0003-02-13
+Option: ps
+
+Role: student
+Class Number: 
+Class Code: CASE B31
+Time: 
+Date: 
+Option: private
+
+Role: student
+Class Number: 
+Class Code: CASE B31
+Time: 
+Date: 
+Option: private
+
+Role: student
+Class Number: 13221321
+Class Code: CASE B15
+Time: 11:12
+Date: 0312-02-11
+Option: public
+

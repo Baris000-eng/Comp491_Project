@@ -158,6 +158,10 @@ def student_login():
         password = request.form['password']
         email = request.form['email']
         session["role"] = "Student"
+
+        session["priority"] = 10
+        session["username"] = username
+
         conn = sqlite3.connect('students_signup_db.db')
         c = conn.cursor()
 
@@ -286,7 +290,9 @@ def teacher_signup():
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-
+        session['priority'] = 20
+        session["username"] = username
+        session["role"] = "Teacher"
         is_valid, error_template = validate_credentials(
             username=username, password=password, email=email, role="teacher")
         if not is_valid:
@@ -329,6 +335,8 @@ def teacher_login():
         if existing_teacher and password_check:
             # Redirect to dashboard if teacher already exists
             session['priority'] = 20
+            session["username"] = username
+            session["role"] = "Teacher"
             return redirect('/teacher_dashboard')
         else:
             # Render template with message and button to go to signup screen
@@ -360,6 +368,9 @@ def it_staff_signup():
         success_message = "You have successfully signed up. Please press the below button to go to the it staff dashboard."
         button_text = "Go To It Staff Dashboard"
         button_url = "/it_staff_dashboard"
+        session["username"] = username
+        session["priority"] = 10
+        session["role"] = "It_staff"
         return render_template('it_staff_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
 
     # Render the it staff signup form
@@ -545,12 +556,7 @@ def report_chat():
     return 'Thank you for reporting the problem to IT!'
 
 
-def getIT():
-    with open("classes_of_teachers.txt", "r") as f:
-        content = f.read()
-        content = content.replace('\n', '<br>')
 
-    return render_template("student_dashboard.html", content=content)
 
 
 def chat_action():
@@ -611,7 +617,7 @@ def it_staff_screen():
 
 
 def student_dashboard():
-    return render_template('student_dashboard.html')
+    return render_template('student_pages/student_dashboard.html')
 
 
 def teacher_dashboard():

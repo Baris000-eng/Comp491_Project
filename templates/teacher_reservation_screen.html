@@ -19,7 +19,7 @@
                 <option value="it_staff">it_staff</option>
             </select>
             <label for="Class-Codes">Select your class code</label>
-            <input type="text" name="class_num" placeholder="Enter your class code">
+            <input required type="text" name="class_num" placeholder="Enter your class code">
             <label for="">or select one from the drop down list</label>
             <select id="class-selector" name="class-code">
                 <!--
@@ -34,20 +34,20 @@
             <br>
             <br>
             <label for="Please specify time">Please specify date and time</label>
-            <input name="time" type="time">
-            <input name="date" type="date">
+            <input required name="time" type="time" required>
+            <input required name="date" type="date" re>
             <br>
             <label for="">Please specify your purpose of reservation.</label>
             <label>
-                <input type="radio" name="option" value="exam" required>
+                <input required type="radio" name="option" value="exam" required>
                 I want to reserve for an exam.
             </label>
             <label>
-                <input type="radio" name="option" value="lecture">
+                <input required type="radio" name="option" value="lecture">
                 I want to reserve for a lecture.
             </label>
             <label>
-                <input type="radio" name="option" value="ps">
+                <input required type="radio" name="option" value="ps">
                 I want to reserve for a ps.
             </label>
             <button type="submit">Click to submit reservation</button>

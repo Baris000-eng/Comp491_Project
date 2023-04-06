@@ -15,7 +15,7 @@
 
     <form>
         <label for="">Enter text to chat</label>
-        <input type="text" name="message_input" placeholder="Enter message">
+        <input required  type="text" name="message_input required " placeholder="Enter message">
         <button type="submit" onClick="send_the_message()"></button>>Send message</button>
     </form>
     <form action="/reportingChat" method="POST" class="chat_report" id="chat_report">
@@ -48,7 +48,7 @@
 
 
     const send_clicked = () => {
-        const message = document.getElementById("message_input");
+        const message = document.getElementById("message_input required ");
 
     };
 
