@@ -137,11 +137,16 @@ def user_login(role: str):
         password = request.form['password']
         email = request.form['email']
 
+        page_to_be_displayed = str()
+
         existing_user = UR.getUserByUsernameAndEmail(username, email, role)
 
         if not existing_user:
             notExistMessage = "Username/Email pair does not exist."
-            return render_template(f'{role}_login.html', notExistMessage=notExistMessage)
+            folder_directory = concat_folder_dir_based_on_role(role = role)
+            page_to_be_displayed += folder_directory
+            page_to_be_displayed += f'{role}_login.html'
+            return render_template(page_to_be_displayed, notExistMessage=notExistMessage)
 
         password_check = UR.check_password(existing_user, password)
 
@@ -244,7 +249,11 @@ def password_change_success():
 def go_to_opening_screen():
     return render_template('opening_screen.html')
 
+
 def concat_folder_dir_based_on_role(role: str): 
+    #### Gets user role as parameter ####
+    #### concatenates the folder directory within templates folder ####
+    #### returns the folder directory. ####
     page_rendered = str()
     if role == "student":
         page_rendered += "student_pages/"
@@ -253,6 +262,7 @@ def concat_folder_dir_based_on_role(role: str):
     elif role == "it_staff":
         page_rendered += "it_pages/"
     return page_rendered
+
 
 def validate_credentials(username, password, email, role):
     """
