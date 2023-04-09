@@ -446,3 +446,31 @@ Time: 23:42
 Date: 234234-03-22
 Option: private
 
+Role: student
+Class Number: w
+Class Code: CASE B31
+Time: 11:11
+Date: 0001-11-11
+Option: private
+
+Role: student
+Class Number: 123312
+Class Code: CASE B31
+Time: 11:11
+Date: 0001-11-11
+Option: private
+
+Role: student
+Class Number: 123213231213
+Class Code: CASE B31
+Time: 11:11
+Date: 0001-11-11
+Option: private
+
+Role: student
+Class Number: 123123
+Class Code: CASE B31
+Time: 11:01
+Date: 0123-03-12
+Option: private
+

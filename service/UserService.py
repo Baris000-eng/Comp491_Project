@@ -67,9 +67,8 @@ def user_signup(request, role: str):
     session["username"] = username
     session["priority"] = ROLES[role].priority
 
-
     page_rendered = str()
-    page_rendered += concat_folder_dir_based_on_role(role = role)
+    page_rendered += concat_folder_dir_based_on_role(role=role)
     page_rendered += f'{role}_signup.html'
     return render_template(page_rendered, success_message=success_message, button_text=button_text, button_url=button_url, username=username)
 
@@ -101,12 +100,14 @@ def validate_password(password):
 
 ###########for checking security ############################
 
+
 def validate_role(role: str):
     """
     Return True if given role is a valid role, false otherwise.
     In other words, check if role exists in ROLES dictionary.
     """
     return role in ROLES
+
 
 @deprecation.deprecated("Use user_signup() instead")
 def student_signup():
@@ -117,11 +118,11 @@ def student_signup():
         email = request.form['email']
 
         is_valid, error_template = validate_credentials(
-            username=username, password=password, email=email, role="student") 
-        
-        if not is_valid: 
-            return error_template 
-        
+            username=username, password=password, email=email, role="student")
+
+        if not is_valid:
+            return error_template
+
         # Insert the new user into the database
         UR.createStudent(username=username, password=password, email=email)
         success_message = "You have successfully signed up. Please press the below button to go to the student dashboard."
@@ -148,7 +149,7 @@ def user_login(role: str):
 
         if not existing_user:
             notExistMessage = "Username/Email pair does not exist."
-            folder_directory = concat_folder_dir_based_on_role(role = role)
+            folder_directory = concat_folder_dir_based_on_role(role=role)
             page_to_be_displayed += folder_directory
             page_to_be_displayed += f'{role}_login.html'
             return render_template(page_to_be_displayed, notExistMessage=notExistMessage)
@@ -169,7 +170,7 @@ def user_login(role: str):
             return render_template(f'{role}_login.html', message=message, button_text=button_text, button_url=button_url, username=username)
 
     rendered_page = str()
-    rendered_page += concat_folder_dir_based_on_role(role = role)
+    rendered_page += concat_folder_dir_based_on_role(role=role)
     rendered_page += f'{role}_login.html'
     return render_template(rendered_page)
 
@@ -255,7 +256,7 @@ def go_to_opening_screen():
     return render_template('opening_screen.html')
 
 
-def concat_folder_dir_based_on_role(role: str): 
+def concat_folder_dir_based_on_role(role: str):
     #### Gets user role as parameter ####
     #### concatenates the folder directory within templates folder ####
     #### returns the folder directory. ####
@@ -343,7 +344,7 @@ def teacher_signup():
 
         is_valid, error_template = validate_credentials(
             username=username, password=password, email=email, role="teacher")
-        
+
         if not is_valid:
             return error_template
 
@@ -411,10 +412,10 @@ def it_staff_signup():
 
         valid_bool, error_temp = validate_credentials(
             username=username, password=password, email=email, role="it_staff")
-        
+
         if not valid_bool:
             return error_temp
-        
+
         # Insert the new it staff into the database
         UR.createItStaff(username=username, password=password, email=email)
         success_message = "You have successfully signed up. Please press the below button to go to the it staff dashboard."
@@ -509,10 +510,10 @@ def showTheClassroomAndInfo():
             info.append(row_values)
 
         def create_html_file(txt_string):
-            file = open(
-                "templates/Classroom_reservation_students_view.html", "w")
-            file.write(txt_string)
-            file.close()
+            with open("templates/Classroom_reservation_students_view.html", "w", encoding="utf-8") as file:
+                file.write(txt_string)
+                file.write(txt_string)
+                file.close()
         beginning = '<!DOCTYPE html><html><head><title>Student Dashboard</title><link rel="stylesheet" type="text/css" href="../static/classroom_infos.css"><script> window.addEventListener("DOMContentLoaded", function() { var reserveButtons=document.querySelectorAll("button[action=\'/OpenReserveScreen\']"); reserveButtons.forEach(function(button) { button.addEventListener("click", function() {  var parentRow=button.parentElement.parentElement; parentRow.classList.add(\'reserved\'); });       });     }); </script></head><body>'
 
         html = ""
@@ -521,7 +522,6 @@ def showTheClassroomAndInfo():
         html += "".join([f"<th>{header}</th>\n" for header in heads])
         html += "</tr>\n</thead>\n<tbody>\n"
         html += "".join([f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><form action='/openStudentReservationScreen' method='GET'><button >Reserve</button></form></td></tr>\n" for row in info])
-
         html += "</tbody>\n</table>"
         html += "</body></html>"
         create_html_file(html)
