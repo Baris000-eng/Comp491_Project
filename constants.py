@@ -1,10 +1,22 @@
 class Role:
-    def __init__(self, priority, db):
+    def __init__(self, priority):
         self.priority = priority
-        self.db = db
 
 ROLES = {
-    "student": Role(10, "students_signup_db"),
-    "teacher": Role(20, "teachers_signup_db"),
-    "it_staff": Role(10, "it_staff_signup_db")
+    "student": Role(10),
+    "teacher": Role(20),
+    "it_staff": Role(10)
 }
+
+class DB:
+    users = "users_db"
+
+# To map column names to column numbers
+class UserModel:
+    id = 0
+    username = 1
+    password = 2
+    email = 3
+    role = 4
+    priority = 5
+

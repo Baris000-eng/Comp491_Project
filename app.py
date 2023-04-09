@@ -5,7 +5,6 @@ from flask import session, flash
 import setup
 from flask_socketio import send
 from service.UserService import student_signup, student_login
-from repository.UserRepository import initializeItStaffTable, initializeTeachersTable, initializeStudentTable, intializeITReportLog, initializeReservationsTable
 from service.UserService import it_staff_login, it_staff_signup, teacher_login, teacher_signup, student_login, student_signup
 from service.UserService import password_change_success, go_to_opening_screen
 from service.UserService import select_role, showTheClassroomAndInfo, chat_action, report_chat, report_it

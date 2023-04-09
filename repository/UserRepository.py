@@ -4,63 +4,22 @@ import deprecation
 from flask import session
 
 from constants import ROLES
+from constants import DB
+from constants import UserModel
 
 
 def initializeUserTables():
-    for role_obj in ROLES.values():
-        conn = sqlite3.connect(role_obj.db + '.db')
-        c = conn.cursor()
-
-        # Create the students_signup_db table if it doesn't exist yet
-        c.execute(f'''CREATE TABLE IF NOT EXISTS {role_obj.db}
-                    (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                    username TEXT NOT NULL, 
-                    password TEXT NOT NULL,
-                    email TEXT NOT NULL,
-                    priority INTEGER DEFAULT {role_obj.priority})''')
-
-
-@deprecation.deprecated("Use initializeUserTables() instead")
-def initializeStudentTable():
-    conn = sqlite3.connect('students_signup_db.db')
+    conn = sqlite3.connect(DB.users + '.db')
     c = conn.cursor()
 
     # Create the students_signup_db table if it doesn't exist yet
-    c.execute('''CREATE TABLE IF NOT EXISTS students_signup_db
+    c.execute(f'''CREATE TABLE IF NOT EXISTS {DB.users}
                 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                 username TEXT NOT NULL, 
-                 password TEXT NOT NULL,
-                 email TEXT NOT NULL,
-                 priority INTEGER DEFAULT 10)''')
-
-
-@deprecation.deprecated("Use initializeUserTables() instead")
-def initializeTeachersTable():
-    conn = sqlite3.connect('teachers_signup_db.db')
-    c = conn.cursor()
-
-    # Create the students_signup_db table if it doesn't exist yet
-    c.execute('''CREATE TABLE IF NOT EXISTS teachers_signup_db
-                (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                 username TEXT NOT NULL, 
-                 password TEXT NOT NULL,
-                 email TEXT NOT NULL,
-                 priority INTEGER DEFAULT 20)''')
-
-
-@deprecation.deprecated("Use initializeUserTables() instead")
-def initializeItStaffTable():
-    conn = sqlite3.connect('it_staff_signup_db.db')
-    c = conn.cursor()
-
-    # Create the students_signup_db table if it doesn't exist yet
-    c.execute('''CREATE TABLE IF NOT EXISTS it_staff_signup_db
-                (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                 username TEXT NOT NULL, 
-                 password TEXT NOT NULL,
-                 email TEXT NOT NULL,
-                 priority INTEGER DEFAULT 10)''')
-
+                username TEXT NOT NULL, 
+                password TEXT NOT NULL,
+                email TEXT NOT NULL,
+                role TEXT NOT NULL,
+                priority INTEGER)''')
 
 def intializeITReportLog():
     conn = sqlite3.connect('IT_Report_logdb.db')
@@ -174,11 +133,11 @@ def createUser(username: str, password: str, email: str, role: str):
 
     session["username"] = username
     print("hi")
-    conn = sqlite3.connect(f'{ROLES[role].db}.db')
+    conn = sqlite3.connect(f'{DB.users}.db')
     c = conn.cursor()
     c.execute(
-        f"INSERT INTO {ROLES[role].db} (username, password, email) VALUES (?, ?, ?)",
-        (username, encrypt_password(password), email)
+        f"INSERT INTO {DB.users} (username, password, email, role, priority) VALUES (?, ?, ?, ?, ?)",
+        (username, encrypt_password(password), email, role, ROLES[role].priority)
     )
     conn.commit()
     conn.close()
@@ -186,13 +145,13 @@ def createUser(username: str, password: str, email: str, role: str):
 # Role-based get methods
 
 
-def getUserByUsername(username: str, role: str):
-    conn = sqlite3.connect(f'{ROLES[role].db}.db')
+def getUserByUsername(username: str):
+    conn = sqlite3.connect(f'{DB.users}.db')
     c = conn.cursor()
 
     # Check if the username exists in the database
     c.execute(
-        f"SELECT * FROM {ROLES[role].db} WHERE username = ?", (username,))
+        f"SELECT * FROM {DB.users} WHERE username = ?", (username,))
 
     user = c.fetchone()
     conn.commit()
@@ -200,13 +159,13 @@ def getUserByUsername(username: str, role: str):
     return user
 
 
-def getUserByEmail(email: str, role: str):
-    conn = sqlite3.connect(f'{ROLES[role].db}.db')
+def getUserByEmail(email: str):
+    conn = sqlite3.connect(f'{DB.users}.db')
     c = conn.cursor()
 
     # Check if the username exists in the database
     c.execute(
-        f"SELECT * FROM {ROLES[role].db} WHERE email = ?", (email,))
+        f"SELECT * FROM {DB.users} WHERE email = ?", (email,))
 
     user = c.fetchone()
     conn.commit()
@@ -215,11 +174,11 @@ def getUserByEmail(email: str, role: str):
 
 
 def getUserByUsernameAndEmail(username: str, email: str, role: str):
-    conn = sqlite3.connect(f'{ROLES[role].db}.db')
+    conn = sqlite3.connect(f'{DB.users}.db')
     c = conn.cursor()
 
     c.execute(
-        f"SELECT * FROM {ROLES[role].db} WHERE username = ? AND email = ?", (username, email))
+        f"SELECT * FROM {DB.users} WHERE username = ? AND email = ?", (username, email))
 
     user = c.fetchone()
     conn.commit()
@@ -227,22 +186,28 @@ def getUserByUsernameAndEmail(username: str, email: str, role: str):
     return user
 
 
-def userExistsByUsername(username: str, role: str):
+def userExistsByUsername(username: str):
     """
     Return true if a user exists in corresponding database with this username, false otherwise.
     """
-    user = getUserByUsername(username, role)
+    user = getUserByUsername(username)
 
     return not (user is None)
 
 
-def userExistsByEmail(email: str, role: str):
+def userExistsByEmail(email: str):
     """
     Return true if a user exists in corresponding database with this email, false otherwise.
     """
-    user = getUserByEmail(email, role)
+    user = getUserByEmail(email)
 
     return not (user is None)
+
+def checkUserRole(user, role: str):
+    """
+    Given a user and a role, check if user.role matches with role
+    """
+    return role == user[UserModel.role]
 
 
 @deprecation.deprecated("Use getUserByUsername() instead")
@@ -421,27 +386,27 @@ def check_password(user, password: str):
     Given a user and a raw password, checks if password is correct
     """
 
-    hashed_password = user[2]
+    hashed_password = user[UserModel.password]
     return bcrypt.checkpw(password.encode('utf-8'), hashed_password)
 
 
 def check_username(user, username: str):
-    username_str = user[1]
+    username_str = user[UserModel.username]
     return username_str == username
 
 
 def check_email(user, email: str):
-    email_str = user[3]
+    email_str = user[UserModel.email]
     return email_str == email
 
 
-def change_user_password(email: str, password: str, role):
+def change_user_password(email: str, password: str):
 
-    conn = sqlite3.connect(f'{ROLES[role].db}.db')
+    conn = sqlite3.connect(f'{DB.users}.db')
     c = conn.cursor()
 
     # Update the password for the student with the given email
-    c.execute(f"UPDATE {ROLES[role].db} SET password = ? WHERE email = ?",
+    c.execute(f"UPDATE {DB.users} SET password = ? WHERE email = ?",
               (encrypt_password(password), email))
     conn.commit()
     conn.close()

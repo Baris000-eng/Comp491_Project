@@ -100,8 +100,13 @@ def validate_password(password):
     return True
 
 ###########for checking security ############################
-##############################################################################
 
+def validate_role(role: str):
+    """
+    Return True if given role is a valid role, false otherwise.
+    In other words, check if role exists in ROLES dictionary.
+    """
+    return role in ROLES
 
 @deprecation.deprecated("Use user_signup() instead")
 def student_signup():
@@ -273,6 +278,7 @@ def validate_credentials(username, password, email, role):
     :param username: Username of the user
     :param password: Password of the user
     :param email: Email of the user
+    :param role: Role of the user (student/teacher/it_stuff)
     """
 
     page_rendered = str()
@@ -280,15 +286,21 @@ def validate_credentials(username, password, email, role):
     page_rendered += (folder_directory + f'{role}_signup.html')
 
     is_valid = True
+
+    # TODO: validate_role might be a temporary solution. May be good to add an invalid_role error to opening.screen.html
+    if not validate_role(role):
+        is_valid = False
+        invalid_role = "This role does not exist. Something went wrong"
+        return is_valid, render_template('opening_screen.html')
     if not is_ku_email(email):
         is_valid = False
         not_ku_error = "This email address is not from the KU Domain."
         return is_valid, render_template(page_rendered, not_ku_error=not_ku_error)
-    elif UR.userExistsByEmail(email, role):
+    elif UR.userExistsByEmail(email):
         is_valid = False
         email_taken_error = "An account with this email already exists. Please choose a different email or try logging in."
         return is_valid, render_template(page_rendered, email_taken_error=email_taken_error)
-    elif UR.userExistsByUsername(username, role):
+    elif UR.userExistsByUsername(username):
         is_valid = False
         username_taken_error = "This username is already taken. Please choose a different one."
         return is_valid, render_template(page_rendered, username_taken_error=username_taken_error)
