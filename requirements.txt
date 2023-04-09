@@ -1,3 +1,7 @@
 bcrypt
 deprecation
 pandas
+flask
+flask_socketio
+flask_rbac
+openpyxl

@@ -8,7 +8,7 @@
 
 <body>
 	<h1>IT Staff Signup</h1>
-	<form action="/it_staff_signup" autocomplete = "off" method="post">
+	<form action="/it_staff/signup" autocomplete = "off" method="post">
 		<label for="username">Username</label>
 		<input type="text" id="username" name="username" placeholder="Please enter your username to signup" required>
 		<label for="password">Password</label>
@@ -38,7 +38,7 @@
     {% endif %}    
 	{% if error_message %}
 	<p>{{ error_message }}</p>
-	<button onclick="window.location.href='/it_staff_login'" name="it-staff-login" value="it-staff-login"
+	<button onclick="window.location.href='/it_staff/login'" name="it-staff-login" value="it-staff-login"
 		id="it-staff-login">Go to It Staff Login</button>
 	{% endif %}
 	{% if success_message %}

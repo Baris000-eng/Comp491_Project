@@ -15,7 +15,7 @@
         press the button of student signup guide again.
     </p>
     <h1>Student Signup</h1>
-    <form action="{{ url_for('student_signup') }}" autocomplete="off" method="post">
+    <form action="/student/signup" autocomplete="off" method="post">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" placeholder="Please enter your username to signup" required>
         <label for="password">Password</label>
@@ -44,7 +44,7 @@
     {% endif %}
     {% if error_message %}
     <p>{{ error_message }}</p>
-    <button onclick="window.location.href='/student_login'" name="student-login" value="student-login"
+    <button onclick="window.location.href='/student/login'" name="student-login" value="student-login"
         id="student-login">Go to Student Login</button>
     {% endif %}
     {% if success_message %}

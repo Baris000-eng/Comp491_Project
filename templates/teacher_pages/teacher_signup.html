@@ -8,7 +8,7 @@
 
 <body>
 	<h1>Teacher Signup</h1>
-	<form action="/teacher_signup" autocomplete = "off" method="post">
+	<form action="/teacher/signup" autocomplete = "off" method="post">
 		<label for="username">Username</label>
 		<input required type="text" id="username" placeholder="Please enter your username to signup" name="username" required>
 		<label for="password">Password</label>
@@ -38,7 +38,7 @@
     {% endif %}    
 	{% if error_message %}
 	<p>{{ error_message }}</p>
-	<button onclick="window.location.href='/teacher_login'" name="teacher-login" value="teacher-login"
+	<button onclick="window.location.href='/teacher/login'" name="teacher-login" value="teacher-login"
 		id="student-login">Go to Teacher Login</button>
 	{% endif %}
 

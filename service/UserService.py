@@ -46,31 +46,37 @@ def check_includes(credentials: List[str]):
 
 
 def user_signup(request, role: str):
-    username = request.form['username']
-    password = request.form['password']
-    email = request.form['email']
+    session["role"] = role
 
-    is_valid, error_template = validate_credentials(
-        username, password, email, role
-    )
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
 
-    if not is_valid:
-        return error_template
+        is_valid, error_template = validate_credentials(
+            username, password, email, role
+        )
 
-    UR.createUser(username, password, email, role)
+        if not is_valid:
+            return error_template
 
-    # TODO: Modify success messages according to role
-    success_message = f"You have successfully signed up. Please press the below button to go to the {role} dashboard."
-    button_text = f"Go To {role} Dashboard"
-    button_url = f"/{role}_dashboard"
+        UR.createUser(username, password, email, role)
 
-    session["username"] = username
-    session["priority"] = ROLES[role].priority
+        # TODO: Modify success messages according to role
+        success_message = f"You have successfully signed up. Please press the below button to go to the {role} dashboard."
+        button_text = f"Go To {role} Dashboard"
+        button_url = f"/{role}_dashboard"
+
+        session["username"] = username
+        session["priority"] = ROLES[role].priority
+        page_rendered = f'{concat_folder_dir_based_on_role(role)}{role}_dashboard.html'
+        return render_template(page_rendered, success_message=success_message, button_text=button_text, button_url=button_url, username=username)
+
 
     page_rendered = str()
     page_rendered += concat_folder_dir_based_on_role(role=role)
     page_rendered += f'{role}_signup.html'
-    return render_template(page_rendered, success_message=success_message, button_text=button_text, button_url=button_url, username=username)
+    return render_template(page_rendered)
 
 
 ###############STUDENT #####################################################################################
@@ -109,34 +115,8 @@ def validate_role(role: str):
     return role in ROLES
 
 
-@deprecation.deprecated("Use user_signup() instead")
-def student_signup():
-    if request.method == 'POST':
-        # Get the username, password, and email from the form data
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
-
-        is_valid, error_template = validate_credentials(
-            username=username, password=password, email=email, role="student")
-
-        if not is_valid:
-            return error_template
-
-        # Insert the new user into the database
-        UR.createStudent(username=username, password=password, email=email)
-        success_message = "You have successfully signed up. Please press the below button to go to the student dashboard."
-        button_text = "Go To Student Dashboard"
-        button_url = "/student_dashboard"
-        session["username"] = username
-        session["role"] = "Student"
-        session["priority"] = 10
-        return render_template('student_pages/student_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
-    # Render the student signup form
-    return render_template('student_pages/student_signup.html')
-
-
-def user_login(role: str):
+def user_login(request, role: str):
+    session['role'] = role
     if request.method == 'POST':
         # Get the username and password from the form data
         username = request.form['username']
@@ -175,76 +155,39 @@ def user_login(role: str):
     return render_template(rendered_page)
 
 
-@deprecation.deprecated("Use user_login() instead")
-def student_login():
-    if request.method == 'POST':
-        # Get the username and password from the form data
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
-        session["role"] = "Student"
 
-        session["priority"] = 10
-        session["username"] = username
-
-        conn = sqlite3.connect('students_signup_db.db')
-        c = conn.cursor()
-
-        c.execute(
-            f"SELECT * FROM students_signup_db WHERE username = '{username}' AND email = '{email}'")
-
-        existing_student = c.fetchone()
-
-        if not existing_student:
-            notExistMessage = "Username does not exist."
-            return render_template('student_pages/student_login.html', notExistMessage=notExistMessage)
-        password_check = UR.check_password(existing_student, password)
-
-        if existing_student and password_check:
-            # Redirect to dashboard if student already exists
-            session["username"] = username
-            session["role"] = "Student"
-            session["priority"] = 10
-            return redirect('/student_dashboard')
-
-        else:
-            # Render template with message and button to go to signup screen
-            message = "You haven't signed up yet. Please go to student signup screen by clicking below button."
-            button_text = "Go To Student Signup Screen"
-            button_url = "/student_signup"
-            return render_template('student_pages/student_login.html', message=message, button_text=button_text, button_url=button_url)
-
-    # Render the student login form
-    return render_template('student_pages/student_login.html')
 
 
 def get_password_change_screen():
     return render_template('password_change_screen.html')
 
 
-def change_student_password():
+def change_user_password():
     if request.method == 'POST':
         # Get the email, new password, and confirm password from the request body
         email = request.form['email']
         new_password = request.form['new_password']
         confirm_password = request.form['confirm_password']
+        
+        # FIXME
+        session['role'] = 'student'
 
-        if not UR.studentExistsByEmail(email):
+        if not UR.userExistsByEmail(email):
             email_not_found_error = "No account exists with this email."
             return render_template('password_change_screen.html', email_not_found_error=email_not_found_error)
 
-        if new_password != confirm_password or new_password == '' or confirm_password == '':
+        if not validate_password(new_password) or new_password != confirm_password:
             invalid_password_error = "Make sure new password and confirm password match and are valid."
             return render_template('password_change_screen.html', invalid_password_error=invalid_password_error)
 
-        UR.change_student_password(email, new_password)
+        UR.change_user_password(email, new_password)
 
         # Redirect to the password_change_success screen
         return redirect(url_for('password_change_success'))
 
     # Render the password change form
     email = session.get('email', '')
-    return render_template('password_change_student.html', email=email)
+    return render_template(f'password_change_screen.html', email=email)
 
 
 def password_change_success():
@@ -260,13 +203,7 @@ def concat_folder_dir_based_on_role(role: str):
     #### Gets user role as parameter ####
     #### concatenates the folder directory within templates folder ####
     #### returns the folder directory. ####
-    page_rendered = str()
-    if role == "student":
-        page_rendered += "student_pages/"
-    elif role == "teacher":
-        page_rendered += "teacher_pages/"
-    elif role == "it_staff":
-        page_rendered += "it_pages/"
+    page_rendered = f'{role}_pages/'
     return page_rendered
 
 
@@ -305,7 +242,7 @@ def validate_credentials(username, password, email, role):
         is_valid = False
         username_taken_error = "This username is already taken. Please choose a different one."
         return is_valid, render_template(page_rendered, username_taken_error=username_taken_error)
-    elif check_includes([username, password, email]):
+    elif check_includes([username, password]) or check_includes([email, password]):
         is_valid = False
         credentials_coincide_error = "Make sure that your credentials do not contain each other"
         return is_valid, render_template(page_rendered, credentials_coincide_error=credentials_coincide_error)
@@ -330,158 +267,15 @@ def is_ku_email(email: str):
     return is_ku_email
 
 
-################TEACHER##############################################################################
-@deprecation.deprecated("Use user_signup() instead")
-def teacher_signup():
-    if request.method == 'POST':
-        # Get the username, password, and email from the form data
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
-        session['priority'] = 20
-        session["username"] = username
-        session["role"] = "Teacher"
-
-        is_valid, error_template = validate_credentials(
-            username=username, password=password, email=email, role="teacher")
-
-        if not is_valid:
-            return error_template
-
-        # Insert the new user into the database
-        UR.createTeacher(username=username, password=password, email=email)
-        success_message = "You have successfully signed up. Please press the below button to go to the teacher dashboard."
-        button_text = "Go To Teacher Dashboard"
-        button_url = "/teacher_dashboard"
-
-        return render_template('teacher_pages/teacher_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
-
-    # Render the student signup form
-    return render_template('teacher_pages/teacher_signup.html')
-
-
-@deprecation.deprecated("Use user_login() instead")
-def teacher_login():
-    if request.method == 'POST':
-        # Get the username and password from the form data
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
-
-        conn = sqlite3.connect('teachers_signup_db.db')
-        c = conn.cursor()
-
-        c.execute(
-            f"SELECT * FROM teachers_signup_db WHERE username = '{username}' AND email = '{email}'")
-
-        existing_teacher = c.fetchone()
-
-        if not existing_teacher:
-            notExistMessage = "Username does not exist."
-            return render_template('teacher_pages/teacher_login.html', notExistMessage=notExistMessage)
-
-        password_check = UR.check_password(existing_teacher, password)
-
-        if existing_teacher and password_check:
-            # Redirect to dashboard if teacher already exists
-            session['priority'] = 20
-            session["username"] = username
-            session["role"] = "Teacher"
-            return redirect('/teacher_dashboard')
-        else:
-            # Render template with message and button to go to signup screen
-            message = "You haven't signed up yet. Please go to teacher signup screen by clicking below button."
-            button_text = "Go To Teacher Signup Screen"
-            button_url = "/teacher_signup"
-            return render_template('teacher_pages/teacher_login.html', message=message, button_text=button_text, button_url=button_url)
-
-    # Render the teacher login form
-    return render_template('teacher_pages/teacher_login.html')
-
-################TEACHER##############################################################################
-
-
-###################IT STAFF######################################################################
-@deprecation.deprecated("Use user_signup() instead")
-def it_staff_signup():
-    if request.method == 'POST':
-        # Get the username, password, and email from the form data
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
-
-        valid_bool, error_temp = validate_credentials(
-            username=username, password=password, email=email, role="it_staff")
-
-        if not valid_bool:
-            return error_temp
-
-        # Insert the new it staff into the database
-        UR.createItStaff(username=username, password=password, email=email)
-        success_message = "You have successfully signed up. Please press the below button to go to the it staff dashboard."
-        button_text = "Go To It Staff Dashboard"
-        button_url = "/it_staff_dashboard"
-        session["username"] = username
-        session["priority"] = 10
-        session["role"] = "It_staff"
-        return render_template('it_pages/it_staff_signup.html', success_message=success_message, button_text=button_text, button_url=button_url)
-
-    # Render the it staff signup form
-    return render_template('it_pages/it_staff_signup.html')
-
-
 def openITReportScreen():
     return render_template('report_to_IT.html')
-
-
-@deprecation.deprecated("Use user_login() instead")
-def it_staff_login():
-    if request.method == 'POST':
-        # Get the username and password from the form data
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
-
-        conn = sqlite3.connect('it_staff_signup_db.db')
-        c = conn.cursor()
-
-        c.execute(
-            f"SELECT * FROM it_staff_signup_db WHERE username = '{username}' AND email = '{email}'")
-
-        existing_it_staff = c.fetchone()
-
-        if not existing_it_staff:
-            notExistMessage = "Username does not exist."
-            return render_template('it_pages/it_staff_login.html', notExistMessage=notExistMessage)
-
-        password_check = UR.check_password(existing_it_staff, password)
-
-        if existing_it_staff and password_check:
-            # Redirect to dashboard if student already exists
-            return redirect('/it_staff_dashboard')
-        else:
-            # Render template with message and button to go to signup screen
-            message = "You haven't signed up yet. Please go to it staff signup screen by clicking below button."
-            button_text = "Go To It Staff Signup Screen"
-            button_url = "/it_staff_signup"
-            return render_template('it_pages/it_staff_login.html', message=message, button_text=button_text, button_url=button_url)
-
-    # Render the student login form
-    return render_template('it_pages/it_staff_login.html')
-
-
-###################IT STAFF######################################################################
 
 
 #########OTHER SCREENS #######################################################
 def select_role():
     role = request.form.get('roles')
-    if role == 'teacher':
-        return redirect(url_for('teacher_screen'))
-    elif role == 'student':
-        return redirect(url_for('student_screen'))
-    elif role == 'it_staff':
-        return redirect(url_for('it_staff_screen'))
+    if role in ROLES:
+        return redirect(f'/{role}/screen')
     else:
         return render_template('opening_screen.html')
 
@@ -653,28 +447,11 @@ def opening_screen():
     return render_template("opening_screen.html")
 
 
-def teacher_screen():
-    return render_template('teacher_pages/teacher_screen.html')
+def user_screen(role: str):
+    return render_template(f'{role}_pages/{role}_screen.html')
 
-
-def student_screen():
-    return render_template('student_pages/student_screen.html')
-
-
-def it_staff_screen():
-    return render_template('it_pages/it_staff_screen.html')
-
-
-def student_dashboard():
-    return render_template('student_pages/student_dashboard.html')
-
-
-def teacher_dashboard():
-    return render_template('teacher_pages/teacher_dashboard.html')
-
-
-def it_staff_dashboard():
-    return render_template('it_pages/it_staff_dashboard.html')
+def user_dashboard(role: str):
+    return render_template(f'{role}_pages/{role}_dashboard.html')
 
 
 def go_to_opening_screen():

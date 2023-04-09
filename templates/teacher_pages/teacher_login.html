@@ -8,7 +8,7 @@
 
 <body>
 	<h1>Teacher Login</h1>
-	<form action="/teacher_login" autocomplete = "off" method="post">
+	<form action="/teacher/login" autocomplete = "off" method="post">
 		<label for="username">Username</label>
 		<input required type="text" id="username" placeholder="Please enter your username to login" name="username" >
 		<label for="password">Password</label>
@@ -34,7 +34,7 @@
 	<script>
 		var buttonSignUp = document.getElementById("signup-btn");
 		buttonSignUp.addEventListener("click", function () {
-			location.href = "/teacher_signup";
+			location.href = "/teacher/signup";
 		});
 	</script>
 	{% endif %}
