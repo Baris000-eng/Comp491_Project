@@ -14,25 +14,6 @@ app.config['SECRET_KEY'] = '491'
 app.debug = True
 
 
-def equals_ignore_case(s1: str, s2: str) -> bool:
-    return s1.lower() == s2.lower()
-
-
-@deprecation.deprecated("Use check_includes() instead")
-def check_username_password_equality(username: str, password: str) -> bool:
-    return equals_ignore_case(username, password)
-
-
-@deprecation.deprecated("Use check_includes() instead")
-def check_username_email_equality(username: str, email: str) -> bool:
-    return equals_ignore_case(username, email)
-
-
-@deprecation.deprecated("Use check_includes() instead")
-def check_password_email_equality(password: str, email: str) -> bool:
-    return equals_ignore_case(password, email)
-
-
 def includes_ignore_case(s1: str, s2: str) -> bool:
     return (s1.lower() in s2.lower())
 
@@ -334,7 +315,6 @@ def extract_first_column_of_ku_class_data():
 
 def reserve_class():
     role = request.form['role']
-    class_num = request.form['class_num']
     class_code = request.form['class-code']
     time = request.form['time']
     date = request.form['date']
@@ -342,7 +322,6 @@ def reserve_class():
 
     with open('class_reservations.txt', 'a') as f:
         f.write(f'Role: {role}\n')
-        f.write(f'Class Number: {class_num}\n')
         f.write(f'Class Code: {class_code}\n')
         f.write(f'Time: {time}\n')
         f.write(f'Date: {date}\n')

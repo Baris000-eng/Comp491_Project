@@ -18,24 +18,19 @@
                 <option value="teacher">teacher</option>
                 <option value="it_staff">it_staff</option>
             </select>
-            <label class = "other-label" for="Class-Codes">Select your class code</label>
-            <input required type="text" name="class_num" placeholder="Enter your class code">
-            <label class = "other-label" for="">or select one from the drop down list</label>
-            <select id="class-selector" name="class-code">
-                <!--
-                    sınıfların api'ı alındıktan sonra arr1 dan sınıflar çekilip select elementlar for loop içinde doldurulacak
-                    const arr1 = ['Option 1', 'Option 2', 'Option 3'];
-                -->
-                {% for option in options %}
-                <option value="{{ option }}">{{ option }}</option>
-                {% endfor %}
-            </select>
-            <br>
+            <label class = "other-label" for="">Select your class from dropdown class list</label>
+            <div class="combo-box">
+                <select id="class-selector" name="class-code">
+                    {% for option in options %}
+                    <option value="{{ option }}">{{ option }}</option>
+                    {% endfor %}
+                </select>
+           </div>
             <br>
             <br>
             <label class = "other-label" for="Please specify time">Please specify date and time</label>
             <input required name="time" type="time" required>
-            <input required name="date" type="date" re>
+            <input required name="date" type="date" required>
             <br>
             <label class = "other-label" for="">Please specify your purpose of reservation.</label>
             <label class = "option-label">
