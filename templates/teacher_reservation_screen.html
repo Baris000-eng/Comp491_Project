@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Reservation Screen</title>
     <link rel="stylesheet" href="../static/teacher_reservation_screen.css">
+    <script type="text/javascript" src="../static/teacher_reservation_screen.js"></script>
 </head>
 
 <body>
@@ -18,7 +19,7 @@
                 <option value="teacher">teacher</option>
                 <option value="it_staff">it_staff</option>
             </select>
-            <label class = "other-label" for="">Select your class from dropdown class list</label>
+            <label for="">Select your class from dropdown class list</label>
             <div class="combo-box">
                 <select id="class-selector" name="class-code">
                     {% for option in options %}
@@ -29,8 +30,8 @@
             <br>
             <br>
             <label class = "other-label" for="Please specify time">Please specify date and time</label>
-            <input required name="time" type="time" required>
-            <input required name="date" type="date" required>
+            <input required type="time" name = "time" id = "time">
+            <input required type="date" name = "date" id = "date">
             <br>
             <label class = "other-label" for="">Please specify your purpose of reservation.</label>
             <label class = "option-label">
