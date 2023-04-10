@@ -315,7 +315,6 @@ def extract_first_column_of_ku_class_data():
 
 def reserve_class():
     role = request.form['role']
-    class_num = request.form['class_num']
     class_code = request.form['class-code']
     time = request.form['time']
     date = request.form['date']
@@ -323,7 +322,6 @@ def reserve_class():
 
     with open('class_reservations.txt', 'a') as f:
         f.write(f'Role: {role}\n')
-        f.write(f'Class Number: {class_num}\n')
         f.write(f'Class Code: {class_code}\n')
         f.write(f'Time: {time}\n')
         f.write(f'Date: {date}\n')
