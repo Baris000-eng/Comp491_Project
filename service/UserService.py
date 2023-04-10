@@ -43,15 +43,10 @@ def user_signup(request, role: str):
 
         UR.createUser(username, password, email, role)
 
-        # TODO: Modify success messages according to role
-        success_message = f"You have successfully signed up. Please press the below button to go to the {role} dashboard."
-        button_text = f"Go To {role} Dashboard"
-        button_url = f"/{role}_dashboard"
-
         session["username"] = username
         session["priority"] = ROLES[role].priority
         page_rendered = f'{concat_folder_dir_based_on_role(role)}{role}_dashboard.html'
-        return render_template(page_rendered, success_message=success_message, button_text=button_text, button_url=button_url, username=username)
+        return render_template(page_rendered, username=username, role = role)
 
 
     page_rendered = str()

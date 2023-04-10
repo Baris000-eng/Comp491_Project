@@ -41,13 +41,6 @@
 	<button onclick="window.location.href='/teacher/login'" name="teacher-login" value="teacher-login"
 		id="student-login">Go to Teacher Login</button>
 	{% endif %}
-
-	{% if success_message %}
-	<p>{{ success_message }}</p>
-	<button onclick="window.location.href='{{ button_url }}'" name="teacher-dashboard" value="teacher-dashboard"
-		id="teacher-dashboard">{{ button_text }}</button>
-	{% endif %}
-
 </body>
 
 </html>
