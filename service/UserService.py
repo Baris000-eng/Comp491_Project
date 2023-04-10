@@ -28,6 +28,7 @@ def check_includes(credentials: List[str]):
 
 def user_signup(request, role: str):
     session["role"] = role
+    session["priority"] = ROLES[role].priority
 
     if request.method == 'POST':
         username = request.form['username']
@@ -41,17 +42,11 @@ def user_signup(request, role: str):
         if not is_valid:
             return error_template
 
-        UR.createUser(username, password, email, role)
-
-        # TODO: Modify success messages according to role
-        success_message = f"You have successfully signed up. Please press the below button to go to the {role} dashboard."
-        button_text = f"Go To {role} Dashboard"
-        button_url = f"/{role}_dashboard"
+        UR.createUser(username = username, password = password, email = email, role = role, priority = ROLES[role].priority)
 
         session["username"] = username
-        session["priority"] = ROLES[role].priority
         page_rendered = f'{concat_folder_dir_based_on_role(role)}{role}_dashboard.html'
-        return render_template(page_rendered, success_message=success_message, button_text=button_text, button_url=button_url, username=username)
+        return render_template(page_rendered)
 
 
     page_rendered = str()
@@ -109,7 +104,7 @@ def user_login(request, role: str):
         existing_user = UR.getUserByUsernameAndEmail(username, email, role)
 
         if not existing_user:
-            notExistMessage = "Username/Email pair does not exist."
+            notExistMessage = "Username & Email pair does not exist."
             folder_directory = concat_folder_dir_based_on_role(role=role)
             page_to_be_displayed += folder_directory
             page_to_be_displayed += f'{role}_login.html'
@@ -121,14 +116,21 @@ def user_login(request, role: str):
             # Redirect to dashboard if student already exists
             session["username"] = username
             session["priority"] = ROLES[role].priority
-            return redirect(f'/{role}_dashboard')
+            page_to_be_shown = str()
+            page_to_be_shown += concat_folder_dir_based_on_role(role=role)
+            page_to_be_shown += f'{role}_dashboard.html'
+            return render_template(page_to_be_shown)
 
         else:
             # Render template with message and button to go to signup screen
-            message = f"You haven't signed up yet. Please go to {role} signup screen by clicking below button."
-            button_text = f"Go To {role} Signup Screen"
+            screen_name = beautify_role_names(role_str=role)
+            message = f"You haven't signed up yet. Please go to {screen_name} signup screen by clicking below button."
+            button_text = f"Go To {screen_name} Signup Screen"
+            page_to_be_rendered = str()
+            page_to_be_rendered += concat_folder_dir_based_on_role(role=role)
+            page_to_be_rendered += f'{role}_login.html'
             button_url = f"/{role}_signup"
-            return render_template(f'{role}_login.html', message=message, button_text=button_text, button_url=button_url, username=username)
+            return render_template(page_to_be_rendered, message=message, button_text=button_text, button_url=button_url, username=username)
 
     rendered_page = str()
     rendered_page += concat_folder_dir_based_on_role(role=role)
@@ -179,6 +181,15 @@ def password_change_success():
 def go_to_opening_screen():
     return render_template('opening_screen.html')
 
+def remove_underscore_and_capitalize(input: str) -> str:
+    #####For beautifying the name of screens on buttons , this function is especially for it_staff#####
+    words = input.split("_")
+    capitalized_words = [word.capitalize() for word in words]
+    return " ".join(capitalized_words)
+
+def capitalize(input_string: str) -> str:
+    output = input_string.capitalize()
+    return output
 
 def concat_folder_dir_based_on_role(role: str):
     #### Gets user role as parameter ####
@@ -187,6 +198,14 @@ def concat_folder_dir_based_on_role(role: str):
     page_rendered = f'{role}_pages/'
     return page_rendered
 
+def beautify_role_names(role_str: str) -> str:
+    screen_name = str()
+    if role_str == "it_staff":
+        screen_name = remove_underscore_and_capitalize(role_str)
+    elif role_str == "student" or role_str == "teacher":
+        screen_name = capitalize(role_str)
+    return screen_name
+ 
 
 def validate_credentials(username, password, email, role):
     """
@@ -197,7 +216,7 @@ def validate_credentials(username, password, email, role):
     :param username: Username of the user
     :param password: Password of the user
     :param email: Email of the user
-    :param role: Role of the user (student/teacher/it_stuff)
+    :param role: Role of the user (student/teacher/it_staff)
     """
 
     page_rendered = str()
@@ -215,13 +234,18 @@ def validate_credentials(username, password, email, role):
         is_valid = False
         not_ku_error = "This email address is not from the KU Domain."
         return is_valid, render_template(page_rendered, not_ku_error=not_ku_error)
+    elif UR.userExistsByUsernameAndEmail(username, email, role):
+        is_valid = False
+        screen_name = beautify_role_names(role_str=role)
+        signup_error_message = "This account already exists. Please go to "+str(screen_name)+" login screen by pressing below button."
+        return is_valid, render_template(page_rendered, signup_error_message = signup_error_message)
     elif UR.userExistsByEmail(email):
         is_valid = False
-        email_taken_error = "An account with this email already exists. Please choose a different email or try logging in."
+        email_taken_error = "An account with this email already exists. Choose different email or try logging in by pressing below button."
         return is_valid, render_template(page_rendered, email_taken_error=email_taken_error)
     elif UR.userExistsByUsername(username):
         is_valid = False
-        username_taken_error = "This username is already taken. Please choose a different one."
+        username_taken_error = "This username is already taken. Choose different username or try logging in by pressing below button."
         return is_valid, render_template(page_rendered, username_taken_error=username_taken_error)
     elif check_includes([username, password]) or check_includes([email, password]):
         is_valid = False

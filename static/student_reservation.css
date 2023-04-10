@@ -78,3 +78,35 @@ button[type="submit"]:hover {
     padding: 16px;
   }
 }
+
+.combo-box {
+  position: relative;
+}
+
+.options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  display: none;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.combo-box input:focus + .options {
+  display: block;
+}
+
+.options li {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.options li:hover {
+  background-color: #f2f2f2;
+}
+

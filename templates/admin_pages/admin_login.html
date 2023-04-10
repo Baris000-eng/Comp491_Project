@@ -1,12 +1,44 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Admin Login</title>
-    <link rel="stylesheet" type="text/css" href="../static/admin_login.css">
+	<link rel="stylesheet" type="text/css" href="../static/admin_login.css">
 </head>
+
 <body>
 	<h1>Admin Login</h1>
+	<form action="/admin/login" autocomplete = "off" method="post">
+		<label for="username">Username</label>
+		<input type="text" id="username" name="username" placeholder="Please enter your username to login" required>
+		<label for="password">Password</label>
+		<input type="password" id="password" name="password" placeholder="Please enter your password to login" required>
+		<label for="email">Email:</label>
+		<input type="email" id="email" name="email" placeholder="Please enter your email address to login"
+			required="email" maxlength="50">
+		<br>
+		<br>
+		<button type="submit">Login</button>
+	</form>
+
+	{% if notExistMessage %}
+	<p>{{ notExistMessage }}</p>
+	{% endif %}
+
+	{% if message %}
+	<p>{{ message }}</p>
+	<button id="signup-btn">{{ button_text }}</button>
+	<script>
+		var buttonSignUp = document.getElementById("signup-btn");
+		buttonSignUp.addEventListener("click", function () {
+			location.href = "/admin/signup";
+		});
+	</script>
+	{% endif %}
+
+	<form id="password-change-form" action="/password_change_screen" method="get">
+		<button type="password_change">Forgot Password</button>
+	</form>
 </body>
+
 </html>

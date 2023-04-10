@@ -60,6 +60,15 @@ button[type="submit"]:hover {
   margin-top: 16px;
 }
 
+.options li {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.options li:hover {
+  background-color: #f2f2f2;
+}
+
 .option-label {
   display: block;
   margin-bottom: 8px;

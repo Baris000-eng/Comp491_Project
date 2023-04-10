@@ -29,12 +29,16 @@
     </form>
     {% if username_taken_error %}
     <p>{{ username_taken_error }} </p>
+    <button onclick="window.location.href='/student/login'" name="student-login" value="student-login"
+        id="student-login">Go to Student Login</button>
     {% endif %}
     {% if not_ku_error %}
     <p>{{ not_ku_error }} </p>
     {% endif %}
     {% if email_taken_error %}
     <p>{{ email_taken_error }} </p>
+    <button onclick="window.location.href='/student/login'" name="student-login" value="student-login"
+        id="student-login">Go to Student Login</button>
     {% endif %}
     {% if credentials_coincide_error %}
     <p>{{credentials_coincide_error}} </p>
@@ -42,15 +46,10 @@
     {% if invalid_password_error %}
     <p>{{ invalid_password_error|safe }} </p>
     {% endif %}
-    {% if error_message %}
-    <p>{{ error_message }}</p>
+    {% if signup_error_message %}
+    <p>{{ signup_error_message }}</p>
     <button onclick="window.location.href='/student/login'" name="student-login" value="student-login"
         id="student-login">Go to Student Login</button>
-    {% endif %}
-    {% if success_message %}
-    <p>{{ success_message }}</p>
-    <button onclick="window.location.href='{{ button_url }}'" name="student-dashboard" value="student-dashboard"
-        id="student-dashboard">{{ button_text }}</button>
     {% endif %}
 </body>
 </html>
