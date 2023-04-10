@@ -104,7 +104,7 @@ def user_login(request, role: str):
         existing_user = UR.getUserByUsernameAndEmail(username, email, role)
 
         if not existing_user:
-            notExistMessage = "Username/Email pair does not exist."
+            notExistMessage = "Username & Email pair does not exist."
             folder_directory = concat_folder_dir_based_on_role(role=role)
             page_to_be_displayed += folder_directory
             page_to_be_displayed += f'{role}_login.html'
@@ -116,7 +116,10 @@ def user_login(request, role: str):
             # Redirect to dashboard if student already exists
             session["username"] = username
             session["priority"] = ROLES[role].priority
-            return redirect(f'/{role}_dashboard')
+            page_to_be_shown = str()
+            page_to_be_shown += concat_folder_dir_based_on_role(role=role)
+            page_to_be_shown += f'{role}_dashboard.html'
+            return render_template(page_to_be_shown)
 
         else:
             # Render template with message and button to go to signup screen
