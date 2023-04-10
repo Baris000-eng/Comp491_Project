@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Class Reservation Page</title>
     <link rel="stylesheet" type="text/css" href="../static/student_reservation.css">
-    <script src="../static/student_reservation_screen.js"></script>
-
+    <script type="text/javascript" src="../static/student_reservation_screen.js"></script>
 </head>
 
 <body>
@@ -22,7 +21,7 @@
                 <option value="teacher">teacher</option>
                 <option value="it_staff">it_staff</option>
             </select>
-            <label class = "other-label" for="">Select your class from dropdown class list</label>
+            <label for="">Select your class from dropdown class list</label>
             <div class="combo-box">
                 <select id="class-selector" name="class-code">
                     {% for option in options %}
@@ -33,8 +32,8 @@
             <br>
             <br>
             <label for="Please specify time">Please specify date and time</label>
-            <input required type="time" name="time">
-            <input required type="date" name="date">
+            <input required type="time" name = "time" id = "time">
+            <input required type="date" name = "date" id = "date">
             <br>
             <label for="">Specify whether you want to study alone or with other people</label>
             <label>

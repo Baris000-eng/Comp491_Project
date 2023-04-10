@@ -1,17 +1,8 @@
-// get the combobox element and its options
-const comboBox = document.querySelector('.combo-box');
-const options = comboBox.querySelectorAll('option');
-
-// add an event listener to the combobox
-comboBox.addEventListener('input', () => {
-  const searchText = comboBox.value.toLowerCase();
-
-  // filter the options based on the search text
-  const filteredOptions = Array.from(options)
-    .filter(option => option.textContent.toLowerCase().startsWith(searchText));
-
-  // update the combobox dropdown with the filtered options
-  const dropdown = comboBox.querySelector('select');
-  dropdown.innerHTML = '';
-  filteredOptions.forEach(option => dropdown.appendChild(option));
-});
+window.onload=function(){
+  var iso_str = new Date().toISOString();
+  var splitted = iso_str.split('T');
+  var today = splitted[0];
+  var date_element = document.getElementsByName("date");
+  var obtained_date = date_element[0];
+  obtained_date.setAttribute('min', today);
+}
