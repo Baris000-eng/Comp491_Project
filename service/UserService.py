@@ -120,10 +120,14 @@ def user_login(request, role: str):
 
         else:
             # Render template with message and button to go to signup screen
-            message = f"You haven't signed up yet. Please go to {role} signup screen by clicking below button."
-            button_text = f"Go To {role} Signup Screen"
+            screen_name = beautify_role_names(role_str=role)
+            message = f"You haven't signed up yet. Please go to {screen_name} signup screen by clicking below button."
+            button_text = f"Go To {screen_name} Signup Screen"
+            page_to_be_rendered = str()
+            page_to_be_rendered += concat_folder_dir_based_on_role(role=role)
+            page_to_be_rendered += f'{role}_login.html'
             button_url = f"/{role}_signup"
-            return render_template(f'{role}_login.html', message=message, button_text=button_text, button_url=button_url, username=username)
+            return render_template(page_to_be_rendered, message=message, button_text=button_text, button_url=button_url, username=username)
 
     rendered_page = str()
     rendered_page += concat_folder_dir_based_on_role(role=role)
@@ -192,7 +196,7 @@ def concat_folder_dir_based_on_role(role: str):
     return page_rendered
 
 def beautify_role_names(role_str: str) -> str:
-    role_str = str()
+    screen_name = str()
     if role_str == "it_staff":
         screen_name = remove_underscore_and_capitalize(role_str)
     elif role_str == "student" or role_str == "teacher":
