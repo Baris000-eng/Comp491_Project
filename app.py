@@ -31,7 +31,7 @@ app.route('/', methods=['GET', 'POST'])(US.opening_screen)
 def screen(role):
     return US.user_screen(role)
 
-@app.route('/<role>/dashboard', methods=['GET'])
+@app.route('/<role>/dashboard', methods=['GET','POST'])
 def dashboard(role):
     return US.user_dashboard(role)
 

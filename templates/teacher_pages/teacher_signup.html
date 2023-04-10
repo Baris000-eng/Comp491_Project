@@ -23,6 +23,8 @@
 	</form>
 	{% if username_taken_error %}
     <p>{{ username_taken_error }} </p>
+	<button onclick="window.location.href='/teacher/login'" name="teacher-login" value="teacher-login"
+		id="teacher-login">Go to Teacher Login</button>
     {% endif %}
     {% if not_ku_error %}
     <p>{{ not_ku_error }} </p>
@@ -32,14 +34,16 @@
     {% endif %}
     {% if email_taken_error %}
     <p>{{ email_taken_error }} </p>
+	<button onclick="window.location.href='/teacher/login'" name="teacher-login" value="teacher-login"
+		id="teacher-login">Go to Teacher Login</button>
     {% endif %}
     {% if invalid_password_error %}
     <p>{{ invalid_password_error|safe }} </p>
     {% endif %}    
-	{% if error_message %}
-	<p>{{ error_message }}</p>
+	{% if signup_error_message %}
+	<p>{{ signup_error_message }}</p>
 	<button onclick="window.location.href='/teacher/login'" name="teacher-login" value="teacher-login"
-		id="student-login">Go to Teacher Login</button>
+		id="teacher-login">Go to Teacher Login</button>
 	{% endif %}
 </body>
 

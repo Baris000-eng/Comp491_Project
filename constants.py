@@ -5,7 +5,8 @@ class Role:
 ROLES = {
     "student": Role(10),
     "teacher": Role(20),
-    "it_staff": Role(10)
+    "it_staff": Role(10),
+    "admin": Role(30)
 }
 
 class DB:
