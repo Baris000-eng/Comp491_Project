@@ -84,3 +84,26 @@ button[type="submit"]:hover {
     padding: 16px;
   }
 }
+
+
+.error-messages {
+    text-align: center;
+}
+
+.error-messages p {
+    color: red;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+#submit-btn {
+    margin-top: 20px;
+}
+
+#submit-btn ~ .error-messages {
+    display: none;
+}
+
+#submit-btn:focus ~ .error-messages {
+    display: block;
+}

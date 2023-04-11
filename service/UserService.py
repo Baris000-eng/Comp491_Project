@@ -65,7 +65,6 @@ def validate_password(password):
     # Define the minimum password length
     min_length = 8
 
-    # Check if the password meets the minimum length requirement
     if len(password) < min_length:
         return False
 
@@ -73,7 +72,7 @@ def validate_password(password):
     has_lower = any(c.islower() for c in password)
     has_upper = any(c.isupper() for c in password)
     has_digit = any(c.isdigit() for c in password)
-    has_special = any(not c.isalnum() for c in password)
+    has_special = any(c.isalnum() for c in password)
     if not (has_lower and has_upper and has_digit and has_special):
         return False
 
@@ -338,19 +337,12 @@ def extract_first_column_of_ku_class_data():
 
 
 def reserve_class():
-    role = request.form['role']
+    role = session["role"]
     class_code = request.form['class-code']
     time = request.form['time']
     date = request.form['date']
     option = request.form['option']
-
-    with open('class_reservations.txt', 'a') as f:
-        f.write(f'Role: {role}\n')
-        f.write(f'Class Code: {class_code}\n')
-        f.write(f'Time: {time}\n')
-        f.write(f'Date: {date}\n')
-        f.write(f'Option: {option}\n\n')
-
+    
     conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
 
@@ -366,12 +358,30 @@ def reserve_class():
     elif option == "public":
         preference = "Public"
 
-    c.execute('''INSERT INTO reservations_db (role, date, time, username, public_or_private, classroom, priority_reserved) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?)''', (role, date, time, session["username"], preference, class_code, session['priority']))
+    # Retrieve existing reservation
+    c.execute('''SELECT * FROM reservations_db WHERE date=? AND time=? AND classroom=?''', (date, time, class_code))
+    existing_reservation = c.fetchone()
 
-    conn.commit()
-    conn.close()
-    return render_template("return_success_message_classroom_reserved.html")
+    if existing_reservation and existing_reservation[6] < session['priority']:
+        c.execute('''UPDATE reservations_db SET role=?, username=?, public_or_private=?, priority_reserved=? 
+                    WHERE date=? AND time=? AND classroom=? AND priority_reserved < ?''', (role, session["username"], preference, session['priority'], date, time, class_code, session['priority']))
+        conn.commit()
+        conn.close()
+        return render_template("return_success_message_classroom_reserved.html")
+    else:
+        if existing_reservation and existing_reservation[1] == date and existing_reservation[2] == time and existing_reservation[3] == class_code and existing_reservation[4] == session['username']:
+            reservation_already_happened = "Reservation failed: you have already reserved this slot."
+            return render_template(role + "_reservation_screen.html", reservation_already_happened = reservation_already_happened)
+        elif existing_reservation:
+            another_user_reserved = "Reservation failed: slot already reserved by another user."
+            return render_template(role + "_reservation_screen.html", another_user_reserved = another_user_reserved)
+        else:
+            # Insert new reservation #
+            c.execute('''INSERT INTO reservations_db (role, date, time, username, public_or_private, classroom, priority_reserved) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?)''', (role, date, time, session["username"], preference, class_code, session['priority']))
+            conn.commit()
+            conn.close()
+            return render_template("return_success_message_classroom_reserved.html")
 
 
 def report_it():

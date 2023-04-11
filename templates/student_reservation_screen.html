@@ -11,16 +11,9 @@
 </head>
 
 <body>
-
     <div class="left_half" id="reservationForm">
         <form action="/reserve_class" method="POST" style="text-align:center;">
             <h2>Student Class Reservation Screen</h2>
-            <label for="role">Select your role</label>
-            <select id="class-selector" name="role">
-                <option value="student">student</option>
-                <option value="teacher">teacher</option>
-                <option value="it_staff">it_staff</option>
-            </select>
             <label for="">Select your class from dropdown class list</label>
             <div class="combo-box">
                 <select id="class-selector" name="class-code">
@@ -45,10 +38,22 @@
                 Other students can also join.
             </label>
             <br>
-            <button type="submit">Click to submit reservation</button>
+            <button type="submit" id="submit-btn">Click to submit reservation</button>
         </form>
     </div>
+
+    <div class="error-messages">
+        {% if reservation_already_happened %}
+            <p>{{ reservation_already_happened }}</p>
+        {% endif %}
+        {% if another_user_reserved %}
+            <p>{{ another_user_reserved }}</p>
+        {% endif %}
+    </div>
+   
+
 </body>
+
 
 
 </html>
