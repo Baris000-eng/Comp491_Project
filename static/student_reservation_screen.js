@@ -6,3 +6,4 @@ window.onload=function(){
   var obtained_date = date_element[0];
   obtained_date.setAttribute('min', today);
 }
+
