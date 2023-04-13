@@ -42,12 +42,12 @@ def user_signup(request, role: str):
         if not is_valid:
             return error_template
 
-        UR.createUser(username = username, password = password, email = email, role = role, priority = ROLES[role].priority)
+        UR.createUser(username=username, password=password,
+                      email=email, role=role, priority=ROLES[role].priority)
 
         session["username"] = username
         page_rendered = f'{concat_folder_dir_based_on_role(role)}{role}_dashboard.html'
         return render_template(page_rendered)
-
 
     page_rendered = str()
     page_rendered += concat_folder_dir_based_on_role(role=role)
@@ -137,9 +137,6 @@ def user_login(request, role: str):
     return render_template(rendered_page)
 
 
-
-
-
 def get_password_change_screen():
     return render_template('password_change_screen.html')
 
@@ -150,7 +147,7 @@ def change_user_password():
         email = request.form['email']
         new_password = request.form['new_password']
         confirm_password = request.form['confirm_password']
-        
+
         # FIXME
         session['role'] = 'student'
 
@@ -180,15 +177,18 @@ def password_change_success():
 def go_to_opening_screen():
     return render_template('opening_screen.html')
 
+
 def remove_underscore_and_capitalize(input: str) -> str:
     #####For beautifying the name of screens on buttons , this function is especially for it_staff#####
     words = input.split("_")
     capitalized_words = [word.capitalize() for word in words]
     return " ".join(capitalized_words)
 
+
 def capitalize(input_string: str) -> str:
     output = input_string.capitalize()
     return output
+
 
 def concat_folder_dir_based_on_role(role: str):
     #### Gets user role as parameter ####
@@ -197,6 +197,7 @@ def concat_folder_dir_based_on_role(role: str):
     page_rendered = f'{role}_pages/'
     return page_rendered
 
+
 def beautify_role_names(role_str: str) -> str:
     screen_name = str()
     if role_str == "it_staff":
@@ -204,7 +205,7 @@ def beautify_role_names(role_str: str) -> str:
     elif role_str == "student" or role_str == "teacher":
         screen_name = capitalize(role_str)
     return screen_name
- 
+
 
 def validate_credentials(username, password, email, role):
     """
@@ -236,8 +237,9 @@ def validate_credentials(username, password, email, role):
     elif UR.userExistsByUsernameAndEmail(username, email, role):
         is_valid = False
         screen_name = beautify_role_names(role_str=role)
-        signup_error_message = "This account already exists. Please go to "+str(screen_name)+" login screen by pressing below button."
-        return is_valid, render_template(page_rendered, signup_error_message = signup_error_message)
+        signup_error_message = "This account already exists. Please go to " + \
+            str(screen_name)+" login screen by pressing below button."
+        return is_valid, render_template(page_rendered, signup_error_message=signup_error_message)
     elif UR.userExistsByEmail(email):
         is_valid = False
         email_taken_error = "An account with this email already exists. Choose different email or try logging in by pressing below button."
@@ -342,7 +344,7 @@ def reserve_class():
     time = request.form['time']
     date = request.form['date']
     option = request.form['option']
-    
+
     conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
 
@@ -359,7 +361,8 @@ def reserve_class():
         preference = "Public"
 
     # Retrieve existing reservation
-    c.execute('''SELECT * FROM reservations_db WHERE date=? AND time=? AND classroom=?''', (date, time, class_code))
+    c.execute('''SELECT * FROM reservations_db WHERE date=? AND time=? AND classroom=?''',
+              (date, time, class_code))
     existing_reservation = c.fetchone()
 
     if existing_reservation and existing_reservation[6] < session['priority']:
@@ -371,10 +374,10 @@ def reserve_class():
     else:
         if existing_reservation and existing_reservation[1] == date and existing_reservation[2] == time and existing_reservation[3] == class_code and existing_reservation[4] == session['username']:
             reservation_already_happened = "Reservation failed: you have already reserved this slot."
-            return render_template(role + "_reservation_screen.html", reservation_already_happened = reservation_already_happened)
+            return render_template(role + "_reservation_screen.html", reservation_already_happened=reservation_already_happened)
         elif existing_reservation:
             another_user_reserved = "Reservation failed: slot already reserved by another user."
-            return render_template(role + "_reservation_screen.html", another_user_reserved = another_user_reserved)
+            return render_template(role + "_reservation_screen.html", another_user_reserved=another_user_reserved)
         else:
             # Insert new reservation #
             c.execute('''INSERT INTO reservations_db (role, date, time, username, public_or_private, classroom, priority_reserved) 
@@ -463,6 +466,7 @@ def opening_screen():
 def user_screen(role: str):
     return render_template(f'{role}_pages/{role}_screen.html')
 
+
 def user_dashboard(role: str):
     return render_template(f'{role}_pages/{role}_dashboard.html')
 
@@ -473,3 +477,22 @@ def go_to_opening_screen():
 
 def OpenReserveScreen():
     return render_template("student_reservation_screen.html")
+
+
+def seeTheUsers():
+    # Connect to the database
+    print("hi")
+    conn = sqlite3.connect('users_db.db')
+    c = conn.cursor()
+
+    # Retrieve the usernames from the database
+    c.execute('SELECT username FROM users_db')
+
+    usernames = [row[0] for row in c.fetchall()]
+
+    # Close the database connection
+    conn.close()
+
+    # Render the HTML template with the usernames
+
+    return render_template('admin_see_users.html', usernames=usernames)

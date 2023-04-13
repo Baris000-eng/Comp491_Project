@@ -20,19 +20,23 @@ app.route('/select_role', methods=['POST'])(select_role)
 app.route('/showTheClassroomAndInfo', methods=['GET'])(showTheClassroomAndInfo)
 app.route('/chat_action')(chat_action)
 
+
 app.route('/reportingChat', methods=['POST'])(report_chat)
 app.route('/reportingIT', methods=['POST'])(report_it)
 
 app.route('/logout')(go_to_opening_screen)
 app.route('/', methods=['GET', 'POST'])(US.opening_screen)
 
+
 @app.route('/<role>/screen', methods=['GET'])
 def screen(role):
     return US.user_screen(role)
 
-@app.route('/<role>/dashboard', methods=['GET','POST'])
+
+@app.route('/<role>/dashboard', methods=['GET', 'POST'])
 def dashboard(role):
     return US.user_dashboard(role)
+
 
 app.route('/reserve_class', methods=['POST'])(US.reserve_class)
 app.route('/already_reserved_classes',
@@ -49,12 +53,21 @@ app.route('/openTeacherReservationScreen',
           methods=['GET'])(US.openTeacherReservationScreen)
 app.route('/seeITReport',
           methods=['POST'])(US.seeITReport)
+app.route('/seeTheUsers', methods=['GET'])(US.seeTheUsers)
 
+app.route('/seeTheReservations', methods=['GET'])(US.seeTheUsers)
 
+###########################################################################################################
+# For Admin
+
+###########################################################################################################
 # Testing out role-based signup request
+
+
 @app.route('/<role>/signup', methods=['GET', 'POST'])
 def signup(role):
     return US.user_signup(request, role)
+
 
 @app.route('/<role>/login', methods=['GET', 'POST'])
 def login(role):
