@@ -55,7 +55,7 @@ app.route('/seeITReport',
           methods=['POST'])(US.seeITReport)
 app.route('/seeTheUsers', methods=['GET'])(US.seeTheUsers)
 
-app.route('/seeTheReservations', methods=['GET'])(US.seeTheUsers)
+app.route('/seeTheReservations', methods=['GET'])(US.seeTheReservations)
 
 ###########################################################################################################
 # For Admin

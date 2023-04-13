@@ -496,3 +496,21 @@ def seeTheUsers():
     # Render the HTML template with the usernames
 
     return render_template('admin_see_users.html', usernames=usernames)
+
+
+def seeTheReservations():
+    # Connect to the database
+    # Connect to the database
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+
+    # Retrieve all the rows from the reservations_db table
+    c.execute('SELECT * FROM reservations_db')
+    data = c.fetchall()
+
+    # Close the database connection
+    conn.close()
+    print(data)
+
+    # Render the HTML template with the rows
+    return render_template('see_the_reservations.html', reservations=data)

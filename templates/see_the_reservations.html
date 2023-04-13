@@ -11,6 +11,45 @@
 </head>
 
 <body>
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <title>Reservations</title>
+    </head>
+
+    <body>
+        <h1>All Reservations:</h1>
+
+        <table class="reservations">
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Username</th>
+                    <th>Public or Private</th>
+                    <th>Classroom</th>
+                    <th>Priority Reserved</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in reservations %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>{{ row[6] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+
+    </html>
 
 </body>
 
