@@ -42,7 +42,10 @@
                     <td>{{ row[3] }}</td>
                     <td>{{ row[4] }}</td>
                     <td>{{ row[5] }}</td>
-                    <td>{{ row[6] }}</td>
+                    <td>{{ row[6] }} <form action="/editReservation" method="GET"> <input type="text"><button>Edit Reservation</button>
+                        </form>
+                    </td>
+
                 </tr>
                 {% endfor %}
             </tbody>

@@ -57,13 +57,11 @@ app.route('/seeTheUsers', methods=['GET'])(US.seeTheUsers)
 
 app.route('/seeTheReservations', methods=['GET'])(US.seeTheReservations)
 
+
 ###########################################################################################################
 # For Admin
-
 ###########################################################################################################
 # Testing out role-based signup request
-
-
 @app.route('/<role>/signup', methods=['GET', 'POST'])
 def signup(role):
     return US.user_signup(request, role)

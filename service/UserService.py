@@ -514,3 +514,7 @@ def seeTheReservations():
 
     # Render the HTML template with the rows
     return render_template('see_the_reservations.html', reservations=data)
+
+
+def editUser(username):
+    return render_template('edit_users.html', username=username)
