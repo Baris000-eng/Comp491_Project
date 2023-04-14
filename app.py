@@ -26,6 +26,9 @@ app.route('/reportingIT', methods=['POST'])(report_it)
 
 app.route('/logout')(go_to_opening_screen)
 app.route('/', methods=['GET', 'POST'])(US.opening_screen)
+app.route('/editReserved', methods=['GET'])(US.editReserved)
+
+app.route('/deleteReservation', methods=['POST'])(US.deleteReservation)
 
 
 @app.route('/<role>/screen', methods=['GET'])

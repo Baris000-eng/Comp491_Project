@@ -518,3 +518,37 @@ def seeTheReservations():
 
 def editUser(username):
     return render_template('edit_users.html', username=username)
+
+
+def editReserved():
+    row = request.args.get('row_data').split(',')
+    return render_template("editYourReservations.html", row=row)
+
+
+def deleteReservation():
+
+    role = request.form['role']
+    date = request.form['date']
+    time = request.form['time']
+    username = request.form['username']
+    public_or_private = request.form['public_or_private']
+    classroom = request.form['classroom']
+    priority_reserved = request.form['priority_reserved']
+
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+
+    c.execute('''DELETE FROM reservations_db WHERE
+                 role = ? AND
+                 date = ? AND
+                 time = ? AND
+                 username = ? AND
+                 public_or_private = ? AND
+                 classroom = ? AND
+                 priority_reserved = ?''',
+              (role, date, time, username, public_or_private, classroom, priority_reserved))
+
+    conn.commit()
+    conn.close()
+    print("1hi")
+    return render_template("classrooms_and_info.html")

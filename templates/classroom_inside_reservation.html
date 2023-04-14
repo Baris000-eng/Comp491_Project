@@ -24,13 +24,17 @@
                 <li>Classroom: {{ row[5] }}</li>
                 <li>Priority Reserved: {{ row[6] }}</li>
             </ul>
+            <form action="/editReserved" method="GET">
+                <input type="hidden" name="row_data" value="{{ row|join(',') }}">
+                <button>Edit your reservation</button>
+            </form>
             {% endfor %}
         </div>
     </div>
 
     {% if 'role' in session %}
     {% if session['role'] == 'teacher' %}
-    <form action="/teacher/dashboard">
+    <form action=" /teacher/dashboard">
         <button>Go To Teacher Dashboard</button>
     </form>
     {% elif session['role'] == 'student' %}
@@ -40,8 +44,6 @@
     {% endif %}
     {% endif %}
 </body>
-
-
 
 
 
