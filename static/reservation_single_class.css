@@ -33,3 +33,13 @@ body {
 h3 {
     background-color: aqua;
 }
+
+.box {
+    vertical-align: auto;
+    height: 500px;
+    border: 5px solid black;
+    border-color: purple;
+    /* For a scrollable box when wieving the classes reservations */
+    overflow-y: scroll;
+
+}

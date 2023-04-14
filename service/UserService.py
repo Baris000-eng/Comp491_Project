@@ -551,4 +551,4 @@ def deleteReservation():
     conn.commit()
     conn.close()
     print("1hi")
-    return render_template("classrooms_and_info.html")
+    return render_template("successsDeletedClass.html")
