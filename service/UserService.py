@@ -525,6 +525,11 @@ def editReserved():
     return render_template("editYourReservations.html", row=row)
 
 
+def editITReport():
+    row = request.args.get('row_data').split(',')
+    return render_template("editITReport.html", row=row)
+
+
 def deleteReservation():
 
     role = request.form['role']
@@ -552,3 +557,26 @@ def deleteReservation():
     conn.close()
     print("1hi")
     return render_template("successsDeletedClass.html")
+
+
+def deleteITReport():
+    report_no = request.form['report_no']
+    room_name = request.form['room_name']
+    faculty_name = request.form['faculty_name']
+    problem_description = request.form['problem_description']
+    date = request.form['date']
+    time = request.form['time']
+
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+    c.execute('''DELETE FROM IT_Report_logdb WHERE
+                 it_report_no = ? AND
+                 room_name = ? AND
+                 faculty_name = ? AND
+                 problem_description = ? AND
+                 date = ? AND
+                 time = ?''',
+              (report_no, room_name, faculty_name, problem_description, date, time))
+    conn.commit()
+    conn.close()
+    return render_template("successDeletedITReport.html")
