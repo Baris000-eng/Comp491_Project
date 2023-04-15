@@ -20,7 +20,7 @@
 
     <body>
         <h1>All Reservations:</h1>
-
+        <h1>no</h1>
         <table class="reservations">
             <thead>
                 <tr>
@@ -42,7 +42,9 @@
                     <td>{{ row[3] }}</td>
                     <td>{{ row[4] }}</td>
                     <td>{{ row[5] }}</td>
-                    <td>{{ row[6] }} <form action="/editReservation" method="GET"> <input type="text"><button>Edit Reservation</button>
+                    <td>{{ row[6] }} <form action="/editReserved" method="GET">
+                            <input type="hidden" name="row_data" value="{{ row|join(',') }}">
+                            <button>Edit your reservation</button>
                         </form>
                     </td>
 
