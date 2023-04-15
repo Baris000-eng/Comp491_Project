@@ -408,7 +408,7 @@ def seeITReport():
     c = conn.cursor()
     c.execute('SELECT * FROM IT_Report_logdb')
     rows = c.fetchall()
-    return render_template('it_pages/IT_Report_list.html', rows=rows)
+    return render_template('it_staff_pages/IT_Report_list.html', rows=rows)
 
 
 def report_chat():
