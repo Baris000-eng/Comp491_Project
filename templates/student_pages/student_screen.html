@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Student Screen</title>
     <link rel="stylesheet" type="text/css" href="../static/styles.css">
 </head>
-<body>
-    <h1>Student Screen</h1>
-    <input type="button" value="Login" onclick="location.href='/student/login';">
-    <br>
-    <input type="button" value="Signup" onclick="location.href='/student/signup';">
-    <br>
-    <input type="button" value="Go Back" onclick="location.href='/logout';">
+
+<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
+
+<h1>Student Screen</h1>
+<input type="button" value="Login" onclick="location.href='/student/login';">
+<br>
+<input type="button" value="Signup" onclick="location.href='/student/signup';">
+<br>
+<input type="button" value="Go Back" onclick="location.href='/logout';">
 </body>
+
 </html>

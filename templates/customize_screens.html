@@ -9,33 +9,34 @@
     <link rel="stylesheet" type="text/css" href="../static/customize_screen.css">
 </head>
 
-<body>
-    <h2>Customize Student Dashboard</h2>
-    <h4>Adjust Screen Brightness</h4>
-    <div id="brightnessControl">
-        <input type="range" min="0" max="100" value="100" id="brightnessSlider">
-    </div>
-    <h4>Select Background Color</h4>
-    <select id="bgColorSelector">
-        <option value="white">White</option>
-        <option value="lightgray">Light Gray</option>
-        <option value="beige">Beige</option>
-        <option value="lightblue">Light Blue</option>
-    </select>
-    <br>
-    <br>
-    <button onclick="applyBgColor()">Apply Background Color</button>
+<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
 
-    <h4>Toggle Music</h4>
-    <button onclick="playMusic()">Play Music</button>
-    <button onclick="pauseMusic()">Pause Music</button>
-    <button onclick="stopMusic()">Stop Music</button>
+<h2>Customize Student Dashboard</h2>
+<h4>Adjust Screen Brightness</h4>
+<div id="brightnessControl">
+    <input type="range" min="0" max="100" value="100" id="brightnessSlider">
+</div>
+<h4>Select Background Color</h4>
+<select id="bgColorSelector">
+    <option value="white">White</option>
+    <option value="lightgray">Light Gray</option>
+    <option value="beige">Beige</option>
+    <option value="lightblue">Light Blue</option>
+</select>
+<br>
+<br>
+<button onclick="applyBgColor()">Apply Background Color</button>
 
-    <h4>Toggle Dark Mode</h4>
-    <label class="switch">
-        <input type="checkbox" id="darkModeToggle">
-        <span class="slider round"></span>
-    </label>
+<h4>Toggle Music</h4>
+<button onclick="playMusic()">Play Music</button>
+<button onclick="pauseMusic()">Pause Music</button>
+<button onclick="stopMusic()">Stop Music</button>
+
+<h4>Toggle Dark Mode</h4>
+<label class="switch">
+    <input type="checkbox" id="darkModeToggle">
+    <span class="slider round"></span>
+</label>
 
 </body>
 <script>

@@ -1,53 +1,87 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Welcome to KuClass App</title>
-    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+	<link rel="stylesheet" type="text/css" href="../static/styles.css">
 	<script src="static/opening_screen.js"></script>
 </head>
-<body>
-	<div class="container">
-		<h1>Welcome to KuClass App</h1>
-		<button id="description-button" onclick="hideOrOpenDescription()">Open KuClass Description</button>
-		<p id="description" style="display: none;">
-			In the exam weeks, students have difficulty in Koç University to find a private place in school for studying. 
-			Our project is a web app that aims to help students to find vacant classrooms, reserve them, and communicate with each other about studying in them. 
-			Therefore, the empty classrooms will be used more efficiently. Buildings, classrooms, and their class schedules will be available through the app. 
-			This will enable the students to make reservations for vacant time slots to study. They can announce what class they are studying in and choose if they allow other students to enter or not. 
-			This may enable students to get together for studying on the same class/topic. Moreover; our project will be able to find the classes which have broken items/materials (ex: chair, desk, projector) in them, and will enable the necessary help for those classes to be obtained. 
-			As a result, the students can know which classes have some broken materials/items, and update their classroom preferences accordingly. 
-			Moreover, the students can update their classroom preferences also according to the number of currently studying students in the classrooms. 
-			This will help with finding suitable classrooms for students to study in. 
-		</p>
-		<button id="help-button" onclick="hideOrOpenHelp()">Open KuClass Help</button>
-		<p id="help-text" style="display: none;">
-			To get started, please select your role from the given options below. 
-			Then, select the background color you want.
-		</p>
-		<form action="/select_role" method="post">
-			<label for="roles">Select your role:</label>
-			<select id="roles" name="roles">
-				<option value="teacher">Teacher</option>
-				<option value="student">Student</option>
-				<option value="it_staff">IT Staff</option>
-				<option value="admin">Admin</option>
-			</select>
-			<label for="background-color">Select background color:</label>
-			<select id="background-color" name="background-color" onchange="changeBackgroundColor(this.value)">
-				<option value="white">White</option>
-				<option value="gray">Gray</option>
-				<option value="lightblue">Light Blue</option>
-				<option value="lightgreen">Light Green</option>
-				<option value="lightyellow">Light Yellow</option>
-				<option value="pink">Pink</option>
-				<option value="purple">Purple</option>
-				<option value="orange">Orange</option>
-				<option value="red">Red</option>
-				<option value="blue">Blue</option>
-			</select>
-			<br><br>
-			<input type="hidden" name="submit" value="true">
-			<input type="submit" value="Submit">
-		</form>
+
+<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
+
+<div class="container">
+	<style>
+		body {
+			background-color: #fff;
+			color: #333;
+		}
+	</style>
+	<button id="theme-toggle">Toggle Theme</button>
+	<script>
+		const toggle = document.getElementById("theme-toggle");
+		toggle.addEventListener("click", function () {
+			const body = document.getElementsByTagName("body")[0];
+			if (body.classList.contains("dark-mode")) {
+				body.classList.remove("dark-mode");
+				body.style.backgroundColor = "#fff";
+				body.style.color = "#333";
+			} else {
+				body.classList.add("dark-mode");
+				body.style.backgroundColor = "#222";
+				body.style.color = "#fff";
+			}
+		});
+	</script>
+	<h1>Welcome to KuClass App</h1>
+	<button id="description-button" onclick="hideOrOpenDescription()">Open KuClass Description</button>
+	<p id="description" style="display: none;">
+		In the exam weeks, students have difficulty in Koç University to find a private place in school for
+		studying.
+		Our project is a web app that aims to help students to find vacant classrooms, reserve them, and communicate
+		with each other about studying in them.
+		Therefore, the empty classrooms will be used more efficiently. Buildings, classrooms, and their class
+		schedules will be available through the app.
+		This will enable the students to make reservations for vacant time slots to study. They can announce what
+		class they are studying in and choose if they allow other students to enter or not.
+		This may enable students to get together for studying on the same class/topic. Moreover; our project will be
+		able to find the classes which have broken items/materials (ex: chair, desk, projector) in them, and will
+		enable the necessary help for those classes to be obtained.
+		As a result, the students can know which classes have some broken materials/items, and update their
+		classroom preferences accordingly.
+		Moreover, the students can update their classroom preferences also according to the number of currently
+		studying students in the classrooms.
+		This will help with finding suitable classrooms for students to study in.
+	</p>
+	<button id="help-button" onclick="hideOrOpenHelp()">Open KuClass Help</button>
+	<p id="help-text" style="display: none;">
+		To get started, please select your role from the given options below.
+		Then, select the background color you want.
+	</p>
+	<form action="/select_role" method="post">
+		<label for="roles">Select your role:</label>
+		<select id="roles" name="roles">
+			<option value="teacher">Teacher</option>
+			<option value="student">Student</option>
+			<option value="it_staff">IT Staff</option>
+			<option value="admin">Admin</option>
+		</select>
+		<label for="background-color">Select background color:</label>
+		<select id="background-color" name="background-color" onchange="changeBackgroundColor(this.value)">
+			<option value="white">White</option>
+			<option value="gray">Gray</option>
+			<option value="lightblue">Light Blue</option>
+			<option value="lightgreen">Light Green</option>
+			<option value="lightyellow">Light Yellow</option>
+			<option value="pink">Pink</option>
+			<option value="purple">Purple</option>
+			<option value="orange">Orange</option>
+			<option value="red">Red</option>
+			<option value="blue">Blue</option>
+		</select>
+		<br><br>
+		<input type="hidden" name="submit" value="true">
+		<input type="submit" value="Submit">
+	</form>
 	</body>
+
 </html>

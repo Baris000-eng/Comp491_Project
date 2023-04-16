@@ -6,42 +6,43 @@
 	<link rel="stylesheet" type="text/css" href="../static/styles.css">
 </head>
 
-<body>
-	<h1>Teacher Login</h1>
-	<form action="/teacher/login" autocomplete = "off" method="post">
-		<label for="username">Username</label>
-		<input required type="text" id="username" placeholder="Please enter your username to login" name="username" >
-		<label for="password">Password</label>
-		<input required type="password" id="password" placeholder="Please enter your password to login" name="password" >
-		<label for="email">Email:</label>
-		<input required type="email" id="email" name="email" placeholder="Please enter your email to login" required="email"
-			maxlength="50">
-		<br>
-		<br>
-		<button type="submit">Login</button>
-	</form>
+<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
+
+<h1>Teacher Login</h1>
+<form action="/teacher/login" autocomplete="off" method="post">
+	<label for="username">Username</label>
+	<input required type="text" id="username" placeholder="Please enter your username to login" name="username">
+	<label for="password">Password</label>
+	<input required type="password" id="password" placeholder="Please enter your password to login" name="password">
+	<label for="email">Email:</label>
+	<input required type="email" id="email" name="email" placeholder="Please enter your email to login" required="email"
+		maxlength="50">
+	<br>
+	<br>
+	<button type="submit">Login</button>
+</form>
 
 
-	{% if notExistMessage %}
-	<p>{{ notExistMessage }}</p>
-	{% endif %}
+{% if notExistMessage %}
+<p>{{ notExistMessage }}</p>
+{% endif %}
 
 
 
-	{% if message %}
-	<p>{{ message }}</p>
-	<button id="signup-btn">{{ button_text }}</button>
-	<script>
-		var buttonSignUp = document.getElementById("signup-btn");
-		buttonSignUp.addEventListener("click", function () {
-			location.href = "/teacher/signup";
-		});
-	</script>
-	{% endif %}
+{% if message %}
+<p>{{ message }}</p>
+<button id="signup-btn">{{ button_text }}</button>
+<script>
+	var buttonSignUp = document.getElementById("signup-btn");
+	buttonSignUp.addEventListener("click", function () {
+		location.href = "/teacher/signup";
+	});
+</script>
+{% endif %}
 
-	<form id="password-change-form" action="/password_change_screen" method="get">
-		<button type="password_change">Forgot Password</button>
-	</form>
+<form id="password-change-form" action="/password_change_screen" method="get">
+	<button type="password_change">Forgot Password</button>
+</form>
 </body>
 
 </html>

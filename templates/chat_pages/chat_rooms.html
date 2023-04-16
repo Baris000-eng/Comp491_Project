@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,7 +7,8 @@
     <title>Chat Rooms</title>
 </head>
 
-<body>
+<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
+
 <!----------------Chat *-------------------------------------------------->
 <div id="chatForm">
     <form action="" method="POST" style="text-align:center;">
@@ -27,7 +29,7 @@
         </div>
 
 
-        <input required  type="text" name="message_to_be_sent" placeholder="Enter the message to be sent.">
+        <input required type="text" name="message_to_be_sent" placeholder="Enter the message to be sent.">
 
         <button type="submit">Send message</button>
     </form>
@@ -41,7 +43,7 @@
 <div id="chatForm"></div>
 <form action="chat_action">
     <label for="Please select class to chat"></label>
-    <input required  type="text" name="classroom" placeholder="Enter the class to chat.">
+    <input required type="text" name="classroom" placeholder="Enter the class to chat.">
     <br>
     <button type="submit">Go to chat.</button>
 </form>
@@ -67,10 +69,11 @@
         </div>
 
 
-        <input required  type="text" name="message_to_be_sent" placeholder="Enter the message to be sent.">
+        <input required type="text" name="message_to_be_sent" placeholder="Enter the message to be sent.">
 
         <button type="submit">Send message</button>
     </form>
 </div>
 </body>
+
 </html>

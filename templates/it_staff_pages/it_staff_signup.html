@@ -6,44 +6,45 @@
 	<link rel="stylesheet" type="text/css" href="../static/styles.css">
 </head>
 
-<body>
-	<h1>IT Staff Signup</h1>
-	<form action="/it_staff/signup" autocomplete = "off" method="post">
-		<label for="username">Username</label>
-		<input type="text" id="username" name="username" placeholder="Please enter your username to signup" required>
-		<label for="password">Password</label>
-		<input type="password" id="password" name="password" placeholder="Please enter your password to signup"
-			required>
-		<label for="email">Email:</label>
-		<input type="email" id="email" name="email" required="email" placeholder="Please enter your email to signup"
-			maxlength="50">
-		<br>
-		<br>
-		<input type="submit" value="Signup">
-	</form>
-	{% if username_taken_error %}
-    <p>{{ username_taken_error }} </p>
-	<button onclick="window.location.href='/it_staff/login'" name="it-staff-login" value="it-staff-login"
-		id="it-staff-login">Go to It Staff Login</button>
-    {% endif %}
-	{% if credentials_coincide_error %}
-    <p>{{ credentials_coincide_error }} </p>
-    {% endif %}
-    {% if not_ku_error %}
-    <p>{{ not_ku_error }} </p>
-    {% endif %}
-    {% if email_taken_error %}
-    <p>{{ email_taken_error }} </p>
-	<button onclick="window.location.href='/it_staff/login'" name="it-staff-login" value="it-staff-login"
-		id="it-staff-login">Go to It Staff Login</button>
-    {% endif %}
-    {% if invalid_password_error %}
-    <p>{{ invalid_password_error|safe }} </p>
-    {% endif %}    
-	{% if signup_error_message %}
-	<p>{{ signup_error_message }}</p>
-	<button onclick="window.location.href='/it_staff/login'" name="it-staff-login" value="it-staff-login"
-		id="it-staff-login">Go to It Staff Login</button>
-	{% endif %}
+<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
+
+<h1>IT Staff Signup</h1>
+<form action="/it_staff/signup" autocomplete="off" method="post">
+	<label for="username">Username</label>
+	<input type="text" id="username" name="username" placeholder="Please enter your username to signup" required>
+	<label for="password">Password</label>
+	<input type="password" id="password" name="password" placeholder="Please enter your password to signup" required>
+	<label for="email">Email:</label>
+	<input type="email" id="email" name="email" required="email" placeholder="Please enter your email to signup"
+		maxlength="50">
+	<br>
+	<br>
+	<input type="submit" value="Signup">
+</form>
+{% if username_taken_error %}
+<p>{{ username_taken_error }} </p>
+<button onclick="window.location.href='/it_staff/login'" name="it-staff-login" value="it-staff-login"
+	id="it-staff-login">Go to It Staff Login</button>
+{% endif %}
+{% if credentials_coincide_error %}
+<p>{{ credentials_coincide_error }} </p>
+{% endif %}
+{% if not_ku_error %}
+<p>{{ not_ku_error }} </p>
+{% endif %}
+{% if email_taken_error %}
+<p>{{ email_taken_error }} </p>
+<button onclick="window.location.href='/it_staff/login'" name="it-staff-login" value="it-staff-login"
+	id="it-staff-login">Go to It Staff Login</button>
+{% endif %}
+{% if invalid_password_error %}
+<p>{{ invalid_password_error|safe }} </p>
+{% endif %}
+{% if signup_error_message %}
+<p>{{ signup_error_message }}</p>
+<button onclick="window.location.href='/it_staff/login'" name="it-staff-login" value="it-staff-login"
+	id="it-staff-login">Go to It Staff Login</button>
+{% endif %}
 </body>
+
 </html>

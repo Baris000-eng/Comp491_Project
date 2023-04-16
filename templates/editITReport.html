@@ -9,26 +9,27 @@
     <title>Editing your Resservation</title>
 </head>
 
-<body>
-    <h1>Your Reservation INFO</h1>
-    <h3>--------------- Reservation --------------------</h3>
-    <ul>
-        <li>IT Report_no : {{ row[0] }}</li>
-        <li>Room Name: {{ row[1] }}</li>
-        <li>Faculty Name: {{ row[2] }}</li>
-        <li>Problem Description: {{ row[3] }}</li>
-        <li>Date: {{ row[4] }}</li>
-        <li>Time: {{ row[5] }}</li>
-    </ul>
-    <form action="/deleteITReport" method="POST">
-        <input type="hidden" name="report_no" value="{{ row[0] }}">
-        <input type="hidden" name="room_name" value="{{ row[1] }}">
-        <input type="hidden" name="faculty_name" value="{{ row[2] }}">
-        <input type="hidden" name="problem_description" value="{{ row[3] }}">
-        <input type="hidden" name="date" value="{{ row[4] }}">
-        <input type="hidden" name="time" value="{{ row[5] }}">
-        <button type="submit">Click here the IT Report</button>
-    </form>
+<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
+
+<h1>Your Reservation INFO</h1>
+<h3>--------------- Reservation --------------------</h3>
+<ul>
+    <li>IT Report_no : {{ row[0] }}</li>
+    <li>Room Name: {{ row[1] }}</li>
+    <li>Faculty Name: {{ row[2] }}</li>
+    <li>Problem Description: {{ row[3] }}</li>
+    <li>Date: {{ row[4] }}</li>
+    <li>Time: {{ row[5] }}</li>
+</ul>
+<form action="/deleteITReport" method="POST">
+    <input type="hidden" name="report_no" value="{{ row[0] }}">
+    <input type="hidden" name="room_name" value="{{ row[1] }}">
+    <input type="hidden" name="faculty_name" value="{{ row[2] }}">
+    <input type="hidden" name="problem_description" value="{{ row[3] }}">
+    <input type="hidden" name="date" value="{{ row[4] }}">
+    <input type="hidden" name="time" value="{{ row[5] }}">
+    <button type="submit">Click here the IT Report</button>
+</form>
 </body>
 
 </html>

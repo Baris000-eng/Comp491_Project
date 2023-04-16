@@ -6,39 +6,39 @@
 	<link rel="stylesheet" type="text/css" href="../static/styles.css">
 </head>
 
-<body>
-	<h1>Student Login</h1>
-	<form action="/student/login" autocomplete = "off" method="post">
-		<label for="username">Username</label>
-		<input type="text" id="username" name="username" placeholder="Please enter your login username here" required>
-		<label for="password">Password</label>
-		<input type="password" id="password" name="password" placeholder="Please enter your login password here"
-			required>
-		<label for="email">Email</label>
-		<input type="email" id="email" name="email" placeholder="Please enter your login email here" required>
-		<br>
-		<br>
-		<button type="submit">Login</button>
-	</form>
+<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
 
-	{% if notExistMessage %}
-	<p>{{ notExistMessage }}</p>
-	{% endif %}
+<h1>Student Login</h1>
+<form action="/student/login" autocomplete="off" method="post">
+	<label for="username">Username</label>
+	<input type="text" id="username" name="username" placeholder="Please enter your login username here" required>
+	<label for="password">Password</label>
+	<input type="password" id="password" name="password" placeholder="Please enter your login password here" required>
+	<label for="email">Email</label>
+	<input type="email" id="email" name="email" placeholder="Please enter your login email here" required>
+	<br>
+	<br>
+	<button type="submit">Login</button>
+</form>
 
-	{% if message %}
-	<p>{{ message }}</p>
-	<button id="signup-btn">{{ button_text }}</button>
-	<script>
-		var buttonSignUp = document.getElementById("signup-btn");
-		buttonSignUp.addEventListener("click", function () {
-			location.href = "/student/signup";
-		});
-	</script>
-	{% endif %}
-	
-	<form id="password-change-form" action="/get_password_change_screen" method="get">
-		<button type="submit" name="password_change_button" id="password_change_button">Forgot Password</button>
-	</form>
+{% if notExistMessage %}
+<p>{{ notExistMessage }}</p>
+{% endif %}
+
+{% if message %}
+<p>{{ message }}</p>
+<button id="signup-btn">{{ button_text }}</button>
+<script>
+	var buttonSignUp = document.getElementById("signup-btn");
+	buttonSignUp.addEventListener("click", function () {
+		location.href = "/student/signup";
+	});
+</script>
+{% endif %}
+
+<form id="password-change-form" action="/get_password_change_screen" method="get">
+	<button type="submit" name="password_change_button" id="password_change_button">Forgot Password</button>
+</form>
 </body>
 
 </html>

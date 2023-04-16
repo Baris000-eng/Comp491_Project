@@ -400,7 +400,7 @@ def report_it():
         date,
         time
     )
-    return render_template("it_pages/IT_report_success_screen.html")
+    return render_template("it_staff_pages/IT_report_success_screen.html")
 
 
 def seeITReport():

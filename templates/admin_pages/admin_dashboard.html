@@ -8,38 +8,39 @@
 	<link rel="stylesheet" type="text/css" href="../static/admin_dashboard.css">
 </head>
 
-<body>
-	<h1>Admin Dashboard</h1>
+<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
+
+<h1>Admin Dashboard</h1>
 
 
-	<div class="container">
-		<div class="group">
-			<form action="/seeTheUsers" method="GET">
-				<button>See the Users (Edit And Delete)</button>
-			</form>
-			<form action="/seeUserStatistics" method="GET">
-				<button>See User Statistics (See Data -avg, min, max ...)</button>
-			</form>
-		</div>
-
-		<div class="group">
-			<form action="/seeTheReservations" method="GET">
-				<button>See the Reservations (Edit And Delete)</button>
-			</form>
-			<form action="/seeReservationStatistics" method="GET">
-				<button>See Reservation Statistics (avg, min, max ...)</button>
-			</form>
-		</div>
-
-		<div class="group">
-			<form action="/seeITReports" method="GET">
-				<button>See IT Reports (Edit And Delete)</button>
-			</form>
-			<form action="/seeITStatistics" method="GET">
-				<button>See IT Statistics (avg, min, max ...)</button>
-			</form>
-		</div>
+<div class="container">
+	<div class="group">
+		<form action="/seeTheUsers" method="GET">
+			<button>See the Users (Edit And Delete)</button>
+		</form>
+		<form action="/seeUserStatistics" method="GET">
+			<button>See User Statistics (See Data -avg, min, max ...)</button>
+		</form>
 	</div>
+
+	<div class="group">
+		<form action="/seeTheReservations" method="GET">
+			<button>See the Reservations (Edit And Delete)</button>
+		</form>
+		<form action="/seeReservationStatistics" method="GET">
+			<button>See Reservation Statistics (avg, min, max ...)</button>
+		</form>
+	</div>
+
+	<div class="group">
+		<form action="/seeITReports" method="GET">
+			<button>See IT Reports (Edit And Delete)</button>
+		</form>
+		<form action="/seeITStatistics" method="GET">
+			<button>See IT Statistics (avg, min, max ...)</button>
+		</form>
+	</div>
+</div>
 
 
 

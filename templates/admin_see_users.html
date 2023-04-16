@@ -9,22 +9,24 @@
     <title>Document</title>
 </head>
 
-<body>
-    <h1>All The Users</h1>
+<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
 
-    <body>
-        <h1>Usernames:</h1>
-        <ul>
-            {% for username in usernames %}
-            <form method="GET" action="/editUser">
+<h1>All The Users</h1>
 
-                <li>{{ username }} <button type="submit">Edit User</button></li>
-                <button>Edit User</button>
-            </form>
-            </form>
-            {% endfor %}
-        </ul>
-    </body>
+<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
+
+<h1>Usernames:</h1>
+<ul>
+    {% for username in usernames %}
+    <form method="GET" action="/editUser">
+
+        <li>{{ username }} <button type="submit">Edit User</button></li>
+        <button>Edit User</button>
+    </form>
+    </form>
+    {% endfor %}
+</ul>
+</body>
 </body>
 
 </html>

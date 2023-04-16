@@ -9,27 +9,28 @@
     <link rel="stylesheet" type="text/css" href="../static/reporting_IT.css">
 </head>
 
-<body>
-    <div class="right_half" id="itForm">
-        <form action="/reportingIT" method="POST" style="text-align:center;">
-            <h2>Report An IT Problem</h2>
-            <label for="room_number">Enter information about classroom</label>
-            <h4>Information of the Room</h4>
-            <input type="text" name="room_number" required placeholder="Enter Room Number">
-            <label for="faculty_name">Enter information about faculty</label>
-            <h4>Information of the Faculty</h4>
-            <input type="text" required name="faculty_name" placeholder="Enter Faculty Name">
-            <label for="problem_description">What is the problem? Describe the problem in detail. Thank you.</label>
-            <br>
-            <textarea required name="problem_description"></textarea>
-            <br>
-            <label for="date">Please specify date and time</label>
-            <input required type="date" name="date">
-            <input required type="time" name="time">
-            <br>
-            <button type="submit">Click to submit the problem to IT</button>
-        </form>
-    </div>
+<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
+
+<div class="right_half" id="itForm">
+    <form action="/reportingIT" method="POST" style="text-align:center;">
+        <h2>Report An IT Problem</h2>
+        <label for="room_number">Enter information about classroom</label>
+        <h4>Information of the Room</h4>
+        <input type="text" name="room_number" required placeholder="Enter Room Number">
+        <label for="faculty_name">Enter information about faculty</label>
+        <h4>Information of the Faculty</h4>
+        <input type="text" required name="faculty_name" placeholder="Enter Faculty Name">
+        <label for="problem_description">What is the problem? Describe the problem in detail. Thank you.</label>
+        <br>
+        <textarea required name="problem_description"></textarea>
+        <br>
+        <label for="date">Please specify date and time</label>
+        <input required type="date" name="date">
+        <input required type="time" name="time">
+        <br>
+        <button type="submit">Click to submit the problem to IT</button>
+    </form>
+</div>
 </body>
 
 

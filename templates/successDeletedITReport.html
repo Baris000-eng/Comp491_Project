@@ -9,8 +9,9 @@
     <title>Success Message</title>
 </head>
 
-<body>
-    <h1>IT Report has been successfully deleted.</h1>
+<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
+
+<h1>IT Report has been successfully deleted.</h1>
 </body>
 {% if 'role' in session %}
 {% if session['role'] == 'teacher' %}
