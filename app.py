@@ -1,6 +1,7 @@
-from flask import Flask, request
+from flask import Flask, request, session
 
 import setup
+from rbac import allow_roles
 from service.UserService import password_change_success, go_to_opening_screen
 from service.UserService import select_role, showTheClassroomAndInfo, chat_action, report_chat, report_it
 import service.UserService as US
@@ -38,6 +39,7 @@ def screen(role):
 
 
 @app.route('/<role>/dashboard', methods=['GET', 'POST'])
+@allow_roles(['student', 'teacher', 'it_staff'], session, request)
 def dashboard(role):
     return US.user_dashboard(role)
 

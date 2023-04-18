@@ -115,6 +115,7 @@ def user_login(request, role: str):
             # Redirect to dashboard if student already exists
             session["username"] = username
             session["priority"] = ROLES[role].priority
+            session["role"] = role
             page_to_be_shown = str()
             page_to_be_shown += concat_folder_dir_based_on_role(role=role)
             page_to_be_shown += f'{role}_dashboard.html'
@@ -199,12 +200,13 @@ def concat_folder_dir_based_on_role(role: str):
 
 
 def beautify_role_names(role_str: str) -> str:
-    screen_name = str()
-    if role_str == "it_staff":
-        screen_name = remove_underscore_and_capitalize(role_str)
-    elif role_str == "student" or role_str == "teacher":
-        screen_name = capitalize(role_str)
-    return screen_name
+    # screen_name = str()
+    # if role_str == "it_staff":
+    #     screen_name = remove_underscore_and_capitalize(role_str)
+    # elif role_str == "student" or role_str == "teacher":
+    #     screen_name = capitalize(role_str)
+    # return screen_name
+    return ROLES[role_str].name
 
 
 def validate_credentials(username, password, email, role):

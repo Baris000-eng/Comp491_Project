@@ -1,12 +1,13 @@
 class Role:
-    def __init__(self, priority):
+    def __init__(self, priority, name):
         self.priority = priority
+        self.name = name
 
 ROLES = {
-    "student": Role(10),
-    "teacher": Role(20),
-    "it_staff": Role(10),
-    "admin": Role(30)
+    "student": Role(10, 'Student'),
+    "teacher": Role(20, 'Teacher'),
+    "it_staff": Role(10, 'IT Staff'),
+    "admin": Role(30, 'Admin')
 }
 
 class DB:
