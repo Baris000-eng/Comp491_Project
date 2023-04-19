@@ -6,12 +6,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/see_IT_reports.css">
-    <title>Document</title>
+    <title>SeeIT</title>
 </head>
 
 <h1>All IT Reports</h1>
 
-<body>
-    
+<table class="IT_Report_logdb">
+    <thead>
+        <tr>
+            <th>IT Report_no :</th>
+            <th>Room Name:</th>
+            <th>Faculty Name:</th>
+            <th>Problem Description:</th>
+            <th>Date:</th>
+            <th>Time:</th>
+
+        </tr>
+
+    </thead>
+    <tbody>
+        {% for row in reservations %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+            <td>{{ row[4] }}</td>
+            <td>{{ row[5] }} <form action="/editReserved" method="GET">
+                    <input type="hidden" name="row_data" value="{{ row|join(',') }}">
+                    <button>Edit your reservation</button>
+                </form>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 </body>
+
 </html>
