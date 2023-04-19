@@ -20,6 +20,7 @@ def initializeUserTables():
                 role TEXT NOT NULL,
                 priority INTEGER)''')
 
+
 def intializeITReportLog():
     conn = sqlite3.connect('IT_Report_logdb.db')
     c = conn.cursor()
@@ -58,6 +59,47 @@ def initializeReservationsTable():
               public_or_private TEXT,
               classroom TEXT,
               priority_reserved INTEGER)''')
+
+
+def initializeChatTable():
+    conn = sqlite3.connect('chat_db.db')
+    c = conn.cursor()
+
+    c.execute('''CREATE TABLE IF NOT EXISTS chat_db
+             (classroom TEXT,
+              time TIME NOT NULL, 
+              date DATE NOT NULL, 
+              sender TEXT DEFAULT "NO_NAME_GIVEN", 
+              role TEXT NOT NULL,
+              flagged BOOLEAN NOT NULL)''')  # the flagged boolean helps keep tracking of reported chat actions
+
+
+def createChat(classroom, time, date, sender, role, flagged):
+    """
+    Given a classroom, time, date, sender, role, flagged, insert new chat message into the chat database
+    """
+    conn = sqlite3.connect('chat_db.db')
+    c = conn.cursor()
+
+    c.execute('''INSERT INTO chat_db (classroom, time, date, sender, role, flagged) 
+             VALUES (?, ?, ?, ?, ?, ?)''', (classroom, time, date, sender, role, flagged))
+
+    conn.commit()
+    conn.close()
+
+
+def createReservation(date, time, username, priority, public_or_private, classroom):
+    """
+    Given a date, time, username, priority, insert new reservation into the reservation database
+    """
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+
+    c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom, priority_reserved) 
+             VALUES (?, ?, ?, ?, ?, ?)''', (date, time, username, public_or_private, classroom, priority))
+
+    conn.commit()
+    conn.close()
 
 
 def createReservation(date, time, username, priority, public_or_private, classroom):
@@ -149,12 +191,14 @@ def userExistsByEmail(email: str):
 
     return not (user is None)
 
+
 def userExistsByUsernameAndEmail(username: str, email: str, role: str):
     """
     Return true if a user exists in corresponding database with this email and username, false otherwise.
     """
-    user = getUserByUsernameAndEmail(username=username, email=email, role = role)
+    user = getUserByUsernameAndEmail(username=username, email=email, role=role)
     return not (user is None)
+
 
 def checkUserRole(user, role: str):
     """
@@ -201,5 +245,3 @@ def change_user_password(email: str, password: str):
               (encrypt_password(password), email))
     conn.commit()
     conn.close()
-
-

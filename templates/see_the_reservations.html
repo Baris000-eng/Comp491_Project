@@ -42,6 +42,10 @@
                     <input type="hidden" name="row_data" value="{{ row|join(',') }}">
                     <button>Edit your reservation</button>
                 </form>
+                <form action="/enterChat" method="GET">
+                    <input type="hidden" name="row_data" value="{{ row|join(',') }}">
+                    <button>Enter Chat for this class</button>
+                </form>
             </td>
 
         </tr>

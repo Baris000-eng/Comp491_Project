@@ -39,7 +39,7 @@ def screen(role):
 
 
 @app.route('/<role>/dashboard', methods=['GET', 'POST'])
-@allow_roles(['student', 'teacher', 'it_staff'], session, request)
+@allow_roles(['student', 'teacher', 'it_staff', 'admin'], session, request)
 def dashboard(role):
     return US.user_dashboard(role)
 
@@ -68,8 +68,6 @@ app.route('/seeTheReservations', methods=['GET'])(US.seeTheReservations)
 # For Admin
 ###########################################################################################################
 # Testing out role-based signup request
-
-
 
 
 @app.route('/<role>/signup', methods=['GET', 'POST'])
