@@ -12,6 +12,7 @@ ROLES = {
 
 class DB:
     users = "users_db"
+    classrooms = "classrooms_db"
 
 # To map column names to column numbers
 class UserModel:
@@ -22,3 +23,19 @@ class UserModel:
     role = 4
     priority = 5
 
+class ClassroomModel:
+    code = 0
+    department = 1
+    room_type = 2
+    seats = 3
+    area = 4
+    board_num = 5
+    board_type = 6
+    board_size = 7
+    connections = 8
+    projector_size = 9
+    panopto_capture = 10
+    touch_screen = 11
+    document_camera = 12
+    outlets_for_students = 13
+    projector_num = 14

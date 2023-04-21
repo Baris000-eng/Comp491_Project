@@ -102,20 +102,6 @@ def createReservation(date, time, username, priority, public_or_private, classro
     conn.close()
 
 
-def createReservation(date, time, username, priority, public_or_private, classroom):
-    """
-    Given a date, time, username, priority, insert new reservation into the reservation database
-    """
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
-
-    c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom, priority_reserved) 
-             VALUES (?, ?, ?, ?, ?, ?)''', (date, time, username, public_or_private, classroom, priority))
-
-    conn.commit()
-    conn.close()
-
-
 def createUser(username: str, password: str, email: str, role: str, priority: int):
     """
     Given a username, password, email, and role, insert user into corresponding database

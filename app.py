@@ -5,16 +5,15 @@ from rbac import allow_roles
 from service.UserService import password_change_success, go_to_opening_screen
 from service.UserService import select_role, showTheClassroomAndInfo, chat_action, report_chat, report_it
 import service.UserService as US
+import service.ClassroomService as CS
 
 app = Flask(__name__)
 app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 
 
-app.route('/get_password_change_screen',
-          methods=['GET'])(US.get_password_change_screen)
-app.route('/change_user_password',
-          methods=['GET', 'POST'])(US.change_user_password)
+app.route('/get_password_change_screen', methods=['GET'])(US.get_password_change_screen)
+app.route('/change_user_password', methods=['GET', 'POST'])(US.change_user_password)
 app.route('/password_change_success')(password_change_success)
 
 app.route('/select_role', methods=['POST'])(select_role)
@@ -37,16 +36,21 @@ app.route('/deleteITReport', methods=['POST'])(US.deleteITReport)
 def screen(role):
     return US.user_screen(role)
 
+@app.route('/admin/import-classrooms', methods=['POST'])
+@allow_roles([], session, request)
+def import_classrooms():
+    file_path = request.form.get('file_path', '')
+    return CS.createClassrooms(file_path)
+
 
 @app.route('/<role>/dashboard', methods=['GET', 'POST'])
-@allow_roles(['student', 'teacher', 'it_staff', 'admin'], session, request)
+@allow_roles(['student', 'teacher', 'it_staff'], session, request)
 def dashboard(role):
     return US.user_dashboard(role)
 
 
 app.route('/reserve_class', methods=['POST'])(US.reserve_class)
-app.route('/already_reserved_classes',
-          methods=['POST'])(US.see_already_reserved_classes)
+app.route('/already_reserved_classes', methods=['POST'])(US.see_already_reserved_classes)
 app.route('/OpenReserveScreen', methods=['POST'])(US.OpenReserveScreen)
 ###########################################################################################################
 
