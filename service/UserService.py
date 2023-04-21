@@ -27,8 +27,8 @@ def check_includes(credentials: List[str]):
 
 
 def user_signup(request, role: str):
-    session["role"] = role
-    session["priority"] = ROLES[role].priority
+    # session["role"] = role
+    # session["priority"] = ROLES[role].priority
 
     if request.method == 'POST':
         username = request.form['username']
@@ -46,6 +46,8 @@ def user_signup(request, role: str):
                       email=email, role=role, priority=ROLES[role].priority)
 
         session["username"] = username
+        session["role"] = role
+        session["priority"] = ROLES[role].priority
         page_rendered = f'{concat_folder_dir_based_on_role(role)}{role}_dashboard.html'
         # After sign-up is done, before the url would show role/dahsborad, now it shows role/dashboard, potential routing problem
         return render_template(page_rendered)
@@ -93,7 +95,6 @@ def validate_role(role: str):
 
 
 def user_login(request, role: str):
-    session['role'] = role
     if request.method == 'POST':
         # Get the username and password from the form data
         username = request.form['username']
@@ -102,10 +103,10 @@ def user_login(request, role: str):
 
         page_to_be_displayed = str()
 
-        existing_user = UR.getUserByUsernameAndEmail(username, email, role)
+        existing_user = UR.getUserByUsernameAndEmail(username, email)
 
-        if not existing_user:
-            notExistMessage = "Username & Email pair does not exist."
+        if not existing_user or not UR.checkUserRole(existing_user, role):
+            notExistMessage = f"There is no {ROLES[role].name} with this Username & Email pair."
             folder_directory = concat_folder_dir_based_on_role(role=role)
             page_to_be_displayed += folder_directory
             page_to_be_displayed += f'{role}_login.html'
@@ -114,7 +115,7 @@ def user_login(request, role: str):
         password_check = UR.check_password(existing_user, password)
 
         if password_check:
-            # Redirect to dashboard if student already exists
+            # Redirect to dashboard if user already exists
             session["username"] = username
             session["priority"] = ROLES[role].priority
             session["role"] = role
@@ -238,7 +239,7 @@ def validate_credentials(username, password, email, role):
         is_valid = False
         not_ku_error = "This email address is not from the KU Domain."
         return is_valid, render_template(page_rendered, not_ku_error=not_ku_error)
-    elif UR.userExistsByUsernameAndEmail(username, email, role):
+    elif UR.userExistsByUsernameAndEmail(username, email) and UR.checkUserRole(UR.getUserByUsernameAndEmail):
         is_valid = False
         screen_name = beautify_role_names(role_str=role)
         signup_error_message = "This account already exists. Please go to " + \
@@ -486,6 +487,9 @@ def OpenReserveScreen():
 def seeTheUsers():
     # Connect to the database
     print("hi")
+
+    # TODO: Connecting to database and fetching data is duty of repository layer
+    # Create a method like getAllUsernames in UserRepository, and call it here
     conn = sqlite3.connect('users_db.db')
     c = conn.cursor()
 

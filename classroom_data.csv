@@ -1,0 +1,96 @@
+﻿CASE B31,CASE,Classroom,34,61.6,4,Sliding,254cmx212cm,Vga/Hdmi,174cm x 178cm,,,,Yes,1
+CASE B30B,CASE,Classroom,17,25,2,Sliding,254x212,Vga ,178cm x 180cm,,,,No,1
+CASE B30A,CASE,Classroom,20,15,2,Sliding,314x212,Vga ,178cm x 180cm,,,,No,1
+CASE B26,CASE,Classroom,34,61.6,4,Sliding,214cmx212cm,Vga/Hdmi,214cm x 163cm,,,,Yes,1
+CASE B24,CASE,Classroom,64,123.9,4,Sliding,242cmx212cm,Vga/Hdmi,240cm x 154cm,,,,Yes,1
+CASE B15,CASE,Classroom,16,30,2,Sliding,314cmx106cm,Vga,178cm x 180cm,,,,No,1
+CASE B13,CASE,Classroom,34,60.2,4,Sliding,214cmx212cm,Vga/HDMI,214cm x 163cm,,,,Yes,1
+CASE B12,CASE,Classroom,22,44.5,2,Sliding,214x212,Vga/HDMI,214cm x 163cm,,,,No,1
+CASE B41,CASE,Classroom,34,60.2,4,Sliding,214cmx214cm,Vga/Hdmi/Mini Display Port,214cm x 163cm,,,,Yes,1
+CASE B40,CASE,Classroom,34,61.8,4,Sliding,214cmx217cm,Vga/Hdmi/Mini Display Port,214cm x 163cm,,,,Yes,1
+CASE B39,CASE,Classroom,34,61.8,4,Sliding,214cmx217cm,Vga/HDMI,214cm x 163cm,,,,Yes,1
+CASE B38,CASE,Classroom,34,62.4,4,Sliding,214cmx163cm,Vga/HDMI,240cm x 288cm,,,,Yes,1
+CASE B35,CASE,Classroom,24,60.6,4,Sliding,214cmx217cm,Vga/HDMI,240cm x 288cm,,,,Yes,1
+CASE B34,CASE,Classroom,34,60.2,4,Sliding,214cmx217cm,Vga/HDMI,214cm x 163cm,,,,Yes,1
+CASE B33,CASE,Classroom,34,60.2,4,Sliding,214cmx217cm,Vga/HDMI,214cm x 163cm,,,,No,1
+CASE Z33,CASE,Classroom,34,60.2,4,Sliding,214cmx217cm,Vga/HDMI,214cm x 163cm,,,,No,1
+CASE Z16A,CASE,Classroom,23,46,4,Sliding,214cmx212cm,Vga/HDMI,174cm x 190cm,,,,No,1
+CASE Z16B,CASE,Classroom,23,46,4,Sliding,254cmx212cm,Vga/HDMI,178cm x 190cm,,,,No,1
+CASE Z16C,CASE,Classroom,23,46,4,Sliding,254cmx212cm,Vga/HDMI,180cm x 160cm,,,,No,1
+CASE Z48,CASE,Classroom,79,132.4,4,Sliding,314cmx214cm,Vga/Hdmi/Mini Display Port,240cm x 185cm,,,,Yes,1
+CASE Z08,CASE,Classroom,53,92.3,4,Sliding,314cmx214cm,Vga/Hdmi,240cm x 154cm,,,,Yes,1
+CASE Z27,CASE,Classroom,55,95,4,Sliding,242cmx212cm,Vga/Hdmi,240cm x 154cm,,,,Yes,1
+CASE Z26,CASE,Classroom,35,62.3,4,Sliding,242cmx212cm,Vga/Hdmi,240cm x 154cm,,,,Yes,1
+CASE Z25,CASE,Classroom,36,60.8,4,Sliding,214cmx212cm,Vga/Hdmi,240cm x 154cm,,,,Yes,1
+CASE Z24,CASE,Classroom,58,95.5,4,Sliding,242cmx212cm,Vga/Hdmi,240cm x 154cm,,,,Yes,1
+CASE 124,CASE,Classroom,40,68,4,Sliding,214cmx210cm,Vga/Hdmi,240cm x 154cm,,,,Yes,1
+CASE 136,CASE,Classroom,26,44.6,4,Sliding,214cmx216cm,Vga/Hdmi,220cm x 160cm,,,,No,1
+CASE 134,CASE,Classroom,34,60.5,4,Sliding,214cmx216cm,Vga/Hdmi,220cm x 178cm,,,,No,1
+CASE 133,CASE,Classroom,33,60.5,2,Sliding,314x212,Vga/Hdmi,240cm x 154cm,,,,Yes,1
+CASE 216,CASE,Classroom,39,68,4,Sliding,254cmx212cm,Vga/Hdmi,240cm x 154cm,,,,Yes,1
+SOS B35,SOS,Classroom,28,42.8,1,,405cmx125cm,Vga,163cm x 185cm,,,,No,1
+SOS B30,SOS,Classroom,21,44.6,4,Sliding,405cmx215cm,Vga,214cm x 163cm,,,,No,1
+SOS B29,SOS,Classroom,21,45.5,4,Sliding,405cmx125cm,Vga,214cm x 163cm,,,,No,1
+SOS B28,SOS,Classroom,21,46.4,4,Sliding,405cmx125cm,Vga,214cm x 163cm,,,,No,1
+SOS B16,SOS,Classroom,,,4,Sliding,405cmx125cm,Vga/Hdmi,214cm x 163cm,,,,Yes,1
+SOS B21,SOS,Classroom,107,173.4,4,Sliding,314cmx204cm,Vga/Hdmi,245cm x 180cm,,,,Yes,1
+SOS B08,SOS,Classroom,107,162.4,4,Sliding,284cmx214cm,Vga/Hdmi,300cm x 180cm,Available,Available,Available,Yes,2
+SOS B07,SOS,Classroom,107,162.4,4,Sliding,284cmx214cm,Vga/Hdmi,245cm x 180cm,,,,Yes,1
+SOS B11,SOS,Classroom,54,88,4,Sliding,242cmx214cm,Vga/Hdmi,240cm x 150cm,Available,Available,Available,Yes,1
+SOS B10,SOS,Classroom,107,162.3,4,Sliding,314cmx214cm,Vga/Hdmi,250cm x 196cm,,,,Yes,1
+SOS Z27,SOS,Classroom,40,66,4,Sliding,284cmx214cm,Vga/Hdmi,220cm x 230cm,,,,Yes,1
+SOS Z21,SOS,Classroom,39,66,4,Sliding,284cmx214cm,Vga/Hdmi,220cm x 230cm,,,,Yes,1
+SOS Z15,SOS,Mava Lab,12,,,,,Vga/Hdmi,152cm x 244cm,,,,No,1
+SOS Z14,SOS,Mava Classroom,25,,,,152cmx244cm,Vga/Hdmi,152cm x 244cm,,,,No,1
+SOS 145,SOS,Classroom,23,47.6,4,Sliding,314cmx212cm,Vga/Hdmi,220cm x 230cm,,,,No,1
+SOS 144,SOS,Classroom,23,47.6,4,Sliding,314cmx212cm,Vga/Hdmi,220cm x 230cm,,,,No,1
+SOS 104,SOS,Classroom,40,60,4,Sliding,314cmx204cm,Vga/Hdmi,220cm x 230cm,,,,No,1
+SOS 103,SOS,Classroom,40,60,4,Sliding,314cmx214cm,Vga/Hdmi,220cm x 230cm,,,,No,1
+SCI Z32,SCI,Classroom,25,50,4,Sliding,314cmx214cm,Vga/Hdmi,214cm x 163cm,,,,No,1
+SCI Z29,SCI,Classroom,24,50.2,2,Sliding,314x212,Vga/Hdmi,214cm x 163cm,,,,No,1
+SCI Z24,SCI,Classroom,92,136,4,Sliding,314cmx214cm,Vga/Hdmi,240cm x 150cm,,,,Yes,1
+SCI Z09,SCI,Classroom,21,48,2,Sliding,314x212,Vga/Hdmi,214cm x 163cm,,,,No,1
+SCI Z08,SCI,Classroom,21,47.6,2,Sliding,314x212,Vga/Hdmi,214cm x 163cm,,,,No,1
+SCI Z07,SCI,Classroom,45,58.2,4,Sliding,314cmx214cm,Vga/Hdmi,214cm x 163cm,,,,No,1
+SCI Z06,SCI,Classroom,21,39,1,Sliding,405cmx125cm,Vga/Hdmi,204cm x 158cm,,,,No,1
+SCI 103,SCI,Classroom,60,95.7,4,Sliding,417cmx216cm,Vga/Hdmi,214cm x 163cm,,,,Yes,1
+SCI 129,SCI,Classroom,44,55.9,4,Sliding,214cmx163cm,Vga/Hdmi,214cm x 163cm,,,,No,1
+SCI 126,SCI,Classroom,23,46.7,4,Sliding,405cmx125cm,Vga/Hdmi,214cm x 163cm,,,,No,1
+SCI 125,SCI,Classroom,22,46.7,4,Sliding,405cmx125cm,Vga/Hdmi,204cm x 158cm,,,,No,1
+ENG B42,ENG,Classroom,42,80,2,Sliding,285cmx212cm,Vga/Hdmi,214cm x 163cm,,,,Yes,1
+ENG B32,ENG,Classroom,41,80,4,Sliding,214cmx210cm,Vga/Hdmi,214cm x 163cm,,,,Yes,1
+ENG B30,ENG,Classroom,80,124.9,4,Sliding,314cmx214cm,Vga/Hdmi,244cm x 186cm,,,,No,1
+ENG B29,ENG,Classroom,80,124.9,4,Sliding,314cmx214cm,Vga/Hdmi,244cm x 186cm,,,,No,1
+ENG B21,ENG,Classroom,35,58.5,4,Sliding,214cmx208cm,Vga/Hdmi,180cm x 185cm,,,,No,1
+ENG B20B,ENG,Classroom,24,54,4,Sliding,254cmx212cm,Vga/Hdmi,180cm x 185cm,,,,No,1
+ENG B20A,ENG,Classroom,25,40,2,Sliding,214cmx208cm,Vga/Hdmi,180cm x 185cm,,,,No,1
+ENG B19,ENG,Computer Lab.,,40,4,Sliding,240cmx212cm,Vga/Hdmi,300cm x 200cm,,,,Yes,1
+ENG B18,ENG,Classroom,36,61,4,Sliding,240cmx208cm,Vga/Hdmi,214cm x 163cm,,,,No,1
+ENG B16,ENG,Classroom,36,63.2,4,Sliding,214cmx208cm,Vga/Hdmi,214cm x 163cm,,,,Yes,1
+ENG B15,ENG,Classroom,35,61,4,Sliding,214cmx208cm,Vga/Hdmi,214cm x 163cm,,,,No,1
+ENG B11,ENG,Classroom,34,34,4,Sliding,214cmx208cm,Vga/Hdmi,214cm x 163cm,,,,Yes,1
+ENG B06,ENG,Classroom,18,35,2,Sliding,314cmx210cm,Vga/Hdmi,180cm x 185cm,,,,No,1
+ENG B05,ENG,Classroom,34,58.1,4,Sliding,214cmx208cm,Vga/Hdmi,214cm x 163cm,,,,Yes,1
+ENG Z15,ENG,Classroom,58,95.1,4,Sliding,216cmx187cm,Vga/Hdmi,240cm x 188cm,Available,Available,Available,Yes,1
+ENG Z27,ENG,Active Learning,55,141.2,,,946cmx145cm,Vga / Hdmi,220cm x 210cm,Available,Available,,Yes,1
+ENG Z21A,ENG,Classroom,20,30,2,Sliding,314cmx210cm,Vga / Hdmi,180cm x 185cm,,,,No,1
+ENGZ21,ENG,Computer Lab.,36,88.5,2,Sliding,270cmx216cm,Vga/Hdmi,300cm x 180cm,,,,Yes,1
+ENG 128,ENG,Computer Lab.,39,98.8,4,Sliding,310cmx214cm,Vga / Hdmi,290cm x 185cm,,,,Yes,1
+ENG 120,ENG,Computer Lab.,,,,,,Vga/Hdmi,,,,,Yes,1
+SNA B149,SNA,Computer Lab.,105,270,4,Sliding,300cmx105cm,Vga/Hdmi,280cm x 180cm,,,Available,Yes,3
+SNA B173,SNA,Classroom,47,94,4,Sliding,300cmx105cm,Vga/Hdmi,240cm x 140cm,,,,Yes,1
+SNA B119,SNA,Classroom,75,150,4,Sliding,240cmx105cm,Vga/Hdmi,280cm x 180cm,Available,Available,,Yes,1
+SNA B172,SNA,Classroom,104,181,4,Sliding,150cmx105cm,Vga/Hdmi,300cm x 190cm,Available,Available,,Yes,1
+SNA B152,SNA,Classroom,66,133,4,Sliding,240cmx105cm,Vga/Hdmi,280cm x 180cm,Available,Available,,Yes,1
+SNA B153,SNA,Classroom,45,92,6,Sliding,200cmx105cm,Vga/Hdmi,240cm x 150cm,Available,Available,,Yes,1
+SNA B184,SNA,Classroom,42,84,4,Sliding,300cmx105cm,Vga/Hdmi,240cm x 150cm,,,,No,1
+SNA A43,SNA,Classroom,98,175,2,Sliding,300cmx105cm,Vga/Hdmi,300cm x 180cm,Available,Available,,Yes,1
+SNA A52,SNA,Classroom,104,178,2,Sliding,300cmx105cm,Vga/Hdmi,240cm x 160cm,,,,Yes,1
+SNA A11,SNA,Classroom,22,53,4,Sliding,240cmx150cm,Vga/Hdmi,240cm x 150cm,,,,No,1
+SNA A42,SNA,Classroom,67,134,4,Sliding,240cmx210cm,Vga/Hdmi,280cm x 180cm,,,,Yes,1
+SNA A44,SNA,Classroom,40,90,4,Sliding,200cmx105cm,Vga/Hdmi,240cm x 150cm,,,,No,1
+SNA 158,SNA,Classroom,70,140,4,Sliding,300cmx105cm,Vga/Hdmi,280cm x 180cm,,,,Yes,1
+SNA 122,SNA,Classroom,18,45,4,Sliding,200cmx105cm,Vga/Hdmi,240cm x 160cm,,,,Yes,1
+SNA 159,SNA,Classroom,65,130,4,Sliding,300cmx105cm,Vga/Hdmi,280cm x 180cm,,,,Yes,1
+SNA A21,SNA,Classroom,154,240,,,,Vga/Hdmi,300cm x 210cm,,Available,,Yes,2
+SNA A22,SNA,Classroom,154,239,,,,Vga/Hdmi,300cm x 210cm,,Available,,Yes,2

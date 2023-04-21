@@ -102,20 +102,6 @@ def createReservation(date, time, username, priority, public_or_private, classro
     conn.close()
 
 
-def createReservation(date, time, username, priority, public_or_private, classroom):
-    """
-    Given a date, time, username, priority, insert new reservation into the reservation database
-    """
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
-
-    c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom, priority_reserved) 
-             VALUES (?, ?, ?, ?, ?, ?)''', (date, time, username, public_or_private, classroom, priority))
-
-    conn.commit()
-    conn.close()
-
-
 def createUser(username: str, password: str, email: str, role: str, priority: int):
     """
     Given a username, password, email, and role, insert user into corresponding database
@@ -161,7 +147,7 @@ def getUserByEmail(email: str):
     return user
 
 
-def getUserByUsernameAndEmail(username: str, email: str, role: str):
+def getUserByUsernameAndEmail(username: str, email: str):
     conn = sqlite3.connect(f'{DB.users}.db')
     c = conn.cursor()
 
@@ -196,7 +182,7 @@ def userExistsByUsernameAndEmail(username: str, email: str, role: str):
     """
     Return true if a user exists in corresponding database with this email and username, false otherwise.
     """
-    user = getUserByUsernameAndEmail(username=username, email=email, role=role)
+    user = getUserByUsernameAndEmail(username=username, email=email)
     return not (user is None)
 
 
