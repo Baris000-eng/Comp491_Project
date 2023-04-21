@@ -27,9 +27,6 @@ def check_includes(credentials: List[str]):
 
 
 def user_signup(request, role: str):
-    # session["role"] = role
-    # session["priority"] = ROLES[role].priority
-
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -145,10 +142,6 @@ def change_user_password():
         email = request.form['email']
         new_password = request.form['new_password']
         confirm_password = request.form['confirm_password']
-
-        # FIXME
-        session['role'] = 'student'
-
         if not UR.userExistsByEmail(email):
             email_not_found_error = "No account exists with this email."
             return render_template('password_change_screen.html', email_not_found_error=email_not_found_error)
@@ -197,12 +190,6 @@ def concat_folder_dir_based_on_role(role: str):
 
 
 def beautify_role_names(role_str: str) -> str:
-    # screen_name = str()
-    # if role_str == "it_staff":
-    #     screen_name = remove_underscore_and_capitalize(role_str)
-    # elif role_str == "student" or role_str == "teacher":
-    #     screen_name = capitalize(role_str)
-    # return screen_name
     return ROLES[role_str].name
 
 
