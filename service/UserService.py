@@ -504,7 +504,6 @@ def seeTheUsers():
 
 def seeTheReservations():
     # Connect to the database
-    # Connect to the database
     conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
 
@@ -584,3 +583,74 @@ def deleteITReport():
     conn.commit()
     conn.close()
     return render_template("successDeletedITReport.html")
+
+
+def seeITReports():
+    # Connect to the database
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+
+    # Retrieve all the rows from the reservations_db table
+    c.execute('SELECT * FROM IT_Report_logdb')
+    data = c.fetchall()
+
+    # Close the database connection
+    conn.close()
+    print(data)
+
+    # Render the HTML template with the rows
+    return render_template('admin_see_IT_reports.html', IT_Reports=data)
+
+
+
+def seeUserStats():
+    # Connect to the database
+    conn = sqlite3.connect('users_db.db')
+    c = conn.cursor()
+
+    # Retrieve the user count and role counts from the database
+    c.execute('SELECT COUNT(*) FROM users_db')
+    user_count = c.fetchone()[0]
+
+    c.execute('SELECT role, COUNT(*) FROM users_db GROUP BY role')
+    roles = dict(c.fetchall())
+
+    # Close the database connection
+    conn.close()
+
+    # Render the HTML template with the user stats
+    return render_template('admin_user_stats.html', user_count=user_count, roles=roles)
+
+
+def seeReserveStats():
+    # Connect to the database
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+
+    # Retrieve all the rows from the reservations_db table
+    c.execute('SELECT * FROM reservations_db')
+    data = c.fetchall()
+
+    # Close the database connection
+    conn.close()
+    print(data)
+
+    # Render the HTML template with the rows
+    return render_template('admin_see_IT_reports.html', reservations=data)
+
+
+def seeITStats():
+    # Connect to the database
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+
+    # Retrieve all the rows from the reservations_db table
+    c.execute('SELECT * FROM reservations_db')
+    data = c.fetchall()
+
+    # Close the database connection
+    conn.close()
+    print(data)
+
+    # Render the HTML template with the rows
+    return render_template('admin_see_IT_reports.html', reservations=data)

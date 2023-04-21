@@ -59,11 +59,22 @@ app.route('/openTeacherReservationScreen',
           methods=['GET'])(US.openTeacherReservationScreen)
 app.route('/seeITReport',
           methods=['POST'])(US.seeITReport)
-app.route('/seeTheUsers', methods=['GET'])(US.seeTheUsers)
+app.route('/seeTheUsers', 
+            methods=['GET'])(US.seeTheUsers)
 
-app.route('/seeTheReservations', methods=['GET'])(US.seeTheReservations)
+app.route('/seeTheReservations', 
+            methods=['GET'])(US.seeTheReservations)
 
 
+app.route('/seeITReports', 
+            methods=['GET'])(US.seeITReports)
+
+
+app.route('/AdminUserStats', methods=['GET'])(US.seeUserStats)
+
+app.route('/AdminReservationStats', methods=['GET'])(US.seeReserveStats)
+
+app.route('/AdminITStats', methods=['GET'])(US.seeITStats)
 ###########################################################################################################
 # For Admin
 ###########################################################################################################
