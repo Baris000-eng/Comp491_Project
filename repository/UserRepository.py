@@ -178,7 +178,7 @@ def userExistsByEmail(email: str):
     return not (user is None)
 
 
-def userExistsByUsernameAndEmail(username: str, email: str, role: str):
+def userExistsByUsernameAndEmail(username: str, email: str):
     """
     Return true if a user exists in corresponding database with this email and username, false otherwise.
     """
