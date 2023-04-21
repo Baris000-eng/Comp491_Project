@@ -147,7 +147,7 @@ def getUserByEmail(email: str):
     return user
 
 
-def getUserByUsernameAndEmail(username: str, email: str, role: str):
+def getUserByUsernameAndEmail(username: str, email: str):
     conn = sqlite3.connect(f'{DB.users}.db')
     c = conn.cursor()
 
@@ -182,7 +182,7 @@ def userExistsByUsernameAndEmail(username: str, email: str, role: str):
     """
     Return true if a user exists in corresponding database with this email and username, false otherwise.
     """
-    user = getUserByUsernameAndEmail(username=username, email=email, role=role)
+    user = getUserByUsernameAndEmail(username=username, email=email)
     return not (user is None)
 
 

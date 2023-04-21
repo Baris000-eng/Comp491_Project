@@ -103,10 +103,10 @@ def user_login(request, role: str):
 
         page_to_be_displayed = str()
 
-        existing_user = UR.getUserByUsernameAndEmail(username, email, role)
+        existing_user = UR.getUserByUsernameAndEmail(username, email)
 
-        if not existing_user:
-            notExistMessage = "Username & Email pair does not exist."
+        if not existing_user or not UR.checkUserRole(existing_user, role):
+            notExistMessage = f"There is no {ROLES[role].name} with this Username & Email pair."
             folder_directory = concat_folder_dir_based_on_role(role=role)
             page_to_be_displayed += folder_directory
             page_to_be_displayed += f'{role}_login.html'
@@ -239,7 +239,7 @@ def validate_credentials(username, password, email, role):
         is_valid = False
         not_ku_error = "This email address is not from the KU Domain."
         return is_valid, render_template(page_rendered, not_ku_error=not_ku_error)
-    elif UR.userExistsByUsernameAndEmail(username, email, role):
+    elif UR.userExistsByUsernameAndEmail(username, email) and UR.checkUserRole(UR.getUserByUsernameAndEmail):
         is_valid = False
         screen_name = beautify_role_names(role_str=role)
         signup_error_message = "This account already exists. Please go to " + \
