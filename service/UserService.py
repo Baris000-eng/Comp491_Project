@@ -48,9 +48,7 @@ def user_signup(request, role: str):
         session["username"] = username
         session["role"] = role
         session["priority"] = ROLES[role].priority
-        page_rendered = f'{concat_folder_dir_based_on_role(role)}{role}_dashboard.html'
-        # After sign-up is done, before the url would show role/dahsborad, now it shows role/dashboard, potential routing problem
-        return render_template(page_rendered)
+        return redirect(f'/{role}/dashboard')
 
     page_rendered = str()
     page_rendered += concat_folder_dir_based_on_role(role=role)
