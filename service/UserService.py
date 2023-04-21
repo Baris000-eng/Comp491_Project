@@ -117,11 +117,7 @@ def user_login(request, role: str):
             session["username"] = username
             session["priority"] = ROLES[role].priority
             session["role"] = role
-            page_to_be_shown = str()
-            page_to_be_shown += concat_folder_dir_based_on_role(role=role)
-            page_to_be_shown += f'{role}_dashboard.html'
-            return render_template(page_to_be_shown)
-
+            return redirect(f'/{role}/dashboard')
         else:
             # Render template with message and button to go to signup screen
             screen_name = beautify_role_names(role_str=role)
