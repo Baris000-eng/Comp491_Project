@@ -42,6 +42,11 @@ def import_classrooms():
     file_path = request.form.get('file_path', '')
     return CS.createClassrooms(file_path)
 
+@app.route('/classrooms', methods=['GET'])
+@allow_roles([], session, request)
+def get_all_classrooms():
+    return CS.getAllClassrooms()
+
 
 @app.route('/<role>/dashboard', methods=['GET', 'POST'])
 @allow_roles(['student', 'teacher', 'it_staff'], session, request)
