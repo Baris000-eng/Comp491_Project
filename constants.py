@@ -39,3 +39,16 @@ class ClassroomModel:
     document_camera = 12
     outlets_for_students = 13
     projector_num = 14
+
+FilterOperations = {
+    "code": "=",
+    "department": "=",
+    "seats": ">",
+    "area": ">",
+    "board_num": "=",
+    "connections": "like",
+    "panopto_capture": "like",
+    "outlets_for_students": "like",
+    "projector_num": "="
+}
+

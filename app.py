@@ -47,6 +47,11 @@ def import_classrooms():
 def get_all_classrooms():
     return CS.getAllClassrooms()
 
+@app.route('/classrooms/filter', methods=['GET'])
+@allow_roles(['student', 'teacher', 'it_staff'], session, request)
+def get_classrooms_where():
+    return CS.getClassroomsWhere(request.form)
+
 
 @app.route('/<role>/dashboard', methods=['GET', 'POST'])
 @allow_roles(['student', 'teacher', 'it_staff'], session, request)

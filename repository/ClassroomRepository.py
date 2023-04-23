@@ -1,8 +1,9 @@
 import sqlite3
 import csv
+from typing import List
 
 from constants import DB
-from constants import ClassroomModel as CM
+from constants import FilterOperations as FO
 
 def initializeClassroomTables():
     conn = sqlite3.connect(f"{DB.classrooms}.db")
@@ -65,3 +66,73 @@ def getAllClassrooms():
     conn.commit()
     conn.close()
     return classrooms
+
+def getClassroomsWhere(criteria: dict):
+    """
+    Given filtering opitons as a dictionary, return the classrooms that fit the filtering 
+    """
+    print(f'criteria: {criteria}')
+
+    query, parameters = getQuery(criteria)
+    
+
+    print(f'query: {query}')
+    print(f'parameters: {parameters}')
+
+    conn = sqlite3.connect(f"{DB.classrooms}.db")
+    c = conn.cursor()
+    c.execute(query, parameters)
+
+    classrooms = c.fetchall()
+    conn.commit()
+    conn.close()
+
+    return classrooms
+    
+
+def getQuery(criteria: dict):
+    """
+    Given a dictionary of filtering criteria and values, construct corresponding query string and parameter list
+    Example: 
+        criteria: {'department': ['SOS', 'ENG'], 'panopto_capture': ['available'], 'projector_num': ['1', '2']}
+        query: "SELECT * FROM classrooms_db WHERE ( department = ? or department = ? ) and ( panopto_capture like ? ) and ( projector_num = ? or projector_num = ? )"
+        parameters: ['SOS', 'ENG', 'available', '1', '2']
+    """
+    parameter_list = []
+    where_clauses = []
+    
+    for criterion, values in criteria.items():
+        where_clause, param_list = getWhereClauseAndParamList(criterion, values)
+        
+        if param_list: # is empty check
+            where_clauses.append(where_clause)
+            parameter_list += param_list
+
+
+    where_clause = f'{" and ".join(where_clauses)}'
+    query = f"SELECT * FROM {DB.classrooms} WHERE {where_clause}"
+    return query, parameter_list
+
+def getWhereClauseAndParamList(criterion: str, values: List):
+    """
+    Given a filter criterion and filter values, return the corresponding where clause and the parameter binding list
+    If given criterion is invalid, return empty string and an empty list.
+    Example:
+        criterion: "code"
+        values: ["SOS B08", "ENG Z15"]
+        where_clause: '( code = ? or code = ? )'
+        parameter_list: ['SOS B08', 'ENG Z15']
+    """
+    if criterion not in FO:
+        return "", []
+    
+    where_clauses = []
+    parameter_list = []
+    
+    for value in values:
+        where_clauses.append(f"{criterion} {FO.get(criterion)} ?")
+        parameter_list.append(value)
+    
+    where_clause = f'( {" or ".join(where_clauses)} )'
+
+    return where_clause, parameter_list
