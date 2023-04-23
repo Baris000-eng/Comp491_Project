@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/see_reservation_statistics.css">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../static/see_reservation_stats.css">
+    <title>Reservation Stats</title>
 </head>
 
-<h1>Reservation Statistics</h1>
-
 <body>
-    
+    <button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
+
+    <h1>Reservation Stats</h1>
+
+    <div>
+        <p>Total Reservations: {{ reservation_count }}</p>
+        <ul>
+            <li>Public Reservations: {{ public_reservation_count }}</li>
+            <li>Private Reservations: {{ private_reservation_count }}</li>
+        </ul>
+    </div>
+
+    <div>
+        <h2>Reservation Roles</h2>
+        <ul>
+            <li>IT Staff: {{ it_staff_reservation_count }}</li>
+            <li>Instructor: {{ instructor_reservation_count }}</li>
+            <li>Student: {{ student_reservation_count }}</li>
+        </ul>
+    </div>
+
+    <script src="../static/see_reservation_stats.js"></script>
 </body>
+
 </html>

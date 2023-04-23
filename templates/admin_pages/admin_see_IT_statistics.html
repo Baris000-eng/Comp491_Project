@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/see_IT_statistics.css">
-
-    <title>ITStatistics</title>
+    <link rel="stylesheet" type="text/css" href="../static/see_IT_stats.css">
+    <title>SeeIT - Stats</title>
 </head>
 
-
-<h1>IT Statistics</h1>
-
 <body>
+    <h1>IT Reports Statistics</h1>
+    
+    <div class="stats-container">
+        <h2>Number of Reports</h2>
+        <ul>
+            <li>Admin: {{ admin_reports }}</li>
+            <li>Instructor: {{ instructor_reports }}</li>
+            <li>IT Staff: {{ it_staff_reports }}</li>
+            <li>Student: {{ student_reports }}</li>
+        </ul>
+    </div>
     
 </body>
+
 </html>

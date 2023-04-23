@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/user_statistics.css">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../static/admin_user_stats.css">
+    <title>User Stats</title>
 </head>
+
 <body>
-    
+    <h1>User Stats</h1>
+
+    <div>
+        <p>Total User Count: {{ total_count }}</p>
+        <ul>
+            <li>Admin Users: {{ admin_count }}</li>
+            <li>IT Staff Users: {{ it_staff_count }}</li>
+            <li>Instructor Users: {{ instructor_count }}</li>
+            <li>Student Users: {{ student_count }}</li>
+        </ul>
+    </div>
+
+    <div>
+        <h2>User Roles</h2>
+        <ul>
+            <li>Admin: {{ admin_count }}</li>
+            <li>IT Staff: {{ it_staff_count }}</li>
+            <li>Instructor: {{ instructor_count }}</li>
+            <li>Student: {{ student_count }}</li>
+        </ul>
+    </div>
 </body>
+
 </html>
