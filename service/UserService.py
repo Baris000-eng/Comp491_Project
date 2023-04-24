@@ -484,7 +484,7 @@ def seeTheUsers():
 
     # Render the HTML template with the usernames
 
-    return render_template('admin_see_users.html', usernames=usernames)
+    return render_template('admin_pages/admin_see_users.html', usernames=usernames)
 
 
 def seeTheReservations():
@@ -501,7 +501,7 @@ def seeTheReservations():
     print(data)
 
     # Render the HTML template with the rows
-    return render_template('see_the_reservations.html', reservations=data)
+    return render_template('admin_pages/see_the_reservations.html', reservations=data)
 
 
 def editUser(username):
@@ -584,7 +584,7 @@ def seeITReports():
     print(data)
 
     # Render the HTML template with the rows
-    return render_template('admin_see_IT_reports.html', IT_Reports=data)
+    return render_template('admin_pages/admin_see_IT_reports.html', IT_Reports=data)
 
 
 def seeUserStats():
@@ -620,7 +620,7 @@ def seeReserveStats():
     print(data)
 
     # Render the HTML template with the rows
-    return render_template('admin_see_IT_reports.html', reservations=data)
+    return render_template('/admin_pages/admin_see_IT_reports.html', reservations=data)
 
 
 def seeITStats():
@@ -642,6 +642,3 @@ def seeITStats():
 
 def enterChat():
     return render_template('chat_class_generic.html')
-
-
-
