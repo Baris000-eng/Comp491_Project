@@ -5,20 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat for {Class name}</title>
+    <link rel="stylesheet" type="text/css" href="../static/chat_with_history.css">
+    <title>Already-Reserved Classrooms</title>
 </head>
 
 <body>
+    <h1> Chat for : {{classsroom_no}} </h1>
     <div>
-        <!-- Message history-->
+        {% for message in messages %}
+        <h3>--------------- Reservation --------------------</h3>
+        <ul>
+            <li>Sender: {{ message[0] }}</li>
+            <li>Message: {{ message[1] }}</li>
+            <li>Time: {{ message[2] }}</li>
+            <li>Username: {{ message[3] }}</li>
 
+            {% endfor %}
     </div>
-    <form action="/sendChatMessage" method="GET">
-        <button>Send Message</button>
-    </form>
-    <form action="/exitChat" method="GET">
-        <button>Exit to dashboard.</button>
-    </form>
+    <div>
+        <form action="/send_chat_message_student"><button>Send message.</button></form>
+        <form action="/report_message_student"><button>Report message.</button></form>
+    </div>
 </body>
 
 </html>

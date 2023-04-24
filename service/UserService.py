@@ -587,7 +587,6 @@ def seeITReports():
     return render_template('admin_see_IT_reports.html', IT_Reports=data)
 
 
-
 def seeUserStats():
     # Connect to the database
     conn = sqlite3.connect('users_db.db')
@@ -639,3 +638,10 @@ def seeITStats():
 
     # Render the HTML template with the rows
     return render_template('admin_see_IT_reports.html', reservations=data)
+
+
+def enterChat():
+    return render_template('chat_class_generic.html')
+
+
+
