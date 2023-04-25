@@ -12,7 +12,7 @@ from flask_socketio import SocketIO, emit
 app = Flask(__name__)
 app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
-
+socketio = SocketIO(app)
 
 app.route('/get_password_change_screen',
           methods=['GET'])(US.get_password_change_screen)
@@ -23,8 +23,8 @@ app.route('/password_change_success')(password_change_success)
 app.route('/select_role', methods=['POST'])(select_role)
 app.route('/showTheClassroomAndInfo', methods=['GET'])(showTheClassroomAndInfo)
 app.route('/chat_action')(chat_action)
-#@socketio.on('connect')
-#@socketio.on('message')
+# @socketio.on('connect')
+# @socketio.on('message')
 
 app.route('/reportingChat', methods=['POST'])(report_chat)
 app.route('/reportingIT', methods=['POST'])(report_it)
@@ -106,6 +106,17 @@ app.route('/AdminITStats', methods=['GET'])(US.seeITStats)
 # Testing out role-based signup request
 
 
+@socketio.on('message')
+def handle_message(message):
+    import clientSide as cs
+    isLegitToSend = cs.isLegitToSend(message)
+    if isLegitToSend:
+        emit('response', message)
+    else:
+        # report IT
+        return
+
+
 @app.route('/<role>/signup', methods=['GET', 'POST'])
 def signup(role):
     return US.user_signup(request, role)
@@ -117,7 +128,6 @@ def login(role):
 
 # socket_chat.on("connect")(US.user_connected)
 # socket_chat.on("disconnect")(US.user_disconnected)
-
 
 
 if __name__ == '__main__':
