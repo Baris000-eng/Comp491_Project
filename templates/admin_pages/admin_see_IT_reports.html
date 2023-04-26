@@ -25,7 +25,7 @@
 
     </thead>
     <tbody>
-        {% for row in reservations %}
+        {% for row in IT_Reports %}
         <tr>
             <td>{{ row[0] }}</td>
             <td>{{ row[1] }}</td>
@@ -34,7 +34,7 @@
             <td>{{ row[4] }}</td>
             <td>{{ row[5] }} <form action="/editReserved" method="GET">
                     <input type="hidden" name="row_data" value="{{ row|join(',') }}">
-                    <button>Edit your reservation</button>
+                    <button>Edit IT_Reports</button>
                 </form>
             </td>
 

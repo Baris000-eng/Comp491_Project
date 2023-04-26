@@ -99,7 +99,7 @@ app.route('/AdminUserStats', methods=['GET'])(US.seeUserStats)
 
 app.route('/AdminReservationStats', methods=['GET'])(US.seeReserveStats)
 
-app.route('/AdminITStats', methods=['GET'])(US.seeITStats)
+app.route('/AdminITStats', methods=['GET'])(US.AdminITStats)
 ###########################################################################################################
 # For Admin
 ###########################################################################################################

@@ -623,13 +623,13 @@ def seeReserveStats():
     return render_template('/admin_pages/admin_see_IT_reports.html', reservations=data)
 
 
-def seeITStats():
+def AdminITStats():
     # Connect to the database
     conn = sqlite3.connect('IT_Report_logdb.db')
     c = conn.cursor()
 
     # Retrieve all the rows from the reservations_db table
-    c.execute('SELECT * FROM reservations_db')
+    c.execute('SELECT * FROM IT_Report_logdb')
     data = c.fetchall()
 
     # Close the database connection
@@ -637,8 +637,9 @@ def seeITStats():
     print(data)
 
     # Render the HTML template with the rows
-    return render_template('admin_see_IT_reports.html', reservations=data)
+    return render_template('admin_pages/admin_see_IT_reports.html', reservations=data)
 
 
 def enterChat():
     return render_template('chat_class_generic.html')
+

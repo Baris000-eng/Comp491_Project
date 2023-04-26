@@ -7,3 +7,5 @@ def isLegitToSend(message):
         #to be implemented
     ## 
     return True
+
+serverAddress = "localhost"
