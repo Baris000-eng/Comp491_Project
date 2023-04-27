@@ -3,18 +3,22 @@ class Role:
         self.priority = priority
         self.name = name
 
+
 ROLES = {
     "student": Role(10, 'Student'),
-    "teacher": Role(20, 'Teacher'),
-    "it_staff": Role(10, 'IT Staff'),
-    "admin": Role(30, 'Admin')
+    "teacher": Role(30, 'Teacher'),
+    "it_staff": Role(40, 'IT Staff'),
+    "admin": Role(50, 'Admin')
 }
+
 
 class DB:
     users = "users_db"
     classrooms = "classrooms_db"
 
 # To map column names to column numbers
+
+
 class UserModel:
     id = 0
     username = 1
@@ -22,6 +26,7 @@ class UserModel:
     email = 3
     role = 4
     priority = 5
+
 
 class ClassroomModel:
     code = 0
@@ -40,6 +45,7 @@ class ClassroomModel:
     outlets_for_students = 13
     projector_num = 14
 
+
 FilterOperations = {
     "code": "=",
     "department": "=",
@@ -51,4 +57,3 @@ FilterOperations = {
     "outlets_for_students": "like",
     "projector_num": "="
 }
-
