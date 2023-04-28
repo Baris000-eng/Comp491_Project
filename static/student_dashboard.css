@@ -11,8 +11,11 @@ h1 {
     font-weight: bold;
     text-align: center;
     margin-top: 40px;
-    margin-bottom: 40px;
-    color: brown
+
+    color: brown;
+    border: 10px;
+    width: auto;
+
 }
 
 .buttons {
@@ -98,5 +101,33 @@ button {
     color: white;
     transform: scale(2.5);
     transition: transform 0.3s ease-in-out;
+
+}
+
+button {
+    animation: pulse 8s infinite;
+    color: black;
+}
+
+@keyframes pulse {
+    0% {
+        background-color: #007bff;
+    }
+
+    25% {
+        background-color: #00ff62;
+    }
+
+    50% {
+        background-color: #ff0059;
+    }
+
+    75% {
+        background-color: #00ffae;
+    }
+
+    100% {
+        background-color: #fbff00;
+    }
 
 }

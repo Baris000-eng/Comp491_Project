@@ -60,3 +60,32 @@ button:hover {
     transition: transform 0.3s ease-in-out;
 
 }
+
+
+button {
+    animation: pulse 8s infinite;
+    color: black;
+}
+
+@keyframes pulse {
+    0% {
+        background-color: #007bff;
+    }
+
+    25% {
+        background-color: #00ff62;
+    }
+
+    50% {
+        background-color: #ff0059;
+    }
+
+    75% {
+        background-color: #00ffae;
+    }
+
+    100% {
+        background-color: #fbff00;
+    }
+
+}
