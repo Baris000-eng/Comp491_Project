@@ -36,7 +36,6 @@ app.route('/editITReport', methods=['GET'])(US.editITReport)
 app.route('/deleteReservation', methods=['POST'])(US.deleteReservation)
 app.route('/deleteITReport', methods=['POST'])(US.deleteITReport)
 
-
 @app.route('/<role>/screen', methods=['GET'])
 def screen(role):
     return US.user_screen(role)
@@ -76,12 +75,19 @@ app.route('/OpenReserveScreen', methods=['POST'])(US.OpenReserveScreen)
 app.route('/enterChat',
           methods=['GET'])(US.enterChat)
 
-app.route('/openStudentReservationScreen',
-          methods=['GET'])(US.openStudentReservationScreen)
+
 app.route('/openITReportScreen',
           methods=['GET'])(US.openITReportScreen)
+
+
+app.route('/openStudentReservationScreen',
+          methods=['GET'])(US.openStudentReservationScreen)
 app.route('/openTeacherReservationScreen',
           methods=['GET'])(US.openTeacherReservationScreen)
+app.route('/openItStaffReservationScreen',
+          methods=['GET'])(US.open_it_staff_reservation_screen)
+
+
 app.route('/seeITReport',
           methods=['POST'])(US.seeITReport)
 app.route('/seeTheUsers',
