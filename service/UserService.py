@@ -344,9 +344,9 @@ def reserve_class():
     elif option == "ps":
         preference = "PS"
     elif option == "private":
-        preference = "Private"
+        preference = "Private Study"
     elif option == "public":
-        preference = "Public"
+        preference = "Public Study"
     elif option == "maintenance":
         preference = "Maintenance"
     elif option == "repair":
@@ -444,15 +444,20 @@ def see_already_reserved_classes():
 def openStudentReservationScreen():
     row_index = request.args.get('row_index')
     options = extract_first_column_of_ku_class_data()
-    selected_class_code = options[int(row_index)]
-    return render_template('student_reservation_screen.html', options=options, class_code = selected_class_code)
+    if row_index is not None:
+        selected_class_code = options[int(row_index)]
+        return render_template('student_reservation_screen.html', options=options, class_code = selected_class_code)
+    return render_template('student_reservation_screen.html', options = options)
 
 
 def openTeacherReservationScreen():
     row_index = request.args.get('row_index')
     options = extract_first_column_of_ku_class_data()
-    selected_class_code = options[int(row_index)]
-    return render_template("teacher_reservation_screen.html", options=options, class_code = selected_class_code)
+
+    if row_index is not None:
+        selected_class_code = options[int(row_index)]
+        return render_template("teacher_reservation_screen.html", options=options, class_code = selected_class_code)
+    return render_template("teacher_reservation_screen.html", options=options)
 
 
 def opening_screen():
@@ -657,8 +662,10 @@ def enterChat():
 def open_it_staff_reservation_screen():
     row_index = request.args.get('row_index')
     options = extract_first_column_of_ku_class_data()
-    selected_class_code = options[int(row_index)]
-    return render_template("it_staff_reservation_screen.html", options=options, class_code=selected_class_code)
+    if row_index is not None:
+        selected_class_code = options[int(row_index)]
+        return render_template("it_staff_reservation_screen.html", options = options, class_code=selected_class_code)
+    return render_template("it_staff_reservation_screen.html", options = options)
 
 
    

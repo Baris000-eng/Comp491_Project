@@ -14,6 +14,7 @@
 <div class="my_div" id="reservationForm">
     <form action="/reserve_class" method="POST">
         <h2>It Staff Class Reservation Screen</h2>
+        {% if class_code %}
         <label for="">Class Code:</label>
         <input type="text" name="class-code" value="{{ class_code }}" readonly>
        {% else %}
