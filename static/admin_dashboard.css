@@ -47,3 +47,20 @@ button {
 form {
     margin-bottom: 10px;
 }
+
+
+button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+button:hover {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: purple;
+    color: white;
+    transform: scale(2.5);
+    transition: transform 0.3s ease-in-out;
+
+}

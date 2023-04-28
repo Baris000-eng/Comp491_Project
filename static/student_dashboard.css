@@ -3,13 +3,9 @@ body {
     padding: 0;
     background-color: yellowgreen;
 }
-  
-.container {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-}
-  
+
+
+
 h1 {
     font-size: 36px;
     font-weight: bold;
@@ -18,14 +14,27 @@ h1 {
     margin-bottom: 40px;
     color: brown
 }
-  
+
 .buttons {
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-  
+
+.buttons.form.button.hover {
+    background-color: red;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons button:hover {
+    background-color: red;
+    color: white;
+}
+
 button {
     display: block;
     width: 100%;
@@ -44,8 +53,50 @@ button {
     justify-content: center;
     align-items: center;
 }
-  
-button:hover {
-    background-color: #0069d9;
+
+
+
+
+.button {
+    transition: transform 0.3s ease-in-out;
 }
-  
+
+.button.clicked {
+    transform: scale(1.5);
+    background-color: red;
+}
+
+.button.hover {
+    transform: scale(1.5);
+    background-color: red;
+    color: red;
+}
+
+.form {
+    transition: transform 0.3s ease-in-out;
+}
+
+.form.clicked {
+    transform: scale(1.5);
+    background-color: red;
+}
+
+.form.hover {
+    transform: scale(1.5);
+    background-color: red;
+}
+
+.buttons button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.buttons button:hover {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: red;
+    color: white;
+    transform: scale(2.5);
+    transition: transform 0.3s ease-in-out;
+
+}
