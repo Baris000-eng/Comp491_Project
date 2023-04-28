@@ -10,7 +10,24 @@
 </head>
 
 <button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
+<br>
 
+
+<div class="filterReservations">
+    <form action="/seeOnlyMyReserves">
+        <input type="radio" name="reservationType" id="myReservations" value="myReservations" checked>
+        <label for="myReservations">See only my reservations</label>
+        <br>
+        <input type="radio" name="reservationType" id="allReservations" value="allReservations">
+        <label for="allReservations">See all reservations</label>
+        <br>
+        <button>Record changes</button>
+    </form>
+</div>
+
+
+
+<br>
 <div class="box">
     <div class="content">
 
@@ -36,7 +53,6 @@
         {% endfor %}
     </div>
 </div>
-
 {% if 'role' in session %}
 {% if session['role'] == 'teacher' %}
 <form action=" /teacher/dashboard">

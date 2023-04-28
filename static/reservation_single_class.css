@@ -43,3 +43,36 @@ h3 {
     overflow-y: scroll;
 
 }
+
+.filterReservations {
+    display: flex;
+    flex-direction: column;
+}
+
+.filterReservations form {
+    margin-top: 10px;
+}
+
+
+/* CSS for filterReservations section */
+.filterReservations {
+    background-color: #008f03;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #8a2e2e;
+    border-radius: 5px;
+    width: 30%;
+}
+
+.filterReservations form {
+    display: inline-block;
+}
+
+.filterReservations label {
+    margin-right: 10px;
+    padding: 0px;
+}
+
+.filterReservations.input :hover {
+    background-color: blanchedalmond;
+}
