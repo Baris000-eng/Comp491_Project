@@ -16,12 +16,11 @@
 <h1>Usernames:</h1>
 <ul>
     {% for username in usernames %}
-    <form method="GET" action="/editUser">
 
+    <form method="GET" action="/editUser">
         <li>{{ username }} <button type="submit">Edit User</button></li>
-        <button>Edit User</button>
     </form>
-    </form>
+
     {% endfor %}
 </ul>
 </body>

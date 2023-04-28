@@ -36,6 +36,7 @@ app.route('/editITReport', methods=['GET'])(US.editITReport)
 app.route('/deleteReservation', methods=['POST'])(US.deleteReservation)
 app.route('/deleteITReport', methods=['POST'])(US.deleteITReport)
 
+
 @app.route('/<role>/screen', methods=['GET'])
 def screen(role):
     return US.user_screen(role)
@@ -93,6 +94,13 @@ app.route('/seeITReport',
 app.route('/seeTheUsers',
           methods=['GET'])(US.seeTheUsers)
 
+
+@app.route('/editUser', methods=['GET'])
+def editUser():
+    username = request.args.get('username')
+    return US.editUser(username=username)
+
+
 app.route('/seeTheReservations',
           methods=['GET'])(US.seeTheReservations)
 
@@ -138,5 +146,5 @@ def login(role):
 
 if __name__ == '__main__':
     setup
-    app.run(debug=True)
+    app.run(debug=True, port=499)
     app.debug = True

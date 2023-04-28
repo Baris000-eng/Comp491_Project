@@ -309,7 +309,8 @@ def showTheClassroomAndInfo():
         html += "<table>\n<thead>\n<tr>\n"
         html += "".join([f"<th>{header}</th>\n" for header in heads])
         html += "</tr>\n</thead>\n<tbody>\n"
-        html += "".join([f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><form action='/openTeacherReservationScreen' method='GET'><input type='hidden' name='row_index' value='{info.index(row)}'><button>Reserve</button></form></td></tr>\n" if 'role' in session and session['role'] == 'teacher' else f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><form action='/openStudentReservationScreen' method='GET'><input type='hidden' name='row_index' value='{info.index(row)}'><button>Reserve</button></form></td></tr>\n" if 'role' in session and session['role'] == 'student' else f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><form action='/openItStaffReservationScreen' method='GET'><input type='hidden' name='row_index' value='{info.index(row)}'><button>Reserve</button></form></td></tr>\n" for row in info])
+        html += "".join([f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><form action='/openTeacherReservationScreen' method='GET'><input type='hidden' name='row_index' value='{info.index(row)}'><button>Reserve</button></form></td></tr>\n" if 'role' in session and session['role'] ==
+                        'teacher' else f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><form action='/openStudentReservationScreen' method='GET'><input type='hidden' name='row_index' value='{info.index(row)}'><button>Reserve</button></form></td></tr>\n" if 'role' in session and session['role'] == 'student' else f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><form action='/openItStaffReservationScreen' method='GET'><input type='hidden' name='row_index' value='{info.index(row)}'><button>Reserve</button></form></td></tr>\n" for row in info])
         html += "</tbody>\n</table>"
         html += "</body></html>"
         create_html_file(html)
@@ -446,8 +447,8 @@ def openStudentReservationScreen():
     options = extract_first_column_of_ku_class_data()
     if row_index is not None:
         selected_class_code = options[int(row_index)]
-        return render_template('student_reservation_screen.html', options=options, class_code = selected_class_code)
-    return render_template('student_reservation_screen.html', options = options)
+        return render_template('student_reservation_screen.html', options=options, class_code=selected_class_code)
+    return render_template('student_reservation_screen.html', options=options)
 
 
 def openTeacherReservationScreen():
@@ -456,7 +457,7 @@ def openTeacherReservationScreen():
 
     if row_index is not None:
         selected_class_code = options[int(row_index)]
-        return render_template("teacher_reservation_screen.html", options=options, class_code = selected_class_code)
+        return render_template("teacher_reservation_screen.html", options=options, class_code=selected_class_code)
     return render_template("teacher_reservation_screen.html", options=options)
 
 
@@ -659,14 +660,11 @@ def AdminITStats():
 def enterChat():
     return render_template('chat_class_generic.html')
 
+
 def open_it_staff_reservation_screen():
     row_index = request.args.get('row_index')
     options = extract_first_column_of_ku_class_data()
     if row_index is not None:
         selected_class_code = options[int(row_index)]
-        return render_template("it_staff_reservation_screen.html", options = options, class_code=selected_class_code)
-    return render_template("it_staff_reservation_screen.html", options = options)
-
-
-   
-
+        return render_template("it_staff_reservation_screen.html", options=options, class_code=selected_class_code)
+    return render_template("it_staff_reservation_screen.html", options=options)
