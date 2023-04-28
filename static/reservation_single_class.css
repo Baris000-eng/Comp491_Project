@@ -56,7 +56,7 @@ h3 {
 
 /* CSS for filterReservations section */
 .filterReservations {
-    background-color: #008f03;
+    background-color: #ffa3cc;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #8a2e2e;
@@ -75,4 +75,26 @@ h3 {
 
 .filterReservations.input :hover {
     background-color: blanchedalmond;
+}
+
+.filterReservations input[type="radio"]:checked+label {
+    animation: flashGreen 3s infinite;
+}
+
+.filterReservations input[type="radio"]+label {
+    background-color: red;
+}
+
+@keyframes flashGreen {
+    0% {
+        background-color: green;
+    }
+
+    50% {
+        background-color: rgb(141, 233, 141);
+    }
+
+    100% {
+        background-color: green;
+    }
 }

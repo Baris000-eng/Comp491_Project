@@ -668,3 +668,43 @@ def open_it_staff_reservation_screen():
         selected_class_code = options[int(row_index)]
         return render_template("it_staff_reservation_screen.html", options=options, class_code=selected_class_code)
     return render_template("it_staff_reservation_screen.html", options=options)
+
+
+def seeOnlyMyReserves():
+    incoming_arg = request.args.get('reservationType')
+    if incoming_arg == "myReservations":
+
+        # Connect to the database
+        conn = sqlite3.connect('reservations_db.db')
+        c = conn.cursor()
+
+        # Retrieve all the rows from the reservations_db table
+        query1 = 'SELECT * FROM reservations_db where username = "' + \
+            session["username"] + '"'
+        c.execute(query1)
+        data = c.fetchall()
+
+        # Close the database connection
+        conn.close()
+        print(data)
+
+        # Render the HTML template with the rows
+        return render_template('classroom_inside_reservation.html', rows=data)
+
+    else:
+
+        # Connect to the database
+        conn = sqlite3.connect('reservations_db.db')
+        c = conn.cursor()
+
+        # Retrieve all the rows from the reservations_db table
+        query1 = 'SELECT * FROM reservations_db'
+        c.execute(query1)
+        data = c.fetchall()
+
+        # Close the database connection
+        conn.close()
+        print(data)
+
+        # Render the HTML template with the rows
+        return render_template('classroom_inside_reservation.html', rows=data)

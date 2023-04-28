@@ -35,6 +35,7 @@ app.route('/editReserved', methods=['GET'])(US.editReserved)
 app.route('/editITReport', methods=['GET'])(US.editITReport)
 app.route('/deleteReservation', methods=['POST'])(US.deleteReservation)
 app.route('/deleteITReport', methods=['POST'])(US.deleteITReport)
+app.route('/seeOnlyMyReserves', methods=['GET'])(US.seeOnlyMyReserves)
 
 
 @app.route('/<role>/screen', methods=['GET'])
