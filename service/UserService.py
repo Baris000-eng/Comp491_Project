@@ -446,7 +446,6 @@ def see_already_reserved_classes():
     c.execute('SELECT * FROM reservations_db')
     rows = c.fetchall()
     return render_template('classroom_inside_reservation.html', rows=rows)
-#########################################################################################################################################################################
 
 
 def openStudentReservationScreen():
@@ -555,7 +554,7 @@ def deleteReservation():
 
     conn.commit()
     conn.close()
-    print("1hi")
+
     return render_template("successsDeletedClass.html")
 
 
