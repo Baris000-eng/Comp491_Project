@@ -14,6 +14,8 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 socketio = SocketIO(app)
 
+app.route("/open_description_text")(US.get_description_text)
+
 app.route('/get_password_change_screen',
           methods=['GET'])(US.get_password_change_screen)
 app.route('/change_user_password',

@@ -13,6 +13,9 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
+def get_description_text():
+    return render_template("description_text.html")
+
 
 def includes_ignore_case(s1: str, s2: str) -> bool:
     return (s1.lower() in s2.lower())

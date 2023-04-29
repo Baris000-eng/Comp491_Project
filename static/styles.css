@@ -8,6 +8,16 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+	background-color: #ffffff;
+	color: #000000;
+  }
+
+body.dark-mode {
+	background-color: #000000;
+	color: #ffffff;
+}
+
 h1 {
 	font-size: 48px;
 	font-weight: bold;
@@ -290,4 +300,6 @@ input[type=submit] {
 input[type=submit]:hover {
 	background-color: darkblue;
 }
+
+
 
