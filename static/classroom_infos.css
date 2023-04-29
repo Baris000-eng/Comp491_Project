@@ -45,3 +45,7 @@ button:hover {
     background-color: #b22222;
 }
 
+
+tr:hover {
+    background-color: red;
+}

@@ -4,17 +4,7 @@ table {
     margin-bottom: 20px;
 }
 
-th,
-td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
 
-th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-}
 
 .reservations {
     border-collapse: collapse;
@@ -22,14 +12,110 @@ th {
     margin-bottom: 20px;
 }
 
-.reservations th,
-.reservations td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
+
 
 .reservations th {
-    background-color: #f2f2f2;
+    background-color: #791e1e;
     font-weight: bold;
+}
+
+
+table {
+    font-family: Arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+table thead th {
+    background-color: #4CAF50;
+    color: white;
+    text-align: left;
+    padding: 8px;
+}
+
+table tbody td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+
+button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d32f2f;
+}
+
+
+td:nth-child(6) {
+    font-weight: bold;
+    color: #2196F3;
+}
+
+
+tbody tr:hover {
+    background-color: green;
+}
+
+
+tbody tr.selected {
+    background-color: #ffffcc;
+}
+
+
+:nth-child(1) {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+
+:nth-child(2) {
+    animation: pulse 2s ease-in-out infinite;
+    animation-delay: 0.2s;
+}
+
+
+:nth-child(3) {
+    animation: pulse 2s ease-in-out infinite;
+    animation-delay: 0.4s;
+}
+
+
+:nth-child(4) {
+    animation: pulse 2s ease-in-out infinite;
+    animation-delay: 0.6s;
+}
+
+
+:nth-child(5) {
+    animation: pulse 2s ease-in-out infinite;
+    animation-delay: 0.8s;
+}
+
+
+@keyframes pulse {
+    0% {
+
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+    }
+
+    70% {
+
+        box-shadow: 0 0 0 20px rgba(255, 0, 0, 0);
+    }
+
+    100% {
+
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    }
 }
