@@ -7,7 +7,7 @@ from service.UserService import select_role, showTheClassroomAndInfo, chat_actio
 import service.UserService as US
 import service.ClassroomService as CS
 from flask_socketio import SocketIO, emit
-
+import time
 
 app = Flask(__name__)
 app.secret_key = '491'
@@ -15,6 +15,8 @@ app.config['SECRET_KEY'] = '491'
 socketio = SocketIO(app)
 
 app.route("/open_description_text")(US.get_description_text)
+app.route("/goToOpeningScreen")(US.goToOpeningScreen)
+
 
 app.route('/get_password_change_screen',
           methods=['GET'])(US.get_password_change_screen)

@@ -4,14 +4,9 @@ body {
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
-	background-color: white;
+	background-color: rgb(0, 255, 238);
 	font-family: Arial, Helvetica, sans-serif;
 }
-
-body {
-	background-color: #ffffff;
-	color: #000000;
-  }
 
 body.dark-mode {
 	background-color: #000000;
@@ -22,10 +17,28 @@ h1 {
 	font-size: 48px;
 	font-weight: bold;
 	text-align: center;
-	margin-bottom: 50px;
+	margin-bottom: 60px;
 	text-shadow: 2px 2px #888888;
 	color: #333;
+	border: 10px;
+	background-color: white;
 }
+
+h1 {
+	background-color: green;
+	border-radius: 10px;
+	padding: 10px;
+	color: white;
+	filter: brightness(1.2) saturate(1.5);
+	transition: box-shadow 0.3s ease-in-out;
+}
+
+h1:hover {
+	box-shadow: 0px 0px 50px 30px rgba(255, 0, 0, 0.8);
+	filter: brightness(1.4) saturate(1.8);
+}
+
+
 
 #description {
 	background-color: darkcyan;
@@ -133,7 +146,17 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-	background-color: #4CAF50;
+	background-color: #eb0000;
+	align-items: center;
+}
+
+input[type=Submit]:hover {
+	background-color: #eb0000;
+	align-items: center;
+}
+
+input :hover {
+	background-color: #eb0000;
 	align-items: center;
 }
 
@@ -241,7 +264,7 @@ input[type=email] {
 
 input[type=text]:focus,
 input[type=password]:focus,
-input[type=email]:focus{
+input[type=email]:focus {
 	outline: none;
 	border-bottom: 2px solid #4CAF50;
 }
@@ -298,8 +321,27 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-	background-color: darkblue;
+	background-color: red;
+
+	transform: scale(1.5);
+}
+
+input[type=hidden]:hover {
+	background-color: red;
+	color: #3e8e41;
+	transform: scale(1.5);
 }
 
 
 
+#description-button:hover {
+	background-color: #a600ff;
+	transform: scale(1.5)
+}
+
+
+input[type=button]:hover {
+	background-color: red;
+	color: #3e8e41;
+	transform: scale(1.5);
+}

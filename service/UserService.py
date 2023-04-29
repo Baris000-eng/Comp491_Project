@@ -13,8 +13,13 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
+
 def get_description_text():
     return render_template("description_text.html")
+
+
+def goToOpeningScreen():
+    return render_template("opening_screen.html")
 
 
 def includes_ignore_case(s1: str, s2: str) -> bool:
