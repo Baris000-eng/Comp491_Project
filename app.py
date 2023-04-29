@@ -145,8 +145,10 @@ def signup(role):
 def login(role):
     return US.user_login(request, role)
 
+
 # socket_chat.on("connect")(US.user_connected)
 # socket_chat.on("disconnect")(US.user_disconnected)
+app.route('/send_chat_message_student')(US.send_chat_message_student)
 
 
 if __name__ == '__main__':

@@ -666,7 +666,18 @@ def AdminITStats():
 
 
 def enterChat():
-    return render_template('chat_class_generic.html')
+
+    # Connect to the database
+    conn = sqlite3.connect('chat_db.db')
+    c = conn.cursor()
+    # Retrieve all the rows from the reservations_db table
+    # where classroom = "' + \    session["classroom"] + '"'
+    query1 = 'SELECT * FROM chat_db'
+    c.execute(query1)
+    data = c.fetchall()
+    # Close the database connection
+    conn.close()
+    return render_template('chat_class_generic.html', rows=data)
 
 
 def open_it_staff_reservation_screen():
@@ -716,3 +727,48 @@ def seeOnlyMyReserves():
 
         # Render the HTML template with the rows
         return render_template('classroom_inside_reservation.html', rows=data)
+
+
+def delete_old_chat_messages():
+    # Connect to the database
+    conn = sqlite3.connect('chat_db.db')
+    c = conn.cursor()
+
+    c.execute("SELECT COUNT(*) FROM chat_db")
+    count = c.fetchone()[0]
+
+    if count > 10:
+        c.execute("DELETE FROM chat_db")
+        print("Deleted all chat messages.")
+
+    conn.commit()
+    conn.close()
+
+
+def send_chat_message_student():
+
+    classroom = 'Turkish'
+    time = '12:00:00'
+    date = '2023-11-11'
+    sender = 'John'
+    role = 'Student'
+    flagged = False
+    message = request.args.get('message')
+    classroom = message
+    conn = sqlite3.connect('chat_db.db')
+    c = conn.cursor()
+
+    c.execute("INSERT INTO chat_db (classroom, time, date, sender, role, flagged) VALUES (?, ?, ?, ?, ?, ?)",
+              (classroom, time, date, sender, role, flagged))
+
+    conn.commit()
+    conn.close()
+    delete_old_chat_messages()
+    conn = sqlite3.connect('chat_db.db')
+    c = conn.cursor()
+    query1 = 'SELECT * FROM chat_db'
+    c.execute(query1)
+    data = c.fetchall()
+
+    conn.close()
+    return render_template('chat_class_generic.html', rows=data)

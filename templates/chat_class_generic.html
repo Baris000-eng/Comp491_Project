@@ -11,22 +11,23 @@
 
 <body>
     <h1> Chat for : {{classsroom_no}} </h1>
-    <div>
-        {% for message in messages %}
-        <h3>--------------- Reservation --------------------</h3>
-        <ul>
-            <li>Sender: {{ message[0] }}</li>
-            <li>Message: {{ message[1] }}</li>
-            <li>Time: {{ message[2] }}</li>
-            <li>Username: {{ message[3] }}</li>
-
-            {% endfor %}
+    <div id="chat-history">
+        {% for row in rows %}
+        <p>{{ row[1] }}
+            {{ row[2] }}
+            {{ row[3] }}
+            {{ row[4] }}:
+            {{ row[0] }}</p>
+        {% endfor %}
     </div>
     <input id="message" type="text">
     <button id="send">Send</button>
     <ul id="messages"></ul>
     <div>
-        <form action="/send_chat_message_student"><button>Send message.</button></form>
+        <form action="/send_chat_message_student" method="get">
+            <input type="text" name="message" id="message">
+            <button type="submit">Send message.</button>
+        </form>
         <form action="/report_message_student"><button>Report message.</button></form>
     </div>
 </body>
