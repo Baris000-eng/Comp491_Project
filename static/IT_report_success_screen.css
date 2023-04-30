@@ -10,17 +10,17 @@ body {
     font-size: 18px;
     line-height: 1.5;
     background-color: rgb(17, 196, 17);
-}
-
-h1 {
-    background-color: white;
+  }
+  
+  h1 {
+    background-color: lightblue;
     padding: 30px;
     border-radius: 20px;
     text-align: center;
     margin-bottom: 1.5rem;
-}
-
-button {
+  }
+  
+  button {
     height: 100px;
     width: 500px;
     margin-top: 1.5rem;
@@ -28,12 +28,14 @@ button {
     border: none;
     border-radius: 5px;
     background-color: #007bff;
-    color: #fff;
+    color: white;
     font-size: 2.2rem;
     cursor: pointer;
-    transition: background-color 4.3s ease-in-out;
-}
-
-button:hover {
+    transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
+  }
+  
+  button:hover {
     background-color: #0062cc;
-}
+    transform: scale(1.05);
+  }
+  

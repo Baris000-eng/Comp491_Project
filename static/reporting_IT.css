@@ -1,101 +1,85 @@
 body {
-
-    background-color: black;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
+  background-color: rgb(83, 83, 174);
+  font-family: Arial, sans-serif;
+  font-weight: bold;
 }
 
 h2 {
-    color: black;
-    font-size: 36px;
-    margin-bottom: 20px;
+  color:seagreen;
+  font-size: 36px;
+  margin-bottom: 20px;
+  text-align: center; /* center align */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 h4 {
-    color: black;
-    font-size: 24px;
+  color: black;
+  font-size: 24px;
+  text-align: left;
+  font-weight: bold;
 }
 
 label {
-    display: block;
-    color: black;
-    margin-bottom: 5px;
+  display: block;
+  color: black;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 20px;
+  text-align: left;
 }
 
 input[type="text"],
 textarea,
 input[type="date"],
 input[type="time"] {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font-size: 18px;
-    border-radius: 5px;
-    border: none;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    background-color: #ffffff;
-    color: #2d2d2d;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  color: #2d2d2d;
 }
 
 button[type="submit"] {
-    display: inline-block;
-    padding: 15px;
-    margin-top: 30px;
-    font-size: 24px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #ffffff;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  display: inline-block;
+  padding: 15px;
+  margin-top: 30px;
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 button[type="submit"]:hover {
-    background-color: #3e8e41;
+  background-color: blue;
+  transform: scale(1.25);
 }
 
 .right_half {
-
-    background-color: rgb(138, 77, 165);
-    width: 80%;
-    height: 50%;
-    margin: auto;
-
-    padding: 30px;
-    border-radius: 10px;
-
-}
-
-body {
-    background-color: rgb(83, 83, 174);
+  background-color: rgb(138, 77, 165);
+  width: 80%;
+  height: 50%;
+  margin: auto;
+  padding: 30px;
+  border-radius: 10px;
 }
 
 form {
-
-    background-color: rgb(138, 77, 165);
-    width: 80%;
-    height: 100%;
-    margin: auto;
-
-    padding: 30px;
-    border-radius: 10px;
-}
-
-label {
-    font-size: 20px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-
-}
-
-h4 {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-input {
-    padding-top: 10px;
-    padding-bottom: 10px;
+  background-color: rgb(138, 77, 165);
+  width: 80%;
+  height: 100%;
+  margin: auto;
+  padding: 30px;
+  border-radius: 10px;
 }
