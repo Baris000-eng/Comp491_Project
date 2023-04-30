@@ -13,20 +13,46 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
+
 def get_it_signup_guide():
     return render_template("it_signup_guide.html")
+
 
 def get_teacher_signup_guide():
     return render_template("teacher_signup_guide.html")
 
+
 def get_admin_signup_guide():
     return render_template("admin_signup_guide.html")
+
 
 def get_student_signup_help():
     return render_template("student_signup_guide.html")
 
+
+def get_student_login_help():
+    return render_template("student_login_guide.html")
+
+
+def get_teacher_signup_help():
+    return render_template("teacher_signup_guide.html")
+
+
+def get_teacher_login_help():
+    return render_template("teacher_login_guide.html")
+
+
+def get_it_staff_signup_help():
+    return render_template("it_staff_signup_guide.html")
+
+
+def get_it_staff_login_help():
+    return render_template("it_staff_login_guide.html")
+
+
 def get_description_text():
     return render_template("description_text.html")
+
 
 def get_opening_help():
     return render_template("opening_screen_help.html")

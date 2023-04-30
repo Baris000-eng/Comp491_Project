@@ -6,6 +6,8 @@
 	<link rel="stylesheet" type="text/css" href="../static/styles.css">
 </head>
 <h1>IT Staff Login</h1>
+<button onclick="location.href='/get_it_staff_login_help';" name="it_staff-login-guide" value="it_staff-login-guide"
+	id="teacher-login-guide">Open IT Staff Login Guide</button>
 <form action="/it_staff/login" autocomplete="off" method="post">
 	<label for="username">Username</label>
 	<input type="text" id="username" name="username" placeholder="Please enter your username to login" required>
@@ -20,11 +22,11 @@
 </form>
 
 {% if notExistMessage %}
-<p class = "error-message">{{ notExistMessage }}</p>
+<p class="error-message">{{ notExistMessage }}</p>
 {% endif %}
 
 {% if message %}
-<p class= "error-message">{{ message }}</p>
+<p class="error-message">{{ message }}</p>
 <button id="signup-btn">{{ button_text }}</button>
 <script>
 	var buttonSignUp = document.getElementById("signup-btn");
