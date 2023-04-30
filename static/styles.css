@@ -234,7 +234,7 @@ input[type="button"][value="Go Back"] {
 
 label {
   color: #333;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   margin-top: 20px;
   display: block;
@@ -429,19 +429,10 @@ input[type="submit"]:hover {
 
 
 
-
-
-
-
-
 #roles input[type="radio"]:checked+img {
-  transform: scale(1.5) translateY(-20%);
+  transform: scale(1.40) translateY(-20%);
   border: 20px 40px 40px 40px solid green;
-}
-
-#roles input[type="radio"]:checked+img {
-  transform: scale(1.2) translateY(-30%);
-  border: 10px solid green;
+  transform: scale(1.40) translateY(-20%);
 }
 
 figure {
@@ -455,5 +446,9 @@ figcaption {
   font-style: center;
   font-size: 14px;
   margin-left: 50px;
+  position: absolute;
+  bottom: 5;
+  left: 0;
+  right: 0;
 
 }
