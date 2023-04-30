@@ -338,10 +338,25 @@ input[type=hidden]:hover {
 }
 
 
-
-
 input[type=button]:hover {
 	background-color: red;
 	color: #3e8e41;
 	transform: scale(1.5);
 }
+
+.error-message {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 18px;
+    background-color: #f8d7da;
+    border: 2px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .error-message:hover {
+    transform: scale(1.010);
+  }
+  

@@ -5,9 +5,6 @@
 	<title>Student Login</title>
 	<link rel="stylesheet" type="text/css" href="../static/styles.css">
 </head>
-
-<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
-
 <h1>Student Login</h1>
 <form action="/student/login" autocomplete="off" method="post">
 	<label for="username">Username</label>
@@ -22,7 +19,7 @@
 </form>
 
 {% if notExistMessage %}
-<p>{{ notExistMessage }}</p>
+<p class = "error-message">{{ notExistMessage }}</p>
 {% endif %}
 
 {% if message %}

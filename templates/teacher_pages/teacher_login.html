@@ -5,9 +5,6 @@
 	<title>Teacher Login</title>
 	<link rel="stylesheet" type="text/css" href="../static/styles.css">
 </head>
-
-<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
-
 <h1>Teacher Login</h1>
 <form action="/teacher/login" autocomplete="off" method="post">
 	<label for="username">Username</label>
@@ -24,7 +21,7 @@
 
 
 {% if notExistMessage %}
-<p>{{ notExistMessage }}</p>
+<p class="error-message">{{ notExistMessage }}</p>
 {% endif %}
 
 
@@ -40,7 +37,7 @@
 </script>
 {% endif %}
 
-<form id="password-change-form" action="/password_change_screen" method="get">
+<form id="password-change-form" action="/get_password_change_screen" method="get">
 	<button type="password_change">Forgot Password</button>
 </form>
 </body>

@@ -6,8 +6,6 @@
 	<link rel="stylesheet" type="text/css" href="../static/admin_login.css">
 </head>
 
-<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
-
 <h1>Admin Login</h1>
 <form action="/admin/login" autocomplete="off" method="post">
 	<label for="username">Username</label>
@@ -23,7 +21,7 @@
 </form>
 
 {% if notExistMessage %}
-<p>{{ notExistMessage }}</p>
+<p class="error-message">{{ notExistMessage }}</p>
 {% endif %}
 
 {% if message %}
@@ -37,7 +35,7 @@
 </script>
 {% endif %}
 
-<form id="password-change-form" action="/password_change_screen" method="get">
+<form id="password-change-form" action="/get_password_change_screen" method="get">
 	<button type="password_change">Forgot Password</button>
 </form>
 </body>

@@ -79,6 +79,7 @@ body {
   
   #goToOpeningScreen:hover {
     background-color: #4f46e5;
+    transform: scale(1.50);
   }
   
   
