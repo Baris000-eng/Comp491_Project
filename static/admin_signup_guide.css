@@ -78,7 +78,7 @@ h1:hover {
   pointer-events: none;
 }
 
-#student-signup-help-text:hover::after {
+#admin-signup-help-text:hover::after {
   transform: scale(1);
 }
 

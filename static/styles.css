@@ -270,6 +270,7 @@ input[type="email"]:focus {
   border-radius: 10px;
 }
 
+
 h1 {
   text-align: center;
 }
@@ -366,7 +367,13 @@ input[type="button"]:hover {
 #teacher-signup-button:hover {
   background-color: red;
   color: #3e8e41;
-  transform: scale(1.5);
+  transform: scale(1.40);
+}
+
+#teacher-signup-guide:hover {
+  background-color: red;
+  color:rgb(0, 255, 238);
+  transform: scale(1.40);
 }
 
 input[type="submit"]:hover {

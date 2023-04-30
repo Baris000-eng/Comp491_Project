@@ -13,6 +13,12 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
+def get_it_signup_guide():
+    return render_template("it_signup_guide.html")
+
+def get_teacher_signup_guide():
+    return render_template("teacher_signup_guide.html")
+
 def get_admin_signup_guide():
     return render_template("admin_signup_guide.html")
 
