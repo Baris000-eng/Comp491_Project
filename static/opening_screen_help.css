@@ -1,0 +1,94 @@
+body {
+  background-color: blue;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  padding-top: 50px;
+}
+
+/* Description style */
+#opening_screen_help {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: lightgreen;
+  border-radius: 10px;
+}
+
+/* Description header style */
+#opening_screen_help::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 10px;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Button style */
+button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #3498db;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Button hover style */
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Link style */
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+   color: white;
+   font-size: bold;
+}
+
+#goToOpeningScreen {
+  border: none;
+  border-radius: 6px;
+  background-color: #6c63ff;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-top: 30px;
+}
+
+#goToOpeningScreen:hover {
+  background-color: #4f46e5;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+

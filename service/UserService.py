@@ -17,6 +17,9 @@ app.debug = True
 def get_description_text():
     return render_template("description_text.html")
 
+def get_opening_help():
+    return render_template("opening_screen_help.html")
+
 
 def goToOpeningScreen():
     return render_template("opening_screen.html")

@@ -40,7 +40,7 @@ h1:hover {
 
 
 
-#description {
+#description, #opening_help {
 	background-color: darkcyan;
 	padding: 20px;
 	border-radius: 5px;
@@ -240,9 +240,7 @@ label {
 	font-weight: bold;
 	margin-top: 20px;
 	display: block;
-	/* change to block element to take up full width */
 	text-align: left;
-	/* align label text to the left */
 }
 
 input[type=text],
@@ -334,10 +332,12 @@ input[type=hidden]:hover {
 
 
 
-#description-button:hover {
+#description-button:hover, #opening-screen-help-button:hover {
 	background-color: #a600ff;
 	transform: scale(1.5)
 }
+
+
 
 
 input[type=button]:hover {

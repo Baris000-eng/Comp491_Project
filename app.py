@@ -15,6 +15,7 @@ app.config['SECRET_KEY'] = '491'
 socketio = SocketIO(app)
 
 app.route("/open_description_text")(US.get_description_text)
+app.route("/get_opening_help")(US.get_opening_help)
 app.route("/goToOpeningScreen")(US.goToOpeningScreen)
 
 
