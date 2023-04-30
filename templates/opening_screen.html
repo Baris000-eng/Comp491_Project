@@ -7,19 +7,50 @@
 	<script src="../static/opening_screen.js"></script>
 </head>
 
+
 <body>
+
+
+
 	<h1>Welcome to KuClass App</h1>
 	<button id="description-button" onclick="location.href='/open_description_text';">See KuClass Description
 		Text</button>
-	<button id="opening-screen-help-button" onclick="location.href='/get_opening_help';">See Opening Screen Help</button>
+	<button id="opening-screen-help-button" onclick="location.href='/get_opening_help';">See Opening Screen
+		Help</button>
 	<form action="/select_role" method="post">
 		<label for="roles">Select your role:</label>
-		<select id="roles" name="roles">
-			<option value="teacher">Teacher</option>
-			<option value="student">Student</option>
-			<option value="it_staff">IT Staff</option>
-			<option value="admin">Admin</option>
-		</select>
+		<div id="roles">
+
+			<label>
+				<input type="radio" name="roles" value="student">
+
+				<img src="../static/images/student.png" alt="Student">
+				<figcaption>Student</figcaption>
+
+
+			</label>
+			<label>
+				<input type="radio" name="roles" value="teacher">
+
+				<img src="../static/images/teacher_cartoon.jpeg" alt="Teacher">
+				<figcaption>Teacher</figcaption>
+
+			</label>
+			<label>
+				<input type="radio" name="roles" value="it_staff">
+
+				<img src="../static/images/it_staff.jpeg" alt="IT Staff">
+				<figcaption>IT Staff</figcaption>
+
+			</label>
+			<label>
+				<input type="radio" name="roles" value="admin">
+
+				<img src="../static/images/admin_cartoon.jpeg" alt="Admin">
+				<figcaption>Admin</figcaption>
+
+			</label>
+		</div>
 		<label for="background-color">Select background color:</label>
 		<select id="background-color" name="background-color" onchange="changeBackgroundColor(this.value)">
 			<option value="white">White</option>

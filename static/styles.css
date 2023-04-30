@@ -6,6 +6,7 @@ body {
   height: 100vh;
   background-color: rgb(0, 255, 238);
   font-family: Arial, Helvetica, sans-serif;
+  margin-top: 100px;
 }
 
 body.dark-mode {
@@ -27,6 +28,13 @@ h1 {
   color: white;
   filter: brightness(1.2) saturate(1.5);
   transition: box-shadow 0.3s ease-in-out;
+
+  top: 10;
+  left: 0;
+  right: 0;
+  padding: 20px;
+
+  z-index: 9999;
 }
 
 h1:hover {
@@ -150,7 +158,7 @@ input :hover {
   align-items: center;
 }
 
-form > * {
+form>* {
   width: 100%;
   max-width: 400px;
 }
@@ -372,7 +380,7 @@ input[type="button"]:hover {
 
 #teacher-signup-guide:hover {
   background-color: red;
-  color:rgb(0, 255, 238);
+  color: rgb(0, 255, 238);
   transform: scale(1.40);
 }
 
@@ -380,4 +388,72 @@ input[type="submit"]:hover {
   background-color: red;
   color: #3e8e41;
   transform: scale(1.5);
+}
+
+
+
+#roles {
+  display: flex;
+  justify-content: center;
+}
+
+#roles label {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+#roles input[type="radio"] {
+  display: none;
+}
+
+#roles img {
+  display: block;
+
+  margin: 0 10px;
+  height: 80px;
+  margin-left: 40px;
+  margin-top: 40px;
+  width: 80px;
+  transition: all 0.3s ease-in-out;
+}
+
+#roles label:hover img {
+  transform: translateY(-10px);
+}
+
+#roles input[type="radio"]:checked+img {
+  transform: scale(1.2) translateY(-50%);
+  border: 3px solid green;
+}
+
+
+
+
+
+
+
+
+#roles input[type="radio"]:checked+img {
+  transform: scale(1.5) translateY(-20%);
+  border: 20px 40px 40px 40px solid green;
+}
+
+#roles input[type="radio"]:checked+img {
+  transform: scale(1.2) translateY(-30%);
+  border: 10px solid green;
+}
+
+figure {
+  display: block;
+  margin: 0 auto;
+  margin-left: 20px;
+  text-align: center;
+}
+
+figcaption {
+  font-style: center;
+  font-size: 14px;
+  margin-left: 50px;
+
 }
