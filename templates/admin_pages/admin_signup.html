@@ -5,14 +5,13 @@
     <title>Admin Signup</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin_signup.css') }}">
 </head>
-
-<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
-
+<button onclick="location.href='/get_admin_signup_guide';"name="admin-signup-guide" value="admin-signup-guide"
+    id="admin-signup-guide">Open Admin Signup Guide</button>
 <h1>Admin Signup</h1>
 <form action="/admin/signup" autocomplete="off" method="post">
-    <label for="username">Username</label>
+    <label for="username">Username:</label>
     <input type="text" id="username" name="username" placeholder="Please enter your username to signup" required>
-    <label for="password">Password</label>
+    <label for="password">Password:</label>
     <input type="password" id="password" name="password" placeholder="Please enter your password to signup" required>
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" placeholder="Please enter your email to signup" required="email"

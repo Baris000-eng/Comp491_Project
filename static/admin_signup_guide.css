@@ -12,29 +12,29 @@ header {
 }
 
 h1 {
-    display: inline-block;
-    max-width: 800px;
-    background-color: green;
-    border-radius: 10px;
-    padding: 10px;
-    color: white;
-    filter: brightness(1.1) saturate(1.5);
-    transition: box-shadow 0.2s ease-in-out;
-    text-align: center;
-    font-weight: bold;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    height: 80px;
-    margin-left: 350px;
-    margin-top: 50px;
+  display: inline-block;
+  max-width: 800px;
+  background-color: green;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+  filter: brightness(1.1) saturate(1.5);
+  transition: box-shadow 0.2s ease-in-out;
+  text-align: center;
+  font-weight: bold;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 80px;
+  margin-left: 350px;
+  margin-top: 50px;
 }
 
 h1:hover {
-  background-color: purple;
+  background-color: red;
 }
 
-#student-signup-help-text::before {
+#admin-signup-help-text::before {
   content: "";
   display: block;
   width: 100%;
@@ -42,11 +42,7 @@ h1:hover {
   border-radius: 10px 10px 0 0;
 }
 
-#student-signup-help-text:hover {
-  background-color: lightskyblue;
-}
-
-#student-signup-help-text {
+#admin-signup-help-text {
   font-size: 18px;
   line-height: 1.6;
   color: #333;
@@ -56,9 +52,16 @@ h1:hover {
   background-color: rgba(144, 238, 144, 0.8);
   border-radius: 10px;
   position: relative;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-#student-signup-help-text::after {
+#admin-signup-help-text:hover {
+  background-color: yellowgreen;
+}
+
+#admin-signup-help-text::after {
   content: "";
   position: absolute;
   top: -50%;
@@ -79,7 +82,7 @@ h1:hover {
   transform: scale(1);
 }
 
-#goToStudentSignupScreen {
+#goToAdminSignupScreen {
   background-color: #2f9c9b;
   color: white;
   font-size: 1.5em;
@@ -91,7 +94,7 @@ h1:hover {
   margin: 30px auto 0 auto;
 }
 
-#goToStudentSignupScreen:hover {
+#goToAdminSignupScreen:hover {
   background-color: #fff;
   color: #2f9c9b;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
