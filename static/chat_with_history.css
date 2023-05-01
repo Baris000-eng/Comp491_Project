@@ -22,7 +22,7 @@ div {
     height: auto;
     width: 80%;
     margin: auto;
-    
+
 
 }
 
@@ -65,4 +65,63 @@ li:nth-child(3) {
 li:last-child {
     font-weight: bold;
     margin-top: 10px;
+}
+
+
+#chat-history {
+    overflow-y: scroll;
+    max-height: 300px;
+    scroll-behavior: smooth;
+}
+
+
+#chat-history p:hover {
+    transform: scale(2.5);
+    background-color: green;
+    color: white;
+}
+
+
+
+
+
+@keyframes flash {
+
+    0% {
+        background-color: azure;
+    }
+
+    10% {
+        background-color: rgb(2, 220, 220);
+    }
+
+    20% {
+        background-color: rgb(2, 255, 200);
+    }
+
+    30% {
+        background-color: rgb(2, 200, 255);
+    }
+
+    40% {
+        background-color: rgb(2, 255, 255);
+    }
+
+    60% {
+        background-color: rgb(31, 155, 103);
+    }
+
+    80% {
+        background-color: rgb(153, 233, 233);
+    }
+
+    100% {
+        background-color: rgb(56, 107, 107);
+    }
+
+}
+
+#chat-history p {
+    animation: flash 20s infinite;
+
 }

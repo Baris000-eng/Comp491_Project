@@ -5,7 +5,7 @@ from constants import ROLES
 import pandas as pd
 import repository.UserRepository as UR
 import deprecation
-
+import datetime
 
 DEBUG = True
 app = Flask(__name__)
@@ -717,6 +717,9 @@ def enterChat():
     data = c.fetchall()
     # Close the database connection
     conn.close()
+    # Retrieve the classroom parameter
+    session["classroom"] = request.args.get('classroom')
+
     return render_template('chat_class_generic.html', rows=data)
 
 
@@ -787,12 +790,14 @@ def delete_old_chat_messages():
 
 def send_chat_message_student():
 
-    classroom = 'Turkish'
-    time = '12:00:00'
-    date = '2023-11-11'
-    sender = 'John'
-    role = 'Student'
+    classroom = session['classroom']
+    time = str(datetime.datetime.now().time())
+    date = str(datetime.date.today())
+    sender = session['username']
+    role = session['role']
     flagged = False
+    message = request.args.get('message')
+    session['message'] = message
     message = request.args.get('message')
     classroom = message
     conn = sqlite3.connect('chat_db.db')
@@ -803,12 +808,13 @@ def send_chat_message_student():
 
     conn.commit()
     conn.close()
-    delete_old_chat_messages()
+
     conn = sqlite3.connect('chat_db.db')
     c = conn.cursor()
     query1 = 'SELECT * FROM chat_db'
     c.execute(query1)
     data = c.fetchall()
+    data.append(('classroom', session["classroom"]))
 
     conn.close()
-    return render_template('chat_class_generic.html', rows=data)
+    return render_template('chat_class_generic.html', rows=data, class_data=classroom, user_name=session["username"], message=message)

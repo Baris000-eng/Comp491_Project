@@ -10,14 +10,16 @@
 </head>
 
 <body>
-    <h1> Chat for : {{classsroom_no}} </h1>
+    <h1> Chat for : {{class_data }} </h1>
     <div id="chat-history">
         {% for row in rows %}
-        <p>{{ row[1] }}
-            {{ row[2] }}
-            {{ row[3] }}
-            {{ row[4] }}:
-            {{ row[0] }}</p>
+        <p>{{ row[2] }} {{ row[1] }}
+            {{user_name}}
+            Message :{{row[0]}}
+
+        </p>
+        </p>
+
         {% endfor %}
     </div>
 

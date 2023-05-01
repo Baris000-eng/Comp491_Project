@@ -47,6 +47,7 @@
         </form>
         <form action="/enterChat" method="GET">
             <input type="hidden" name="row_data" value="{{ row|join(',') }}">
+            <input type="hidden" name="classroom" value="{{ row[5] }}">
             <button>Enter Chat for This Classroom</button>
         </form>
         {% endfor %}
@@ -64,6 +65,9 @@
 {% endif %}
 {% endif %}
 </body>
+
+
+
 
 
 
