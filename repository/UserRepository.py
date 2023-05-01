@@ -74,6 +74,21 @@ def initializeChatTable():
               flagged BOOLEAN NOT NULL)''')  # the flagged boolean helps keep tracking of reported chat actions
 
 
+def initializeNewsTable():
+    conn = sqlite3.connect('news_db.db')
+    c = conn.cursor()
+
+    c.execute('''CREATE TABLE IF NOT EXISTS news_db
+             (news_message TEXT,
+              time TIME NOT NULL, 
+              date DATE NOT NULL, 
+              time_end TIME NOT NULL, 
+              date_end DATE NOT NULL, 
+              sender TEXT DEFAULT "NO_NAME_GIVEN", 
+              role TEXT NOT NULL
+              )''')  # the flagged boolean helps keep tracking of reported chat actions
+
+
 def createChat(classroom, time, date, sender, role, flagged):
     """
     Given a classroom, time, date, sender, role, flagged, insert new chat message into the chat database
