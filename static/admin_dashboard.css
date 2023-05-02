@@ -36,17 +36,34 @@ button {
 }
 
 .group {
-
     flex-basis: calc(100% / 3);
-    /* This is three because of Student, Teacher, 
-                                and IT_Staff grouping, since the grouping is 3 groups,
-                                 If more groups added, increment the 3 by the added group 
-                                 numbers*/
 }
 
 form {
     margin-bottom: 10px;
 }
+
+.excel-wrapper {
+    overflow-x: auto;
+  }
+  
+  table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 110%;
+  }
+  
+  td, th {
+    border: 1px solid black;
+    padding: 5px;
+    font-size: 11px;
+    min-width: 50px;
+    min-height: 20px;
+  }
+  
+  table colgroup col {
+    width: auto;
+  }
 
 
 button {
