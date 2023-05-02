@@ -6,12 +6,41 @@ import pandas as pd
 import repository.UserRepository as UR
 import deprecation
 import datetime
+import html
 
 DEBUG = True
 app = Flask(__name__)
 app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
+
+
+def exam_schedules():
+    df = pd.read_excel('FALL_22_EXAMS.xlsx')
+    
+    # Replace missing values with an empty string #
+    df.fillna("", inplace=True)
+    
+    # Escape special characters #
+    df = df.applymap(lambda x: html.escape(str(x)) if isinstance(x, str) else x)
+    
+    html_table = df.to_html(index=False, header=False)
+    header_fields = df.columns.tolist()
+    return render_template("exam_schedules.html", html_table=html_table, header_fields=header_fields)
+
+def course_schedules():
+    df = pd.read_excel('SPR_23_COURSES.xlsx')
+    
+    # Replace missing values with an empty string #
+    df.fillna("", inplace=True)
+    
+    # Escape special characters #
+    df = df.applymap(lambda x: html.escape(str(x)) if isinstance(x, str) else x)
+    
+    html_table = df.to_html(index=False, header=False)
+    header_fields = df.columns.tolist()
+    return render_template("course_schedules.html", html_table=html_table, header_fields=header_fields)
+
 
 
 def get_it_signup_guide():

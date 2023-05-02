@@ -45,16 +45,6 @@ h1:hover {
 
 
 
-
-
-
-
-
-
-
-
-
-
 #description-button {
   animation: boomerang 15s ease-in-out infinite;
 }
@@ -106,26 +96,6 @@ h1:hover {
     transform: translateX(0) rotate(0deg);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #description,
@@ -441,6 +411,16 @@ input[type="button"]:hover {
   transform: scale(1.01);
 }
 
+h1 {
+  animation: slideIn 1s;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+}
+
 .error-message {
   color: #e74c3c;
   font-weight: bold;
@@ -518,6 +498,28 @@ input[type="submit"]:hover {
   transform: scale(1.40) translateY(-20%);
   border: 20px 40px 40px 40px solid green;
   transform: scale(1.40) translateY(-20%);
+}
+
+.excel-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 110%;
+}
+
+td, th {
+  border: 1px solid black;
+  padding: 5px;
+  font-size: 11px;
+  min-width: 50px;
+  min-height: 20px;
+}
+
+table colgroup col {
+  width: auto;
 }
 
 figure {

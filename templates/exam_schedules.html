@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Exam Schedules</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <h1>Exam Schedules</h1>
+  <div class="excel-wrapper">
+    <table>
+      <thead>
+        <tr>
+          {% for field in header_fields %}
+          <th>{{ field }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {{ html_table|safe }}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
+
