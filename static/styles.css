@@ -42,6 +42,92 @@ h1:hover {
   filter: brightness(1.4) saturate(1.8);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+#description-button {
+  animation: boomerang 15s ease-in-out infinite;
+}
+
+@keyframes boomerang {
+  20% {
+    transform: translateX(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateX(50%) rotate(180deg);
+  }
+
+  35% {
+    transform: translateX(100%) rotate(0deg);
+  }
+
+  40% {
+    transform: translateX(50%) rotate(180deg);
+  }
+
+  45% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+#opening-screen-help-button {
+  animation: boomerang2 15s ease-in-out infinite;
+}
+
+@keyframes boomerang2 {
+  20% {
+    transform: translateX(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateX(-50%) rotate(-180deg);
+  }
+
+  35% {
+    transform: translateX(-100%) rotate(0deg);
+  }
+
+  40% {
+    transform: translateX(-50%) rotate(-180deg);
+  }
+
+  45% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #description,
 #opening_help {
   background-color: darkcyan;
@@ -486,4 +572,3 @@ input[type="submit"] {
     box-shadow: 0px 0px 0px 05px red, 0px 0px 0px 4px blue;
   }
 }
-
