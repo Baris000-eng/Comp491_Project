@@ -17,30 +17,32 @@ app.debug = True
 
 def exam_schedules():
     df = pd.read_excel('FALL_22_EXAMS.xlsx')
-    
+
     # Replace missing values with an empty string #
     df.fillna("", inplace=True)
-    
+
     # Escape special characters #
-    df = df.applymap(lambda x: html.escape(str(x)) if isinstance(x, str) else x)
-    
+    df = df.applymap(lambda x: html.escape(str(x))
+                     if isinstance(x, str) else x)
+
     html_table = df.to_html(index=False, header=False)
     header_fields = df.columns.tolist()
     return render_template("exam_schedules.html", html_table=html_table, header_fields=header_fields)
 
+
 def course_schedules():
     df = pd.read_excel('SPR_23_COURSES.xlsx')
-    
+
     # Replace missing values with an empty string #
     df.fillna("", inplace=True)
-    
+
     # Escape special characters #
-    df = df.applymap(lambda x: html.escape(str(x)) if isinstance(x, str) else x)
-    
+    df = df.applymap(lambda x: html.escape(str(x))
+                     if isinstance(x, str) else x)
+
     html_table = df.to_html(index=False, header=False)
     header_fields = df.columns.tolist()
     return render_template("course_schedules.html", html_table=html_table, header_fields=header_fields)
-
 
 
 def get_it_signup_guide():
@@ -847,3 +849,26 @@ def send_chat_message_student():
 
     conn.close()
     return render_template('chat_class_generic.html', rows=data, class_data=classroom, user_name=session["username"], message=message)
+
+
+def myExamsOnly():
+    df = pd.read_excel('FALL_22_EXAMS.xlsx')
+    df.fillna("", inplace=True)
+    df = df.applymap(lambda x: html.escape(str(x))
+                     if isinstance(x, str) else x)
+    class_name = request.args.get('class_name')
+    class_code = request.args.get('class_code')
+    a_list = []
+    b_list = []
+    a_list.append(class_name)
+    b_list.append(class_code)
+
+    df = df[df.apply(lambda row: row.astype(str).str.contains('|'.join(a_list)).any(
+    ) and row.astype(str).str.contains('|'.join(b_list)).any(), axis=1)]
+    html_table = df.to_html(index=False, header=False)
+    header_fields = df.columns.tolist()
+    return render_template("exam_schedules.html", html_table=html_table, header_fields=header_fields)
+
+
+def allExams():
+    return exam_schedules()

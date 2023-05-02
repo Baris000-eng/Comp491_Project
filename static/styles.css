@@ -3,7 +3,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+
   background-color: rgb(0, 255, 238);
   font-family: Arial, Helvetica, sans-serif;
   margin-top: 100px;
@@ -502,6 +502,7 @@ input[type="submit"]:hover {
 
 .excel-wrapper {
   overflow-x: auto;
+
 }
 
 table {
@@ -510,7 +511,8 @@ table {
   width: 110%;
 }
 
-td, th {
+td,
+th {
   border: 1px solid black;
   padding: 5px;
   font-size: 11px;
@@ -573,4 +575,8 @@ input[type="submit"] {
   100% {
     box-shadow: 0px 0px 0px 05px red, 0px 0px 0px 4px blue;
   }
+}
+
+.buttons_box {
+  align-items: flex-start;
 }
