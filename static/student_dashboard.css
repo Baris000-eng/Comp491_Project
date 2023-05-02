@@ -1,132 +1,144 @@
 body {
-    margin: 0;
-    padding: 0;
-    background-color: yellowgreen;
+  margin: 0;
+  padding: 0;
+  background-color: yellowgreen;
 }
 
+.group1,
+.group2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
 
+.group1 {
+  flex-direction: column;
+}
+
+.group2 {
+  flex-direction: row;
+}
+
+.group2 .buttons {
+  margin-right: 10px;
+}
 h1 {
-    font-size: 36px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 40px;
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 40px;
 
-    color: brown;
-    border: 10px;
-    width: auto;
-
+  color: brown;
+  border: 10px;
+  width: auto;
 }
 
 .buttons {
-    margin-bottom: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .buttons.form.button.hover {
-    background-color: red;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: red;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .buttons button:hover {
-    background-color: red;
-    color: white;
+  background-color: red;
+  color: white;
 }
 
 button {
-    display: block;
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    color: #ffffff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #ffffff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-
-
 .button {
-    transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 .button.clicked {
-    transform: scale(1.5);
-    background-color: red;
+  transform: scale(1.5);
+  background-color: red;
 }
 
 .button.hover {
-    transform: scale(1.25);
-    background-color: red;
-    color: red;
+  transform: scale(1.25);
+  background-color: red;
+  color: red;
 }
 
 .form {
-    transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 .form.clicked {
-    transform: scale(1.25);
-    background-color: red;
+  transform: scale(1.25);
+  background-color: red;
 }
 
 .form.hover {
-    transform: scale(1.25);
-    background-color: red;
+  transform: scale(1.25);
+  background-color: red;
 }
 
 .buttons button {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .buttons button:hover {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: red;
-    color: white;
-    transform: scale(1.5);
-    transition: transform 0.3s ease-in-out;
-
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: red;
+  color: white;
+  transform: scale(1.5);
+  transition: transform 0.3s ease-in-out;
 }
 
 button {
-    animation: pulse 8s infinite;
-    color: black;
+  animation: pulse 8s infinite;
+  color: black;
 }
 
 @keyframes pulse {
-    0% {
-        background-color: #007bff;
-    }
+  0% {
+    background-color: #007bff;
+  }
 
-    25% {
-        background-color: #00ff62;
-    }
+  25% {
+    background-color: #00ff62;
+  }
 
-    50% {
-        background-color: #ff0059;
-    }
+  50% {
+    background-color: #ff0059;
+  }
 
-    75% {
-        background-color: #00ffae;
-    }
+  75% {
+    background-color: #00ffae;
+  }
 
-    100% {
-        background-color: #fbff00;
-    }
-
+  100% {
+    background-color: #fbff00;
+  }
 }
