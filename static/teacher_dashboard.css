@@ -48,3 +48,22 @@ button:hover {
   transform: scale(1.1);
 }
 
+.group1,
+.group2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.group1 {
+  flex-direction: column;
+}
+
+.group2 {
+  flex-direction: row;
+}
+
+.group2 .buttons {
+  margin-right: 10px;
+}

@@ -5,54 +5,52 @@
     <title>Student Dashboard</title>
     <link rel="stylesheet" type="text/css" href="/../static/student_dashboard.css">
 </head>
-<h1>Student Dashboard</h1>
-<div class="container">
-    <div class="buttons">
-        <form action="/openStudentReservationScreen" method="GET"> <button>Reserve A Classroom</button>
-        </form>
+<body>
+    <h1>Student Dashboard</h1>
+    <div class="container">
+        <div class="group1">
+            <div class="buttons">
+                <form action="/openStudentReservationScreen" method="GET">
+                    <button>Reserve A Classroom</button>
+                </form>
+            </div>
+            <div class="buttons">
+                <form action="/openITReportScreen" method="GET">
+                    <button>Report To IT</button>
+                </form>
+            </div>
+            <div class="buttons">
+                <form action="/already_reserved_classes" method="POST">
+                    <button>See Reserved Classes</button>
+                </form>
+            </div>
+        </div>
+        <div class="group2">
+            <div class="buttons">
+                <form action="/showTheClassroomAndInfo" method="GET">
+                    <button>Show Classroom Info</button>
+                </form>
+            </div>
+            <div class="buttons">
+                <form action="/exam_schedules">
+                    <button onclick="location.href='/exam_schedules';" name="exam-schedules" value="exam-schedules" id="exam-schedules">View Exam Schedules</button>
+                </form>
+            </div>
+            <div class="buttons">
+                <form action="/class_schedules">
+                    <button onclick="location.href='/class_schedules';" name="class-schedules" value="class-schedules" id="class-schedules">View Course Schedules</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="buttons">
-        <form action="/openITReportScreen" method="GET"> <button>Report To IT</button></form>
+    <div class="news">
+        {% if news_data is defined and news_data %}
+        {% for news_item in news_data %}
+        <p>{{ news_item[1] }}</p>
+        {% endfor %}
+        {% else %}
+        {% endif %}
     </div>
-    <div class="buttons">
-        <form action="/already_reserved_classes" method="POST"> <button>See Reserved Classes</button></form>
-    </div>
-    <div class="buttons">
-        <form action="/showTheClassroomAndInfo" method="GET"> <button>Show Classroom Info</button></form>
-    </div>
-    <div class="buttons">
-        <form action="/exam_schedules">
-         <button onclick="location.href='/exam_schedules';" 
-                  name="exam-schedules" 
-                  value="exam-schedules" 
-                  id="exam-schedules">
-            View Exam Schedules
-          </button>
-        </form>
-    </div>
-    <div class="buttons">
-        <form action="/class_schedules">
-         <button onclick="location.href='/class_schedules';" 
-                  name="class-schedules" 
-                  value="class-schedules" 
-                  id="class-schedules">
-            View Course Schedules
-          </button>
-        </form>
-    </div>
-</div>
-<div class="news">
-    {% if news_data is defined and news_data %}
-    {% for news_item in news_data %}
-    <p>{{ news_item[1] }}</p>
-    {% endfor %}
-    {% else %}
-    {% endif %}
-</div>
-</div>
-<!----------------Chat *-------------------------------------------------->
 </body>
-
-
 
 </html>
