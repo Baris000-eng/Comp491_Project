@@ -381,7 +381,8 @@ def showTheClassroomAndInfo():
                 file.close()
 
         role = session.get("role", '')
-        beginning = f'<!DOCTYPE html><html><head><title>{role.capitalize()} Dashboard</title><link rel="stylesheet" type="text/css" href="../static/classroom_infos.css"></head><body>'
+        beginning = '<div class="buttons_box"><form action="/myClassesOnly"><input type="text" name="class_name" value="Enter class name"><br> <input type="text" name="class_code" value="Enter class code"><button>Show only selected classes</button></form><form action="/allClasses"><button>Show all classes</button></form></div>'
+        beginning += f'<!DOCTYPE html><html><head><title>{role.capitalize()} Dashboard</title><link rel="stylesheet" type="text/css" href="../static/classroom_infos.css"></head><body>'
 
         html = ""
         html += beginning
@@ -872,3 +873,26 @@ def myExamsOnly():
 
 def allExams():
     return exam_schedules()
+
+
+def myClassesOnly():
+    df = pd.read_excel('KU_Classrooms.xlsx')
+    df.fillna("", inplace=True)
+    df = df.applymap(lambda x: html.escape(str(x))
+                     if isinstance(x, str) else x)
+    class_name = request.args.get('class_name')
+    class_code = request.args.get('class_code')
+    a_list = []
+    b_list = []
+    a_list.append(class_name)
+    b_list.append(class_code)
+
+    df = df[df.apply(lambda row: row.astype(str).str.contains('|'.join(a_list)).any(
+    ) and row.astype(str).str.contains('|'.join(b_list)).any(), axis=1)]
+    html_table = df.to_html(index=False, header=False)
+    header_fields = df.columns.tolist()
+    return render_template("exam_schedules.html", html_table=html_table, header_fields=header_fields, fromMyClassesOnly = True)
+
+
+def allClasses():
+    return showTheClassroomAndInfo()

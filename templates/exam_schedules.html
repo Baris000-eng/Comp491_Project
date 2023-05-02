@@ -21,13 +21,29 @@
     <button>Go To Student Dashboard</button>
   </form>
   {% endif %} {% endif %}
+
+  {% if fromMyClassesOnly %}
+  <h1>Classroom Reult</h1>
+  {% else %}
   <h1>Exam Schedules</h1>
+  {% endif %}
+
+
+
+  {% if fromMyClassesOnly %}
+
+  {% else %}
   <div class="buttons_box">
     <form action="/myExamsOnly"><input type="text" name="class_name" value="Enter class name">
       <br> <input type="text" name="class_code" value="Enter class code"><button>Show only my exams</button>
     </form>
     <form action="/allExams"><button>Show all exams</button></form>
   </div>
+
+  {% endif %}
+
+
+
 
   <div class="excel-wrapper">
     <table>

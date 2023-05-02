@@ -18,6 +18,9 @@ app.route('/class_schedules')(US.course_schedules)
 app.route('/exam_schedules')(US.exam_schedules)
 app.route('/myExamsOnly')(US.myExamsOnly)
 app.route('/allExams')(US.allExams)
+app.route('/myClassesOnly')(US.myClassesOnly)
+app.route('/allClasses')(US.allClasses)
+
 
 app.route("/get_teacher_signup_guide")(US.get_teacher_signup_guide)
 app.route("/get_admin_signup_guide")(US.get_admin_signup_guide)
@@ -170,3 +173,5 @@ if __name__ == '__main__':
     setup
     app.run(debug=True, port=499)
     app.debug = True
+
+
