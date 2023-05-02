@@ -22,7 +22,14 @@
     </div>
 </div>
 <div class="news">
-    
+    {% if news_data is defined and news_data %}
+    {% for news_item in news_data %}
+    <p>{{ news_item[1] }}</p>
+    {% endfor %}
+    {% else %}
+    <p>No news items found.</p>
+    {% endif %}
+</div>
 </div>
 <!----------------Chat *-------------------------------------------------->
 </body>

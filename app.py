@@ -161,6 +161,7 @@ app.route('/send_chat_message_student')(US.send_chat_message_student)
 
 
 if __name__ == '__main__':
+
     setup
     app.run(debug=True, port=499)
     app.debug = True

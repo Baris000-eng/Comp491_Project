@@ -162,7 +162,7 @@ def user_login(request, role: str):
             session["username"] = username
             session["priority"] = ROLES[role].priority
             session["role"] = role
-            return redirect(f'/{role}/dashboard')
+            return redirect(f'/{role}/dashboard', news_data=UR.getNews())
         else:
             # Render template with message and button to go to signup screen
             screen_name = beautify_role_names(role_str=role)
@@ -518,7 +518,7 @@ def user_screen(role: str):
 
 
 def user_dashboard(role: str):
-    return render_template(f'{role}_pages/{role}_dashboard.html')
+    return render_template(f'{role}_pages/{role}_dashboard.html', news_data=UR.getNews())
 
 
 def go_to_opening_screen():
