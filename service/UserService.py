@@ -896,4 +896,4 @@ def myClassesOnly():
 
 
 def allClasses():
-    return showTheClassroomAndInfo()git
+    return showTheClassroomAndInfo()
