@@ -382,7 +382,7 @@ def showTheClassroomAndInfo():
                 file.close()
 
         role = session.get("role", '')
-        beginning = '<div class="buttons_box"><form action="/myClassesOnly"><input type="text" name="class_name" value="Enter class name"><br> <input type="text" name="class_code" value="Enter class code"><button>Show only selected classes</button></form><form action="/allClasses"><button>Show all classes</button></form></div>'
+        beginning = '<div class="buttons_box"><form action="/myClassesOnly"><input type="text" name="faculty_name" value="Enter faculty name"><br> <input type="text" name="class_code" value="Enter class code"><button>Show only selected classes</button></form><form action="/allClasses"><button>Show all classes</button></form></div>'
         beginning += f'<!DOCTYPE html><html><head><title>{role.capitalize()} Dashboard</title><link rel="stylesheet" type="text/css" href="../static/classroom_infos.css"></head><body>'
 
         html = ""
@@ -881,11 +881,11 @@ def myClassesOnly():
     df.fillna("", inplace=True)
     df = df.applymap(lambda x: html.escape(str(x))
                      if isinstance(x, str) else x)
-    class_name = request.args.get('class_name')
+    faculty_name = request.args.get('faculty_name')
     class_code = request.args.get('class_code')
     a_list = []
     b_list = []
-    a_list.append(class_name)
+    a_list.append(faculty_name)
     b_list.append(class_code)
 
     df = df[df.apply(lambda row: row.astype(str).str.contains('|'.join(a_list)).any(
