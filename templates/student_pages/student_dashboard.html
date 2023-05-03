@@ -44,15 +44,20 @@
                         id="class-schedules">View Course Schedules</button>
                 </form>
             </div>
+            <div class="news">
+                {% if news_data is defined and news_data %}
+                {% for news_item in news_data %}
+                <p>{{ news_item[1] }}</p>
+                {% endfor %}
+                {% else %}
+                <h1>hi</h1>
+                {% endif %}
+
+            </div>
         </div>
+
     </div>
-    <div class="news">
-        {% if news_data is defined and news_data %}
-        {% for news_item in news_data %}
-        <p>{{ news_item[1] }}</p>
-        {% endfor %}
-        {% endif %}
-    </div>
+
 </body>
 
 </html>

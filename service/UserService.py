@@ -897,3 +897,28 @@ def myClassesOnly():
 
 def allClasses():
     return showTheClassroomAndInfo()
+
+
+def createNews():
+    return render_template("admin_create_news.html")
+
+
+def createNewsElement():
+    print("hi")
+    news_message = request.form.get('news_message')
+    date = request.form.get('date')
+    time = request.form.get('time')
+    date_end = request.form.get('date_end')
+    time_end = request.form.get('time_end')
+    sender = request.form.get('sender')
+    role = request.form.get('role')
+    for i in (news_message, time, date, time_end, date_end, sender, role):
+        print(i)
+    conn = sqlite3.connect('news_db.db')
+    c = conn.cursor()
+    c.execute('''INSERT INTO news_db (news_message, time, date, time_end, date_end, sender, role) 
+             VALUES (?, ?, ?, ?, ?, ?, ?)''', (news_message, time, date, time_end, date_end, sender, role))
+
+    conn.commit()
+    conn.close()
+    return render_template("admin_create_news.html")

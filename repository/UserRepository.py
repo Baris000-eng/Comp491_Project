@@ -80,12 +80,12 @@ def initializeNewsTable():
 
     c.execute('''CREATE TABLE IF NOT EXISTS news_db
              (news_message TEXT,
-              time TIME NOT NULL, 
-              date DATE NOT NULL, 
-              time_end TIME NOT NULL, 
-              date_end DATE NOT NULL, 
+              time str DEFAULT "NO_NAME_GIVEN" , 
+              date DATE DEFAULT "NO_NAME_GIVEN", 
+              time_end TIME DEFAULT "NO_NAME_GIVEN", 
+              date_end DATE DEFAULT "NO_NAME_GIVEN", 
               sender TEXT DEFAULT "NO_NAME_GIVEN", 
-              role TEXT NOT NULL
+              role TEXT DEFAULT "NO_NAME_GIVEN"
               )''')
 
 
@@ -103,9 +103,23 @@ def createNews(news_message, time, date, time_end, date_end, sender, role):
     """
     conn = sqlite3.connect('news_db.db')
     c = conn.cursor()
+    if news_message == None:
+        news_message = "not specified"
+    if time == None:
+        time = "not specified"
+    if date == None:
+        date = "not specified"
+    if time_end == None:
+        time_end = "not specified"
+    if date_end == None:
+        date_end = "not specified"
+    if sender == None:
+        sender = "not specified"
+    if role == None:
+        role = "not specified"
 
-    c.execute('''INSERT INTO chat_db (news_message, time, date, time_end, date_end, sender, role) 
-             VALUES (?, ?, ?, ?, ?, ?)''', (news_message, time, date, time_end, date_end, sender, role))
+    c.execute('''INSERT INTO news_db (news_message, time, date, time_end, date_end, sender, role) 
+             VALUES (?, ?, ?, ?, ?, ?, ?)''', (news_message, time, date, time_end, date_end, sender, role))
 
     conn.commit()
     conn.close()

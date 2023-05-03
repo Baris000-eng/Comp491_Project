@@ -57,6 +57,7 @@ app.route('/editITReport', methods=['GET'])(US.editITReport)
 app.route('/deleteReservation', methods=['POST'])(US.deleteReservation)
 app.route('/deleteITReport', methods=['POST'])(US.deleteITReport)
 app.route('/seeOnlyMyReserves', methods=['GET'])(US.seeOnlyMyReserves)
+app.route('/createNews', methods=['GET'])(US.createNews)
 
 
 @app.route('/<role>/screen', methods=['GET'])
@@ -134,7 +135,7 @@ app.route('/seeITReports',
 app.route('/AdminUserStats', methods=['GET'])(US.seeUserStats)
 
 app.route('/AdminReservationStats', methods=['GET'])(US.seeReserveStats)
-
+app.route('/createNewsElement', methods=['GET', "POST"])(US.createNewsElement)
 app.route('/AdminITStats', methods=['GET'])(US.AdminITStats)
 ###########################################################################################################
 # For Admin
@@ -173,5 +174,3 @@ if __name__ == '__main__':
     setup
     app.run(debug=True, port=499)
     app.debug = True
-
-

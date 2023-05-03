@@ -197,7 +197,7 @@ input[type="submit"] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  
+
   align-items: center;
   font-size: 20px;
   transition: background-color 0.3s;
@@ -585,4 +585,19 @@ input[type="submit"] {
 
 .buttons_box {
   align-items: flex-start;
+}
+
+body.left {
+  position: relative;
+  animation: slide-left 3s forwards;
+}
+
+@keyframes slide-left {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: -100%;
+  }
 }

@@ -71,13 +71,14 @@
 		<br><br>
 		<input type="hidden" name="submit" value="true">
 
-		<input type="submit" value="Submit">
+		<input type="submit" class="choose" value="Submit">
 
 
 	</form>
 
 	<p>&copy; 2023 KuClass App. All rights reserved.</p>
 </body>
+
 <script>
 	let imageIndex = 1;
 	let selectedImage = document.querySelector(".image");
@@ -90,6 +91,13 @@
 		selectedImage.src = imagesList[imageIndex];
 		imageIndex = imageIndex + 1;
 	}, 1000);
+
+	const form = document.querySelector('form');
+
 </script>
+
+
+
+
 
 </html>
