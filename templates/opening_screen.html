@@ -79,9 +79,9 @@
 <script>
 	let imageIndex = 1;
 	let selectedImage = document.querySelector(".image");
-	let imagesList = ["../static/images/img1.png", "../static/images/img2.png"];
+	let imagesList = ["../static/images/img1.png", "../static/images/img2.png", "../static/images/img3.png"];
 	setInterval(() => {
-		if (imageIndex > 5) {
+		if (imageIndex > imagesList.length) {
 			imageIndex = 1;
 		}
 
