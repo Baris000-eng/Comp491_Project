@@ -11,6 +11,12 @@
 <body>
 
 	<h1>Welcome to KuClass App</h1>
+
+	<div class="images">
+		<img src="../static/images/img1.png" class="image" width="220" height="220">
+	</div>
+
+
 	<button id="description-button" onclick="location.href='/open_description_text';">See KuClass Description
 		Text</button>
 	<button id="opening-screen-help-button" onclick="location.href='/get_opening_help';">See Opening Screen
@@ -72,5 +78,18 @@
 
 	<p>&copy; 2023 KuClass App. All rights reserved.</p>
 </body>
+<script>
+	let imageIndex = 1;
+	let selectedImage = document.querySelector(".image");
+	let imagesList = ["../static/images/img1.png", "../static/images/img2.png", "../static/images/img3.png"];
+	setInterval(() => {
+		if (imageIndex > imagesList.length) {
+			imageIndex = 1;
+		}
+
+		selectedImage.src = imagesList[imageIndex];
+		imageIndex = imageIndex + 1;
+	}, 1000);
+</script>
 
 </html>
