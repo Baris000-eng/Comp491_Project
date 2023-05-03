@@ -122,6 +122,10 @@ button {
   color: black;
 }
 
+body {
+  animation: lights_turn_off 20s;
+}
+
 @keyframes pulse {
   0% {
     background-color: #007bff;
@@ -148,4 +152,160 @@ button {
   border-radius: 10px;
   border-color: #ff0059;
   box-shadow: #00ff62;
+}
+
+
+
+@keyframes lights_turn_off {
+  0% {
+    background-color: #000000;
+  }
+
+  2% {
+    background-color: #ffffff;
+  }
+
+  4% {
+    background-color: #000000;
+  }
+
+  6% {
+    background-color: #ffffff;
+  }
+
+  8% {
+    background-color: #000000;
+  }
+
+  10% {
+    background-color: #ffffff;
+  }
+
+  12% {
+    background-color: #000000;
+  }
+
+  14% {
+    background-color: #ffffff;
+  }
+
+  16% {
+    background-color: #000000;
+  }
+
+  18% {
+    background-color: #ffffff;
+  }
+
+  20% {
+    background-color: #fbff00;
+  }
+}
+
+/*new elements */
+
+
+
+.star {
+  animation: star_shifts 15s;
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  transform: scale(0.2);
+
+}
+
+@keyframes star_shifts {
+  0% {
+    top: -200px;
+    left: -200px;
+  }
+
+
+
+  39% {
+    top: 1000px;
+    left: 3000px;
+  }
+
+  50% {
+    top: 2000px;
+    left: 4000px;
+  }
+
+  50% {
+    left: -4000px;
+  }
+
+  60% {
+    top: 4000px;
+  }
+
+  60% {
+    top: -200px;
+    left: -200px;
+  }
+
+}
+
+/*new elements */
+
+.star:nth-child(1) {
+  animation-delay: 0.5s;
+}
+
+.star:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.star:nth-child(3) {
+  animation-delay: 1.4s;
+}
+
+.star:nth-child(4) {
+  animation-delay: 1.8s;
+}
+
+.star:nth-child(5) {
+  animation-delay: 2.3s;
+}
+
+.star:nth-child(6) {
+  animation-delay: 2.6s;
+}
+
+.star:nth-child(7) {
+  animation-delay: 3.0s;
+}
+
+.star:nth-child(8) {
+  animation-delay: 3.3s;
+}
+
+.star:nth-child(9) {
+  animation-delay: 4.5s;
+}
+
+.star:nth-child(10) {
+  animation-delay: 5s;
+}
+
+.star:nth-child(11) {
+  animation-delay: 5.2s;
+}
+
+.star:nth-child(12) {
+  animation-delay: 5.4s;
+}
+
+.star:nth-child(13) {
+  animation-delay: 5.6s;
+}
+
+.star:nth-child(14) {
+  animation-delay: 5.8s;
+}
+
+.star:nth-child(15) {
+  animation-delay: 6s;
 }
