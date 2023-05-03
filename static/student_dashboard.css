@@ -23,6 +23,7 @@ body {
 .group2 .buttons {
   margin-right: 10px;
 }
+
 h1 {
   font-size: 36px;
   font-weight: bold;
@@ -141,4 +142,10 @@ button {
   100% {
     background-color: #fbff00;
   }
+}
+
+.news {
+  border-radius: 10px;
+  border-color: #ff0059;
+  box-shadow: #00ff62;
 }

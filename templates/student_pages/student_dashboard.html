@@ -5,6 +5,7 @@
     <title>Student Dashboard</title>
     <link rel="stylesheet" type="text/css" href="/../static/student_dashboard.css">
 </head>
+
 <body>
     <h1>Student Dashboard</h1>
     <div class="container">
@@ -33,12 +34,14 @@
             </div>
             <div class="buttons">
                 <form action="/exam_schedules">
-                    <button onclick="location.href='/exam_schedules';" name="exam-schedules" value="exam-schedules" id="exam-schedules">View Exam Schedules</button>
+                    <button onclick="location.href='/exam_schedules';" name="exam-schedules" value="exam-schedules"
+                        id="exam-schedules">View Exam Schedules</button>
                 </form>
             </div>
             <div class="buttons">
                 <form action="/class_schedules">
-                    <button onclick="location.href='/class_schedules';" name="class-schedules" value="class-schedules" id="class-schedules">View Course Schedules</button>
+                    <button onclick="location.href='/class_schedules';" name="class-schedules" value="class-schedules"
+                        id="class-schedules">View Course Schedules</button>
                 </form>
             </div>
         </div>
@@ -49,6 +52,7 @@
         <p>{{ news_item[1] }}</p>
         {% endfor %}
         {% else %}
+        <h1>no news</h1>
         {% endif %}
     </div>
 </body>

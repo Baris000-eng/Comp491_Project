@@ -197,6 +197,7 @@ input[type="submit"] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  
   align-items: center;
   font-size: 20px;
   transition: background-color 0.3s;
