@@ -83,8 +83,8 @@
 	let selectedImage = document.querySelector(".image");
 	let imagesList = ["../static/images/img1.png", "../static/images/img2.png", "../static/images/img3.png"];
 	setInterval(() => {
-		if (imageIndex > imagesList.length) {
-			imageIndex = 1;
+		if (imageIndex + 1 > imagesList.length) {
+			imageIndex = 0;
 		}
 
 		selectedImage.src = imagesList[imageIndex];
