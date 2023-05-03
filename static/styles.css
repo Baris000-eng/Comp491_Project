@@ -184,6 +184,11 @@ select {
   font-family: inherit;
 }
 
+input[type="submit"]:active {
+  color: rgb(0, 0, 0);
+  background-color: #ffffff;
+}
+
 input[type="submit"] {
   background-color: #45a049;
   color: #fff;

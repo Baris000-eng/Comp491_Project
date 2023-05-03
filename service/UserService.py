@@ -344,6 +344,7 @@ def openITReportScreen():
 
 #########OTHER SCREENS #######################################################
 def select_role():
+
     role = request.form.get('roles')
     if role in ROLES:
         return redirect(f'/{role}/screen')
@@ -891,7 +892,7 @@ def myClassesOnly():
     ) and row.astype(str).str.contains('|'.join(b_list)).any(), axis=1)]
     html_table = df.to_html(index=False, header=False)
     header_fields = df.columns.tolist()
-    return render_template("exam_schedules.html", html_table=html_table, header_fields=header_fields, fromMyClassesOnly = True)
+    return render_template("exam_schedules.html", html_table=html_table, header_fields=header_fields, fromMyClassesOnly=True)
 
 
 def allClasses():
