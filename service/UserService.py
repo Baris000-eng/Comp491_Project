@@ -1,6 +1,9 @@
 from typing import List
 from flask import render_template, redirect, session,  flash, request, Flask, url_for, jsonify
 import sqlite3
+import secrets
+import random
+import string
 from constants import ROLES
 import pandas as pd
 import repository.UserRepository as UR
@@ -13,6 +16,19 @@ app = Flask(__name__)
 app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
+
+from flask import session
+
+def generate_classroom_reservation_code():
+    alphabet = string.ascii_letters + string.digits 
+    if 'reservation_code' in session:
+        reservation_code = session['reservation_code']
+    else:
+        reservation_code = ''.join(random.choice(alphabet) for i in range(8))
+        session['reservation_code'] = reservation_code
+    print(reservation_code)
+    return render_template("reservation_code.html", reservation_code=reservation_code)
+
 
 def get_news_count():
     return UR.getNewsCount()

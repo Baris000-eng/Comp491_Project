@@ -10,6 +10,9 @@
 </head>
 
 <h1>Your class has been successfully reserved.</h1>
+<form action="/reservation_code">
+<button id="reservation-code" name="reservation-code">Get Class Reservation Code</button>
+</form>
 
 {% if 'role' in session %}
 {% if session['role'] == 'teacher' %}

@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: lightgreen;
+    color: #333333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2em;
+    text-align: center;
+    margin-top: 50px;
+    color: red;
+}
+
+form.h1-form h1 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: blue;
+}
+
+.class_reservation_code {
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+form.reservation-code-form .class_reservation_code {
+    font-size: 3em;
+    text-align: center;
+    margin-top: 50px;
+    background-color: lightblue;
+    padding: 20px;
+    border-radius: 10px;
+}

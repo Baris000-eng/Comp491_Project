@@ -14,6 +14,8 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 socketio = SocketIO(app)
 
+app.route("/reservation_code")(US.generate_classroom_reservation_code)
+
 app.route('/class_schedules')(US.course_schedules)
 app.route('/exam_schedules')(US.exam_schedules)
 app.route('/myExamsOnly')(US.myExamsOnly)
