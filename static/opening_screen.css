@@ -5,8 +5,9 @@ body {
     align-items: center;
     background-color: rgb(0, 255, 238);
     font-family: Arial, Helvetica, sans-serif
-  }
-  h1 {
+}
+
+h1 {
     font-size: 48px;
     font-weight: bold;
     text-align: center;
@@ -25,110 +26,110 @@ body {
     left: 0;
     right: 0;
     padding: 20px;
-  
+
     z-index: 9999;
-  }
-  
-  h1:hover {
+}
+
+h1:hover {
     box-shadow: 0px 0px 50px 30px rgba(255, 0, 0, 0.8);
     filter: brightness(1.4) saturate(1.8);
-  }
-  
-  
-  
-  
-  #description-button {
-    animation: boomerang 15s ease-in-out infinite;
-  }
-  
-  @keyframes boomerang {
-    20% {
-      transform: translateX(0) rotate(0deg);
-    }
-  
-    25% {
-      transform: translateX(50%) rotate(180deg);
-    }
-  
-    35% {
-      transform: translateX(100%) rotate(0deg);
-    }
-  
-    40% {
-      transform: translateX(50%) rotate(180deg);
-    }
-  
-    45% {
-      transform: translateX(0) rotate(0deg);
-    }
-  }
-  
-  #opening-screen-help-button {
-    animation: boomerang2 15s ease-in-out infinite;
-  }
-  
-  @keyframes boomerang2 {
-    20% {
-      transform: translateX(0) rotate(0deg);
-    }
-  
-    25% {
-      transform: translateX(-50%) rotate(-180deg);
-    }
-  
-    35% {
-      transform: translateX(-100%) rotate(0deg);
-    }
-  
-    40% {
-      transform: translateX(-50%) rotate(-180deg);
-    }
-  
-    45% {
-      transform: translateX(0) rotate(0deg);
-    }
-  }
-  
-  
-  #description,
-  #opening_help {
-    background-color: darkcyan;
-    padding: 20px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    font-size: 13px;
-    font-weight: bold;
-    display: none;
-    line-height: 1.5;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
-  }
-  
-  #description p:first-child {
-    margin-top: 0px;
-  }
-  
-  #description p:last-child {
-    margin-bottom: 0px;
-  }
-  
-  #help-text {
-    background-color: darkcyan;
-    padding: 20px;
-    font-size: 13px;
-    font-weight: bold;
-    display: none;
-    line-height: 1.5;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
+}
 
-  #help-text,
-  #description {
+
+
+
+#description-button {
+    animation: boomerang 15s ease-in-out infinite;
+}
+
+@keyframes boomerang {
+    20% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateX(50%) rotate(180deg);
+    }
+
+    35% {
+        transform: translateX(100%) rotate(0deg);
+    }
+
+    40% {
+        transform: translateX(50%) rotate(180deg);
+    }
+
+    45% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+#opening-screen-help-button {
+    animation: boomerang2 15s ease-in-out infinite;
+}
+
+@keyframes boomerang2 {
+    20% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateX(-50%) rotate(-180deg);
+    }
+
+    35% {
+        transform: translateX(-100%) rotate(0deg);
+    }
+
+    40% {
+        transform: translateX(-50%) rotate(-180deg);
+    }
+
+    45% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+
+#description,
+#opening_help {
+    background-color: darkcyan;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: bold;
     display: none;
-  }
-  
-  form {
+    line-height: 1.5;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+}
+
+#description p:first-child {
+    margin-top: 0px;
+}
+
+#description p:last-child {
+    margin-bottom: 0px;
+}
+
+#help-text {
+    background-color: darkcyan;
+    padding: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    display: none;
+    line-height: 1.5;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#help-text,
+#description {
+    display: none;
+}
+
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -138,9 +139,9 @@ body {
     width: 100%;
     max-width: 750px;
     margin: 0;
-  }
-  
-  label {
+}
+
+label {
     color: #333;
     font-size: 24px;
     font-weight: bold;
@@ -149,9 +150,9 @@ body {
     text-align: right;
     margin-right: 20px;
     min-width: 200px;
-  }
-  
-  select {
+}
+
+select {
     width: 100%;
     padding: 14px 20px;
     margin: 8px 0;
@@ -162,11 +163,11 @@ body {
     background-color: #fff;
     color: #555;
     font-family: inherit;
-  }
-  
+}
 
-  
-  input[type="submit"] {
+
+
+input[type="submit"] {
     background-color: #45a049;
     color: #fff;
     padding: 14px 20px;
@@ -180,31 +181,31 @@ body {
     font-family: inherit;
     text-transform: uppercase;
     border-bottom: 10px;
-  }
-  
-  input[type="submit"]:hover {
+}
+
+input[type="submit"]:hover {
     background-color: #eb0000;
     align-items: center;
-  }
-  
+}
 
-  
-  form>* {
+
+
+form>* {
     width: 100%;
     max-width: 400px;
-  }
-  
-  @media screen and (max-width: 600px) {
+}
+
+@media screen and (max-width: 600px) {
     h1 {
-      font-size: 36px;
+        font-size: 36px;
     }
-  
+
     label {
-      min-width: 100px;
+        min-width: 100px;
     }
-  }
-  
-  button {
+}
+
+button {
     display: block;
     margin: 0 auto;
     padding: 10px 20px;
@@ -213,14 +214,14 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     background-color: red;
     transform: scale(1.15);
-  }
-  
-  input[type="button"][value="Login"] {
+}
+
+input[type="button"][value="Login"] {
     background-color: #4caf50;
     border: none;
     border-radius: 4px;
@@ -232,28 +233,28 @@ body {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-  }
-  
- 
-  
-  label {
+}
+
+
+
+label {
     color: #333;
     font-size: 20px;
     font-weight: bold;
     margin-top: 20px;
     display: block;
     text-align: left;
-  }
-  
-  
-  
+}
 
-  
-  button {
+
+
+
+
+button {
     margin-bottom: 20px;
-  }
-  
-  form {
+}
+
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -263,124 +264,152 @@ body {
     width: 100%;
     max-width: 750px;
     margin: 0;
-  }
-  
-  label,
-  select {
+}
+
+label,
+select {
     margin-bottom: 10px;
-  }
-  
-  input[type="submit"] {
-  
+}
+
+input[type="submit"] {
+
     font-size: 16px;
     font-weight: bold;
     color: white;
     background-color: blue;
     cursor: pointer;
     transition: background-color 0.2s ease;
-  }
-  
-  input[type="submit"]:hover {
+}
+
+input[type="submit"]:hover {
     background-color: red;
-  
+
     transform: scale(1.5);
-  }
-  
- 
-  #description-button:hover,
-  #opening-screen-help-button:hover {
+}
+
+
+#description-button:hover,
+#opening-screen-help-button:hover {
     background-color: #a600ff;
     transform: scale(1.5);
-  }
-  
-  input[type="button"]:hover {
+}
+
+input[type="button"]:hover {
     background-color: red;
     color: #3e8e41;
     transform: scale(1.5);
-  }
-  
+}
 
 
-  h1 {
+
+h1 {
     animation: slideIn 1s;
-  }
-  
-  @keyframes slideIn {
+}
+
+@keyframes slideIn {
     from {
-      transform: translateX(-100%);
+        transform: translateX(-100%);
     }
-  }
-  
+}
 
-  
 
-  
-  input[type="submit"]:hover {
+
+
+
+input[type="submit"]:hover {
     background-color: red;
     color: #3e8e41;
     transform: scale(1.5);
-  }
-  
-  
-  
-  #roles {
+}
+
+
+
+#roles {
     display: flex;
     justify-content: center;
-  }
-  
-  #roles label {
+}
+
+#roles label {
     margin: 0;
     padding: 0;
     position: relative;
-  }
-  
-  #roles input[type="radio"] {
+}
+
+#roles input[type="radio"] {
     display: none;
-  }
-  
-  #roles img {
+}
+
+#roles img {
     display: block;
-  
+
     margin: 0 10px;
     height: 80px;
     margin-left: 40px;
     margin-top: 40px;
     width: 80px;
     transition: all 0.3s ease-in-out;
-  }
-  
-  #roles label:hover img {
+}
+
+#roles label:hover img {
     transform: translateY(-10px);
-  }
-  
-  #roles input[type="radio"]:checked+img {
+}
+
+#roles input[type="radio"]:checked+img {
     transform: scale(1.2) translateY(-50%);
     border: 3px solid green;
-  }
-  
-  
-  
-  #roles input[type="radio"]:checked+img {
+}
+
+
+
+#roles input[type="radio"]:checked+img+figcaption {
     transform: scale(1.40) translateY(-20%);
     border: 20px 40px 40px 40px solid green;
-    transform: scale(1.40) translateY(-20%);
-  }
-  
-  .excel-wrapper {
-    overflow-x: auto;
-  
-  }
-  
 
- 
-  figure {
+    transform: scale(1.40) translateY(-20%);
+    /*  animation: select_signify 5s linear infinite;*/
+}
+
+
+
+@keyframes select_signify {
+    0% {
+
+        box-shadow: 0px 0px 0px 0px blue, 0px 0px 0px 4px red;
+
+    }
+
+    20% {
+        box-shadow: 0px 0px 0px 20px rgb(217, 255, 0), 0px 0px 0px 4px yellow;
+    }
+
+    50% {
+        box-shadow: 0px 0px 0px 30px green, 0px 0px 0px 4px yellow;
+    }
+
+    50% {
+        box-shadow: 0px 0px 0px 20px rgb(17, 0, 255), 0px 0px 0px 4px yellow;
+    }
+
+    100% {
+        box-shadow: 0px 0px 0px 05px red, 0px 0px 0px 4px blue;
+    }
+}
+
+.excel-wrapper {
+    overflow-x: auto;
+
+}
+
+
+
+figure {
     display: block;
     margin: 0 auto;
     margin-left: 20px;
     text-align: center;
-  }
-  
-  figcaption {
+}
+
+figcaption {
     font-style: center;
     font-size: 14px;
     margin-left: 50px;
@@ -388,46 +417,44 @@ body {
     bottom: 5;
     left: 0;
     right: 0;
-  
-  }
-  
-  
-  input[type="submit"] {
+
+}
+
+
+input[type="submit"] {
     border: 5px solid rgb(12, 178, 0);
-  
-  
-  
+
+
+
     animation: rotate-border 5s linear infinite;
     font-size: 16px;
-  }
-  
-  
-  
-  
-  @keyframes rotate-border {
-    0% {
-      box-shadow: 0px 0px 0px 0px blue, 0px 0px 0px 4px red;
-    }
-  
-    20% {
-      box-shadow: 0px 0px 0px 20px rgb(217, 255, 0), 0px 0px 0px 4px yellow;
-    }
-  
-    50% {
-      box-shadow: 0px 0px 0px 30px green, 0px 0px 0px 4px yellow;
-    }
-  
-    50% {
-      box-shadow: 0px 0px 0px 20px rgb(17, 0, 255), 0px 0px 0px 4px yellow;
-    }
-  
-    100% {
-      box-shadow: 0px 0px 0px 05px red, 0px 0px 0px 4px blue;
-    }
-  }
-  
-  .buttons_box {
-    align-items: flex-start;
-  }
+}
 
-  
+
+
+
+@keyframes rotate-border {
+    0% {
+        box-shadow: 0px 0px 0px 0px blue, 0px 0px 0px 4px red;
+    }
+
+    20% {
+        box-shadow: 0px 0px 0px 20px rgb(217, 255, 0), 0px 0px 0px 4px yellow;
+    }
+
+    50% {
+        box-shadow: 0px 0px 0px 30px green, 0px 0px 0px 4px yellow;
+    }
+
+    50% {
+        box-shadow: 0px 0px 0px 20px rgb(17, 0, 255), 0px 0px 0px 4px yellow;
+    }
+
+    100% {
+        box-shadow: 0px 0px 0px 05px red, 0px 0px 0px 4px blue;
+    }
+}
+
+.buttons_box {
+    align-items: flex-start;
+}
