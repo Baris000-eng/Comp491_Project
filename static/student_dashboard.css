@@ -4,6 +4,16 @@ body {
   background-color: yellowgreen;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification {
+  margin-right: 10px;
+}
+
 .group1,
 .group2 {
   display: flex;
@@ -24,6 +34,48 @@ body {
   margin-right: 10px;
 }
 
+.icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.count {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: black;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.notification .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-image: url("/static/images/notification.png");
+  background-size: cover;
+  cursor: pointer;
+}
+
 h1 {
   font-size: 36px;
   font-weight: bold;
@@ -33,6 +85,7 @@ h1 {
   color: brown;
   border: 10px;
   width: auto;
+  align-items: center;
 }
 
 .buttons {
@@ -154,8 +207,6 @@ body {
   box-shadow: #00ff62;
 }
 
-
-
 @keyframes lights_turn_off {
   0% {
     background-color: #000000;
@@ -202,17 +253,12 @@ body {
   }
 }
 
-/*new elements */
-
-
-
 .star {
   animation: star_shifts 15s;
   position: absolute;
   top: -200px;
   left: -200px;
   transform: scale(0.2);
-
 }
 
 @keyframes star_shifts {
@@ -220,8 +266,6 @@ body {
     top: -200px;
     left: -200px;
   }
-
-
 
   39% {
     top: 1000px;
@@ -245,7 +289,6 @@ body {
     top: -200px;
     left: -200px;
   }
-
 }
 
 /*new elements */
@@ -275,7 +318,7 @@ body {
 }
 
 .star:nth-child(7) {
-  animation-delay: 3.0s;
+  animation-delay: 3s;
 }
 
 .star:nth-child(8) {

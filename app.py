@@ -20,8 +20,8 @@ app.route('/myExamsOnly')(US.myExamsOnly)
 app.route('/allExams')(US.allExams)
 app.route('/myClassesOnly')(US.myClassesOnly)
 app.route('/allClasses')(US.allClasses)
-
-
+app.route("/get_news_count")(US.get_news_count)
+app.route("/open_news")(US.open_news_screen)
 app.route("/get_teacher_signup_guide")(US.get_teacher_signup_guide)
 app.route("/get_admin_signup_guide")(US.get_admin_signup_guide)
 app.route("/get_student_signup_help")(US.get_student_signup_help)

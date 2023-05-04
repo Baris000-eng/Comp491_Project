@@ -14,6 +14,11 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
+def get_news_count():
+    return UR.getNewsCount()
+
+def open_news_screen():
+    return render_template("incoming_news.html", news_data=UR.getNews(), newsCount = UR.getNewsCount())
 
 def exam_schedules():
     df = pd.read_excel('FALL_22_EXAMS.xlsx')
@@ -193,7 +198,7 @@ def user_login(request, role: str):
             session["username"] = username
             session["priority"] = ROLES[role].priority
             session["role"] = role
-            return redirect(f'/{role}/dashboard', news_data=UR.getNews())
+            return redirect(f'/{role}/dashboard')
         else:
             # Render template with message and button to go to signup screen
             screen_name = beautify_role_names(role_str=role)
@@ -242,7 +247,6 @@ def change_user_password():
 def password_change_success():
     return render_template('password_change_success.html')
 ###############STUDENT #####################################################################################
-
 
 def go_to_opening_screen():
     return render_template('opening_screen.html')

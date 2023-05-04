@@ -97,6 +97,16 @@ def getNews():
     conn.close()
 
 
+def getNewsCount():
+    conn = sqlite3.connect('news_db.db')
+    c = conn.cursor()
+    c.execute('SELECT COUNT(*) FROM news_db')
+    news_count = c.fetchone()[0]
+    conn.close()
+    return news_count
+
+
+
 def createNews(news_message, time, date, time_end, date_end, sender, role):
     """
     Given a news_message, time, date, time_end, date_end, sender, role insert new news message into the news_db database
