@@ -2,6 +2,7 @@ import sqlite3
 import io
 import base64
 import matplotlib.pyplot as plt
+import numpy as np
 
 def plot_reservations_per_role():
     conn = sqlite3.connect('reservations_db.db')
@@ -51,8 +52,8 @@ def plot_reservations_per_purpose():
     ax.set_xlabel('Role')
     ax.set_ylabel('Total Reservations')
 
-
-    ax.set_xticks(range(len(reservation_purposes)))
+    ticks = np.linspace(0, len(reservation_purposes)-1, len(reservation_purposes))
+    ax.set_xticks(ticks)
     ax.set_xticklabels(reservation_purposes)
     plt.xticks(rotation=45, ha="right")
 
@@ -83,8 +84,8 @@ def plot_reservations_per_class():
     ax.set_xlabel('Classroom Name')
     ax.set_ylabel('Total Reservations')
 
-
-    ax.set_xticks(range(len(classroom_names)))
+    ticks = np.linspace(0, len(classroom_names)-1, len(classroom_names))
+    ax.set_xticks(ticks)
     ax.set_xticklabels(classroom_names)
     plt.xticks(rotation=45, ha="right")
 
@@ -99,7 +100,35 @@ def plot_reservations_per_class():
     html = f'<img src="data:image/png;base64,{png_image_base64}"/>'
     return html
 
+import numpy as np
 
+def plot_reservations_per_priority_value():
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+    c.execute('SELECT priority_reserved, COUNT(*) FROM reservations_db GROUP BY priority_reserved')
+    data = c.fetchall()
+    conn.close()
 
+    priority_values = [row[0] for row in data]
+    total_reservations = [row[1] for row in data]
 
+    fig, ax = plt.subplots(figsize=(15,15))
+    ax.bar(priority_values, total_reservations)
+    ax.set_title('Total Reservations by Priority Value')
+    ax.set_xlabel('Priority Value')
+    ax.set_ylabel('Total Reservations')
 
+    ticks = np.linspace(min(priority_values), max(priority_values), len(priority_values))
+    ax.set_xticks(ticks)
+    ax.set_xticklabels(priority_values)
+    plt.xticks(rotation=45, ha="right")
+
+    ax.set_yticks(range(0, max(total_reservations)+1, 5))
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    png_image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+    html = f'<img src="data:image/png;base64,{png_image_base64}"/>'
+    return html

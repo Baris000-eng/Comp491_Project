@@ -984,3 +984,6 @@ def createNewsElement():
 def get_reservation_statistics_screen():
     return render_template("reservation_statistics.html")
 
+def open_user_statistics_screen():
+    return render_template("user_statistics.html")
+
