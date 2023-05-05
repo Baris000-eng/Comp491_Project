@@ -465,7 +465,7 @@ def reserve_class():
     existing_reservation = c.fetchone()
 
     if existing_reservation and existing_reservation[6] < session['priority']:
-        c.execute('''UPDATE reservations_db SET role=?, username=?, public_or_private=?, priority_reserved=? 
+        c.execute('''UPDATE reservations_db SET role=?, username=?, public_or_private=?, priority_reserved=?
                     WHERE date=? AND time=? AND classroom=? AND priority_reserved < ?''', (role, session["username"], preference, session['priority'], date, time, class_code, session['priority']))
         conn.commit()
         conn.close()
@@ -479,7 +479,7 @@ def reserve_class():
             return render_template(role + "_reservation_screen.html", another_user_reserved=another_user_reserved)
         else:
             # Insert new reservation #
-            c.execute('''INSERT INTO reservations_db (role, date, time, username, public_or_private, classroom, priority_reserved) 
+            c.execute('''INSERT INTO reservations_db (role, date, time, username, public_or_private, classroom, priority_reserved)
                         VALUES (?, ?, ?, ?, ?, ?, ?)''', (role, date, time, session["username"], preference, class_code, session['priority']))
             conn.commit()
             conn.close()
@@ -885,16 +885,57 @@ def myExamsOnly():
                      if isinstance(x, str) else x)
     class_name = request.args.get('class_name')
     class_code = request.args.get('class_code')
-    a_list = []
-    b_list = []
-    a_list.append(class_name)
-    b_list.append(class_code)
 
-    df = df[df.apply(lambda row: row.astype(str).str.contains('|'.join(a_list)).any(
-    ) or row.astype(str).str.contains('|'.join(b_list)).any(), axis=1)]
+    args_array = []
+
+    class_name = request.args.get('class_name')
+    class_code = request.args.get('class_code')
+    subject = request.args.get('subject')
+    catalog = request.args.get('catalog')
+    description = request.args.get('description')
+    section = request.args.get('section')
+    courseid = request.args.get('courseid')
+    examdate = request.args.get('examdate')
+    starttime = request.args.get('starttime')
+    endtime = request.args.get('endtime')
+    facilid = request.args.get('facilid')
+    examtype = request.args.get('examtype')
+    instructorname = request.args.get('instructorname')
+    totalenr = request.args.get('totalenr')
+    acadorg = request.args.get('acadorg')
+
+    # Add each argument to the args_array with the appropriate name
+    args_array.append(("class_name", class_name))
+    args_array.append(("class_code", class_code))
+    args_array.append(("subject", subject))
+    args_array.append(("catalog", catalog))
+    args_array.append(("description", description))
+    args_array.append(("section", section))
+    args_array.append(("courseid", courseid))
+    args_array.append(("examdate", examdate))
+    args_array.append(("starttime", starttime))
+    args_array.append(("endtime", endtime))
+    args_array.append(("facilid", facilid))
+    args_array.append(("examtype", examtype))
+    args_array.append(("instructorname", instructorname))
+    args_array.append(("totalenr", totalenr))
+    args_array.append(("acadorg", acadorg))
+
+
+    search_args = ["|".join([x[1] for x in args_array if x[1]]), class_name]
+
+
+    a_list = [x[0] for x in args_array if x[1] and x[0] != "class_code"]
+    b_list = [class_code] #this is for later code modification, the user will be able to search with class code only, but others are not mandatory
+
+    df = df[df.apply(lambda row: row.astype(str).str.contains('|'.join(search_args)).any()
+                            or row.astype(str).str.contains('|'.join(a_list)).any()
+                            or row.astype(str).str.contains('|'.join(b_list)).any(), axis=1)]
+
     html_table = df.to_html(index=False, header=False)
     header_fields = df.columns.tolist()
     return render_template("exam_schedules.html", html_table=html_table, header_fields=header_fields)
+
 
 
 def allExams():
