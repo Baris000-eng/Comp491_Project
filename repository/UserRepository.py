@@ -95,15 +95,16 @@ def getNews():
     c.execute('SELECT * FROM news_db')
     news_data = c.fetchall()
     conn.close()
+    return news_data
 
 
 def getNewsCount():
     conn = sqlite3.connect('news_db.db')
     c = conn.cursor()
     c.execute('SELECT COUNT(*) FROM news_db')
-    news_count = c.fetchone()[0]
+    newsCount = c.fetchone()[0]
     conn.close()
-    return news_count
+    return newsCount
 
 
 

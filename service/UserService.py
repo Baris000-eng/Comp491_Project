@@ -145,7 +145,8 @@ def user_signup(request, role: str):
         session["username"] = username
         session["role"] = role
         session["priority"] = ROLES[role].priority
-        return redirect(f'/{role}/dashboard')
+        newsCount = UR.getNewsCount()
+        return redirect(f'/{role}/dashboard?newsCount={newsCount}')
 
     page_rendered = str()
     page_rendered += concat_folder_dir_based_on_role(role=role)
@@ -214,7 +215,8 @@ def user_login(request, role: str):
             session["username"] = username
             session["priority"] = ROLES[role].priority
             session["role"] = role
-            return redirect(f'/{role}/dashboard')
+            newsCount = UR.getNewsCount()
+            return redirect(f'/{role}/dashboard?newsCount={newsCount}')
         else:
             # Render template with message and button to go to signup screen
             screen_name = beautify_role_names(role_str=role)
@@ -397,7 +399,6 @@ def showTheClassroomAndInfo():
 
         def create_html_file(txt_string):
             with open("templates/Classroom_reservation_students_view.html", "w", encoding="utf-8") as file:
-                file.write(txt_string)
                 file.write(txt_string)
                 file.close()
 
@@ -924,21 +925,22 @@ def createNews():
 
 
 def createNewsElement():
-    print("hi")
-    news_message = request.form.get('news_message')
-    date = request.form.get('date')
-    time = request.form.get('time')
-    date_end = request.form.get('date_end')
-    time_end = request.form.get('time_end')
-    sender = request.form.get('sender')
-    role = request.form.get('role')
-    for i in (news_message, time, date, time_end, date_end, sender, role):
-        print(i)
-    conn = sqlite3.connect('news_db.db')
-    c = conn.cursor()
-    c.execute('''INSERT INTO news_db (news_message, time, date, time_end, date_end, sender, role) 
-             VALUES (?, ?, ?, ?, ?, ?, ?)''', (news_message, time, date, time_end, date_end, sender, role))
+     if request.method == 'POST':
+        news_message = request.form.get('news_message')
+        date = request.form.get('date')
+        time = request.form.get('time')
+        date_end = request.form.get('date_end')
+        time_end = request.form.get('time_end')
+        sender = session['username']
+        role = session['role']
 
-    conn.commit()
-    conn.close()
-    return render_template("admin_create_news.html")
+        conn = sqlite3.connect('news_db.db')
+        c = conn.cursor()
+
+        c.execute('''INSERT INTO news_db (news_message, time, date, time_end, date_end, sender, role) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?)''', (news_message, time, date, time_end, date_end, sender, role))
+
+        conn.commit()
+        conn.close()
+
+        return render_template('admin_create_news.html')

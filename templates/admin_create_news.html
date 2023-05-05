@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <h1>Create A News</h1>
+    <h1>Create News</h1>
     <div class="news_creation_box">
         <form action="/createNewsElement" method="POST">
             <label for="news_message">News message:</label><br>
@@ -27,18 +27,6 @@
 
             <label for="time_end">End Time:</label><br>
             <input type="time" id="time_end" name="time_end"><br>
-
-            <label for="sender">Sender:</label><br>
-            <input type="text" id="sender" name="sender"><br>
-
-            <label for="role">Role:</label><br>
-            <select id="role" name="role">
-                <option value="student">Student</option>
-                <option value="teacher">Teacher</option>
-                <option value="it_staff">IT Staff</option>
-                <option value="admin">Admin</option>
-            </select><br><br>
-
             <input type="submit" value="Submit">
         </form>
 
