@@ -6,6 +6,7 @@ from service.UserService import password_change_success, go_to_opening_screen
 from service.UserService import select_role, showTheClassroomAndInfo, chat_action, report_chat, report_it
 import service.UserService as US
 import service.ClassroomService as CS
+import service.PlottingService as PS
 from flask_socketio import SocketIO, emit
 import time
 
@@ -169,6 +170,12 @@ def login(role):
 # socket_chat.on("connect")(US.user_connected)
 # socket_chat.on("disconnect")(US.user_disconnected)
 app.route('/send_chat_message_student')(US.send_chat_message_student)
+
+
+app.route('/see_plot_of_reservation_num_per_role')(PS.plot_reservations_per_role)
+app.route('/see_plot_of_reservation_num_per_class')(PS.plot_reservations_per_class)
+app.route('/see_plot_of_reservation_num_per_purpose')(PS.plot_reservations_per_purpose)
+app.route("/seeReservationStatistics")(US.get_reservation_statistics_screen)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,98 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: lightseagreen;
+}
+
+h1 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: red;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  color: green;
+  text-shadow: 1px 1px #fff;
+  background-color: lightpink;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px #888;
+}
+
+p:hover{
+    background-color: aqua;
+}
+
+button {
+  background-color: #4285f4;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  box-shadow: 1px 1px 3px #888;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: darkred;
+  transform: scale(1.05);
+}
+
+.group-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.group-container .btn-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: lightcoral;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px #888;
+}
+
+.group-container .btn-group h1:first-child {
+  font-size: 20px;
+  margin: 0;
+  margin-bottom: 10px;
+  color: #333;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px #888;
+}
+
+.group-container .btn-group button {
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .group-container .btn-group {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
+
+.group-container .btn-group:hover {
+    background-color: rosybrown;
+    transform: scale(1.05);
+}
+  

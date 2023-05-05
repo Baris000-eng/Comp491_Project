@@ -4,7 +4,10 @@ from flask import render_template, redirect, session,  flash, request, Flask, ur
 import sqlite3
 import secrets
 import random
+import matplotlib.pyplot as plt
 import string
+import io
+import base64
 from constants import ROLES
 import pandas as pd
 import repository.UserRepository as UR
@@ -977,3 +980,7 @@ def createNewsElement():
     conn.commit()
     conn.close()
     return render_template("admin_create_news.html")
+
+def get_reservation_statistics_screen():
+    return render_template("reservation_statistics.html")
+
