@@ -177,6 +177,17 @@ app.route('/see_plot_of_reservation_num_per_class')(PS.plot_reservations_per_cla
 app.route('/see_plot_of_reservation_num_per_purpose')(PS.plot_reservations_per_purpose)
 app.route("/see_plot_of_reservation_num_per_priority")(PS.plot_reservations_per_priority_value)
 
+app.route('/see_piechart_of_reservation_num_per_role')(PS.piechart_of_reservations_per_role)
+app.route('/see_piechart_of_reservation_num_per_class')(PS.piechart_of_reservations_per_class)
+app.route('/see_piechart_of_reservation_num_per_purpose')(PS.piechart_of_reservations_per_purpose)
+app.route("/see_piechart_of_reservation_num_per_priority")(PS.piechart_reservations_per_priority_value)
+
+
+app.route("/see_plot_of_user_numbers_per_priority_value")(PS.plot_user_numbers_per_priority_value)
+app.route("/see_plot_of_user_numbers_per_role")(PS.plot_user_numbers_per_role)
+app.route("/see_piechart_of_user_numbers_per_priority_value")(PS.plot_piechart_of_user_numbers_per_priority_value)
+app.route("/see_piechart_of_user_numbers_per_role")(PS.plot_piechart_of_user_numbers_per_role)
+
 
 app.route("/seeReservationStatistics")(US.get_reservation_statistics_screen)
 app.route("/seeUserStatistics")(US.open_user_statistics_screen)

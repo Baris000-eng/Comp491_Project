@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>User Statistics</title>
-  </head>
-  <body>
-    <p>User Statistics</p>
-  </body>
+<head>
+  <title>User Statistics</title>
+  <link rel="stylesheet" type="text/css" href="../static/user_statistics.css"/>
+</head>
+<body>
+  <div class="card">
+    <p class="intro">Plots and Visuals of User Statistics</p>
+    <div class="group-container">
+      <div class="btn-group">
+        <h1>Plot Histogram of User Numbers per Priority Value</h1>
+        <button onclick="location.href='/see_plot_of_user_numbers_per_priority_value';">Plot Data</button>
+      </div>
+      <div class="btn-group">
+        <h1>Plot Pie Chart of User Numbers per Priority Value</h1>
+        <button onclick="location.href='/see_piechart_of_user_numbers_per_priority_value'">Plot Data</button>
+      </div>
+      <div class="btn-group">
+        <h1>Plot Histogram of User Numbers per Role</h1>
+        <button onclick="location.href='/see_plot_of_user_numbers_per_role'">Plot Data</button>
+      </div>
+      <div class="btn-group">
+        <h1>Plot Pie Chart of User Numbers per Role</h1>
+        <button onclick="location.href='/see_piechart_of_user_numbers_per_role'">Plot Data</button>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
