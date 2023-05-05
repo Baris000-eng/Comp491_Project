@@ -877,14 +877,11 @@ def send_chat_message_student():
     conn.close()
     return render_template('chat_class_generic.html', rows=data, class_data=classroom, user_name=session["username"], message=message)
 
-
 def myExamsOnly():
     df = pd.read_excel('FALL_22_EXAMS.xlsx')
     df.fillna("", inplace=True)
     df = df.applymap(lambda x: html.escape(str(x))
                      if isinstance(x, str) else x)
-    class_name = request.args.get('class_name')
-    class_code = request.args.get('class_code')
 
     args_array = []
 
@@ -904,7 +901,6 @@ def myExamsOnly():
     totalenr = request.args.get('totalenr')
     acadorg = request.args.get('acadorg')
 
-    # Add each argument to the args_array with the appropriate name
     args_array.append(("class_name", class_name))
     args_array.append(("class_code", class_code))
     args_array.append(("subject", subject))
@@ -921,20 +917,16 @@ def myExamsOnly():
     args_array.append(("totalenr", totalenr))
     args_array.append(("acadorg", acadorg))
 
+    search_args = ["|".join([x[1] for x in args_array if x[1]])]
+    search_args.extend([f"{key}={value}" for key, value in request.args.items() if value and key != "class_code"])
 
-    search_args = ["|".join([x[1] for x in args_array if x[1]]), class_name]
-
-
-    a_list = [x[0] for x in args_array if x[1] and x[0] != "class_code"]
-    b_list = [class_code] #this is for later code modification, the user will be able to search with class code only, but others are not mandatory
-
-    df = df[df.apply(lambda row: row.astype(str).str.contains('|'.join(search_args)).any()
-                            or row.astype(str).str.contains('|'.join(a_list)).any()
-                            or row.astype(str).str.contains('|'.join(b_list)).any(), axis=1)]
+    df = df[df.apply(lambda row: row.astype(str).str.startswith(tuple(search_args)).any() or
+                                    row.astype(str).str.startswith(class_code).any(), axis=1)]
 
     html_table = df.to_html(index=False, header=False)
     header_fields = df.columns.tolist()
     return render_template("exam_schedules.html", html_table=html_table, header_fields=header_fields)
+
 
 
 

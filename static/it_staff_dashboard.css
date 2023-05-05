@@ -1,200 +1,180 @@
 body {
-    margin: 0;
-    padding: 0;
-    background-color: yellowgreen;
+  margin: 0;
+  padding: 0;
+  background-color: yellowgreen;
 }
 
 .container {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 h1 {
-    font-size: 36px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    color: brown
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  color: brown;
 }
 
 .buttons {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button {
-    display: block;
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    color: #ffffff;
-    background-color: #007bff;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
-
-
-button {
-    margin-top: 20px;
-    margin-bottom: 20px;
-
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: #ffffff;
+  background-color: #007bff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 button:hover {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: purple;
-    color: white;
-    transform: scale(2.5);
-    transition: transform 0.3s ease-in-out;
-
-}
-
-
-button {
-    animation: pulse 8s infinite;
-    color: black;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background-color: #6f42c1;
+  transform: scale(1.20);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes pulse {
-    0% {
-        background-color: #007bff;
-    }
+  0% {
+    background-color: #007bff;
+  }
 
-    25% {
-        background-color: #00ff62;
-    }
+  25% {
+    background-color: #00ff62;
+  }
 
-    50% {
-        background-color: #ff0059;
-    }
+  50% {
+    background-color: #ff0059;
+  }
 
-    75% {
-        background-color: #00ffae;
-    }
+  75% {
+    background-color: #00ffae;
+  }
 
-    100% {
-        background-color: #fbff00;
-    }
-
+  100% {
+    background-color: #fbff00;
+  }
 }
 
-
-/*new elements */
-
-
-
 .computer {
-    animation: computer_shifts 15s;
-    position: absolute;
-    top: -200px;
-    left: -200px;
-    transform: scale(0.05);
-
+  animation: computer_shifts 15s;
+  position: absolute;
+  top: -200px;
+  left: -200px;
+  transform: scale(0.05);
 }
 
 @keyframes computer_shifts {
-    0% {
-        top: -1500px;
-        left: -1500px;
-    }
+  0% {
+    top: -1500px;
+    left: -1500px;
+  }
 
+  39% {
+    left: -1000px;
+    left: 900px;
+  }
 
+  50% {
+    top: 2000px;
+    left: 4000px;
+  }
 
-    39% {
-        left: -1000px;
-        left: 900px;
-    }
+  50% {
+    left: -4000px;
+  }
 
-    50% {
-        top: 2000px;
-        left: 4000px;
-    }
+  60% {
+    top: 4000px;
+  }
 
-    50% {
-        left: -4000px;
-    }
-
-    60% {
-        top: 4000px;
-    }
-
-    60% {
-        top: -200px;
-        left: -200px;
-    }
-
+  60% {
+    top: -200px;
+    left: -200px;
+  }
 }
 
 /*new elements */
 
 .computer:nth-child(1) {
-    animation-delay: 0.5s;
+  animation-delay: 0.5s;
 }
 
 .computer:nth-child(2) {
-    animation-delay: 1s;
+  animation-delay: 1s;
 }
 
 .computer:nth-child(3) {
-    animation-delay: 1.4s;
+  animation-delay: 1.4s;
 }
 
 .computer:nth-child(4) {
-    animation-delay: 1.8s;
+  animation-delay: 1.8s;
 }
 
 .computer:nth-child(5) {
-    animation-delay: 2.3s;
+  animation-delay: 2.3s;
 }
 
 .computer:nth-child(6) {
-    animation-delay: 2.6s;
+  animation-delay: 2.6s;
 }
 
 .computer:nth-child(7) {
-    animation-delay: 3.0s;
+  animation-delay: 3s;
 }
 
 .computer:nth-child(8) {
-    animation-delay: 3.3s;
+  animation-delay: 3.3s;
 }
 
 .computer:nth-child(9) {
-    animation-delay: 4.5s;
+  animation-delay: 4.5s;
 }
 
 .computer:nth-child(10) {
-    animation-delay: 5s;
+  animation-delay: 5s;
 }
 
 .computer:nth-child(11) {
-    animation-delay: 5.2s;
+  animation-delay: 5.2s;
 }
 
 .computer:nth-child(12) {
-    animation-delay: 5.4s;
+  animation-delay: 5.4s;
 }
 
 .computer:nth-child(13) {
-    animation-delay: 5.6s;
+  animation-delay: 5.6s;
 }
 
 .computer:nth-child(14) {
-    animation-delay: 5.8s;
+  animation-delay: 5.8s;
 }
 
 .computer:nth-child(15) {
-    animation-delay: 6s;
+  animation-delay: 6s;
 }

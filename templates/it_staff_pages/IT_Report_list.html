@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IT Report List</title>
-
-    <link rel="stylesheet" type="text/css" href="../static/IT_Report_list.css">
-</head>
-
-<button id="theme-button" class="theme-button" onclick="changeTheme()">Change Theme</button>
-
-<div class="box">
-    <div class="content">
-        <h2>Reported IT Problems.</h2>
-
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../static/IT_Report_list.css"
+    />
+  </head>
+  <body>
+    <div class="box">
+      <div class="content">
+        <h2>Reported IT Problems</h2>
         {% for row in rows %}
         <h3>--------------- Reported IT Problem--------------------</h3>
         <ul>
-            <li>IT Report_no : {{ row[0] }}</li>
-            <li>Room Name: {{ row[1] }}</li>
-            <li>Faculty Name: {{ row[2] }}</li>
-            <li>Problem Description: {{ row[3] }}</li>
-            <li>Date: {{ row[4] }}</li>
-            <li>Time: {{ row[5] }}</li>
-            <form action="/editITReport" method="GET">
-                <input type="hidden" name="row_data" value="{{ row|join(',') }}">
-                <button>Edit your IT Report</button>
-            </form>
+          <li>IT Report_no : {{ row[0] }}</li>
+          <li>Room Name: {{ row[1] }}</li>
+          <li>Faculty Name: {{ row[2] }}</li>
+          <li>Problem Description: {{ row[3] }}</li>
+          <li>Date: {{ row[4] }}</li>
+          <li>Time: {{ row[5] }}</li>
+          <form action="/editITReport" method="GET">
+            <input type="hidden" name="row_data" value="{{ row|join(',') }}" />
+            <button class="edit-report-button">Edit your IT Report</button>
+          </form>
         </ul>
         {% endfor %}
+      </div>
     </div>
-</div>
-<form action="it_staff/dashboard">
-    <button>Go To IT Staff Dashboard</button>
-</form>
-
-</body>
-
+    <div id="it-staff-button-container">
+        <form action="it_staff/dashboard">
+          <button id="it-staff-button">Go To IT Staff Dashboard</button>
+        </form>
+      </div>
+  </body>
 </html>

@@ -132,7 +132,7 @@ button {
 }
 
 .button.clicked {
-  transform: scale(1.5);
+  transform: scale(1.40);
   background-color: red;
 }
 
@@ -166,7 +166,7 @@ button {
   margin-bottom: 10px;
   background-color: red;
   color: white;
-  transform: scale(1.5);
+  transform: scale(1.40);
   transition: transform 0.3s ease-in-out;
 }
 
@@ -211,47 +211,14 @@ body {
   0% {
     background-color: #000000;
   }
-
-  2% {
-    background-color: #ffffff;
-  }
-
-  4% {
-    background-color: #000000;
-  }
-
-  6% {
-    background-color: #ffffff;
-  }
-
-  8% {
-    background-color: #000000;
-  }
-
-  10% {
-    background-color: #ffffff;
-  }
-
-  12% {
-    background-color: #000000;
-  }
-
-  14% {
-    background-color: #ffffff;
-  }
-
-  16% {
-    background-color: #000000;
-  }
-
-  18% {
-    background-color: #ffffff;
-  }
-
   20% {
     background-color: #fbff00;
   }
+  100% {
+    background-color: #000000;
+  }
 }
+
 
 .star {
   animation: star_shifts 15s;
@@ -291,7 +258,6 @@ body {
   }
 }
 
-/*new elements */
 
 .star:nth-child(1) {
   animation-delay: 0.5s;

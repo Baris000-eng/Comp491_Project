@@ -4,19 +4,13 @@
 <head>
 	<title>Welcome to KuClass App</title>
 	<link rel="stylesheet" type="text/css" href="../static/opening_screen.css">
-	<script src="../static/opening_screen.js"></script>
+	<script src="../static/opening_screen.js"></script> <!-- Contains the image changing animation so no need to include it in script tag within this html-->
 </head>
-
-
 <body>
-
 	<h1>Welcome to KuClass App</h1>
-
 	<div class="images">
 		<img src="../static/images/img1.png" class="image" width="300" height="150">
 	</div>
-
-
 	<button id="description-button" onclick="location.href='/open_description_text';">See KuClass Description
 		Text</button>
 	<button id="opening-screen-help-button" onclick="location.href='/get_opening_help';">See Opening Screen
@@ -24,28 +18,20 @@
 	<form action="/select_role" method="post">
 		<label for="roles">Select your role:</label>
 		<div id="roles">
-
 			<label>
 				<input type="radio" name="roles" value="student">
-
 				<img src="../static/images/student.png" alt="Student">
 				<figcaption>Student</figcaption>
-
-
 			</label>
 			<label>
 				<input type="radio" name="roles" value="teacher">
-
 				<img src="../static/images/teacher_cartoon.jpeg" alt="Teacher">
 				<figcaption>Teacher</figcaption>
-
 			</label>
 			<label>
 				<input type="radio" name="roles" value="it_staff">
-
 				<img src="../static/images/it_staff.jpeg" alt="IT Staff">
 				<figcaption>IT Staff</figcaption>
-
 			</label>
 			<label>
 				<input type="radio" name="roles" value="admin">
@@ -70,34 +56,8 @@
 		</select>
 		<br><br>
 		<input type="hidden" name="submit" value="true">
-
 		<input type="submit" class="choose" value="Submit">
-
-
 	</form>
-
 	<p>&copy; 2023 KuClass App. All rights reserved.</p>
 </body>
-
-<script>
-	let imageIndex = 1;
-	let selectedImage = document.querySelector(".image");
-	let imagesList = ["../static/images/img1.png", "../static/images/img2.png", "../static/images/img3.png"];
-	setInterval(() => {
-		if (imageIndex + 1 > imagesList.length) {
-			imageIndex = 0;
-		}
-
-		selectedImage.src = imagesList[imageIndex];
-		imageIndex = imageIndex + 1;
-	}, 1000);
-
-	const form = document.querySelector('form');
-
-</script>
-
-
-
-
-
 </html>
