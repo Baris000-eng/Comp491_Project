@@ -1,3 +1,4 @@
+from flask import session
 from typing import List
 from flask import render_template, redirect, session,  flash, request, Flask, url_for, jsonify
 import sqlite3
@@ -17,10 +18,9 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
-from flask import session
 
 def generate_classroom_reservation_code():
-    alphabet = string.ascii_letters + string.digits 
+    alphabet = string.ascii_letters + string.digits
     if 'reservation_code' in session:
         reservation_code = session['reservation_code']
     else:
@@ -33,8 +33,10 @@ def generate_classroom_reservation_code():
 def get_news_count():
     return UR.getNewsCount()
 
+
 def open_news_screen():
-    return render_template("incoming_news.html", news_data=UR.getNews(), newsCount = UR.getNewsCount())
+    return render_template("incoming_news.html", news_data=UR.getNews(), newsCount=UR.getNewsCount())
+
 
 def exam_schedules():
     df = pd.read_excel('FALL_22_EXAMS.xlsx')
@@ -263,6 +265,7 @@ def change_user_password():
 def password_change_success():
     return render_template('password_change_success.html')
 ###############STUDENT #####################################################################################
+
 
 def go_to_opening_screen():
     return render_template('opening_screen.html')
@@ -886,7 +889,7 @@ def myExamsOnly():
     b_list.append(class_code)
 
     df = df[df.apply(lambda row: row.astype(str).str.contains('|'.join(a_list)).any(
-    ) and row.astype(str).str.contains('|'.join(b_list)).any(), axis=1)]
+    ) or row.astype(str).str.contains('|'.join(b_list)).any(), axis=1)]
     html_table = df.to_html(index=False, header=False)
     header_fields = df.columns.tolist()
     return render_template("exam_schedules.html", html_table=html_table, header_fields=header_fields)

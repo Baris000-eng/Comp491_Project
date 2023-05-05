@@ -3,7 +3,7 @@
 
 <head>
   <title>Exam Schedules</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <link rel="stylesheet" href="../static/exam_schedules.css" />
 </head>
 
 <body>
@@ -34,11 +34,43 @@
 
   {% else %}
   <div class="buttons_box">
-    <form action="/myExamsOnly"><input type="text" name="class_name" value="Enter class name">
-      <br> <input type="text" name="class_code" value="Enter class code"><button>Show only my exams</button>
+    <form action="/myExamsOnly">
+      <div class="filtering-container">
+        <input type="text" name="class_name" value="Enter class name">
+        <input type="text" name="class_code" value="Enter class code">
+        <div>
+          <input type="text" class="search_filtering" placeholder="Subject">
+          <input type="text" class="search_filtering" placeholder="Catalog">
+        </div>
+        <div>
+          <input type="text" class="search_filtering" placeholder="Description">
+          <input type="text" class="search_filtering" placeholder="Section">
+        </div>
+        <div>
+          <input type="text" class="search_filtering" placeholder="Course ID">
+          <input type="text" class="search_filtering" placeholder="Exam Date">
+        </div>
+        <div>
+          <input type="text" class="search_filtering" placeholder="Start Time">
+          <input type="text" class="search_filtering" placeholder="End Time">
+        </div>
+        <div>
+          <input type="text" class="search_filtering" placeholder="Facil ID">
+          <input type="text" class="search_filtering" placeholder="Exam Type">
+        </div>
+        <div>
+          <input type="text" class="search_filtering" placeholder="Instructor Name">
+          <input type="text" class="search_filtering" placeholder="Total Enrl">
+        </div>
+        <input type="text" class="search_filtering" placeholder="Acad Org">
+        <button>Show only my exams</button>
+      </div>
     </form>
-    <form action="/allExams"><button>Show all exams</button></form>
+    <form action="/allExams">
+      <button>Show all exams</button>
+    </form>
   </div>
+
 
   {% endif %}
 
