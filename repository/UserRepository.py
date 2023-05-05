@@ -95,6 +95,7 @@ def getNews():
     c.execute('SELECT * FROM news_db')
     news_data = c.fetchall()
     conn.close()
+    return news_data
 
 
 def getNewsCount():
