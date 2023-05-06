@@ -117,8 +117,6 @@ button:hover {
   }
 }
 
-/*new elements */
-
 .computer:nth-child(1) {
   animation-delay: 0.5s;
 }

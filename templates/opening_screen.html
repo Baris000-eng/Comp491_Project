@@ -1,63 +1,83 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Welcome to KuClass App</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../static/opening_screen.css"
+    />
+    <script src="../static/opening_screen.js"></script>
+    <!-- Contains the image changing animation so no need to include it in script tag within this html-->
+  </head>
+  <body>
+    <h1>Welcome to KuClass App</h1>
+    <div class="images">
+      <img
+        src="../static/images/img1.png"
+        class="image"
+        width="450"
+        height="250"
+      />
+    </div>
+    <button
+      id="description-button"
+      onclick="location.href='/open_description_text';"
+    >
+      See KuClass Description Text
+    </button>
+    <button
+      id="opening-screen-help-button"
+      onclick="location.href='/get_opening_help';"
+    >
+      See Opening Screen Help
+    </button>
+    <form action="/select_role" method="post">
+      <label for="roles">Select your role:</label>
+      <div id="roles">
+        <label>
+          <input type="radio" name="roles" value="student" />
+          <img src="../static/images/student.png" alt="Student" />
+          <figcaption>Student</figcaption>
+        </label>
+        <label>
+          <input type="radio" name="roles" value="teacher" />
+          <img src="../static/images/teacher_cartoon.jpeg" alt="Teacher" />
+          <figcaption>Teacher</figcaption>
+        </label>
+        <label>
+          <input type="radio" name="roles" value="it_staff" />
+          <img src="../static/images/it_staff.jpeg" alt="IT Staff" />
+          <figcaption>IT Staff</figcaption>
+        </label>
+        <label>
+          <input type="radio" name="roles" value="admin" />
 
-<head>
-	<title>Welcome to KuClass App</title>
-	<link rel="stylesheet" type="text/css" href="../static/opening_screen.css">
-	<script src="../static/opening_screen.js"></script> <!-- Contains the image changing animation so no need to include it in script tag within this html-->
-</head>
-<body>
-	<h1>Welcome to KuClass App</h1>
-	<div class="images">
-		<img src="../static/images/img1.png" class="image" width="300" height="150">
-	</div>
-	<button id="description-button" onclick="location.href='/open_description_text';">See KuClass Description
-		Text</button>
-	<button id="opening-screen-help-button" onclick="location.href='/get_opening_help';">See Opening Screen
-		Help</button>
-	<form action="/select_role" method="post">
-		<label for="roles">Select your role:</label>
-		<div id="roles">
-			<label>
-				<input type="radio" name="roles" value="student">
-				<img src="../static/images/student.png" alt="Student">
-				<figcaption>Student</figcaption>
-			</label>
-			<label>
-				<input type="radio" name="roles" value="teacher">
-				<img src="../static/images/teacher_cartoon.jpeg" alt="Teacher">
-				<figcaption>Teacher</figcaption>
-			</label>
-			<label>
-				<input type="radio" name="roles" value="it_staff">
-				<img src="../static/images/it_staff.jpeg" alt="IT Staff">
-				<figcaption>IT Staff</figcaption>
-			</label>
-			<label>
-				<input type="radio" name="roles" value="admin">
-
-				<img src="../static/images/admin_cartoon.jpeg" alt="Admin">
-				<figcaption>Admin</figcaption>
-
-			</label>
-		</div>
-		<label for="background-color">Select background color:</label>
-		<select id="background-color" name="background-color" onchange="changeBackgroundColor(this.value)">
-			<option value="white">White</option>
-			<option value="gray">Gray</option>
-			<option value="lightblue">Light Blue</option>
-			<option value="lightgreen">Light Green</option>
-			<option value="lightyellow">Light Yellow</option>
-			<option value="pink">Pink</option>
-			<option value="purple">Purple</option>
-			<option value="orange">Orange</option>
-			<option value="red">Red</option>
-			<option value="blue">Blue</option>
-		</select>
-		<br><br>
-		<input type="hidden" name="submit" value="true">
-		<input type="submit" class="choose" value="Submit">
-	</form>
-	<p>&copy; 2023 KuClass App. All rights reserved.</p>
-</body>
+          <img src="../static/images/admin_cartoon.jpeg" alt="Admin" />
+          <figcaption>Admin</figcaption>
+        </label>
+      </div>
+      <label for="background-color">Select background color:</label>
+      <select
+        id="background-color"
+        name="background-color"
+        onchange="changeBackgroundColor(this.value)"
+      >
+        <option value="white">White</option>
+        <option value="gray">Gray</option>
+        <option value="lightblue">Light Blue</option>
+        <option value="lightgreen">Light Green</option>
+        <option value="lightyellow">Light Yellow</option>
+        <option value="pink">Pink</option>
+        <option value="purple">Purple</option>
+        <option value="orange">Orange</option>
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+      </select>
+      <br /><br />
+      <input type="hidden" name="submit" value="true" />
+      <input type="submit" class="choose" value="Submit" />
+    </form>
+      <p>&copy; 2023 KuClass App All rights reserved</p>
+  </body>
 </html>

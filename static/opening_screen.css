@@ -1,396 +1,328 @@
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(0, 255, 238);
-    font-family: Arial, Helvetica, sans-serif
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../static/images/classroom.png");
+  background-size: cover;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: black;
+  margin: 10px 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 h1 {
-    font-size: 48px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 60px;
-    text-shadow: 2px 2px #888888;
-    color: #333;
-    border: 10px;
-    background-color: green;
-    border-radius: 10px;
-    padding: 10px;
-    color: white;
-    filter: brightness(1.2) saturate(1.5);
-    transition: box-shadow 0.3s ease-in-out;
-    text-align: center;
-    top: 10;
-    left: 0;
-    right: 0;
-    padding: 20px;
-
-    z-index: 9999;
+  font-size: 48px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 60px;
+  text-shadow: 2px 2px #888888;
+  color: #333;
+  border: 10px;
+  background-color: green;
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  filter: brightness(1.2) saturate(1.5);
+  transition: box-shadow 0.3s ease-in-out;
+  text-align: center;
+  top: 10;
+  left: 0;
+  right: 0;
+  z-index: 9999;
 }
 
 h1:hover {
-    box-shadow: 0px 0px 50px 30px rgba(255, 0, 0, 0.8);
-    filter: brightness(1.4) saturate(1.8);
+  box-shadow: 0px 0px 50px 30px rgba(255, 0, 0, 0.8);
+  filter: brightness(1.4) saturate(1.8);
 }
 
-
-
-
-#description-button {
-    animation: boomerang 13s ease-in-out infinite;
+.image {
+  margin-top: -20px;
+  margin-bottom: 20px;
 }
-
-@keyframes boomerang {
-    20% {
-        transform: translateX(0) rotate(0deg);
-    }
-
-    25% {
-        transform: translateX(50%) rotate(180deg);
-    }
-
-    35% {
-        transform: translateX(100%) rotate(0deg);
-    }
-
-    40% {
-        transform: translateX(50%) rotate(180deg);
-    }
-
-    45% {
-        transform: translateX(0) rotate(0deg);
-    }
-}
-
-#opening-screen-help-button {
-    animation: boomerang2 15s ease-in-out infinite;
-}
-
-@keyframes boomerang2 {
-    20% {
-        transform: translateX(0) rotate(0deg);
-    }
-
-    25% {
-        transform: translateX(-50%) rotate(-180deg);
-    }
-
-    35% {
-        transform: translateX(-100%) rotate(0deg);
-    }
-
-    40% {
-        transform: translateX(-50%) rotate(-180deg);
-    }
-
-    45% {
-        transform: translateX(0) rotate(0deg);
-    }
-}
-
 
 #description,
 #opening_help {
-    background-color: darkcyan;
-    padding: 20px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    font-size: 13px;
-    font-weight: bold;
-    display: none;
-    line-height: 1.5;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  background-color: darkcyan;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  display: none;
+  line-height: 1.5;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 #description p:first-child {
-    margin-top: 0px;
+  margin-top: 0px;
 }
 
 #description p:last-child {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 #help-text {
-    background-color: darkcyan;
-    padding: 20px;
-    font-size: 13px;
-    font-weight: bold;
-    display: none;
-    line-height: 1.5;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-    margin-bottom: 20px;
+  background-color: darkcyan;
+  padding: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  display: none;
+  line-height: 1.5;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 
 #help-text,
 #description {
-    display: none;
+  display: none;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    width: 100%;
-    max-width: 750px;
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 100%;
+  max-width: 750px;
+  margin: 0;
+}
+
+form:hover {
+  background-color: darkred;
 }
 
 label {
-    color: #333;
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 20px;
-    display: inline-block;
-    text-align: right;
-    margin-right: 20px;
-    min-width: 200px;
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+  display: inline-block;
+  text-align: right;
+  margin-right: 20px;
+  min-width: 200px;
 }
 
 select {
-    width: 100%;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-bottom: 2px solid #45a049;
-    font-size: 20px;
-    appearance: none;
-    background-color: #fff;
-    color: #555;
-    font-family: inherit;
+  width: 100%;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-bottom: 2px solid #45a049;
+  font-size: 20px;
+  appearance: none;
+  background-color: #fff;
+  color: #555;
+  font-family: inherit;
 }
 
-
-
 input[type="submit"] {
-    background-color: #45a049;
-    color: #fff;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    align-items: center;
-    font-size: 20px;
-    transition: background-color 0.3s;
-    font-family: inherit;
-    text-transform: uppercase;
-    border-bottom: 10px;
+  background-color: #45a049;
+  color: #fff;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-items: center;
+  font-size: 20px;
+  transition: background-color 0.3s;
+  font-family: inherit;
+  text-transform: uppercase;
+  border-bottom: 10px;
 }
 
 input[type="submit"]:hover {
-    background-color: #eb0000;
-    align-items: center;
+  background-color: red;
+  color: #3e8e41;
+  transform: scale(1.35);
+  border-color: #a600ff;
 }
 
-
-
-form>* {
-    width: 100%;
-    max-width: 400px;
+form > * {
+  width: 100%;
+  max-width: 400px;
 }
 
 @media screen and (max-width: 600px) {
-    h1 {
-        font-size: 36px;
-    }
+  h1 {
+    font-size: 36px;
+  }
 
-    label {
-        min-width: 100px;
-    }
+  label {
+    min-width: 100px;
+  }
 }
 
 button {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: red;
-    transform: scale(1.15);
+  background-color: red;
+  transform: scale(1.15);
+  border-color: pink;
 }
 
 input[type="button"][value="Login"] {
-    background-color: #4caf50;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
-
-
 
 label {
-    color: #333;
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 20px;
-    display: block;
-    text-align: left;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  display: block;
+  text-align: left;
 }
 
-
-
-
-
 button {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    width: 100%;
-    max-width: 750px;
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 100%;
+  border-color: darkblue;
+  background-color: lightblue;
+  max-width: 750px;
+  margin: 0;
 }
 
 label,
 select {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 input[type="submit"] {
-
-    font-size: 16px;
-    font-weight: bold;
-    color: white;
-    background-color: blue;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: blue;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
-
-input[type="submit"]:hover {
-    background-color: red;
-
-    transform: scale(1.5);
-}
-
 
 #description-button:hover,
 #opening-screen-help-button:hover {
-    background-color: #a600ff;
-    transform: scale(1.5);
+  background-color: #a600ff;
+  transform: scale(1.35);
+  border-color: darkgreen;
 }
 
 input[type="button"]:hover {
-    background-color: red;
-    color: #3e8e41;
-    transform: scale(1.5);
-}
-
-
-
-h1 {
-    animation: slideIn 1s;
+  background-color: red;
+  color: #3e8e41;
+  transform: scale(1.35);
+  border-color: #a600ff;
 }
 
 @keyframes slideIn {
-    from {
-        transform: translateX(-100%);
-    }
+  from {
+    transform: translateX(-100%);
+  }
 }
-
-
-input[type="submit"]:hover {
-    background-color: red;
-    color: #3e8e41;
-    transform: scale(1.35);
-}
-
-
 
 #roles {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 #roles label {
-    margin: 0;
-    padding: 0;
-    position: relative;
+  margin: 0;
+  padding: 0;
+  position: relative;
 }
 
 #roles input[type="radio"] {
-    display: none;
+  display: none;
 }
 
 #roles img {
-    display: block;
+  display: block;
 
-    margin: 0 10px;
-    height: 80px;
-    margin-left: 40px;
-    margin-top: 40px;
-    width: 80px;
-    transition: all 0.3s ease-in-out;
+  margin: 0 10px;
+  height: 80px;
+  margin-left: 40px;
+  margin-top: 40px;
+  width: 80px;
+  transition: all 0.3s ease-in-out;
 }
 
 #roles label:hover img {
-    transform: translateY(-10px);
+  transform: translateY(-10px);
 }
 
 #roles input[type="radio"]:checked + img {
-    transform: scale(1.2) translateY(-20%);
-    border: 3px solid green;
-    position: relative;
-    z-index: 1;
+  transform: scale(1.2) translateY(-20%);
+  border: 3px solid green;
+  position: relative;
+  z-index: 1;
 }
-
 
 .excel-wrapper {
-    overflow-x: auto;
-
+  overflow-x: auto;
 }
 
-
 figure {
-    display: block;
-    margin: 0 auto;
-    margin-left: 20px;
-    text-align: center;
+  display: block;
+  margin: 0 auto;
+  margin-left: 20px;
+  text-align: center;
 }
 
 figcaption {
-    font-style: center;
-    font-size: 14px;
-    margin-left: 50px;
-    position: absolute;
-    bottom: 5;
-    left: 0;
-    right: 0;
-
+  font-style: center;
+  font-size: 14px;
+  margin-left: 50px;
+  position: absolute;
+  bottom: 5;
+  left: 0;
+  right: 0;
 }
-
 
 input[type="submit"] {
-    border: 5px solid rgb(12, 178, 0);
-    animation: rotate-border 5s linear infinite;
-    font-size: 16px;
+  border: 5px solid rgb(12, 178, 0);
+  animation: rotate-border 5s linear infinite;
+  font-size: 16px;
 }
 
-
 .buttons_box {
-    align-items: flex-start;
+  align-items: flex-start;
 }
