@@ -136,11 +136,8 @@ app.route('/seeITReports',
           methods=['GET'])(US.seeITReports)
 
 
-app.route('/AdminUserStats', methods=['GET'])(US.seeUserStats)
-
-app.route('/AdminReservationStats', methods=['GET'])(US.seeReserveStats)
 app.route('/createNewsElement', methods=['GET', "POST"])(US.createNewsElement)
-app.route('/AdminITStats', methods=['GET'])(US.AdminITStats)
+app.route('/get_it_statistics_for_admin', methods=['GET'])(US.it_report_statistics_for_admin)
 ###########################################################################################################
 # For Admin
 ###########################################################################################################
@@ -168,11 +165,15 @@ def login(role):
     return US.user_login(request, role)
 
 
+
+
 # socket_chat.on("connect")(US.user_connected)
 # socket_chat.on("disconnect")(US.user_disconnected)
 app.route('/send_chat_message_student')(US.send_chat_message_student)
 
 
+
+app.route("/get_it_report_statistics_for_admin")(US.it_report_statistics_for_admin)
 app.route('/see_plot_of_reservation_num_per_role')(PS.plot_reservations_per_role)
 app.route('/see_plot_of_reservation_num_per_class')(PS.plot_reservations_per_class)
 app.route('/see_plot_of_reservation_num_per_purpose')(PS.plot_reservations_per_purpose)
@@ -188,6 +189,20 @@ app.route("/see_plot_of_user_numbers_per_priority_value")(PS.plot_user_numbers_p
 app.route("/see_plot_of_user_numbers_per_role")(PS.plot_user_numbers_per_role)
 app.route("/see_piechart_of_user_numbers_per_priority_value")(PS.plot_piechart_of_user_numbers_per_priority_value)
 app.route("/see_piechart_of_user_numbers_per_role")(PS.plot_piechart_of_user_numbers_per_role)
+
+
+app.route('/see_barchart_of_it_report_num_by_time_period')(PS.plot_barchart_of_it_report_num_by_time_period)
+app.route('/see_piechart_of_it_report_num_by_time_period')(PS.plot_piechart_of_it_report_num_by_time_period)
+
+app.route('/see_histogram_of_it_report_num_by_classroom_name')(PS.plot_histogram_of_it_report_numbers_per_classroom_name)
+app.route('/see_piechart_of_it_report_num_by_classroom_name')(PS.plot_piechart_of_it_report_numbers_per_classroom_name)
+
+
+app.route('/see_histogram_of_it_report_num_by_faculty_name')(PS.plot_histogram_of_it_report_numbers_per_faculty_name)
+app.route('/see_piechart_of_it_report_num_by_faculty_name')(PS.plot_piechart_of_it_report_numbers_per_faculty_name)
+
+app.route('/see_barchart_of_it_report_num_per_problem_description')(PS.plot_histogram_of_it_report_numbers_per_problem_description)
+app.route('/see_piechart_of_it_report_num_per_problem_description')(PS.plot_piechart_of_it_report_numbers_per_problem_description)
 
 
 app.route("/seeReservationStatistics")(US.get_reservation_statistics_screen)

@@ -246,10 +246,10 @@ def plot_user_numbers_per_priority_value():
     conn.close()
 
     priority_values = [row[0] for row in data]
-    total_reservations = [row[1] for row in data]
+    total_number_of_users = [row[1] for row in data]
 
     fig, ax = plt.subplots(figsize=(15,15))
-    ax.bar(priority_values, total_reservations)
+    ax.bar(priority_values, total_number_of_users)
     ax.set_title('Total Number of Users for Each Priority Value')
     ax.set_xlabel('Priority Value')
     ax.set_ylabel('Total Number of Users')
@@ -277,10 +277,10 @@ def plot_piechart_of_user_numbers_per_priority_value():
     conn.close()
 
     priority_values = [row[0] for row in data]
-    total_reservations = [row[1] for row in data]
+    total_number_of_users = [row[1] for row in data]
 
     fig, ax = plt.subplots(figsize=(15, 15))
-    ax.pie(total_reservations, labels=priority_values, autopct='%1.1f%%', startangle=90)
+    ax.pie(total_number_of_users, labels=priority_values, autopct='%1.1f%%', startangle=90)
     ax.set_title('Total Number of Users for Each Priority Value')
     plt.legend(title="User Priority Values", loc="upper left", bbox_to_anchor=(1, 0, 0.5, 1))
 
@@ -293,7 +293,6 @@ def plot_piechart_of_user_numbers_per_priority_value():
     html = f'<img src="data:image/png;base64,{png_image_base64}"/>'
     return html
 
-
 def plot_user_numbers_per_role():
     conn = sqlite3.connect('users_db.db')
     c = conn.cursor()
@@ -302,10 +301,10 @@ def plot_user_numbers_per_role():
     conn.close()
 
     user_roles = [row[0] for row in data]
-    total_reservations = [row[1] for row in data]
+    total_number_of_users = [row[1] for row in data]
 
     fig, ax = plt.subplots(figsize=(15,15))
-    ax.bar(user_roles, total_reservations)
+    ax.bar(user_roles, total_number_of_users)
     ax.set_title('Total Number of Users for Each User Role')
     ax.set_xlabel('Role')
     ax.set_ylabel('Number of Users')
@@ -315,7 +314,7 @@ def plot_user_numbers_per_role():
     ax.set_xticklabels(user_roles)
     plt.xticks(rotation=45, ha="right")
 
-    ax.set_yticks(range(0, max(total_reservations)+1, 5))
+    ax.set_yticks(range(0, max(total_number_of_users)+1, 5))
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
     buffer.seek(0)
@@ -348,5 +347,265 @@ def plot_piechart_of_user_numbers_per_role():
 
     html = f'<img src="data:image/png;base64,{png_image_base64}"/>'
     return html
+
+#########################DATA VISUALIZATIONS FOR IT REPORTS#################################################
+def plot_piechart_of_it_report_numbers_per_problem_description():
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+    c.execute('SELECT problem_description, COUNT(*) FROM IT_Report_logdb GROUP BY problem_description')
+    data = c.fetchall()
+    conn.close()
+
+    problem_descriptions = [row[0] for row in data]
+    total_number_of_it_reports = [row[1] for row in data]
+
+    fig, ax = plt.subplots(figsize=(15,15))
+    ax.pie(total_number_of_it_reports, labels=problem_descriptions, autopct='%1.1f%%', startangle=90)
+    ax.set_title('Number of It Reports per Problem Description')
+    plt.legend(title="Problem Descriptions", loc="upper left", bbox_to_anchor=(1, 0, 0.5, 1))
+    
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    png_image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+    html = f'<img src="data:image/png;base64,{png_image_base64}"/>'
+    return html
+
+def plot_histogram_of_it_report_numbers_per_problem_description():
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+    c.execute('SELECT problem_description, COUNT(*) FROM IT_Report_logdb GROUP BY problem_description')
+    data = c.fetchall()
+    conn.close()
+
+    problem_descriptions = [row[0] for row in data]
+    total_number_of_it_reports = [row[1] for row in data]
+
+    fig, ax = plt.subplots(figsize=(15,15))
+    ax.bar(problem_descriptions, total_number_of_it_reports)
+    ax.set_title('Number of IT Reports per Problem Description')
+    ax.set_xlabel('Problem Descriptions')
+    ax.set_ylabel('Number of IT Reports')
+
+    ticks = np.linspace(0, len(problem_descriptions)-1, len(problem_descriptions))
+    ax.set_xticks(ticks)
+    ax.set_xticklabels(problem_descriptions)
+    plt.xticks(rotation=45, ha="right")
+    
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    png_image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+    html = f'<img src="data:image/png;base64,{png_image_base64}"/>'
+    return html
+
+
+def plot_piechart_of_it_report_numbers_per_classroom_name():
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+    c.execute('SELECT room_name, COUNT(*) FROM IT_Report_logdb GROUP BY room_name')
+    data = c.fetchall()
+    conn.close()
+
+    room_names = [row[0] for row in data]
+    total_number_of_it_reports = [row[1] for row in data]
+
+    fig, ax = plt.subplots(figsize=(15,15))
+    ax.pie(total_number_of_it_reports, labels=room_names, autopct='%1.1f%%', startangle=90)
+    ax.set_title('Number of It Reports per Classroom Name')
+    plt.legend(title="Classroom Names", loc="upper left", bbox_to_anchor=(1, 0, 0.5, 1))
+    
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    png_image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+    html = f'<img src="data:image/png;base64,{png_image_base64}"/>'
+    return html
+
+def plot_histogram_of_it_report_numbers_per_classroom_name():
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+    c.execute('SELECT room_name, COUNT(*) FROM IT_Report_logdb GROUP BY room_name')
+    data = c.fetchall()
+    conn.close()
+
+    room_names = [row[0] for row in data]
+    total_number_of_it_reports = [row[1] for row in data]
+
+    fig, ax = plt.subplots(figsize=(15,15))
+    ax.bar(room_names, total_number_of_it_reports)
+    ax.set_title('Number of IT Reports for Each Classroom')
+    ax.set_xlabel('Classroom Names')
+    ax.set_ylabel('Number of IT Reports')
+
+    ticks = np.linspace(0, len(room_names)-1, len(room_names))
+    ax.set_xticks(ticks)
+    ax.set_xticklabels(room_names)
+    plt.xticks(rotation=45, ha="right")
+    
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    png_image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+    html = f'<img src="data:image/png;base64,{png_image_base64}"/>'
+    return html
+
+
+def plot_piechart_of_it_report_numbers_per_faculty_name():
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+    c.execute('SELECT faculty_name, COUNT(*) FROM IT_Report_logdb GROUP BY faculty_name')
+    data = c.fetchall()
+    conn.close()
+
+    faculty_names = [row[0] for row in data]
+    total_number_of_it_reports = [row[1] for row in data]
+
+    fig, ax = plt.subplots(figsize=(15,15))
+    ax.pie(total_number_of_it_reports, labels=faculty_names, autopct='%1.1f%%', startangle=90)
+    ax.set_title('Number of It Reports per Faculty')
+    plt.legend(title="Faculty Names", loc="upper left", bbox_to_anchor=(1, 0, 0.5, 1))
+    
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    png_image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+    html = f'<img src="data:image/png;base64,{png_image_base64}"/>'
+    return html
+
+def plot_histogram_of_it_report_numbers_per_faculty_name():
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+    c.execute('SELECT faculty_name, COUNT(*) FROM IT_Report_logdb GROUP BY faculty_name')
+    data = c.fetchall()
+    conn.close()
+
+    faculty_names = [row[0] for row in data]
+    total_number_of_it_reports = [row[1] for row in data]
+
+    fig, ax = plt.subplots(figsize=(15,15))
+    ax.bar(faculty_names, total_number_of_it_reports)
+    ax.set_title('Number of IT Reports for Each Faculty Name')
+    ax.set_xlabel('Faculty Names')
+    ax.set_ylabel('Number of IT Reports')
+
+    ticks = np.linspace(0, len(faculty_names)-1, len(faculty_names))
+    ax.set_xticks(ticks)
+    ax.set_xticklabels(faculty_names)
+    plt.xticks(rotation=45, ha="right")
+    
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    png_image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+    html = f'<img src="data:image/png;base64,{png_image_base64}"/>'
+    return html
+
+
+def plot_piechart_of_it_report_num_by_time_period():
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+
+    c.execute('SELECT strftime("%H", time), COUNT(*) FROM IT_Report_logdb GROUP BY strftime("%H", time)')
+    data = c.fetchall()
+
+    hours = [int(row[0]) for row in data]
+    counts = [int(row[1]) for row in data]
+
+    labels = [f'{hour}:00-{hour+1}:00' for hour in hours]
+
+    fig, ax = plt.subplots()
+    ax.pie(counts, labels=labels, autopct='%1.1f%%')
+    ax.set_title('IT Report Count by Time Period')
+
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    piechart_png_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+    html = f'<img src="data:image/png;base64,{piechart_png_base64}"/>'
+    return html
+
+
+#####################how many IT reports are send in which time period in a day (i.e.: 2 in noon, 3 in morning ...)#######
+def plot_barchart_of_it_report_num_by_time_period():
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+
+    c.execute('SELECT strftime("%H", time), COUNT(*) FROM IT_Report_logdb GROUP BY strftime("%H", time)')
+    data = c.fetchall()
+
+    hours = [int(row[0]) for row in data]
+    counts = [int(row[1]) for row in data]
+
+    labels = [f'{hour}:00-{hour+1}:00' for hour in hours]
+
+    fig, ax = plt.subplots()
+    ax.bar(labels, counts)
+    ax.set_xlabel('Time Period')
+    ax.set_ylabel('IT Report Count')
+    ax.set_title('IT Report Count by Time Period')
+
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    barchart_png_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+    html = f'<img src="data:image/png;base64,{barchart_png_base64}"/>'
+    return html
+
+#########################DATA VISUALIZATIONS FOR IT REPORTS#################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

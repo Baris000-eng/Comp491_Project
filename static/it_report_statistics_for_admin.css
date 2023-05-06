@@ -1,0 +1,133 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: lightseagreen;
+  }
+  
+  h1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: red;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  
+  p {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    color: green;
+    text-shadow: 1px 1px #fff;
+    background-color: lightpink;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px #888;
+  }
+  
+  p:hover {
+    background-color: aqua;
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+    padding: 50px;
+    background-color: lightgreen;
+    border-radius: 20px;
+    box-shadow: 1px 1px 3px #888;
+  }
+  
+  .card:hover {
+    background-color: burlywood;
+  }
+  
+  .card h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: red;
+    text-transform: uppercase;
+  }
+  
+  .group-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .group-container .btn-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 25px;
+    margin-left: 25px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: lightcoral;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px #888;
+    flex-basis: calc(100% / 4);
+  }
+  
+  .group-container .btn-group h1:first-child {
+    font-size: 20px;
+    margin: 0;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px #888;
+  }
+  
+  .group-container .btn-group button {
+    margin-top: 10px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .group-container .btn-group {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+  
+  .group-container .btn-group:hover {
+    background-color: rosybrown;
+    transform: scale(1.05);
+  }
+  
+  .group-container .btn-group:nth-child(2n+1) {
+    margin-right: 0;
+  }
+  
+  button {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: darkblue;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+    background-color: darkcyan;
+    cursor: pointer;
+  }
+  

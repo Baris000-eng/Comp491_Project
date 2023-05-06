@@ -651,34 +651,9 @@ def seeITReports():
     data = UR.getAllITReports()
     return render_template('admin_pages/admin_see_IT_reports.html', IT_Reports=data)
 
-def seeUserStats():
-    conn = sqlite3.connect('users_db.db')
-    c = conn.cursor()
-    c.execute('SELECT COUNT(*) FROM users_db')
-    user_count = c.fetchone()[0]
-    c.execute('SELECT role, COUNT(*) FROM users_db GROUP BY role')
-    roles = dict(c.fetchall())
-    conn.close()
-    return render_template('admin_user_stats.html', user_count=user_count, roles=roles)
 
-
-def seeReserveStats():
-    conn = sqlite3.connect('IT_Report_logdb.db')
-    c = conn.cursor()
-    c.execute('SELECT * FROM reservations_db')
-    data = c.fetchall()
-    conn.close()
-    return render_template('/admin_pages/admin_see_IT_reports.html', reservations=data)
-
-
-def AdminITStats():
-    conn = sqlite3.connect('IT_Report_logdb.db')
-    c = conn.cursor()
-    c.execute('SELECT * FROM IT_Report_logdb')
-    data = c.fetchall()
-    conn.close()
-    return render_template('admin_pages/admin_see_IT_reports.html', reservations=data)
-
+def it_report_statistics_for_admin():
+    return render_template("it_report_statistics_for_admin.html")
 
 def enterChat():
     conn = sqlite3.connect('chat_db.db')
