@@ -40,7 +40,7 @@ p:hover {
   align-items: center;
   flex-direction: column; 
   padding: 50px;
-  background-color: white;
+  background-color: violet;
   border-radius: 20px;
   box-shadow: 1px 1px 3px #888;
 }
@@ -76,6 +76,7 @@ p:hover {
   background-color: lightcoral;
   border-radius: 10px;
   box-shadow: 1px 1px 3px #888;
+  flex-basis: calc(100% / 4); 
 }
 
 .group-container .btn-group h1:first-child {

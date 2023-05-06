@@ -70,12 +70,14 @@ p:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-right: 20px;
-  margin-bottom: 20px;
+  margin-right: 25px;
+  margin-left: 25px;
+  margin-bottom: 25px;
   padding: 20px;
   background-color: lightcoral;
   border-radius: 10px;
   box-shadow: 1px 1px 3px #888;
+  flex-basis: calc(100% / 4);
 }
 
 .group-container .btn-group h1:first-child {
