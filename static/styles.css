@@ -3,7 +3,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   background-color: rgb(0, 255, 238);
   font-family: Arial, Helvetica, sans-serif;
   margin-top: 100px;
@@ -16,19 +15,16 @@ h1 {
   margin-bottom: 60px;
   text-shadow: 2px 2px #888888;
   color: #333;
-  border: 10px;
   background-color: green;
+  border: 10px;
   border-radius: 10px;
-  padding: 10px;
+  padding: 20px;
   color: white;
   filter: brightness(1.2) saturate(1.5);
   transition: box-shadow 0.3s ease-in-out;
-
   top: 10;
   left: 0;
   right: 0;
-  padding: 20px;
-
   z-index: 9999;
 }
 
@@ -38,38 +34,8 @@ h1:hover {
 }
 
 #description,
-#opening_help {
-  background-color: darkcyan;
-  padding: 20px;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  font-size: 13px;
-  font-weight: bold;
-  display: none;
-  line-height: 1.5;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
-}
-
-#description p:first-child {
-  margin-top: 0px;
-}
-
-#description p:last-child {
-  margin-bottom: 0px;
-}
-
-#help-text {
-  background-color: darkcyan;
-  padding: 20px;
-  font-size: 13px;
-  font-weight: bold;
-  display: none;
-  line-height: 1.5;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
-
+#opening_help,
+#help-text,
 #student-signup-help-text {
   background-color: darkcyan;
   padding: 20px;
@@ -82,9 +48,12 @@ h1:hover {
   margin-bottom: 20px;
 }
 
-#help-text,
-#description {
-  display: none;
+#description p:first-child {
+  margin-top: 0px;
+}
+
+#description p:last-child {
+  margin-bottom: 0px;
 }
 
 form {
@@ -123,12 +92,9 @@ select {
   font-family: inherit;
 }
 
-input[type="submit"]:active {
-  color: rgb(0, 0, 0);
-  background-color: #ffffff;
-}
-
-input[type="submit"] {
+input[type="submit"]:active,
+input[type="submit"],
+input[type="button"][value="Login"] {
   background-color: #45a049;
   color: #fff;
   padding: 14px 20px;
@@ -136,14 +102,19 @@ input[type="submit"] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-
   align-items: center;
   font-size: 20px;
-  transition: background-color 0.3s;
   font-family: inherit;
-  text-transform: uppercase;
-  border-bottom: 10px;
 }
+
+input[type="submit"]:hover,
+input[type="button"][value="Login"]:hover,
+input:hover {
+  background-color: #eb0000;
+  border-color: black;
+}
+ 
+
 
 input[type="submit"]:hover {
   background-color: #eb0000;
@@ -319,7 +290,7 @@ input[type="submit"] {
 }
 
 input[type="button"]:hover {
-  background-color: lightgreen;
+  background-color: red;
   border-color: black;
   transform: scale(1.3);
 }
@@ -338,7 +309,6 @@ input[type="button"]:hover {
 
 #error-message:hover {
   transform: scale(1.01);
-  border-color: black;
 }
 
 .error-message {
@@ -355,7 +325,6 @@ input[type="button"]:hover {
 
 .error-message:hover {
   transform: scale(1.01);
-  border-color: black;
 }
 
 #teacher-signup-button:hover {

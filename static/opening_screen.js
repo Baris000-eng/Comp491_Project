@@ -1,7 +1,3 @@
-function changeBackgroundColor(color) {
-  document.body.style.backgroundColor = color;
-}
-
 document.addEventListener("DOMContentLoaded", function() {
   const images = [
     "../static/images/img1.png",
