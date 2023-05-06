@@ -506,10 +506,7 @@ def report_it():
 
 
 def seeITReport():
-    conn = sqlite3.connect('IT_Report_logdb.db')
-    c = conn.cursor()
-    c.execute('SELECT * FROM IT_Report_logdb')
-    rows = c.fetchall()
+    rows = UR.getAllITReports()
     return render_template('it_staff_pages/IT_Report_list.html', rows=rows)
 
 
@@ -543,10 +540,7 @@ def user_disconnected():
 
 
 def see_already_reserved_classes():
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
-    c.execute('SELECT * FROM reservations_db')
-    rows = c.fetchall()
+    rows = UR.getAllReservations()
     return render_template('classroom_inside_reservation.html', rows=rows)
 #########################################################################################################################################################################
 
@@ -592,41 +586,11 @@ def OpenReserveScreen():
 
 
 def seeTheUsers():
-    # Connect to the database
-    print("hi")
-
-    # TODO: Connecting to database and fetching data is duty of repository layer
-    # Create a method like getAllUsernames in UserRepository, and call it here
-    conn = sqlite3.connect('users_db.db')
-    c = conn.cursor()
-
-    # Retrieve the usernames from the database
-    c.execute('SELECT username FROM users_db')
-
-    usernames = [row[0] for row in c.fetchall()]
-
-    # Close the database connection
-    conn.close()
-
-    # Render the HTML template with the usernames
-
+    usernames = UR.getAllUsernames()
     return render_template('admin_pages/admin_see_users.html', usernames=usernames)
 
-
 def seeTheReservations():
-    # Connect to the database
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
-
-    # Retrieve all the rows from the reservations_db table
-    c.execute('SELECT * FROM reservations_db')
-    data = c.fetchall()
-
-    # Close the database connection
-    conn.close()
-    print(data)
-
-    # Render the HTML template with the rows
+    data = UR.getAllReservations()
     return render_template('admin_pages/see_the_reservations.html', reservations=data)
 
 
@@ -645,7 +609,6 @@ def editITReport():
 
 
 def deleteReservation():
-
     role = request.form['role']
     date = request.form['date']
     time = request.form['time']
@@ -653,23 +616,16 @@ def deleteReservation():
     public_or_private = request.form['public_or_private']
     classroom = request.form['classroom']
     priority_reserved = request.form['priority_reserved']
+    UR.delete_reservation_from_db(
+        role = role,
+        date = date,
+        time = time,
+        username = username,
+        public_or_private = public_or_private,
+        classroom = classroom,
+        priority_reserved = priority_reserved
+    )
 
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
-
-    c.execute('''DELETE FROM reservations_db WHERE
-                 role = ? AND
-                 date = ? AND
-                 time = ? AND
-                 username = ? AND
-                 public_or_private = ? AND
-                 classroom = ? AND
-                 priority_reserved = ?''',
-              (role, date, time, username, public_or_private, classroom, priority_reserved))
-
-    conn.commit()
-    conn.close()
-    print("1hi")
     return render_template("successsDeletedClass.html")
 
 
@@ -680,95 +636,51 @@ def deleteITReport():
     problem_description = request.form['problem_description']
     date = request.form['date']
     time = request.form['time']
-
-    conn = sqlite3.connect('IT_Report_logdb.db')
-    c = conn.cursor()
-    c.execute('''DELETE FROM IT_Report_logdb WHERE
-                 it_report_no = ? AND
-                 room_name = ? AND
-                 faculty_name = ? AND
-                 problem_description = ? AND
-                 date = ? AND
-                 time = ?''',
-              (report_no, room_name, faculty_name, problem_description, date, time))
-    conn.commit()
-    conn.close()
+    UR.delete_it_report_from_db(
+        report_no = report_no,
+        room_name = room_name,
+        faculty_name = faculty_name,
+        problem_description = problem_description,
+        date = date,
+        time = time
+    )
     return render_template("successDeletedITReport.html")
 
 
 def seeITReports():
-    # Connect to the database
-    conn = sqlite3.connect('IT_Report_logdb.db')
-    c = conn.cursor()
-
-    # Retrieve all the rows from the reservations_db table
-    c.execute('SELECT * FROM IT_Report_logdb')
-    data = c.fetchall()
-
-    # Close the database connection
-    conn.close()
-    print(data)
-
-    # Render the HTML template with the rows
+    data = UR.getAllITReports()
     return render_template('admin_pages/admin_see_IT_reports.html', IT_Reports=data)
 
-
 def seeUserStats():
-    # Connect to the database
     conn = sqlite3.connect('users_db.db')
     c = conn.cursor()
-
-    # Retrieve the user count and role counts from the database
     c.execute('SELECT COUNT(*) FROM users_db')
     user_count = c.fetchone()[0]
-
     c.execute('SELECT role, COUNT(*) FROM users_db GROUP BY role')
     roles = dict(c.fetchall())
-
-    # Close the database connection
     conn.close()
-
-    # Render the HTML template with the user stats
     return render_template('admin_user_stats.html', user_count=user_count, roles=roles)
 
 
 def seeReserveStats():
-    # Connect to the database
     conn = sqlite3.connect('IT_Report_logdb.db')
     c = conn.cursor()
-
-    # Retrieve all the rows from the reservations_db table
     c.execute('SELECT * FROM reservations_db')
     data = c.fetchall()
-
-    # Close the database connection
     conn.close()
-    print(data)
-
-    # Render the HTML template with the rows
     return render_template('/admin_pages/admin_see_IT_reports.html', reservations=data)
 
 
 def AdminITStats():
-    # Connect to the database
     conn = sqlite3.connect('IT_Report_logdb.db')
     c = conn.cursor()
-
-    # Retrieve all the rows from the reservations_db table
     c.execute('SELECT * FROM IT_Report_logdb')
     data = c.fetchall()
-
-    # Close the database connection
     conn.close()
-    print(data)
-
-    # Render the HTML template with the rows
     return render_template('admin_pages/admin_see_IT_reports.html', reservations=data)
 
 
 def enterChat():
-
-    # Connect to the database
     conn = sqlite3.connect('chat_db.db')
     c = conn.cursor()
     # Retrieve all the rows from the reservations_db table
@@ -796,57 +708,21 @@ def open_it_staff_reservation_screen():
 def seeOnlyMyReserves():
     incoming_arg = request.args.get('reservationType')
     if incoming_arg == "myReservations":
-
-        # Connect to the database
         conn = sqlite3.connect('reservations_db.db')
         c = conn.cursor()
-
-        # Retrieve all the rows from the reservations_db table
         query1 = 'SELECT * FROM reservations_db where username = "' + \
             session["username"] + '"'
         c.execute(query1)
         data = c.fetchall()
-
-        # Close the database connection
         conn.close()
-        print(data)
-
-        # Render the HTML template with the rows
         return render_template('classroom_inside_reservation.html', rows=data)
-
     else:
-
-        # Connect to the database
-        conn = sqlite3.connect('reservations_db.db')
-        c = conn.cursor()
-
-        # Retrieve all the rows from the reservations_db table
-        query1 = 'SELECT * FROM reservations_db'
-        c.execute(query1)
-        data = c.fetchall()
-
-        # Close the database connection
-        conn.close()
-        print(data)
-
-        # Render the HTML template with the rows
+        data = UR.getAllReservations()
         return render_template('classroom_inside_reservation.html', rows=data)
 
 
 def delete_old_chat_messages():
-    # Connect to the database
-    conn = sqlite3.connect('chat_db.db')
-    c = conn.cursor()
-
-    c.execute("SELECT COUNT(*) FROM chat_db")
-    count = c.fetchone()[0]
-
-    if count > 10:
-        c.execute("DELETE FROM chat_db")
-        print("Deleted all chat messages.")
-
-    conn.commit()
-    conn.close()
+    UR.delete_chat_messages()
 
 
 def send_chat_message_student():
@@ -972,13 +848,15 @@ def createNewsElement():
     time_end = request.form.get('time_end')
     sender = session["username"]
     role = session["role"]
-    conn = sqlite3.connect('news_db.db')
-    c = conn.cursor()
-    c.execute('''INSERT INTO news_db (news_message, time, date, time_end, date_end, sender, role) 
-             VALUES (?, ?, ?, ?, ?, ?, ?)''', (news_message, time, date, time_end, date_end, sender, role))
-
-    conn.commit()
-    conn.close()
+    UR.insert_news_to_newsdb(
+        news_message = news_message,
+        time = time,
+        date = date,
+        time_end = time_end,
+        date_end = date_end,
+        sender = sender,
+        role = role
+    )
     return render_template("admin_create_news.html")
 
 def get_reservation_statistics_screen():

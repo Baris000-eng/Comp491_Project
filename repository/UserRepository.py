@@ -7,6 +7,93 @@ from constants import ROLES
 from constants import DB
 from constants import UserModel
 
+def getAllITReports():
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM IT_Report_logdb')
+    data = c.fetchall()
+    conn.close()
+    return data
+
+def delete_it_report_from_db(report_no, room_name, faculty_name, problem_description, date, time):
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+    c.execute('''DELETE FROM IT_Report_logdb WHERE
+                 it_report_no = ? AND
+                 room_name = ? AND
+                 faculty_name = ? AND
+                 problem_description = ? AND
+                 date = ? AND
+                 time = ?''',
+              (report_no, room_name, faculty_name, problem_description, date, time))
+    conn.commit()
+    conn.close()
+
+def delete_reservation_from_db(role, date, time, username, public_or_private, classroom, priority_reserved):
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+
+    c.execute('''DELETE FROM reservations_db WHERE
+                 role = ? AND
+                 date = ? AND
+                 time = ? AND
+                 username = ? AND
+                 public_or_private = ? AND
+                 classroom = ? AND
+                 priority_reserved = ?''',
+              (role, date, time, username, public_or_private, classroom, priority_reserved))
+
+    conn.commit()
+    conn.close()
+
+
+def insert_news_to_newsdb(news_message, time, date, time_end, date_end, sender, role):
+    conn = sqlite3.connect('news_db.db')
+    c = conn.cursor()
+    c.execute('''INSERT INTO news_db (news_message, time, date, time_end, date_end, sender, role) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?)''', (news_message, time, date, time_end, date_end, sender, role))
+    conn.commit()
+    conn.close()
+
+def delete_chat_messages():
+    conn = sqlite3.connect('chat_db.db')
+    c = conn.cursor()
+
+    c.execute("SELECT COUNT(*) FROM chat_db")
+    count = c.fetchone()[0]
+
+    if count > 10:
+        c.execute("DELETE FROM chat_db")
+        print("Deleted all chat messages.")
+
+    conn.commit()
+    conn.close()
+
+def getAllITReports():
+    conn = sqlite3.connect('IT_Report_logdb.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM IT_Report_logdb')
+    rows = c.fetchall()
+    return rows
+    
+
+def getAllReservations():
+    conn = sqlite3.connect('reservations_db.db')
+    c = conn.cursor()
+
+    # Retrieve all the rows from the reservations_db table
+    c.execute('SELECT * FROM reservations_db')
+    data = c.fetchall()
+    conn.close()
+    return data
+
+def getAllUsernames():
+    conn = sqlite3.connect('users_db.db')
+    c = conn.cursor()
+    c.execute('SELECT username FROM users_db')
+    usernames = [row[0] for row in c.fetchall()]
+    conn.close()
+    return usernames
 
 def initializeUserTables():
     conn = sqlite3.connect(DB.users + '.db')
