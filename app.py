@@ -1,6 +1,7 @@
 from flask import Flask, request, session
 
 import setup
+import socket
 from rbac import allow_roles
 from service.UserService import password_change_success, go_to_opening_screen
 from service.UserService import select_role, showTheClassroomAndInfo, chat_action, report_chat, report_it
@@ -192,10 +193,18 @@ app.route("/see_piechart_of_user_numbers_per_role")(PS.plot_piechart_of_user_num
 app.route("/seeReservationStatistics")(US.get_reservation_statistics_screen)
 app.route("/seeUserStatistics")(US.open_user_statistics_screen)
 
-
+######################this gets ip address of the device #####################
+def get_ip_address():
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+        s.connect(('8.8.8.8', 80))
+        ip_address = s.getsockname()[0]
+    return ip_address
+######################this gets ip address of the device #####################
 
 if __name__ == '__main__':
-
     setup
-    app.run(debug=True, port=499)
+    # Setting the host to the IP address of the device #
+    host_address = get_ip_address()
+    app.run(host=host_address, debug = True, port=5000)
     app.debug = True
+
