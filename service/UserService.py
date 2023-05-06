@@ -584,7 +584,29 @@ def OpenReserveScreen():
     class_code = request.args.get('class_code')
     return render_template("student_reservation_screen.html")
 
+def updateITReport():
+    print(request.form)
+    if request.method == 'POST':
+        report_no = request.form['report_no']
+        room_name = request.form['room_name']
+        faculty_name = request.form['faculty_name']
+        problem_description = request.form['problem_description']
+        date = request.form['date']
+        time = request.form['time']
+        UR.updateITReport(
+            report_no = report_no,
+            room_name = room_name,
+            faculty_name = faculty_name,
+            problem_description = problem_description,
+            date = date,
+            time = time
+        )
+        return redirect(url_for('successfulUpdateOfITReport'))
+    else:
+        return render_template('editITReport.html')
+    
 
+    
 def seeTheUsers():
     usernames = UR.getAllUsernames()
     return render_template('admin_pages/admin_see_users.html', usernames=usernames)
@@ -598,14 +620,14 @@ def editUser(username):
     return render_template('edit_users.html', username=username)
 
 
-def editReserved():
-    row = request.args.get('row_data').split(',')
-    return render_template("editYourReservations.html", row=row)
-
-
 def editITReport():
     row = request.args.get('row_data').split(',')
-    return render_template("editITReport.html", row=row)
+    return render_template("editITReport.html", row = row)
+
+
+def editClassroomReservations():
+    row = request.args.get('row_data').split(',')
+    return render_template("editReservations.html", row = row)
 
 
 def deleteReservation():
@@ -626,7 +648,7 @@ def deleteReservation():
         priority_reserved = priority_reserved
     )
 
-    return render_template("successsDeletedClass.html")
+    return render_template("successfulDeletionOfClassroom.html")
 
 
 def deleteITReport():
@@ -644,7 +666,7 @@ def deleteITReport():
         date = date,
         time = time
     )
-    return render_template("successDeletedITReport.html")
+    return render_template("successfulDeletionOfITReport.html")
 
 
 def seeITReports():
@@ -839,4 +861,8 @@ def get_reservation_statistics_screen():
 
 def open_user_statistics_screen():
     return render_template("user_statistics.html")
+
+def successfulUpdateOfITReport():
+    return render_template('successfulUpdateOfITReport.html')
+
 

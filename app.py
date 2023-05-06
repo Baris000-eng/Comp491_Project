@@ -36,7 +36,6 @@ app.route("/open_description_text")(US.get_description_text)
 app.route("/get_opening_help")(US.get_opening_help)
 app.route("/goToOpeningScreen")(US.goToOpeningScreen)
 
-
 app.route('/get_password_change_screen',
           methods=['GET'])(US.get_password_change_screen)
 app.route('/change_user_password',
@@ -54,12 +53,13 @@ app.route('/reportingIT', methods=['POST'])(report_it)
 
 app.route('/logout')(go_to_opening_screen)
 app.route('/', methods=['GET', 'POST'])(US.opening_screen)
-app.route('/editReserved', methods=['GET'])(US.editReserved)
+app.route('/editReservedClassrooms', methods=['GET'])(US.editClassroomReservations)
 app.route('/editITReport', methods=['GET'])(US.editITReport)
 app.route('/deleteReservation', methods=['POST'])(US.deleteReservation)
 app.route('/deleteITReport', methods=['POST'])(US.deleteITReport)
 app.route('/seeOnlyMyReserves', methods=['GET'])(US.seeOnlyMyReserves)
 app.route('/createNews', methods=['GET'])(US.createNews)
+app.route('/updateITReport', methods=['POST','GET'])(US.updateITReport)
 
 
 @app.route('/<role>/screen', methods=['GET'])
@@ -201,6 +201,9 @@ app.route('/see_piechart_of_it_report_num_per_problem_description')(PS.plot_piec
 
 app.route("/seeReservationStatistics")(US.get_reservation_statistics_screen)
 app.route("/seeUserStatistics")(US.open_user_statistics_screen)
+app.route('/successfulUpdateOfITReport')(US.successfulUpdateOfITReport)
+
+
 
 ######################this gets ip address of the device #####################
 def get_ip_address():

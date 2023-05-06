@@ -7,11 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/see_all_reservations.css">
 
-    <title>SeeReservations</title>
+    <title>Admin Observes Reservations</title>
 </head>
 
 <html>
-
 
 <h1>All Reservations</h1>
 
@@ -36,7 +35,7 @@
             <td>{{ row[3] }}</td>
             <td>{{ row[4] }}</td>
             <td>{{ row[5] }}</td>
-            <td>{{ row[6] }} <form action="/editReserved" method="GET">
+            <td>{{ row[6] }} <form action="/editReservedClassrooms" method="GET">
                     <input type="hidden" name="row_data" value="{{ row|join(',') }}">
                     <button>Edit your reservation</button>
                 </form>

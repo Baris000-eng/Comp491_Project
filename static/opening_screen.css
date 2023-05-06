@@ -147,7 +147,7 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   background-color: red;
-  color: #3e8e41;
+  color: darkblue;
   transform: scale(1.35);
   border-color: #a600ff;
 }
@@ -248,7 +248,7 @@ input[type="submit"] {
 
 input[type="button"]:hover {
   background-color: red;
-  color: #3e8e41;
+  color: darkblue;
   transform: scale(1.35);
   border-color: #a600ff;
 }

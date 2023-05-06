@@ -57,28 +57,6 @@ button:hover {
   box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes pulse {
-  0% {
-    background-color: #007bff;
-  }
-
-  25% {
-    background-color: #00ff62;
-  }
-
-  50% {
-    background-color: #ff0059;
-  }
-
-  75% {
-    background-color: #00ffae;
-  }
-
-  100% {
-    background-color: #fbff00;
-  }
-}
-
 .computer {
   animation: computer_shifts 15s;
   position: absolute;

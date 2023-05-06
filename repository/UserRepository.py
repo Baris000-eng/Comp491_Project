@@ -3,9 +3,22 @@ import bcrypt
 import deprecation
 from flask import session
 
+
 from constants import ROLES
 from constants import DB
 from constants import UserModel
+
+def updateITReport(report_no, room_name, faculty_name, problem_description, date, time):
+    conn = sqlite3.connect("IT_Report_logdb.db")
+    c = conn.cursor()
+
+    c.execute("UPDATE IT_Report_logdb SET room_name=?, faculty_name=?, problem_description=?, date=?, time=? WHERE it_report_no=?", 
+                (room_name, faculty_name, problem_description, date, time, report_no))
+
+    conn.commit()
+    conn.close()
+
+
 
 def getAllITReports():
     conn = sqlite3.connect('IT_Report_logdb.db')

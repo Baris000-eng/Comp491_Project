@@ -38,7 +38,6 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  animation: pulse 2s ease-in-out infinite;
 }
 
 /* Button hover style */

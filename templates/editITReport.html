@@ -1,33 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width= initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../static/editReservations.css"
+    />
+    <script src="../static/editITReport.js"></script>
+    <title>Editing IT Report</title>
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width= initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/editYourReservations.css">
-    <title>Editing your Resservation</title>
-</head>
+  <body>
+    <h1>IT Report Information</h1>
+    <h3>--------IT Report Information ---------</h3>
+    <form action="/updateITReport" method="POST">
+      <ul>
+        <li>
+          <label for="report_no">IT Report_no:</label>
+          <input
+            type="text"
+            id="report_no"
+            name="report_no"
+            value="{{ row[0] }}"
+            readonly
+          />
+        </li>
+        <li>
+          <label for="room_name">Classroom Name:</label>
+          <input
+            type="text"
+            id="room_name"
+            name="room_name"
+            value="{{ row[1] }}"
+          />
+          <button type="button" onclick="makeNonEditable('room_name')">
+            Save
+          </button>
+        </li>
+        <li>
+          <label for="faculty_name">Faculty Name:</label>
+          <input
+            type="text"
+            id="faculty_name"
+            name="faculty_name"
+            value="{{ row[2] }}"
+          />
+          <button type="button" onclick="makeNonEditable('faculty_name')">
+            Save
+          </button>
+        </li>
+        <li>
+          <label for="problem_description">Problem Description:</label>
+          <input
+            type="text"
+            id="problem_description"
+            name="problem_description"
+            value="{{ row[3] }}"
+          />
+          <button
+            type="button"
+            onclick="makeNonEditable('problem_description')"
+          >
+            Save
+          </button>
+        </li>
+        <li>
+          <label for="date">Date of IT Report:</label>
+          <input type="text" id="date" name="date" value="{{ row[4] }}" />
+          <button type="button" onclick="makeNonEditable('date')">Save</button>
+        </li>
+        <li>
+          <label for="time">Time of IT Report:</label>
+          <input type="text" id="time" name="time" value="{{ row[5] }}" />
+          <button type="button" onclick="makeNonEditable('time')">Save</button>
+        </li>
+      </ul>
+      <button type="submit">Click here to save the edited IT Report</button>
+    </form>
 
-<h1>Your IT Report Information</h1>
-<h3>--------------- IT Report Information --------------------</h3>
-<ul>
-    <li>IT Report_no : {{ row[0] }}</li>
-    <li>Room Name: {{ row[1] }}</li>
-    <li>Faculty Name: {{ row[2] }}</li>
-    <li>Problem Description: {{ row[3] }}</li>
-    <li>Date: {{ row[4] }}</li>
-    <li>Time: {{ row[5] }}</li>
-</ul>
-<form action="/deleteITReport" method="POST">
-    <input type="hidden" name="report_no" value="{{ row[0] }}">
-    <input type="hidden" name="room_name" value="{{ row[1] }}">
-    <input type="hidden" name="faculty_name" value="{{ row[2] }}">
-    <input type="hidden" name="problem_description" value="{{ row[3] }}">
-    <input type="hidden" name="date" value="{{ row[4] }}">
-    <input type="hidden" name="time" value="{{ row[5] }}">
-    <button type="submit">Click here to delete the IT Report</button>
-</form>
-</body>
-
+    <form action="/deleteITReport" method="POST">
+      <input type="hidden" name="report_no" value="{{ row[0] }}" />
+      <input type="hidden" name="room_name" value="{{ row[1] }}" />
+      <input type="hidden" name="faculty_name" value="{{ row[2] }}" />
+      <input type="hidden" name="problem_description" value="{{ row[3] }}" />
+      <input type="hidden" name="date" value="{{ row[4] }}" />
+      <input type="hidden" name="time" value="{{ row[5] }}" />
+      <button type="submit">Click here to delete the IT Report</button>
+    </form>
+  </body>
 </html>

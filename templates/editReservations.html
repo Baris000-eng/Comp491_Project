@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/editReservations.css">
+    <title>Editing Classroom Reservation</title>
+</head>
+
+<body>
+    <h1>Classroom Reservation Information</h1>
+    <h3>--------------- Reservation --------------------</h3>
+    <ul>
+        <li>Role: <span contenteditable>{{ row[0] }}</span></li>
+        <li>Date: <span contenteditable>{{ row[1] }}</span></li>
+        <li>Time: <span contenteditable>{{ row[2] }}</span></li>
+        <li>Username: <span contenteditable>{{ row[3] }}</span></li>
+        <li>Reservation Purpose: <span contenteditable>{{ row[4] }}</span></li>
+        <li>Classroom: <span contenteditable>{{ row[5] }}</span></li>
+        <li>Priority Reserved: <span contenteditable>{{ row[6] }}</span></li>
+    </ul>
+    <form action="/deleteReservation" method="POST">
+        <input type="hidden" name="role" value="{{ row[0] }}">
+        <input type="hidden" name="date" value="{{ row[1] }}">
+        <input type="hidden" name="time" value="{{ row[2] }}">
+        <input type="hidden" name="username" value="{{ row[3] }}">
+        <input type="hidden" name="public_or_private" value="{{ row[4] }}">
+        <input type="hidden" name="classroom" value="{{ row[5] }}">
+        <input type="hidden" name="priority_reserved" value="{{ row[6] }}">
+        <button type="submit">Click here to save the edited reservation</button>
+        <button type="submit">Click here to delete the reservation</button>
+    </form>
+</body>
+
+</html>
