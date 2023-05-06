@@ -1,5 +1,4 @@
 from flask import Flask, request, session
-
 import setup
 import socket
 from rbac import allow_roles
@@ -9,7 +8,6 @@ import service.UserService as US
 import service.ClassroomService as CS
 import service.PlottingService as PS
 from flask_socketio import SocketIO, emit
-import time
 
 app = Flask(__name__)
 app.secret_key = '491'
@@ -189,10 +187,6 @@ app.route("/see_plot_of_user_numbers_per_priority_value")(PS.plot_user_numbers_p
 app.route("/see_plot_of_user_numbers_per_role")(PS.plot_user_numbers_per_role)
 app.route("/see_piechart_of_user_numbers_per_priority_value")(PS.plot_piechart_of_user_numbers_per_priority_value)
 app.route("/see_piechart_of_user_numbers_per_role")(PS.plot_piechart_of_user_numbers_per_role)
-
-
-app.route('/see_barchart_of_it_report_num_by_time_period')(PS.plot_barchart_of_it_report_num_by_time_period)
-app.route('/see_piechart_of_it_report_num_by_time_period')(PS.plot_piechart_of_it_report_num_by_time_period)
 
 app.route('/see_histogram_of_it_report_num_by_classroom_name')(PS.plot_histogram_of_it_report_numbers_per_classroom_name)
 app.route('/see_piechart_of_it_report_num_by_classroom_name')(PS.plot_piechart_of_it_report_numbers_per_classroom_name)

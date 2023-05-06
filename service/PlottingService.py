@@ -477,9 +477,7 @@ def plot_piechart_of_it_report_numbers_per_faculty_name():
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
     buffer.seek(0)
-
     png_image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
-
     html = f'<img src="data:image/png;base64,{png_image_base64}"/>'
     return html
 
@@ -512,100 +510,4 @@ def plot_histogram_of_it_report_numbers_per_faculty_name():
 
     html = f'<img src="data:image/png;base64,{png_image_base64}"/>'
     return html
-
-
-def plot_piechart_of_it_report_num_by_time_period():
-    conn = sqlite3.connect('IT_Report_logdb.db')
-    c = conn.cursor()
-
-    c.execute('SELECT strftime("%H", time), COUNT(*) FROM IT_Report_logdb GROUP BY strftime("%H", time)')
-    data = c.fetchall()
-
-    hours = [int(row[0]) for row in data]
-    counts = [int(row[1]) for row in data]
-
-    labels = [f'{hour}:00-{hour+1}:00' for hour in hours]
-
-    fig, ax = plt.subplots()
-    ax.pie(counts, labels=labels, autopct='%1.1f%%')
-    ax.set_title('IT Report Count by Time Period')
-
-    buffer = io.BytesIO()
-    plt.savefig(buffer, format='png')
-    buffer.seek(0)
-
-    piechart_png_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
-
-    html = f'<img src="data:image/png;base64,{piechart_png_base64}"/>'
-    return html
-
-
-#####################how many IT reports are send in which time period in a day (i.e.: 2 in noon, 3 in morning ...)#######
-def plot_barchart_of_it_report_num_by_time_period():
-    conn = sqlite3.connect('IT_Report_logdb.db')
-    c = conn.cursor()
-
-    c.execute('SELECT strftime("%H", time), COUNT(*) FROM IT_Report_logdb GROUP BY strftime("%H", time)')
-    data = c.fetchall()
-
-    hours = [int(row[0]) for row in data]
-    counts = [int(row[1]) for row in data]
-
-    labels = [f'{hour}:00-{hour+1}:00' for hour in hours]
-
-    fig, ax = plt.subplots()
-    ax.bar(labels, counts)
-    ax.set_xlabel('Time Period')
-    ax.set_ylabel('IT Report Count')
-    ax.set_title('IT Report Count by Time Period')
-
-    buffer = io.BytesIO()
-    plt.savefig(buffer, format='png')
-    buffer.seek(0)
-
-    barchart_png_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
-
-    html = f'<img src="data:image/png;base64,{barchart_png_base64}"/>'
-    return html
-
-#########################DATA VISUALIZATIONS FOR IT REPORTS#################################################
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#########################DATA VISUALIZATIONS FOR IT REPORTS#####################################################
