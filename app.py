@@ -205,6 +205,6 @@ if __name__ == '__main__':
     setup
     # Setting the host to the IP address of the device #
     host_address = get_ip_address()
-    app.run(host=host_address, debug = True, port=5000)
+    app.run(host = host_address, debug = True, port = 5000)
     app.debug = True
 
