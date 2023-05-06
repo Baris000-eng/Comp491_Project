@@ -24,26 +24,38 @@ p {
   box-shadow: 1px 1px 3px #888;
 }
 
-p:hover{
-    background-color: aqua;
+p:hover {
+  background-color: aqua;
 }
 
-button {
-  background-color: #4285f4;
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  margin-right: 10px;
-  cursor: pointer;
+.card-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; 
+  padding: 50px;
+  background-color: white;
+  border-radius: 20px;
   box-shadow: 1px 1px 3px #888;
-  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
-  background-color: darkred;
-  transform: scale(1.05);
+.card:hover {
+  background-color: burlywood;
+}
+
+.card h2 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: red;
+  text-transform: uppercase;
 }
 
 .group-container {
@@ -51,7 +63,6 @@ button:hover {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 20px;
 }
 
 .group-container .btn-group {
@@ -92,7 +103,25 @@ button:hover {
 }
 
 .group-container .btn-group:hover {
-    background-color: rosybrown;
-    transform: scale(1.05);
+  background-color: rosybrown;
+  transform: scale(1.05);
 }
-  
+
+button {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  background-color: #f39c12;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background-color: darkred;
+  cursor: pointer;
+}
+

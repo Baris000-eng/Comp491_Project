@@ -39,7 +39,7 @@ h1:hover {
 
 
 #description-button {
-    animation: boomerang 15s ease-in-out infinite;
+    animation: boomerang 13s ease-in-out infinite;
 }
 
 @keyframes boomerang {
@@ -313,13 +313,10 @@ h1 {
 }
 
 
-
-
-
 input[type="submit"]:hover {
     background-color: red;
     color: #3e8e41;
-    transform: scale(1.5);
+    transform: scale(1.35);
 }
 
 
@@ -393,30 +390,6 @@ input[type="submit"] {
     font-size: 16px;
 }
 
-
-
-
-@keyframes rotate-border {
-    0% {
-        box-shadow: 0px 0px 0px 0px blue, 0px 0px 0px 4px red;
-    }
-
-    20% {
-        box-shadow: 0px 0px 0px 20px rgb(217, 255, 0), 0px 0px 0px 4px yellow;
-    }
-
-    50% {
-        box-shadow: 0px 0px 0px 30px green, 0px 0px 0px 4px yellow;
-    }
-
-    50% {
-        box-shadow: 0px 0px 0px 20px rgb(17, 0, 255), 0px 0px 0px 4px yellow;
-    }
-
-    100% {
-        box-shadow: 0px 0px 0px 05px red, 0px 0px 0px 4px blue;
-    }
-}
 
 .buttons_box {
     align-items: flex-start;
