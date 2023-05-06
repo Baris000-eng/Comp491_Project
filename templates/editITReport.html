@@ -7,7 +7,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="../static/editReservations.css"
+      href="../static/editITReport.css"
     />
     <script src="../static/editITReport.js"></script>
     <title>Editing IT Report</title>
@@ -15,7 +15,6 @@
 
   <body>
     <h1>IT Report Information</h1>
-    <h3>--------IT Report Information ---------</h3>
     <form action="/updateITReport" method="POST">
       <ul>
         <li>
@@ -36,7 +35,7 @@
             name="room_name"
             value="{{ row[1] }}"
           />
-          <button type="button" onclick="makeNonEditable('room_name')">
+          <button class = "save_field_button" type="button" onclick="makeNonEditable('room_name')">
             Save
           </button>
         </li>
@@ -48,7 +47,7 @@
             name="faculty_name"
             value="{{ row[2] }}"
           />
-          <button type="button" onclick="makeNonEditable('faculty_name')">
+          <button class = "save_field_button" type="button" onclick="makeNonEditable('faculty_name')">
             Save
           </button>
         </li>
@@ -61,6 +60,7 @@
             value="{{ row[3] }}"
           />
           <button
+            class = "save_field_button"
             type="button"
             onclick="makeNonEditable('problem_description')"
           >
@@ -70,15 +70,15 @@
         <li>
           <label for="date">Date of IT Report:</label>
           <input type="text" id="date" name="date" value="{{ row[4] }}" />
-          <button type="button" onclick="makeNonEditable('date')">Save</button>
+          <button class = "save_field_button" type="button" onclick="makeNonEditable('date')">Save</button>
         </li>
         <li>
           <label for="time">Time of IT Report:</label>
           <input type="text" id="time" name="time" value="{{ row[5] }}" />
-          <button type="button" onclick="makeNonEditable('time')">Save</button>
+          <button class = "save_field_button" type="button" onclick="makeNonEditable('time')">Save</button>
         </li>
       </ul>
-      <button type="submit">Click here to save the edited IT Report</button>
+      <button class = "edit_it_button" type="submit">Click here to save the edited IT Report</button>
     </form>
 
     <form action="/deleteITReport" method="POST">
@@ -88,7 +88,7 @@
       <input type="hidden" name="problem_description" value="{{ row[3] }}" />
       <input type="hidden" name="date" value="{{ row[4] }}" />
       <input type="hidden" name="time" value="{{ row[5] }}" />
-      <button type="submit">Click here to delete the IT Report</button>
+      <button class = "delete_it_button" type="submit">Click here to delete the IT Report</button>
     </form>
   </body>
 </html>

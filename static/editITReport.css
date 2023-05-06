@@ -1,0 +1,90 @@
+body {
+  background-color: #003638;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 60px;
+  font-weight: bold;
+  color: black;
+  background-color: lightgreen;
+  border-radius: 4px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  background-color: #ffffff;
+  border: 2px solid #222;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+li {
+  font-size: 2rem;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-bottom: 2px solid #222;
+  color: #222;
+}
+
+input[type="text"] {
+  padding: 5px;
+  font-size: 2rem;
+  border-radius: 5px;
+  border: 2px solid #222;
+  margin-right: 20px;
+}
+
+.save_field_button {
+  background-color: #dd2c00;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1.6rem;
+  margin-right: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px #222;
+}
+
+.save_field_button:hover {
+  background-color: #ff3d00;
+  color: #ffffff;
+  box-shadow: 2px 2px #333;
+  transform: scale(1.05);
+}
+
+.edit_it_button,
+.delete_it_button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: #dd2c00;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 2rem;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px #222;
+}
+
+.edit_it_button:hover,
+.delete_it_button:hover {
+  background-color: #ff3d00;
+  color: #ffffff;
+  box-shadow: 2px 2px #333;
+  transform: scale(1.05);
+}

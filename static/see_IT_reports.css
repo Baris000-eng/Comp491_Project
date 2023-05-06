@@ -1,35 +1,62 @@
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 20px;
+body {
+  background-color: beige;
+  font-family: Arial, sans-serif;
 }
 
-th,
-td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+h1 {
+  color: darkgreen;
+  background-color: aqua;
+  font-weight: bold;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 20px;
 }
 
-th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+.IT_Report_logdb {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px auto;
+  background-color: lightpink;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.reservations {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 20px;
+.IT_Report_logdb th,
+.IT_Report_logdb td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-.reservations th,
-.reservations td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+.IT_Report_logdb th {
+  background-color: violet;
+  font-weight: bold;
 }
 
-.reservations th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+.IT_Report_logdb tbody tr:hover {
+  background-color: cyan;
+}
+
+.IT_Report_logdb tbody td button {
+  background-color: lightgreen;
+  color: blue;
+  font-weight: bold;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.IT_Report_logdb tbody td button:hover {
+  background-color: darkred;
+}
+
+@media only screen and (max-width: 600px) {
+  .IT_Report_logdb {
+    font-size: 12px;
+  }
+
+  .IT_Report_logdb th,
+  .IT_Report_logdb td {
+    padding: 8px;
+  }
 }

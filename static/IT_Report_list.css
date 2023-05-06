@@ -42,25 +42,25 @@ ul li {
   margin-bottom: 10px;
 }
 
-button.edit-report-button{
-  display: inline-block;
-  margin: 20px 0 20px 10%;
+button.edit-report-button {
+  align-self: flex-start;
   width: 100%;
   max-width: 400px;
   padding: 20px;
   font-size: 24px;
   font-weight: bold;
-  text-align: left;
+  text-align: center;
   color: blue;
-  border-color:aquamarine;
+  border-color: aquamarine;
   background-color: #ab6da7;
   border-radius: 5px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: left;
   margin-top: 20px;
   margin-bottom: 20px;
   border: none;
+  position: left;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease-in-out;
@@ -68,7 +68,7 @@ button.edit-report-button{
 
 .box {
   background-color: lightgoldenrodyellow;
-  margin: 0 10%;
+  margin: 0 10% 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,23 +96,11 @@ button#it-staff-button {
   transition: all 0.3s ease-in-out;
 }
 
-#it-staff-button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  position: absolute;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 #it-staff-button:hover {
   background-color: #ff8692;
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
 
 .edit-report-button.button:hover {
   background-color: #ff8692;

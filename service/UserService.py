@@ -585,7 +585,6 @@ def OpenReserveScreen():
     return render_template("student_reservation_screen.html")
 
 def updateITReport():
-    print(request.form)
     if request.method == 'POST':
         report_no = request.form['report_no']
         room_name = request.form['room_name']
@@ -604,6 +603,30 @@ def updateITReport():
         return redirect(url_for('successfulUpdateOfITReport'))
     else:
         return render_template('editITReport.html')
+    
+def updateReservation():
+    if request.method == 'POST':
+        user_role = request.form['role']
+        reservation_date = request.form['date']
+        reservation_time = request.form['time']
+        reserver_username = request.form['username']
+        reservation_purpose = request.form['reservation_purpose']
+        reserved_classroom = request.form['classroom']
+        priority_reserved = request.form['priority_reserved']
+        current_reservation_id = UR.get_current_reservation_id()
+        UR.updateReservation(
+            role = user_role,
+            date = reservation_date,
+            time = reservation_time,
+            username = reserver_username,
+            reservation_purpose = reservation_purpose,
+            reserved_classroom = reserved_classroom,
+            priority_reserved = priority_reserved,
+            id = current_reservation_id
+        )
+        return redirect(url_for('successfulUpdateOfReservation'))
+    else:
+        return render_template('editReservations.html')
     
 
     
@@ -648,7 +671,7 @@ def deleteReservation():
         priority_reserved = priority_reserved
     )
 
-    return render_template("successfulDeletionOfClassroom.html")
+    return render_template("successfulDeletionOfClassReservation.html")
 
 
 def deleteITReport():
@@ -864,5 +887,8 @@ def open_user_statistics_screen():
 
 def successfulUpdateOfITReport():
     return render_template('successfulUpdateOfITReport.html')
+
+def successfulUpdateOfReservation():
+    return render_template('successfulUpdateOfReservation.html')
 
 

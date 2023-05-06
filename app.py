@@ -202,6 +202,7 @@ app.route('/see_piechart_of_it_report_num_per_problem_description')(PS.plot_piec
 app.route("/seeReservationStatistics")(US.get_reservation_statistics_screen)
 app.route("/seeUserStatistics")(US.open_user_statistics_screen)
 app.route('/successfulUpdateOfITReport')(US.successfulUpdateOfITReport)
+app.route('/successfulUpdateOfReservation')(US.successfulUpdateOfReservation)
 
 
 

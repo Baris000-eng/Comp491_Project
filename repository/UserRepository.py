@@ -8,6 +8,24 @@ from constants import ROLES
 from constants import DB
 from constants import UserModel
 
+def get_current_reservation_id():
+    with sqlite3.connect('reservations_db.db') as con:
+        cur = con.cursor()
+        cur.execute("SELECT max(id) FROM reservations_db")
+        result = cur.fetchone()[0]
+        return result
+
+
+def updateReservation(role, date, time, username, reservation_purpose, reserved_classroom, priority_reserved, id):
+    conn = sqlite3.connect("reservations_db.db")
+    c = conn.cursor()
+
+    c.execute("UPDATE reservations_db SET role=?, date=?, time=?, username=?, reservation_purpose=?, reserved_classroom = ?, priority_reserved=? WHERE id=?", 
+                (role, date, time, username, reservation_purpose, reserved_classroom, priority_reserved, id))
+
+    conn.commit()
+    conn.close()
+
 def updateITReport(report_no, room_name, faculty_name, problem_description, date, time):
     conn = sqlite3.connect("IT_Report_logdb.db")
     c = conn.cursor()
@@ -151,8 +169,9 @@ def initializeReservationsTable():
     conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
 
-    c.execute('''CREATE TABLE IF NOT EXISTS reservations_db 
-             (role TEXT NOT NULL,
+    c.execute('''CREATE TABLE IF NOT EXISTS reservations_db (
+              id INTEGER PRIMARY KEY AUTOINCREMENT, 
+              role TEXT NOT NULL,
               date DATE NOT NULL, 
               time TIME NOT NULL, 
               username TEXT DEFAULT "NO_NAME_GIVEN", 

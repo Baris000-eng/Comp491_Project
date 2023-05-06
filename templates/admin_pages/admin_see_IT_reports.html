@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/see_IT_reports.css">
-    <title>SeeIT</title>
+    <title>See IT Reports</title>
 </head>
 
 <h1>All IT Reports</h1>
@@ -32,12 +32,13 @@
             <td>{{ row[2] }}</td>
             <td>{{ row[3] }}</td>
             <td>{{ row[4] }}</td>
-            <td>{{ row[5] }} <form action="/editITReport" method="GET">
-                    <input type="hidden" name="row_data" value="{{ row|join(',') }}">
-                    <button>Edit IT_Reports</button>
-                </form>
-            </td>
-
+            <td>{{ row[5] }} </td>
+            <td> 
+            <form action="/editITReport" method="GET">
+                <input type="hidden" name="row_data" value="{{ row|join(',') }}">
+                <button>Edit IT Report</button>
+            </form>
+           </td>
         </tr>
         {% endfor %}
     </tbody>
