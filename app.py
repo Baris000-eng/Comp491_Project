@@ -60,6 +60,7 @@ app.route('/deleteITReport', methods=['POST'])(US.deleteITReport)
 app.route('/seeOnlyMyReserves', methods=['GET'])(US.seeOnlyMyReserves)
 app.route('/createNews', methods=['GET'])(US.createNews)
 app.route('/updateITReport', methods=['POST','GET'])(US.updateITReport)
+app.route('/updateReservation', methods=['POST','GET'])(US.updateReservation)
 
 
 @app.route('/<role>/screen', methods=['GET'])

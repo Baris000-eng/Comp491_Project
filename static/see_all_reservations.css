@@ -46,8 +46,10 @@ table thead th {
 }
 
 table tbody td {
-    border: 1px solid #ddd;
+    border: 1px solid black;
     padding: 8px;
+    font-weight: bold;
+    color: darkblue;
 }
 
 
@@ -71,7 +73,7 @@ button:hover {
 
 td:nth-child(6) {
     font-weight: bold;
-    color: #2196F3;
+    color: darkblue;
 }
 
 

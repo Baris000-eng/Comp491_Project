@@ -606,14 +606,14 @@ def updateITReport():
     
 def updateReservation():
     if request.method == 'POST':
+        current_reservation_id = request.form['reservation_id']
         user_role = request.form['role']
         reservation_date = request.form['date']
         reservation_time = request.form['time']
-        reserver_username = request.form['username']
+        reserver_username = request.form['username_of_reserver']
         reservation_purpose = request.form['reservation_purpose']
-        reserved_classroom = request.form['classroom']
+        reserved_classroom = request.form['classroom_name']
         priority_reserved = request.form['priority_reserved']
-        current_reservation_id = UR.get_current_reservation_id()
         UR.updateReservation(
             role = user_role,
             date = reservation_date,
@@ -654,24 +654,27 @@ def editClassroomReservations():
 
 
 def deleteReservation():
-    role = request.form['role']
-    date = request.form['date']
-    time = request.form['time']
-    username = request.form['username']
-    public_or_private = request.form['public_or_private']
-    classroom = request.form['classroom']
-    priority_reserved = request.form['priority_reserved']
-    UR.delete_reservation_from_db(
-        role = role,
-        date = date,
-        time = time,
-        username = username,
-        public_or_private = public_or_private,
-        classroom = classroom,
-        priority_reserved = priority_reserved
-    )
-
-    return render_template("successfulDeletionOfClassReservation.html")
+    if request.method == "POST":
+        role = request.form['role']
+        date = request.form['date']
+        time = request.form['time']
+        username = request.form['username_of_reserver']
+        public_or_private = request.form['reservation_purpose']
+        classroom = request.form['classroom_name']
+        priority_reserved = request.form['priority_reserved']
+        UR.delete_reservation_from_db(
+            role = role,
+            date = date,
+            time = time,
+            username = username,
+            public_or_private = public_or_private,
+            classroom = classroom,
+            priority_reserved = priority_reserved
+        )
+        return render_template("successfulDeletionOfClassReservation.html")
+    else:
+        return render_template("editReservations.html")
+    
 
 
 def deleteITReport():
@@ -889,6 +892,15 @@ def successfulUpdateOfITReport():
     return render_template('successfulUpdateOfITReport.html')
 
 def successfulUpdateOfReservation():
-    return render_template('successfulUpdateOfReservation.html')
+    return render_template('successfulUpdateOfClassReservation.html')
+
+def find_reservation_id():
+    user_role = request.form['role']
+    reservation_date = request.form['date']
+    reservation_time = request.form['time']
+    reserver_username = request.form['username']
+    reservation_purpose = request.form['reservation_purpose']
+    reserved_classroom = request.form['classroom']
+    priority_reserved = request.form['priority_reserved']
 
 

@@ -4,96 +4,138 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width= initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../static/editReservations.css"
-    />
-    <script src="../static/editITReport.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/editReservations.css"/>
+    <script src="../static/editReservations.js"></script>
     <title>Editing Reservation</title>
   </head>
 
   <body>
     <h1>Reservation Information</h1>
-    <form action="/updateITReport" method="POST">
+    <form action="/updateReservation" method="POST">
       <ul>
         <li>
-          <label for="role">Role:</label>
+          <label for="reservation_id">Reservation Id:</label>
           <input
             type="text"
-            id="role"
-            name="role"
+            id="reservation_id"
+            name="reservation_id"
             value="{{ row[0] }}"
             readonly
           />
         </li>
         <li>
-          <label for="date">Date:</label>
-          <input
-            type="text"
-            id="date"
-            name="date"
-            value="{{ row[1] }}"
-          />
-          <button class = "save_field_button" type="button" onclick="makeNonEditable('room_name')">
+          <label for="role">Reserver Role:</label>
+          <input type="text" id="role" name="role" value="{{ row[1] }}" />
+          <button
+            class="save_field_button"
+            type="button"
+            onclick="makeNonEditable('role')"
+          >
             Save
           </button>
         </li>
         <li>
-          <label for="faculty_name">Time:</label>
-          <input
-            type="text"
-            id="time"
-            name="time"
-            value="{{ row[2] }}"
-          />
-          <button class = "save_field_button" type="button" onclick="makeNonEditable('faculty_name')">
+          <label for="date">Reservation Date:</label>
+          <input type="text" id="date" name="date" value="{{ row[2] }}" />
+          <button
+            class="save_field_button"
+            type="button"
+            onclick="makeNonEditable('date')">
             Save
           </button>
         </li>
         <li>
-          <label for="username">Username:</label>
+          <label for="time">Reservation Time:</label>
+          <input type="text" id="time" name="time" value="{{ row[3] }}" />
+          <button
+            class="save_field_button"
+            type="button"
+            onclick="makeNonEditable('time')"
+          >
+            Save
+          </button>
+        </li>
+        <li>
+          <label for="username_of_reserver">Reservation Done By:</label>
           <input
             type="text"
-            id="username"
-            name="username"
-            value="{{ row[3] }}"
+            id="username_of_reserver"
+            name="username_of_reserver"
+            value="{{ row[4] }}"
           />
           <button
-            class = "save_field_button"
+            class="save_field_button"
             type="button"
-            onclick="makeNonEditable('problem_description')">
+            onclick="makeNonEditable('username_of_reserver')"
+          >
             Save
           </button>
         </li>
         <li>
           <label for="reservation_purpose">Reservation Purpose:</label>
-          <input type="text" id="reservation_purpose" name="reservation_purpose" value="{{ row[4] }}" />
-          <button class = "save_field_button" type="button" onclick="makeNonEditable('date')">Save</button>
+          <input
+            type="text"
+            id="reservation_purpose"
+            name="reservation_purpose"
+            value="{{ row[5] }}"
+          />
+          <button
+            class="save_field_button"
+            type="button"
+            onclick="makeNonEditable('reservation_purpose')"
+          >
+            Save
+          </button>
         </li>
         <li>
-          <label for="classroom">Classroom:</label>
-          <input type="text" id="classroom" name="classroom" value="{{ row[5] }}" />
-          <button class = "save_field_button" type="button" onclick="makeNonEditable('time')">Save</button>
+          <label for="classroom_name">Classroom:</label>
+          <input
+            type="text"
+            id="classroom_name"
+            name="classroom_name"
+            value="{{ row[6] }}"
+          />
+          <button
+            class="save_field_button"
+            type="button"
+            onclick="makeNonEditable('classroom_name')"
+          >
+            Save
+          </button>
         </li>
-         <li>
-            <label for="priority_reserved">Priority Reserved:</label>
-            <input type="text" id="priority_reserved" name="priority_reserved" value="{{ row[6] }}" />
-            <button class = "save_field_button" type="button" onclick="makeNonEditable('time')">Save</button>
+        <li>
+          <label for="priority_reserved">Priority Reserved:</label>
+          <input
+            type="text"
+            id="priority_reserved"
+            name="priority_reserved"
+            value="{{ row[7] }}"
+          />
+          <button
+            class="save_field_button"
+            type="button"
+            onclick="makeNonEditable('priority_reserved')"
+          >
+            Save
+          </button>
         </li>
       </ul>
-      <button class = "save_reservation" type="submit">Click here to save the edited reservation</button>
+      <button class="save_reservation" type="submit">
+        Click here to save the edited reservation
+      </button>
     </form>
-
     <form action="/deleteReservation" method="POST">
-      <input type="hidden" name="role" value="{{ row[0] }}" />
-      <input type="hidden" name="date" value="{{ row[1] }}" />
-      <input type="hidden" name="time" value="{{ row[2] }}" />
-      <input type="hidden" name="username" value="{{ row[3] }}" />
-      <input type="hidden" name="public_or_private" value="{{ row[4] }}" />
-      <input type="hidden" name="classroom" value="{{ row[5] }}" />
-      <input type="hidden" name="priority_reserved" value="{{ row[6] }}" />
-      <button type="submit">Click here to delete the reservation</button>
+      <input type="hidden" name="reservation_id" value="{{ row[0] }}" />
+      <input type="hidden" name="role" value="{{ row[1] }}" />
+      <input type="hidden" name="date" value="{{ row[2] }}" />
+      <input type="hidden" name="time" value="{{ row[3] }}" />
+      <input type="hidden" name="username_of_reserver" value="{{ row[4] }}" />
+      <input type="hidden" name="reservation_purpose" value="{{ row[5] }}" />
+      <input type="hidden" name="classroom_name" value="{{ row[6] }}" />
+      <input type="hidden" name="priority_reserved" value="{{ row[7] }}" />
+      <button class="delete_class_reservation" type="submit">
+        Click here to delete the reservation
+      </button>
     </form>
   </body>
 </html>

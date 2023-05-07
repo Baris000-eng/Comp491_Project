@@ -2,25 +2,16 @@ import sqlite3
 import bcrypt
 import deprecation
 from flask import session
-
-
 from constants import ROLES
 from constants import DB
 from constants import UserModel
-
-def get_current_reservation_id():
-    with sqlite3.connect('reservations_db.db') as con:
-        cur = con.cursor()
-        cur.execute("SELECT max(id) FROM reservations_db")
-        result = cur.fetchone()[0]
-        return result
-
-
+import sqlite3
+  
 def updateReservation(role, date, time, username, reservation_purpose, reserved_classroom, priority_reserved, id):
     conn = sqlite3.connect("reservations_db.db")
     c = conn.cursor()
 
-    c.execute("UPDATE reservations_db SET role=?, date=?, time=?, username=?, reservation_purpose=?, reserved_classroom = ?, priority_reserved=? WHERE id=?", 
+    c.execute("UPDATE reservations_db SET role=?, date=?, time=?, username=?, public_or_private=?, classroom = ?, priority_reserved=? WHERE id=?", 
                 (role, date, time, username, reservation_purpose, reserved_classroom, priority_reserved, id))
 
     conn.commit()
@@ -111,8 +102,6 @@ def getAllITReports():
 def getAllReservations():
     conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
-
-    # Retrieve all the rows from the reservations_db table
     c.execute('SELECT * FROM reservations_db')
     data = c.fetchall()
     conn.close()
