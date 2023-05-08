@@ -543,6 +543,7 @@ def OpenReserveScreen():
     class_code = request.args.get('class_code')
     return render_template("student_reservation_screen.html")
 
+
 def updateITReport():
     if request.method == 'POST':
         report_no = request.form['report_no']
@@ -552,17 +553,18 @@ def updateITReport():
         date = request.form['date']
         time = request.form['time']
         UR.updateITReport(
-            report_no = report_no,
-            room_name = room_name,
-            faculty_name = faculty_name,
-            problem_description = problem_description,
-            date = date,
-            time = time
+            report_no=report_no,
+            room_name=room_name,
+            faculty_name=faculty_name,
+            problem_description=problem_description,
+            date=date,
+            time=time
         )
         return redirect(url_for('successfulUpdateOfITReport'))
     else:
         return render_template('editITReport.html')
-    
+
+
 def updateReservation():
     if request.method == 'POST':
         current_reservation_id = request.form['reservation_id']
@@ -574,24 +576,24 @@ def updateReservation():
         reserved_classroom = request.form['classroom_name']
         priority_reserved = request.form['priority_reserved']
         UR.updateReservation(
-            role = user_role,
-            date = reservation_date,
-            time = reservation_time,
-            username = reserver_username,
-            reservation_purpose = reservation_purpose,
-            reserved_classroom = reserved_classroom,
-            priority_reserved = priority_reserved,
-            id = current_reservation_id
+            role=user_role,
+            date=reservation_date,
+            time=reservation_time,
+            username=reserver_username,
+            reservation_purpose=reservation_purpose,
+            reserved_classroom=reserved_classroom,
+            priority_reserved=priority_reserved,
+            id=current_reservation_id
         )
         return redirect(url_for('successfulUpdateOfReservation'))
     else:
         return render_template('editReservations.html')
-    
 
-    
+
 def seeTheUsers():
     usernames = UR.getAllUsernames()
     return render_template('admin_pages/admin_see_users.html', usernames=usernames)
+
 
 def seeTheReservations():
     data = UR.getAllReservations()
@@ -604,12 +606,12 @@ def editUser(username):
 
 def editITReport():
     row = request.args.get('row_data').split(',')
-    return render_template("editITReport.html", row = row)
+    return render_template("editITReport.html", row=row)
 
 
 def editClassroomReservations():
     row = request.args.get('row_data').split(',')
-    return render_template("editReservations.html", row = row)
+    return render_template("editReservations.html", row=row)
 
 
 def deleteReservation():
@@ -622,18 +624,17 @@ def deleteReservation():
         classroom = request.form['classroom_name']
         priority_reserved = request.form['priority_reserved']
         UR.delete_reservation_from_db(
-            role = role,
-            date = date,
-            time = time,
-            username = username,
-            public_or_private = public_or_private,
-            classroom = classroom,
-            priority_reserved = priority_reserved
+            role=role,
+            date=date,
+            time=time,
+            username=username,
+            public_or_private=public_or_private,
+            classroom=classroom,
+            priority_reserved=priority_reserved
         )
         return render_template("successfulDeletionOfClassReservation.html")
     else:
         return render_template("editReservations.html")
-    
 
 
 def deleteITReport():
@@ -644,12 +645,12 @@ def deleteITReport():
     date = request.form['date']
     time = request.form['time']
     UR.delete_it_report_from_db(
-        report_no = report_no,
-        room_name = room_name,
-        faculty_name = faculty_name,
-        problem_description = problem_description,
-        date = date,
-        time = time
+        report_no=report_no,
+        room_name=room_name,
+        faculty_name=faculty_name,
+        problem_description=problem_description,
+        date=date,
+        time=time
     )
     return render_template("successfulDeletionOfITReport.html")
 
@@ -661,6 +662,7 @@ def seeITReports():
 
 def it_report_statistics_for_admin():
     return render_template("it_report_statistics_for_admin.html")
+
 
 def enterChat():
     conn = sqlite3.connect('chat_db.db')
@@ -729,6 +731,7 @@ def send_chat_message_student():
     conn.close()
     return render_template('chat_class_generic.html', rows=data, class_data=classroom, user_name=session["username"], message=message)
 
+
 def myExamsOnly():
     df = pd.read_excel('FALL_22_EXAMS.xlsx')
     df.fillna("", inplace=True)
@@ -770,21 +773,19 @@ def myExamsOnly():
     args_array.append(("acadorg", acadorg))
 
     search_args = ["|".join([x[1] for x in args_array if x[1]])]
-    search_args.extend([f"{key}={value}" for key, value in request.args.items() if value and key != "class_code"])
+    search_args.extend([f"{key}={value}" for key, value in request.args.items(
+    ) if value and key != "class_code"])
 
     df = df[df.apply(lambda row: row.astype(str).str.startswith(tuple(search_args)).any() or
-                                    row.astype(str).str.startswith(class_code).any(), axis=1)]
+                     row.astype(str).str.startswith(class_code).any(), axis=1)]
 
     html_table = df.to_html(index=False, header=False)
     header_fields = df.columns.tolist()
     return render_template("exam_schedules.html", html_table=html_table, header_fields=header_fields)
 
 
-
-
 def allExams():
     return exam_schedules()
-    
 
 
 def createNews():
@@ -800,27 +801,32 @@ def createNewsElement():
     sender = session["username"]
     role = session["role"]
     UR.insert_news_to_newsdb(
-        news_message = news_message,
-        time = time,
-        date = date,
-        time_end = time_end,
-        date_end = date_end,
-        sender = sender,
-        role = role
+        news_message=news_message,
+        time=time,
+        date=date,
+        time_end=time_end,
+        date_end=date_end,
+        sender=sender,
+        role=role
     )
     return render_template("admin_create_news.html")
+
 
 def get_reservation_statistics_screen():
     return render_template("reservation_statistics.html")
 
+
 def open_user_statistics_screen():
     return render_template("user_statistics.html")
+
 
 def successfulUpdateOfITReport():
     return render_template('successfulUpdateOfITReport.html')
 
+
 def successfulUpdateOfReservation():
     return render_template('successfulUpdateOfClassReservation.html')
+
 
 def find_reservation_id():
     user_role = request.form['role']
@@ -832,3 +838,21 @@ def find_reservation_id():
     priority_reserved = request.form['priority_reserved']
 
 
+def clearMessages():
+    conn = sqlite3.connect('chat_db.db')
+    c = conn.cursor()
+
+    c.execute("DELETE FROM chat_db")
+
+    conn.commit()
+    conn.close()
+
+    conn = sqlite3.connect('chat_db.db')
+    c = conn.cursor()
+    query1 = 'SELECT * FROM chat_db'
+    c.execute(query1)
+    data = c.fetchall()
+    data.append(('classroom', session["classroom"]))
+
+    conn.close()
+    return render_template('chat_class_generic.html', rows=data, user_name=session["username"], message="No Messages Recieved Yet")

@@ -147,16 +147,6 @@ app.route('/get_it_statistics_for_admin', methods=['GET'])(US.it_report_statisti
 # Testing out role-based signup request
 
 
-@socketio.on('message')
-def handle_message(message):
-    import clientSide as cs
-    isLegitToSend = cs.isLegitToSend(message)
-    if isLegitToSend:
-        emit('response', message)
-    else:
-        # report IT
-        return
-
 
 @app.route('/<role>/signup', methods=['GET', 'POST'])
 def signup(role):
@@ -173,6 +163,8 @@ def login(role):
 # socket_chat.on("connect")(US.user_connected)
 # socket_chat.on("disconnect")(US.user_disconnected)
 app.route('/send_chat_message_student')(US.send_chat_message_student)
+app.route('/clearMessages')(US.clearMessages)
+
 
 
 

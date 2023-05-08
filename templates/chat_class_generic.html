@@ -13,13 +13,11 @@
     <h1> Chat for : {{class_data }} </h1>
     <div id="chat-history">
         {% for row in rows %}
-        <p>{{ row[2] }} {{ row[1] }}
-            {{user_name}}
-            Message :{{row[0]}}
-
+        <p class="p1">Date, time ** {{ row[2] }} {{ row[1] }} **</p>
+        <p class="p1">Sender : {{row[3]}}
         </p>
-        </p>
-
+        <p class="p2"> Message :{{row[0]}}</p>
+        <br>
         {% endfor %}
     </div>
 
@@ -30,6 +28,7 @@
             <button type="submit">Send message.</button>
         </form>
         <form action="/report_message_student"><button>Report message.</button></form>
+        <form action="/clearMessages"> <button>Clear Messages (Warning, cannot be undone.)</button></form>
     </div>
 </body>
 
