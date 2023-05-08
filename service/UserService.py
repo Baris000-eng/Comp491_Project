@@ -22,6 +22,9 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
+def getClassroomView():
+    return render_template("view_inside_of_classroom.html")
+
 
 def generate_classroom_reservation_code():
     alphabet = string.ascii_letters + string.digits
