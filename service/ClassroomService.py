@@ -6,14 +6,20 @@ from flask import request
 def showTheClassroomAndInfo():
     return render_template("Classroom_reservation_students_view.html")
 
+def getAllClassrooms():
+     return CR.getAllClassrooms()
+
 def createClassrooms(csv_source: str):
     """
     Given a path to csv file import data to classroom repository
     """
     return CR.createClassrooms(csv_source)
 
-# def getAllClassrooms():
-#     return CR.getAllClassrooms()
+def showClassroomSearchAndFilterScreen():
+    classroom_names = CR.getAllClassroomNames()
+    departments = CR.getAllDepartmentNames()
+    return render_template("classroom_search_and_filtering_screen.html", classroom_names = classroom_names, departments = departments)
+    
 
 def getClassroomsWhere(criteria: dict={}):
         filtered_criteria, operations = filter_criteria(criteria=criteria)
@@ -41,6 +47,7 @@ def filter_criteria(criteria: dict):
     filtered_criteria = {}
     operations = {}
     for key, value in criteria.items():
+        print("Key: "+str(key)+" Value: "+str(value)+"")
         # Ensure field is checked and its value is not empty
         if f'checkbox_{key}' in criteria and value:
                 filtered_criteria[key] = value
@@ -49,9 +56,6 @@ def filter_criteria(criteria: dict):
             operations[key[10:]] = value
 
     return filtered_criteria, operations
-
-
-
 
    
 

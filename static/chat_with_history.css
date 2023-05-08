@@ -76,8 +76,22 @@ li:last-child {
 
 
 #chat-history p:hover {
-    transform: scale(2.5);
     background-color: green;
     color: white;
 }
 
+.p1{
+    background-color: aqua;
+}
+
+.p2{
+    background-color: rgb(20, 173, 255);
+}
+
+#chat-history{
+    background-color: rgb(238, 99, 173);
+}
+
+br{
+    background-color: black;
+}

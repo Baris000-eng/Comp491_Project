@@ -1,4 +1,4 @@
-from flask import Flask, request, session, render_template
+from flask import Flask, request, session
 import setup
 import socket
 from rbac import allow_roles
@@ -8,11 +8,16 @@ import service.UserService as US
 import service.ClassroomService as CS
 import service.PlottingService as PS
 from flask_socketio import SocketIO, emit
+from flask import render_template
 
 app = Flask(__name__)
 app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 socketio = SocketIO(app)
+
+
+app.route("/getFilterAndSearchClassroomsScreen")(CS.showClassroomSearchAndFilterScreen)
+
 
 app.route("/reservation_code")(US.generate_classroom_reservation_code)
 
@@ -42,13 +47,6 @@ app.route('/change_user_password',
 app.route('/password_change_success')(password_change_success)
 
 app.route('/select_role', methods=['POST'])(select_role)
-
-# @app.route('/classrooms', methods=['GET'])
-# def get_all_classrooms():
-#     classrooms = CS.getAllClassrooms()
-#     departments = CS.getAllDepartments()
-#     return render_template("Classroom_reservation_students_view.html", classrooms = classrooms, departments = departments)
-
 app.route('/chat_action')(chat_action)
 # @socketio.on('connect')
 # @socketio.on('message')
@@ -74,23 +72,23 @@ def screen(role):
 
 
 @app.route('/admin/import-classrooms', methods=['POST'])
-@allow_roles([], session, request)
+@allow_roles(['student', 'teacher', 'it_staff'], session, request)
 def import_classrooms():
     file_path = request.form.get('file_path', '')
     return CS.createClassrooms(file_path)
 
 
-@app.route('/classrooms', methods=['GET'])
+@app.route('/classrooms', methods=["GET"])
+@allow_roles(['student', 'teacher', 'it_staff'], session, request)
+def get_all_classrooms():
+    classrooms = CS.getAllClassrooms()
+    return render_template("classroom_reservation_view.html", classrooms = classrooms)
+
+@app.route('/filteredClassrooms', methods=['GET'])
 def get_classrooms_where():
     classrooms = CS.getClassroomsWhere(request.args)
     departments = CS.getAllDepartments()
-    return render_template("Classroom_reservation_students_view.html", classrooms = classrooms, departments = departments)
-
-@app.route('/allClasses', methods=['GET'])
-def get_all_classes():
-    classrooms = CS.getClassroomsWhere()
-    departments = CS.getAllDepartments()
-    return render_template("Classroom_reservation_students_view.html", classrooms = classrooms, departments = departments)
+    return render_template("classroom_reservation_view.html", classrooms = classrooms, departments = departments)
 
 
 @app.route('/<role>/dashboard', methods=['GET', 'POST'])
@@ -117,8 +115,8 @@ app.route('/openStudentReservationScreen',
           methods=['GET'])(US.openStudentReservationScreen)
 app.route('/openTeacherReservationScreen',
           methods=['GET'])(US.openTeacherReservationScreen)
-app.route('/openItStaffReservationScreen',
-          methods=['GET'])(US.open_it_staff_reservation_screen)
+app.route('/openITStaffReservationScreen',
+          methods=['GET'])(US.openITStaffReservationScreen)
 
 
 app.route('/seeITReport',
@@ -149,16 +147,6 @@ app.route('/get_it_statistics_for_admin', methods=['GET'])(US.it_report_statisti
 # Testing out role-based signup request
 
 
-@socketio.on('message')
-def handle_message(message):
-    import clientSide as cs
-    isLegitToSend = cs.isLegitToSend(message)
-    if isLegitToSend:
-        emit('response', message)
-    else:
-        # report IT
-        return
-
 
 @app.route('/<role>/signup', methods=['GET', 'POST'])
 def signup(role):
@@ -175,6 +163,8 @@ def login(role):
 # socket_chat.on("connect")(US.user_connected)
 # socket_chat.on("disconnect")(US.user_disconnected)
 app.route('/send_chat_message_student')(US.send_chat_message_student)
+app.route('/clearMessages')(US.clearMessages)
+
 
 
 

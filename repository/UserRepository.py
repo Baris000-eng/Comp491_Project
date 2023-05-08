@@ -7,12 +7,12 @@ from constants import DB
 from constants import UserModel
 import sqlite3
   
-def updateReservation(role, date, time, username, reservation_purpose, reserved_classroom, priority_reserved, id):
+def updateReservation(role, date, start_time, end_time, username, reservation_purpose, reserved_classroom, priority_reserved, id):
     conn = sqlite3.connect("reservations_db.db")
     c = conn.cursor()
 
-    c.execute("UPDATE reservations_db SET role=?, date=?, time=?, username=?, public_or_private=?, classroom = ?, priority_reserved=? WHERE id=?", 
-                (role, date, time, username, reservation_purpose, reserved_classroom, priority_reserved, id))
+    c.execute("UPDATE reservations_db SET role=?, date=?, start_time=?, end_time=?, username=?, public_or_private=?, classroom = ?, priority_reserved=? WHERE id=?", 
+                (role, date, start_time, end_time, username, reservation_purpose, reserved_classroom, priority_reserved, id))
 
     conn.commit()
     conn.close()
@@ -26,7 +26,6 @@ def updateITReport(report_no, room_name, faculty_name, problem_description, date
 
     conn.commit()
     conn.close()
-
 
 
 def getAllITReports():
@@ -51,19 +50,20 @@ def delete_it_report_from_db(report_no, room_name, faculty_name, problem_descrip
     conn.commit()
     conn.close()
 
-def delete_reservation_from_db(role, date, time, username, public_or_private, classroom, priority_reserved):
+def delete_reservation_from_db(role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved):
     conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
 
     c.execute('''DELETE FROM reservations_db WHERE
                  role = ? AND
                  date = ? AND
-                 time = ? AND
+                 start_time = ? AND
+                 end_time = ? AND 
                  username = ? AND
                  public_or_private = ? AND
                  classroom = ? AND
                  priority_reserved = ?''',
-              (role, date, time, username, public_or_private, classroom, priority_reserved))
+              (role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved))
 
     conn.commit()
     conn.close()
@@ -162,7 +162,8 @@ def initializeReservationsTable():
               id INTEGER PRIMARY KEY AUTOINCREMENT, 
               role TEXT NOT NULL,
               date DATE NOT NULL, 
-              time TIME NOT NULL, 
+              start_time TIME NOT NULL, 
+              end_time TIME NOT NULL,
               username TEXT DEFAULT "NO_NAME_GIVEN", 
               public_or_private TEXT,
               classroom TEXT,
@@ -258,18 +259,7 @@ def createChat(classroom, time, date, sender, role, flagged):
     conn.close()
 
 
-def createReservation(date, time, username, priority, public_or_private, classroom):
-    """
-    Given a date, time, username, priority, insert new reservation into the reservation database
-    """
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
 
-    c.execute('''INSERT INTO reservations_db (date, time, username, public_or_private, classroom, priority_reserved) 
-             VALUES (?, ?, ?, ?, ?, ?)''', (date, time, username, public_or_private, classroom, priority))
-
-    conn.commit()
-    conn.close()
 
 
 def createUser(username: str, password: str, email: str, role: str, priority: int):

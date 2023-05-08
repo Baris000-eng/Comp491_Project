@@ -1,11 +1,19 @@
+function activateButton(button) {
+  button.disabled = true;
+  button.closest("form").submit();
+}
 
-setInterval(function() {
-    fetch('/get_news_count')
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('newsCount').textContent = data.news_count || '0';
-      })
-      .catch(error => {
-        console.error('Error:', error);
+document.addEventListener("DOMContentLoaded", function () {
+  const buttons = document.querySelectorAll(".buttons button");
+  buttons.forEach(function (button) {
+      let timeout;
+      button.addEventListener("mouseenter", function () {
+          timeout = setTimeout(function () {
+              activateButton(button);
+          }, 2000);
       });
-}, 10000);
+      button.addEventListener("mouseleave", function () {
+          clearTimeout(timeout);
+      });
+  });
+});

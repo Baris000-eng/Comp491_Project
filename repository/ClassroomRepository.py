@@ -155,3 +155,19 @@ def getAllDepartmentNames():
     conn.close()
     return returned_department_names
 
+def getAllClassroomNames():
+    conn = sqlite3.connect(f"{DB.classrooms}.db")
+    c = conn.cursor()
+    c.execute(f"SELECT code FROM {DB.classrooms}")
+
+    classrooms = c.fetchall()
+    returned_classroom_names = list()
+    for classroom in classrooms:
+        class_name = classroom[0]
+        returned_classroom_names.append(class_name)
+
+    conn.commit()
+    conn.close()
+    return returned_classroom_names
+
+

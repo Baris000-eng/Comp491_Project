@@ -121,38 +121,29 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.button {
-  transition: transform 0.3s ease-in-out;
-}
-
 .button.clicked {
-  transform: scale(1.40);
+  transform: scale(1.05);
   background-color: red;
 }
 
 .button.hover {
-  transform: scale(1.25);
+  transform: scale(1.05);
   background-color: red;
   color: red;
 }
 
-.form {
-  transition: transform 0.3s ease-in-out;
-}
-
 .form.clicked {
-  transform: scale(1.25);
+  transform: scale(1.05);
   background-color: red;
 }
 
 .form.hover {
-  transform: scale(1.25);
+  transform: scale(1.05);
   background-color: red;
 }
 
@@ -162,11 +153,9 @@ button {
 }
 
 .buttons button:hover {
-  margin-top: 10px;
-  margin-bottom: 10px;
   background-color: red;
   color: white;
-  transform: scale(1.40);
+  transform: scale(1.05);
   transition: transform 0.3s ease-in-out;
 }
 
@@ -185,9 +174,11 @@ button {
   0% {
     background-color: #000000;
   }
+
   20% {
     background-color: #fbff00;
   }
+
   100% {
     background-color: #000000;
   }
@@ -291,4 +282,59 @@ button {
 
 .star:nth-child(15) {
   animation-delay: 6s;
+}
+
+
+#hover_effect {
+  transition: transform 5s;
+}
+
+#hover_effect:hover {
+  transform: scale(1.10);
+}
+
+.buttons button {
+  transition: transform 3s;
+}
+
+.buttons button:hover {
+  transform: scale(1.10);
+}
+
+@keyframes rainbow {
+  0% {
+    background-color: red;
+  }
+
+  14% {
+    background-color: orange;
+  }
+
+  28% {
+    background-color: yellow;
+  }
+
+  42% {
+    background-color: green;
+  }
+
+  57% {
+    background-color: blue;
+  }
+
+  71% {
+    background-color: indigo;
+  }
+
+  85% {
+    background-color: violet;
+  }
+
+  100% {
+    background-color: red;
+  }
+}
+
+.buttons button:hover {
+  animation: rainbow 1.5s linear infinite;
 }

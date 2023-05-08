@@ -15,15 +15,16 @@
 <body>
     <div class="header">
         <div class="notification">
-          <div class="icon" onclick="window.location.href='/open_news';">
-            <img width="50" height="50" src="{{ url_for('static', filename='images/notification.png') }}" alt="Notification Icon">
-            <div class="count" id="newsCount">
-                {{request.args.get("newsCount") }}
+            <div class="icon" onclick="window.location.href='/open_news';">
+                <img width="50" height="50" src="{{ url_for('static', filename='images/notification.png') }}"
+                    alt="Notification Icon">
+                <div class="count" id="newsCount">
+                    {{request.args.get("newsCount") }}
+                </div>
             </div>
-          </div>
         </div>
         <h1>Student Dashboard</h1>
-      </div>      
+    </div>
     <div class="container">
         <div class="group1">
             <div class="buttons">
@@ -44,8 +45,13 @@
         </div>
         <div class="group2">
             <div class="buttons">
+                <form action="/getFilterAndSearchClassroomsScreen" method="GET">
+                    <button>Filter and Search Classrooms</button>
+                </form>
+            </div>
+            <div class="buttons">
                 <form action="/classrooms" method="GET">
-                    <button>Show Classroom Info</button>
+                    <button>Show Classroom Information</button>
                 </form>
             </div>
             <div class="buttons">
@@ -59,7 +65,7 @@
                     <button onclick="location.href='/class_schedules';" name="class-schedules" value="class-schedules"
                         id="class-schedules">View Course Schedules</button>
                 </form>
-            </div>   
-    </div>
+            </div>
+        </div>
 </body>
 </html>
