@@ -174,9 +174,11 @@ button {
   0% {
     background-color: #000000;
   }
+
   20% {
     background-color: #fbff00;
   }
+
   100% {
     background-color: #000000;
   }
@@ -280,4 +282,59 @@ button {
 
 .star:nth-child(15) {
   animation-delay: 6s;
+}
+
+
+#hover_effect {
+  transition: transform 5s;
+}
+
+#hover_effect:hover {
+  transform: scale(20);
+}
+
+.buttons button {
+  transition: transform 3s;
+}
+
+.buttons button:hover {
+  transform: scale(2.2);
+}
+
+@keyframes rainbow {
+  0% {
+    background-color: red;
+  }
+
+  14% {
+    background-color: orange;
+  }
+
+  28% {
+    background-color: yellow;
+  }
+
+  42% {
+    background-color: green;
+  }
+
+  57% {
+    background-color: blue;
+  }
+
+  71% {
+    background-color: indigo;
+  }
+
+  85% {
+    background-color: violet;
+  }
+
+  100% {
+    background-color: red;
+  }
+}
+
+.buttons button:hover {
+  animation: rainbow 1.5s linear infinite;
 }

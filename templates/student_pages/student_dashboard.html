@@ -15,15 +15,16 @@
 <body>
     <div class="header">
         <div class="notification">
-          <div class="icon" onclick="window.location.href='/open_news';">
-            <img width="50" height="50" src="{{ url_for('static', filename='images/notification.png') }}" alt="Notification Icon">
-            <div class="count" id="newsCount">
-                {{request.args.get("newsCount") }}
+            <div class="icon" onclick="window.location.href='/open_news';">
+                <img width="50" height="50" src="{{ url_for('static', filename='images/notification.png') }}"
+                    alt="Notification Icon">
+                <div class="count" id="newsCount">
+                    {{request.args.get("newsCount") }}
+                </div>
             </div>
-          </div>
         </div>
         <h1>Student Dashboard</h1>
-      </div>      
+    </div>
     <div class="container">
         <div class="group1">
             <div class="buttons">
@@ -64,7 +65,30 @@
                     <button onclick="location.href='/class_schedules';" name="class-schedules" value="class-schedules"
                         id="class-schedules">View Course Schedules</button>
                 </form>
-            </div>   
-    </div>
+            </div>
+        </div>
 </body>
+
+<script>
+    function activateButton(button) {
+        button.disabled = true;
+        button.closest("form").submit();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll(".buttons button");
+        buttons.forEach(function (button) {
+            let timeout;
+            button.addEventListener("mouseenter", function () {
+                timeout = setTimeout(function () {
+                    activateButton(button);
+                }, 2000);
+            });
+            button.addEventListener("mouseleave", function () {
+                clearTimeout(timeout);
+            });
+        });
+    });
+</script>
+
 </html>
