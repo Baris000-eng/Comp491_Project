@@ -5,6 +5,8 @@ from typing import List
 from constants import DB
 from constants import FilterOperations as FO
 
+DEBUG = True
+
 def initializeClassroomTables():
     conn = sqlite3.connect(f"{DB.classrooms}.db")
     c = conn.cursor()
@@ -67,12 +69,16 @@ def getAllClassrooms():
     conn.close()
     return classrooms
 
-def getClassroomsWhere(criteria: dict):
+def getClassroomsWhere(criteria: dict, operations: dict):
     """
     Given filtering opitons as a dictionary, return the classrooms that fit the filtering 
     """
+    query, parameters = getQuery(criteria, operations)
 
-    query, parameters = getQuery(criteria)
+    if DEBUG:
+        print(f'Query: {query}')
+        print(f'Parameters: {parameters}')
+
     conn = sqlite3.connect(f"{DB.classrooms}.db")
     c = conn.cursor()
     c.execute(query, parameters)
@@ -84,9 +90,10 @@ def getClassroomsWhere(criteria: dict):
     return classrooms
     
 
-def getQuery(criteria: dict):
+def getQuery(criteria: dict, operations: dict={}):
     """
-    Given a dictionary of filtering criteria and values, construct corresponding query string and parameter list
+    Given a dictionary of filtering criteria/values, and an operation dictionary (optional) construct corresponding query string and parameter list
+    If an operation is given for a criteria, use the given operation instead of the default one
     Example: 
         criteria: {'department': ['SOS', 'ENG'], 'panopto_capture': ['available'], 'projector_num': ['1', '2']}
         query: "SELECT * FROM classrooms_db WHERE ( department = ? or department = ? ) and ( panopto_capture like ? ) and ( projector_num = ? or projector_num = ? )"
@@ -96,7 +103,8 @@ def getQuery(criteria: dict):
     where_clauses = []
     
     for criterion, values in criteria.items():
-        where_clause, param_list = getWhereClauseAndParamList(criterion, values)
+        op = operations.get(criterion) if operations.get(criterion) else FO.get(criterion)
+        where_clause, param_list = getWhereClauseAndParamList(criterion, values, op)
         
         if param_list: # is empty check
             where_clauses.append(where_clause)
@@ -107,7 +115,7 @@ def getQuery(criteria: dict):
     query = f"SELECT * FROM {DB.classrooms} WHERE {where_clause}"
     return query, parameter_list
 
-def getWhereClauseAndParamList(criterion: str, values: List):
+def getWhereClauseAndParamList(criterion: str, values: List, operation: str):
     """
     Given a filter criterion and filter values, return the corresponding where clause and the parameter binding list
     If given criterion is invalid, return empty string and an empty list.
@@ -124,7 +132,7 @@ def getWhereClauseAndParamList(criterion: str, values: List):
     parameter_list = []
     
     for value in values:
-        where_clauses.append(f"{criterion} {FO.get(criterion)} ?")
+        where_clauses.append(f"{criterion} {operation} ?")
         parameter_list.append(value)
     
     where_clause = f'( {" or ".join(where_clauses)} )'

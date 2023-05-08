@@ -1,11 +1,10 @@
-from flask import Flask, request, session
+from flask import Flask, request, session, render_template
 import setup
 import socket
 from rbac import allow_roles
 from service.UserService import password_change_success, go_to_opening_screen
 from service.UserService import select_role, chat_action, report_chat, report_it
 import service.UserService as US
-from service.ClassroomService import read_classrooms_and_put_to_html
 import service.ClassroomService as CS
 import service.PlottingService as PS
 from flask_socketio import SocketIO, emit
@@ -43,7 +42,13 @@ app.route('/change_user_password',
 app.route('/password_change_success')(password_change_success)
 
 app.route('/select_role', methods=['POST'])(select_role)
-app.route('/showTheClassroomAndInfo', methods=['GET'])(read_classrooms_and_put_to_html)
+
+# @app.route('/classrooms', methods=['GET'])
+# def get_all_classrooms():
+#     classrooms = CS.getAllClassrooms()
+#     departments = CS.getAllDepartments()
+#     return render_template("Classroom_reservation_students_view.html", classrooms = classrooms, departments = departments)
+
 app.route('/chat_action')(chat_action)
 # @socketio.on('connect')
 # @socketio.on('message')
@@ -76,15 +81,16 @@ def import_classrooms():
 
 
 @app.route('/classrooms', methods=['GET'])
-@allow_roles([], session, request)
-def get_all_classrooms():
-    return CS.getAllClassrooms()
-
-
-@app.route('/classrooms/filter', methods=['POST'])
 def get_classrooms_where():
-    print(request.form)
-    return CS.getClassroomsWhere(request.form)
+    classrooms = CS.getClassroomsWhere(request.args)
+    departments = CS.getAllDepartments()
+    return render_template("Classroom_reservation_students_view.html", classrooms = classrooms, departments = departments)
+
+@app.route('/allClasses', methods=['GET'])
+def get_all_classes():
+    classrooms = CS.getClassroomsWhere()
+    departments = CS.getAllDepartments()
+    return render_template("Classroom_reservation_students_view.html", classrooms = classrooms, departments = departments)
 
 
 @app.route('/<role>/dashboard', methods=['GET', 'POST'])
