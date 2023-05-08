@@ -54,7 +54,6 @@
         </tr>
       </thead>
       <tbody>
-        {% set row_index = 0 %}
         {% for row in classrooms %}
         <tr>
           <td>{{ row[0] }}</td>
@@ -75,23 +74,22 @@
           <td>
             {% if 'role' in session %} {% if session['role'] == 'teacher' %}
             <form action="/openTeacherReservationScreen">
-              <input type="hidden" name="selected_row_index" value="{{ row_index }}">
+              <input type="hidden" name="class_code" value="{{ row[0] }}">
               <button>Reserve The Class In Teacher Reservation Screen</button>
             </form>
             {% elif session['role'] == 'it_staff' %}
             <form action="/openITStaffReservationScreen">
-              <input type="hidden" name="selected_row_index" value="{{ row_index}}">
+              <input type="hidden" name="class_code" value="{{ row[0]}}">
               <button>Reserve The Class In IT Staff Reservation Screen</button>
             </form>
             {% elif session['role'] == 'student' %}
             <form action="/openStudentReservationScreen">
-              <input type="hidden" name="selected_row_index" value="{{ row_index }}">
+              <input type="hidden" name="class_code" value="{{ row[0] }}">
               <button>Reserve The Class In Student Reservation Screen</button>
             </form>
             {% endif %} {% endif %}
           </td>
         </tr>
-        {% set row_index = row_index + 1 %}
         {% endfor %}
         </tbody>        
     </table>

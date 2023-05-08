@@ -499,29 +499,27 @@ def see_already_reserved_classes():
 
 
 def openStudentReservationScreen():
-    row_index_of_selected_class = request.args.get('row_index_of_selected_class')
     options = extract_first_column_of_ku_class_data()
-    if row_index_of_selected_class is not None:
-        selected_class_code = options[int(row_index_of_selected_class)]
+    selected_class_code = request.form.get('class_code')
+    if selected_class_code is not None:
         return render_template('student_reservation_screen.html', options=options, class_code=selected_class_code)
     return render_template('student_reservation_screen.html', options=options)
 
 
 def openTeacherReservationScreen():
-    row_index_of_selected_class = request.args.get('row_index_of_selected_class')
     options = extract_first_column_of_ku_class_data()
-    if row_index_of_selected_class is not None:
-        selected_class_code = options[int(row_index_of_selected_class)]
+    selected_class_code = request.form.get('class_code')
+    if selected_class_code is not None:
         return render_template('teacher_reservation_screen.html', options=options, class_code=selected_class_code)
     return render_template('teacher_reservation_screen.html', options=options)
 
 
 def openITStaffReservationScreen():
-    row_index_of_selected_class = request.args.get('row_index_of_selected_class')
     options = extract_first_column_of_ku_class_data()
-    if row_index_of_selected_class is not None:
-        selected_class_code = options[int(row_index_of_selected_class)]
-        return render_template('teacher_reservation_screen.html', options=options, class_code=selected_class_code)
+    selected_class_code = request.form.get('class_code')
+    if selected_class_code is not None:
+        selected_class_code = options[int(selected_class_code)]
+        return render_template('it_staff_reservation_screen.html', options=options, class_code=selected_class_code)
     return render_template('it_staff_reservation_screen.html', options=options)
 
 
