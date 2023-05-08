@@ -392,9 +392,11 @@ def extract_first_column_of_ku_class_data():
 def reserve_class():
     role = session["role"]
     class_code = request.form['class-code']
-    time = request.form['time']
+    start_time = request.form['start-time']
+    end_time = request.form['end-time']
     date = request.form['date']
     option = request.form['option']
+    classroom_code_options = extract_first_column_of_ku_class_data()
 
     conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
@@ -416,27 +418,26 @@ def reserve_class():
         preference = "Repair"
 
     # Retrieve existing reservation
-    c.execute('''SELECT * FROM reservations_db WHERE date=? AND time=? AND classroom=?''',
-              (date, time, class_code))
+    c.execute('''SELECT * FROM reservations_db WHERE date=? AND start_time=? AND end_time = ? AND classroom=?''',
+              (date, start_time, end_time, class_code))
     existing_reservation = c.fetchone()
 
-    if existing_reservation and existing_reservation[6] < session['priority']:
+    if existing_reservation and existing_reservation[8] < session['priority']:
         c.execute('''UPDATE reservations_db SET role=?, username=?, public_or_private=?, priority_reserved=?
-                    WHERE date=? AND time=? AND classroom=? AND priority_reserved < ?''', (role, session["username"], preference, session['priority'], date, time, class_code, session['priority']))
+                    WHERE date=? AND start_time=? AND end_time=? AND classroom=? AND priority_reserved < ?''', (role, session["username"], preference, session['priority'], date, start_time, end_time, class_code, session['priority']))
         conn.commit()
         conn.close()
         return render_template("return_success_message_classroom_reserved.html")
     else:
-        if existing_reservation and existing_reservation[1] == date and existing_reservation[2] == time and existing_reservation[3] == class_code and existing_reservation[4] == session['username']:
+        if existing_reservation and existing_reservation[2] == date and existing_reservation[3] == start_time and existing_reservation[4] == end_time and existing_reservation[5] == session['username'] and existing_reservation[7] == class_code :
             reservation_already_happened = "Reservation failed: you have already reserved this slot."
-            return render_template(role + "_reservation_screen.html", reservation_already_happened=reservation_already_happened)
+            return render_template(role + "_reservation_screen.html", reservation_already_happened=reservation_already_happened, options=classroom_code_options)
         elif existing_reservation:
             another_user_reserved = "Reservation failed: slot already reserved by another user."
-            return render_template(role + "_reservation_screen.html", another_user_reserved=another_user_reserved)
+            return render_template(role + "_reservation_screen.html", another_user_reserved=another_user_reserved, options=classroom_code_options)
         else:
-            # Insert new reservation #
-            c.execute('''INSERT INTO reservations_db (role, date, time, username, public_or_private, classroom, priority_reserved)
-                        VALUES (?, ?, ?, ?, ?, ?, ?)''', (role, date, time, session["username"], preference, class_code, session['priority']))
+            c.execute('''INSERT INTO reservations_db (role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', (role, date, start_time, end_time, session["username"], preference, class_code, session['priority']))
             conn.commit()
             conn.close()
             return render_template("return_success_message_classroom_reserved.html")
@@ -826,16 +827,6 @@ def successfulUpdateOfITReport():
 
 def successfulUpdateOfReservation():
     return render_template('successfulUpdateOfClassReservation.html')
-
-
-def find_reservation_id():
-    user_role = request.form['role']
-    reservation_date = request.form['date']
-    reservation_time = request.form['time']
-    reserver_username = request.form['username']
-    reservation_purpose = request.form['reservation_purpose']
-    reserved_classroom = request.form['classroom']
-    priority_reserved = request.form['priority_reserved']
 
 
 def clearMessages():
