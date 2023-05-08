@@ -71,14 +71,8 @@ def getClassroomsWhere(criteria: dict):
     """
     Given filtering opitons as a dictionary, return the classrooms that fit the filtering 
     """
-    print(f'criteria: {criteria}')
 
     query, parameters = getQuery(criteria)
-    
-
-    print(f'query: {query}')
-    print(f'parameters: {parameters}')
-
     conn = sqlite3.connect(f"{DB.classrooms}.db")
     c = conn.cursor()
     c.execute(query, parameters)
@@ -136,3 +130,20 @@ def getWhereClauseAndParamList(criterion: str, values: List):
     where_clause = f'( {" or ".join(where_clauses)} )'
 
     return where_clause, parameter_list
+
+
+def getAllDepartmentNames():
+    conn = sqlite3.connect(f"{DB.classrooms}.db")
+    c = conn.cursor()
+    c.execute(f"SELECT DISTINCT department FROM {DB.classrooms}")
+
+    departments = c.fetchall()
+    returned_department_names = list()
+    for dep in departments:
+        dep_name = dep[0]
+        returned_department_names.append(dep_name)
+
+    conn.commit()
+    conn.close()
+    return returned_department_names
+

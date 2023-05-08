@@ -2,6 +2,7 @@ from flask import session
 from typing import List
 from flask import render_template, redirect, session,  flash, request, Flask, url_for, jsonify
 import sqlite3
+import openpyxl
 import secrets
 import random
 import matplotlib.pyplot as plt
@@ -379,53 +380,10 @@ def select_role():
     else:
         return render_template('opening_screen.html')
 
-
-def showTheClassroomAndInfo():
-    import openpyxl
-
-    def load_classes_with_info(filename):
-        # Load workbook
-        workBook = openpyxl.load_workbook(filename)
-
-        # Select active worksheet
-        workBookActive = workBook.active
-
-        # Get column headers
-        columns = workBookActive[1][:8]
-        heads = [collumn.value for collumn in columns]
-
-        # Get data from columns A to H
-        rows = workBookActive.iter_rows(min_row=2)
-        info = []
-        for row in rows:
-            row_values = []
-            for column in row[:8]:
-                row_values.append(column.value)
-            info.append(row_values)
-
-        def create_html_file(txt_string):
+def create_html_file(txt_string):
             with open("templates/Classroom_reservation_students_view.html", "w", encoding="utf-8") as file:
                 file.write(txt_string)
-                file.write(txt_string)
                 file.close()
-
-        role = session.get("role", '')
-        beginning = '<div class="buttons_box"><form action="/myClassesOnly"><input type="text" name="faculty_name" value="Enter faculty name"><br> <input type="text" name="class_code" value="Enter class code"><button>Show only selected classes</button></form><form action="/allClasses"><button>Show all classes</button></form></div>'
-        beginning += f'<!DOCTYPE html><html><head><title>{role.capitalize()} Dashboard</title><link rel="stylesheet" type="text/css" href="../static/classroom_infos.css"></head><body>'
-
-        html = ""
-        html += beginning
-        html += "<table>\n<thead>\n<tr>\n"
-        html += "".join([f"<th>{header}</th>\n" for header in heads])
-        html += "</tr>\n</thead>\n<tbody>\n"
-        html += "".join([f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><form action='/openTeacherReservationScreen' method='GET'><input type='hidden' name='row_index' value='{info.index(row)}'><button>Reserve</button></form></td></tr>\n" if 'role' in session and session['role'] ==
-                        'teacher' else f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><form action='/openStudentReservationScreen' method='GET'><input type='hidden' name='row_index' value='{info.index(row)}'><button>Reserve</button></form></td></tr>\n" if 'role' in session and session['role'] == 'student' else f"<tr>{''.join([f'<td>{cell}</td>' for cell in row])}<td><form action='/openItStaffReservationScreen' method='GET'><input type='hidden' name='row_index' value='{info.index(row)}'><button>Reserve</button></form></td></tr>\n" for row in info])
-        html += "</tbody>\n</table>"
-        html += "</body></html>"
-        create_html_file(html)
-        return html
-    html = load_classes_with_info('KU_Classrooms.xlsx')
-    return render_template("Classroom_reservation_students_view.html")
 
 
 def extract_first_column_of_ku_class_data():
@@ -834,29 +792,7 @@ def myExamsOnly():
 
 def allExams():
     return exam_schedules()
-
-
-def myClassesOnly():
-    df = pd.read_excel('KU_Classrooms.xlsx')
-    df.fillna("", inplace=True)
-    df = df.applymap(lambda x: html.escape(str(x))
-                     if isinstance(x, str) else x)
-    faculty_name = request.args.get('faculty_name')
-    class_code = request.args.get('class_code')
-    a_list = []
-    b_list = []
-    a_list.append(faculty_name)
-    b_list.append(class_code)
-
-    df = df[df.apply(lambda row: row.astype(str).str.contains('|'.join(a_list)).any(
-    ) and row.astype(str).str.contains('|'.join(b_list)).any(), axis=1)]
-    html_table = df.to_html(index=False, header=False)
-    header_fields = df.columns.tolist()
-    return render_template("exam_schedules.html", html_table=html_table, header_fields=header_fields, fromMyClassesOnly=True)
-
-
-def allClasses():
-    return showTheClassroomAndInfo()
+    
 
 
 def createNews():

@@ -3,6 +3,7 @@ import io
 import base64
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.ticker as ticker
 
 
 def piechart_reservations_per_priority_value():
@@ -259,7 +260,7 @@ def plot_user_numbers_per_priority_value():
     ax.set_xticklabels(priority_values)
     plt.xticks(rotation=45, ha="right")
 
-    ax.set_yticks(range(0, max(total_reservations)+1, 5))
+    ax.set_yticks(range(0, max(total_number_of_users)+1, 5))
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
     buffer.seek(0)
@@ -438,17 +439,24 @@ def plot_histogram_of_it_report_numbers_per_classroom_name():
     room_names = [row[0] for row in data]
     total_number_of_it_reports = [row[1] for row in data]
 
-    fig, ax = plt.subplots(figsize=(15,15))
-    ax.bar(room_names, total_number_of_it_reports)
-    ax.set_title('Number of IT Reports for Each Classroom')
-    ax.set_xlabel('Classroom Names')
-    ax.set_ylabel('Number of IT Reports')
+    fig, ax = plt.subplots(figsize=(12,8))
+    ax.bar(room_names, total_number_of_it_reports, color='steelblue', edgecolor='black')
+    ax.set_title('Number of IT Reports for Each Classroom', fontsize=18)
+    ax.set_xlabel('Classroom Names', fontsize=14)
+    ax.set_ylabel('Number of IT Reports', fontsize=14)
 
-    ticks = np.linspace(0, len(room_names)-1, len(room_names))
-    ax.set_xticks(ticks)
-    ax.set_xticklabels(room_names)
-    plt.xticks(rotation=45, ha="right")
-    
+    ax.tick_params(axis='both', labelsize=12)
+
+    # Use MaxNLocator to choose the number of ticks based on the available space
+    ax.xaxis.set_major_locator(ticker.MaxNLocator(len(room_names)))
+
+    ax.set_xticklabels(room_names, rotation=45, ha="right")
+
+    for i, v in enumerate(total_number_of_it_reports):
+        ax.text(i, v+0.5, str(v), ha='center', fontsize=12)
+
+    plt.tight_layout()
+
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
     buffer.seek(0)
@@ -491,17 +499,18 @@ def plot_histogram_of_it_report_numbers_per_faculty_name():
     faculty_names = [row[0] for row in data]
     total_number_of_it_reports = [row[1] for row in data]
 
-    fig, ax = plt.subplots(figsize=(15,15))
+    fig, ax = plt.subplots(figsize=(10, 8))
     ax.bar(faculty_names, total_number_of_it_reports)
-    ax.set_title('Number of IT Reports for Each Faculty Name')
-    ax.set_xlabel('Faculty Names')
+    ax.set_title('Number of IT Reports for Each Faculty')
+    ax.set_xlabel('Faculty')
     ax.set_ylabel('Number of IT Reports')
 
-    ticks = np.linspace(0, len(faculty_names)-1, len(faculty_names))
+    ticks = np.arange(len(faculty_names))
     ax.set_xticks(ticks)
-    ax.set_xticklabels(faculty_names)
-    plt.xticks(rotation=45, ha="right")
-    
+    ax.set_xticklabels(faculty_names, rotation=45, ha='right', fontsize=12)
+    ax.tick_params(axis='y', labelsize=12)
+    ax.grid(axis='y', linestyle='--')
+
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
     buffer.seek(0)

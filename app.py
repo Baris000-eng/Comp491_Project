@@ -3,8 +3,9 @@ import setup
 import socket
 from rbac import allow_roles
 from service.UserService import password_change_success, go_to_opening_screen
-from service.UserService import select_role, showTheClassroomAndInfo, chat_action, report_chat, report_it
+from service.UserService import select_role, chat_action, report_chat, report_it
 import service.UserService as US
+from service.ClassroomService import read_classrooms_and_put_to_html
 import service.ClassroomService as CS
 import service.PlottingService as PS
 from flask_socketio import SocketIO, emit
@@ -20,8 +21,7 @@ app.route('/class_schedules')(US.course_schedules)
 app.route('/exam_schedules')(US.exam_schedules)
 app.route('/myExamsOnly')(US.myExamsOnly)
 app.route('/allExams')(US.allExams)
-app.route('/myClassesOnly')(US.myClassesOnly)
-app.route('/allClasses')(US.allClasses)
+
 app.route("/get_news_count")(US.get_news_count)
 app.route("/open_news")(US.open_news_screen)
 app.route("/get_teacher_signup_guide")(US.get_teacher_signup_guide)
@@ -43,7 +43,7 @@ app.route('/change_user_password',
 app.route('/password_change_success')(password_change_success)
 
 app.route('/select_role', methods=['POST'])(select_role)
-app.route('/showTheClassroomAndInfo', methods=['GET'])(showTheClassroomAndInfo)
+app.route('/showTheClassroomAndInfo', methods=['GET'])(read_classrooms_and_put_to_html)
 app.route('/chat_action')(chat_action)
 # @socketio.on('connect')
 # @socketio.on('message')
@@ -81,9 +81,9 @@ def get_all_classrooms():
     return CS.getAllClassrooms()
 
 
-@app.route('/classrooms/filter', methods=['GET'])
-@allow_roles(['student', 'teacher', 'it_staff'], session, request)
+@app.route('/classrooms/filter', methods=['POST'])
 def get_classrooms_where():
+    print(request.form)
     return CS.getClassroomsWhere(request.form)
 
 
