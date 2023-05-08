@@ -290,7 +290,7 @@ button {
 }
 
 #hover_effect:hover {
-  transform: scale(20);
+  transform: scale(1.10);
 }
 
 .buttons button {
@@ -298,7 +298,7 @@ button {
 }
 
 .buttons button:hover {
-  transform: scale(2.2);
+  transform: scale(1.10);
 }
 
 @keyframes rainbow {
