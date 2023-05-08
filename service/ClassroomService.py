@@ -47,6 +47,7 @@ def filter_criteria(criteria: dict):
     filtered_criteria = {}
     operations = {}
     for key, value in criteria.items():
+        print("Key: "+str(key)+" Value: "+str(value)+"")
         # Ensure field is checked and its value is not empty
         if f'checkbox_{key}' in criteria and value:
                 filtered_criteria[key] = value

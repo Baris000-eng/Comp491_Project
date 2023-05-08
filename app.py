@@ -115,7 +115,7 @@ app.route('/openStudentReservationScreen',
           methods=['GET'])(US.openStudentReservationScreen)
 app.route('/openTeacherReservationScreen',
           methods=['GET'])(US.openTeacherReservationScreen)
-app.route('/openItStaffReservationScreen',
+app.route('/openITStaffReservationScreen',
           methods=['GET'])(US.openITStaffReservationScreen)
 
 

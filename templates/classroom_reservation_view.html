@@ -7,11 +7,10 @@
       type="text/css"
       href="../static/classroom_infos.css"
     />
-    <script src="../static/classroom_infos.js"></script>
   </head>
   <body>
     <div class="buttons_box">
-    <form action="/classroomFilterAndSearchScreen" method="GET">
+    <form action="/getFilterAndSearchClassroomsScreen" method="GET">
       <button
         name="goToClassFilterandSearchScreen"
         id="goToClassFilterandSearchScreen"
@@ -57,7 +56,7 @@
       <tbody>
         {% set row_index = 0 %}
         {% for row in classrooms %}
-        <tr onclick="getRowValue(this)" data-row-index="{{ row_index }}">
+        <tr>
           <td>{{ row[0] }}</td>
           <td>{{ row[1] }}</td>
           <td>{{ row[2] }}</td>
@@ -75,18 +74,18 @@
           <td>{{ row[14] }}</td>
           <td>
             {% if 'role' in session %} {% if session['role'] == 'teacher' %}
-            <form action="openTeacherReservationScreen">
-              <input type="hidden" name="row_index_of_selected_class" value="{{ row_index }}">
+            <form action="/openTeacherReservationScreen">
+              <input type="hidden" name="selected_row_index" value="{{ row_index }}">
               <button>Reserve The Class In Teacher Reservation Screen</button>
             </form>
             {% elif session['role'] == 'it_staff' %}
-            <form action="openITStaffReservationScreen">
-              <input type="hidden" name="row_index_of_selected_class" value="{{ row_index }}">
+            <form action="/openITStaffReservationScreen">
+              <input type="hidden" name="selected_row_index" value="{{ row_index}}">
               <button>Reserve The Class In IT Staff Reservation Screen</button>
             </form>
             {% elif session['role'] == 'student' %}
-            <form action="openStudentReservationScreen">
-              <input type="hidden" name="row_index_of_selected_class" value="{{ row_index }}">
+            <form action="/openStudentReservationScreen">
+              <input type="hidden" name="selected_row_index" value="{{ row_index }}">
               <button>Reserve The Class In Student Reservation Screen</button>
             </form>
             {% endif %} {% endif %}
