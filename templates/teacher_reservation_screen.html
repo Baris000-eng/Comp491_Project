@@ -12,10 +12,10 @@
 <div class="my_div" id="reservationForm">
     <form action="/reserve_class" method="POST">
         <h2>Teacher Class Reservation Screen</h2>
-        {% if class_code %}
+        {% if 'class_code' in request.args %}
         <label for="">Class Code:</label>
-        <input type="text" name="class-code" value="{{ class_code }}" readonly>
-       {% else %}
+        <input type="text" name="class-code" value="{{ request.args['class_code'] }}" readonly>
+        {% else %}
         <label for="">Select your class from dropdown class list</label>
         <div class="combo-box">
             <select id="class-selector" name="class-code">
@@ -24,7 +24,7 @@
                 {% endfor %}
             </select>
         </div>
-    {% endif %}    
+        {% endif %}
         <br>
         <br>
         <label class="other-label" for="Please specify time">Please specify date and time</label>
@@ -47,7 +47,6 @@
         <button type="submit" id="submit-btn">Click to submit reservation</button>
     </form>
 </div>
-</body>
 
 {% if 'role' in session %}
 {% if session['role'] == 'teacher' %}
@@ -65,7 +64,6 @@
 {% endif %}
 {% endif %}
 
-
 <div class="error-messages">
     {% if reservation_already_happened %}
     <p>{{ reservation_already_happened }}</p>
@@ -75,4 +73,5 @@
     {% endif %}
 </div>
 
+</body>
 </html>
