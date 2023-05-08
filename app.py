@@ -5,15 +5,19 @@ from rbac import allow_roles
 from service.UserService import password_change_success, go_to_opening_screen
 from service.UserService import select_role, chat_action, report_chat, report_it
 import service.UserService as US
-from service.ClassroomService import read_classrooms_and_put_to_html
 import service.ClassroomService as CS
 import service.PlottingService as PS
 from flask_socketio import SocketIO, emit
+from flask import render_template
 
 app = Flask(__name__)
 app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 socketio = SocketIO(app)
+
+
+app.route("/getFilterAndSearchClassroomsScreen")(CS.showClassroomSearchAndFilterScreen)
+
 
 app.route("/reservation_code")(US.generate_classroom_reservation_code)
 
@@ -43,7 +47,6 @@ app.route('/change_user_password',
 app.route('/password_change_success')(password_change_success)
 
 app.route('/select_role', methods=['POST'])(select_role)
-app.route('/showTheClassroomAndInfo', methods=['GET'])(read_classrooms_and_put_to_html)
 app.route('/chat_action')(chat_action)
 # @socketio.on('connect')
 # @socketio.on('message')
@@ -69,22 +72,23 @@ def screen(role):
 
 
 @app.route('/admin/import-classrooms', methods=['POST'])
-@allow_roles([], session, request)
+@allow_roles(['student', 'teacher', 'it_staff'], session, request)
 def import_classrooms():
     file_path = request.form.get('file_path', '')
     return CS.createClassrooms(file_path)
 
 
-@app.route('/classrooms', methods=['GET'])
-@allow_roles([], session, request)
+@app.route('/classrooms', methods=["GET"])
+@allow_roles(['student', 'teacher', 'it_staff'], session, request)
 def get_all_classrooms():
-    return CS.getAllClassrooms()
+    classrooms = CS.getAllClassrooms()
+    return render_template("classroom_reservation_view.html", classrooms = classrooms)
 
-
-@app.route('/classrooms/filter', methods=['POST'])
+@app.route('/filteredClassrooms', methods=['GET'])
 def get_classrooms_where():
-    print(request.form)
-    return CS.getClassroomsWhere(request.form)
+    classrooms = CS.getClassroomsWhere(request.args)
+    departments = CS.getAllDepartments()
+    return render_template("classroom_reservation_view.html", classrooms = classrooms, departments = departments)
 
 
 @app.route('/<role>/dashboard', methods=['GET', 'POST'])
@@ -112,7 +116,7 @@ app.route('/openStudentReservationScreen',
 app.route('/openTeacherReservationScreen',
           methods=['GET'])(US.openTeacherReservationScreen)
 app.route('/openItStaffReservationScreen',
-          methods=['GET'])(US.open_it_staff_reservation_screen)
+          methods=['GET'])(US.openITStaffReservationScreen)
 
 
 app.route('/seeITReport',

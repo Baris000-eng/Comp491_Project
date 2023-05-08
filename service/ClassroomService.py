@@ -6,48 +6,55 @@ from flask import request
 def showTheClassroomAndInfo():
     return render_template("Classroom_reservation_students_view.html")
 
+def getAllClassrooms():
+     return CR.getAllClassrooms()
+
 def createClassrooms(csv_source: str):
     """
     Given a path to csv file import data to classroom repository
     """
     return CR.createClassrooms(csv_source)
 
-def getAllClassrooms():
-    return CR.getAllClassrooms()
+def showClassroomSearchAndFilterScreen():
+    classroom_names = CR.getAllClassroomNames()
+    departments = CR.getAllDepartmentNames()
+    return render_template("classroom_search_and_filtering_screen.html", classroom_names = classroom_names, departments = departments)
+    
 
-def getClassroomsWhere(criteria: dict):
-    if request.method == "POST":
-        filtered_criterias = filter_criterias(criteria=criteria)
-        print("Before: "+str(filtered_criterias))
+def getClassroomsWhere(criteria: dict={}):
+        filtered_criteria, operations = filter_criteria(criteria=criteria)
+        print("Before: " + str(filtered_criteria))
     
 
         # Turn each comma-seperated dictionary value to a list of string
-        for k,v in filtered_criterias.items():
-            filtered_criterias[k] = v.split(",")
+        for k,v in filtered_criteria.items():
+            filtered_criteria[k] = v.split(",")
 
-        print("After: "+str(filtered_criterias))
+        print("After: "+str(filtered_criteria))
+
+        if not filtered_criteria:
+            return CR.getAllClassrooms()
+        
+
     
-        return CR.getClassroomsWhere(filtered_criterias)
-    else:
-        return render_template("Classroom_reservation_students_view.html")
+        return CR.getClassroomsWhere(filtered_criteria, operations)
+
+def getAllDepartments():
+    return CR.getAllDepartmentNames()
 
 
-def read_classrooms_and_put_to_html():
-    classrooms = CR.getAllClassrooms()
-    departments = CR.getAllDepartmentNames()
-    return render_template("Classroom_reservation_students_view.html", classrooms = classrooms, departments = departments)
-
-def filter_criterias(criteria: dict):
-    my_dict = {}
+def filter_criteria(criteria: dict):
+    filtered_criteria = {}
+    operations = {}
     for key, value in criteria.items():
-        if "checkbox" in key:
-            my_dict[key[9:]] = criteria[key[9:]]
+        # Ensure field is checked and its value is not empty
+        if f'checkbox_{key}' in criteria and value:
+                filtered_criteria[key] = value
 
-        if "operation" in key and key[10:] in my_dict:
-            my_dict[key] = criteria[key[10:]]
+        if "operation" in key:
+            operations[key[10:]] = value
 
-    return my_dict
-
+    return filtered_criteria, operations
 
    
 

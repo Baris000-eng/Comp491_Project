@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Classroom Information Screen</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../static/classroom_infos.css"
+    />
+    <script src="../static/classroom_infos.js"></script>
+  </head>
+  <body>
+    <div class="buttons_box">
+    <form action="/classroomFilterAndSearchScreen" method="GET">
+      <button
+        name="goToClassFilterandSearchScreen"
+        id="goToClassFilterandSearchScreen"
+      >
+        Go To Classroom Filter and Search Screen
+      </button>
+    </form>
+    {% if 'role' in session %} {% if session['role'] == 'teacher' %}
+    <form action="teacher/dashboard">
+      <button>Go To Teacher Dashboard</button>
+    </form>
+    {% elif session['role'] == 'it_staff' %}
+    <form action="it_staff/dashboard">
+      <button>Go To IT Staff Dashboard</button>
+    </form>
+    {% elif session['role'] == 'student' %}
+    <form action="student/dashboard">
+      <button>Go To Student Dashboard</button>
+    </form>
+    {% endif %} {% endif %}
+    <br />
+    <br />
+    <table id="classroom-table">
+      <thead>
+        <tr>
+          <th>Classroom Code</th>
+          <th>Department</th>
+          <th>Room Type</th>
+          <th>Seats</th>
+          <th>Area (m^2)</th>
+          <th>Board Number</th>
+          <th>Board Type</th>
+          <th>Board Size</th>
+          <th>Connections</th>
+          <th>Projector Size</th>
+          <th>Panopto Capture</th>
+          <th>Touch Screen</th>
+          <th>Document Camera</th>
+          <th>Outlets for Students</th>
+          <th>Projector Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% set row_index = 0 %}
+        {% for row in classrooms %}
+        <tr onclick="getRowValue(this)" data-row-index="{{ row_index }}">
+          <td>{{ row[0] }}</td>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[2] }}</td>
+          <td>{{ row[3] }}</td>
+          <td>{{ row[4] }}</td>
+          <td>{{ row[5] }}</td>
+          <td>{{ row[6] }}</td>
+          <td>{{ row[7] }}</td>
+          <td>{{ row[8] }}</td>
+          <td>{{ row[9] }}</td>
+          <td>{{ row[10] }}</td>
+          <td>{{ row[11] }}</td>
+          <td>{{ row[12] }}</td>
+          <td>{{ row[13] }}</td>
+          <td>{{ row[14] }}</td>
+          <td>
+            {% if 'role' in session %} {% if session['role'] == 'teacher' %}
+            <form action="openTeacherReservationScreen">
+              <input type="hidden" name="row_index_of_selected_class" value="{{ row_index }}">
+              <button>Reserve The Class In Teacher Reservation Screen</button>
+            </form>
+            {% elif session['role'] == 'it_staff' %}
+            <form action="openITStaffReservationScreen">
+              <input type="hidden" name="row_index_of_selected_class" value="{{ row_index }}">
+              <button>Reserve The Class In IT Staff Reservation Screen</button>
+            </form>
+            {% elif session['role'] == 'student' %}
+            <form action="openStudentReservationScreen">
+              <input type="hidden" name="row_index_of_selected_class" value="{{ row_index }}">
+              <button>Reserve The Class In Student Reservation Screen</button>
+            </form>
+            {% endif %} {% endif %}
+          </td>
+        </tr>
+        {% set row_index = row_index + 1 %}
+        {% endfor %}
+        </tbody>        
+    </table>
+  </body>
+</html>
+
+
+
+
+
+
+

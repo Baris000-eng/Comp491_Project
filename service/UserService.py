@@ -380,11 +380,6 @@ def select_role():
     else:
         return render_template('opening_screen.html')
 
-def create_html_file(txt_string):
-            with open("templates/Classroom_reservation_students_view.html", "w", encoding="utf-8") as file:
-                file.write(txt_string)
-                file.close()
-
 
 def extract_first_column_of_ku_class_data():
     df = pd.read_excel('KU_Classrooms.xlsx')
@@ -504,22 +499,30 @@ def see_already_reserved_classes():
 
 
 def openStudentReservationScreen():
-    row_index = request.args.get('row_index')
+    row_index_of_selected_class = request.args.get('row_index_of_selected_class')
     options = extract_first_column_of_ku_class_data()
-    if row_index is not None:
-        selected_class_code = options[int(row_index)]
+    if row_index_of_selected_class is not None:
+        selected_class_code = options[int(row_index_of_selected_class)]
         return render_template('student_reservation_screen.html', options=options, class_code=selected_class_code)
     return render_template('student_reservation_screen.html', options=options)
 
 
 def openTeacherReservationScreen():
-    row_index = request.args.get('row_index')
+    row_index_of_selected_class = request.args.get('row_index_of_selected_class')
     options = extract_first_column_of_ku_class_data()
+    if row_index_of_selected_class is not None:
+        selected_class_code = options[int(row_index_of_selected_class)]
+        return render_template('teacher_reservation_screen.html', options=options, class_code=selected_class_code)
+    return render_template('teacher_reservation_screen.html', options=options)
 
-    if row_index is not None:
-        selected_class_code = options[int(row_index)]
-        return render_template("teacher_reservation_screen.html", options=options, class_code=selected_class_code)
-    return render_template("teacher_reservation_screen.html", options=options)
+
+def openITStaffReservationScreen():
+    row_index_of_selected_class = request.args.get('row_index_of_selected_class')
+    options = extract_first_column_of_ku_class_data()
+    if row_index_of_selected_class is not None:
+        selected_class_code = options[int(row_index_of_selected_class)]
+        return render_template('teacher_reservation_screen.html', options=options, class_code=selected_class_code)
+    return render_template('it_staff_reservation_screen.html', options=options)
 
 
 def opening_screen():
@@ -675,15 +678,6 @@ def enterChat():
     session["classroom"] = request.args.get('classroom')
 
     return render_template('chat_class_generic.html', rows=data)
-
-
-def open_it_staff_reservation_screen():
-    row_index = request.args.get('row_index')
-    options = extract_first_column_of_ku_class_data()
-    if row_index is not None:
-        selected_class_code = options[int(row_index)]
-        return render_template("it_staff_reservation_screen.html", options=options, class_code=selected_class_code)
-    return render_template("it_staff_reservation_screen.html", options=options)
 
 
 def seeOnlyMyReserves():

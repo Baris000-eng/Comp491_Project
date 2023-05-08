@@ -121,38 +121,29 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.button {
-  transition: transform 0.3s ease-in-out;
-}
-
 .button.clicked {
-  transform: scale(1.40);
+  transform: scale(1.05);
   background-color: red;
 }
 
 .button.hover {
-  transform: scale(1.25);
+  transform: scale(1.05);
   background-color: red;
   color: red;
 }
 
-.form {
-  transition: transform 0.3s ease-in-out;
-}
-
 .form.clicked {
-  transform: scale(1.25);
+  transform: scale(1.05);
   background-color: red;
 }
 
 .form.hover {
-  transform: scale(1.25);
+  transform: scale(1.05);
   background-color: red;
 }
 
@@ -162,11 +153,9 @@ button {
 }
 
 .buttons button:hover {
-  margin-top: 10px;
-  margin-bottom: 10px;
   background-color: red;
   color: white;
-  transform: scale(1.40);
+  transform: scale(1.05);
   transition: transform 0.3s ease-in-out;
 }
 
