@@ -1,3 +1,0 @@
--it database
-    -initialize 
-    -create report

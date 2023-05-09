@@ -1,35 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Welcome to KuClass App</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="../static/opening_screen.css"
-    />
-    <script src="../static/opening_screen.js"></script>
-    <!-- Contains the image changing animation so no need to include it in script tag within this html-->
-  </head>
-  <body>
-    <h1>Welcome to KuClass App</h1>
+
+<head>
+  <title>Welcome to KuClass App</title>
+  <link rel="stylesheet" type="text/css" href="../static/opening_screen.css" />
+  <script src="../static/opening_screen.js"></script>
+  <!-- Contains the image changing animation so no need to include it in script tag within this html-->
+</head>
+
+<body>
+  <h1>Welcome to KuClass App</h1>
+  <div class="contents">
+
+
     <div class="images">
-      <img
-        src="../static/images/img1.png"
-        class="image"
-        width="500"
-        height="250"
-      />
+      <img src="../static/images/img1.png" class="image" width="500" height="250" style="background-color: white;" />
     </div>
-    <button
-      id="description-button"
-      onclick="location.href='/open_description_text';"
-    >
+    <button id="description-button" onclick="location.href='/open_description_text';">
       See KuClass Description Text
     </button>
-    <button
-      id="opening-screen-help-button"
-      onclick="location.href='/get_opening_help';"
-    >
+    <button id="opening-screen-help-button" onclick="location.href='/get_opening_help';">
       See Opening Screen Help
     </button>
     <form action="/select_role" method="post">
@@ -62,7 +52,11 @@
       <br>
       <input type="hidden" name="submit" value="true" />
       <input type="submit" class="choose" value="Submit" />
-    </form>
-      <p>&copy; 2023 KuClass App All rights reserved</p>
-  </body>
+  </div>
+  </form>
+  <p>&copy; 2023 KuClass App All rights reserved</p>
+  </div>
+
+</body>
+
 </html>
