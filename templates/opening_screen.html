@@ -10,53 +10,47 @@
 
 <body>
   <h1>Welcome to KuClass App</h1>
-  <div class="contents">
-
-
-    <div class="images">
-      <img src="../static/images/img1.png" class="image" width="500" height="250" style="background-color: white;" />
-    </div>
-    <button id="description-button" onclick="location.href='/open_description_text';">
-      See KuClass Description Text
-    </button>
-    <button id="opening-screen-help-button" onclick="location.href='/get_opening_help';">
-      See Opening Screen Help
-    </button>
-    <form action="/select_role" method="post">
-      <label for="roles">Select your role:</label>
-      <div id="roles">
-        <label>
-          <input type="radio" name="roles" value="student" />
-          <img src="../static/images/student.png" alt="Student" />
-          <figcaption>Student</figcaption>
-        </label>
-        <label>
-          <input type="radio" name="roles" value="teacher" />
-          <img src="../static/images/teacher_cartoon.jpeg" alt="Teacher" />
-          <figcaption>Teacher</figcaption>
-        </label>
-        <label>
-          <input type="radio" name="roles" value="it_staff" />
-          <img src="../static/images/it_staff.jpeg" alt="IT Staff" />
-          <figcaption>IT Staff</figcaption>
-        </label>
-        <label>
-          <input type="radio" name="roles" value="admin" />
-
-          <img src="../static/images/admin_cartoon.jpeg" alt="Admin" />
-          <figcaption>Admin</figcaption>
-        </label>
-      </div>
-      <br>
-      <br>
-      <br>
-      <input type="hidden" name="submit" value="true" />
-      <input type="submit" class="choose" value="Submit" />
+  <div class="images">
+    <img src="../static/images/img1.png" style="background-color: white;" class="image" width="500" height="250" />
   </div>
+  <button id="description-button" onclick="location.href='/open_description_text';">
+    See KuClass Description Text
+  </button>
+  <button id="opening-screen-help-button" onclick="location.href='/get_opening_help';">
+    See Opening Screen Help
+  </button>
+  <form action="/select_role" method="post">
+    <label for="roles">Select your role:</label>
+    <div id="roles">
+      <label>
+        <input type="radio" name="roles" value="student" />
+        <img src="../static/images/student.png" alt="Student" />
+        <figcaption>Student</figcaption>
+      </label>
+      <label>
+        <input type="radio" name="roles" value="teacher" />
+        <img src="../static/images/teacher_cartoon.jpeg" alt="Teacher" />
+        <figcaption>Teacher</figcaption>
+      </label>
+      <label>
+        <input type="radio" name="roles" value="it_staff" />
+        <img src="../static/images/it_staff.jpeg" alt="IT Staff" />
+        <figcaption>IT Staff</figcaption>
+      </label>
+      <label>
+        <input type="radio" name="roles" value="admin" />
+
+        <img src="../static/images/admin_cartoon.jpeg" alt="Admin" />
+        <figcaption>Admin</figcaption>
+      </label>
+    </div>
+    <br>
+    <br>
+    <br>
+    <input type="hidden" name="submit" value="true" />
+    <input type="submit" class="choose" value="Submit" />
   </form>
   <p>&copy; 2023 KuClass App All rights reserved</p>
-  </div>
-
 </body>
 
 </html>
