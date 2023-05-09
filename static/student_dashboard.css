@@ -163,7 +163,6 @@ button {
   color: black;
 }
 
-
 .news {
   border-radius: 10px;
   border-color: #ff0059;
@@ -183,7 +182,6 @@ button {
     background-color: #000000;
   }
 }
-
 
 .star {
   animation: star_shifts 15s;
@@ -222,7 +220,6 @@ button {
     left: -200px;
   }
 }
-
 
 .star:nth-child(1) {
   animation-delay: 0.5s;
@@ -284,13 +281,12 @@ button {
   animation-delay: 6s;
 }
 
-
 #hover_effect {
   transition: transform 5s;
 }
 
 #hover_effect:hover {
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
 
 .buttons button {
@@ -298,43 +294,5 @@ button {
 }
 
 .buttons button:hover {
-  transform: scale(1.10);
-}
-
-@keyframes rainbow {
-  0% {
-    background-color: red;
-  }
-
-  14% {
-    background-color: orange;
-  }
-
-  28% {
-    background-color: yellow;
-  }
-
-  42% {
-    background-color: green;
-  }
-
-  57% {
-    background-color: blue;
-  }
-
-  71% {
-    background-color: indigo;
-  }
-
-  85% {
-    background-color: violet;
-  }
-
-  100% {
-    background-color: red;
-  }
-}
-
-.buttons button:hover {
-  animation: rainbow 1.50s linear infinite;
+  transform: scale(1.1);
 }
