@@ -54,6 +54,8 @@ app.route('/chat_action')(chat_action)
 app.route('/reportingChat', methods=['POST'])(report_chat)
 app.route('/reportingIT', methods=['POST'])(report_it)
 
+app.route("/makeAnnouncment")(US.makeAnnouncment)
+
 app.route('/logout')(go_to_opening_screen)
 app.route('/', methods=['GET', 'POST'])(US.opening_screen)
 app.route('/editReservedClassrooms', methods=['GET'])(US.editClassroomReservations)

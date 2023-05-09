@@ -12,58 +12,65 @@
 
 <div class="container">
     <div class="group1">
-    <div class="buttons">
-        <form action="/openTeacherReservationScreen" method="GET"> <button>Reserve A Classroom</button>
-        </form>
-    </div>
-    <div class="buttons">
-        <form action="/viewInsidesOfClassrooms" method="GET">
-            <button>View Insides of Classrooms</button>
-        </form>
-    </div>
-    <div class="buttons">
-        <form action="/openITReportScreen" method="GET"> <button>Report To IT</button></form>
+        <div class="buttons">
+            <form action="/openTeacherReservationScreen" method="GET"> <button>Reserve A Classroom</button>
+            </form>
+        </div>
+        <div class="buttons">
+            <form action="/viewInsidesOfClassrooms" method="GET">
+                <button>View Insides of Classrooms</button>
+            </form>
+        </div>
+        <div class="buttons">
+            <form action="/openITReportScreen" method="GET"> <button>Report To IT</button></form>
+        </div>
+
+        <div class="buttons">
+            <form action="/already_reserved_classes" method="POST"> <button>See Reserved Classes</button></form>
+        </div>
     </div>
 
-    <div class="buttons">
-        <form action="/already_reserved_classes" method="POST"> <button>See Reserved Classes</button></form>
-    </div>
-</div>
+    <div class="group2">
+        <div class="buttons">
+            <form action="/getFilterAndSearchClassroomsScreen" method="GET">
+                <button>Filter and Search Classrooms</button>
+            </form>
+            <form action="/makeAnnouncment">
+                <button onclick="location.href='/makeAnnouncment';" name="makeAnnouncment" value="makeAnnouncment"
+                    style="margin-left: 10px; width: 200px;" id="makeAnnouncment">
+                    Make Announcment To Students
+                </button>
+            </form>
+        </div>
+        <div class="buttons">
+            <form action="/classrooms" method="GET">
+                <button>Show Classroom Information</button>
+            </form>
+        </div>
 
-<div class="group2">
-    <div class="buttons">
-        <form action="/getFilterAndSearchClassroomsScreen" method="GET">
-            <button>Filter and Search Classrooms</button>
-        </form>
-    </div>
-    <div class="buttons">
-        <form action="/classrooms" method="GET">
-            <button>Show Classroom Information</button>
-        </form>
-    </div>
+        <div class="buttons">
+            <form action="/exam_schedules">
+                <button onclick="location.href='/exam_schedules';" name="exam-schedules" value="exam-schedules"
+                    id="exam-schedules">
+                    View Exam Schedules
+                </button>
+            </form>
 
-    <div class="buttons">
-        <form action="/exam_schedules">
-         <button onclick="location.href='/exam_schedules';" 
-                  name="exam-schedules" 
-                  value="exam-schedules" 
-                  id="exam-schedules">
-            View Exam Schedules
-          </button>
-        </form>
-    </div>
+        </div>
 
-    <div class="buttons">
-        <form action="/class_schedules">
-         <button onclick="location.href='/class_schedules';" 
-                  name="class-schedules" 
-                  value="class-schedules" 
-                  id="class-schedules">
-            View Course Schedules
-          </button>
-        </form>
+        <div class="buttons">
+            <form action="/class_schedules">
+                <button onclick="location.href='/class_schedules';" name="class-schedules" value="class-schedules"
+                    id="class-schedules">
+                    View Course Schedules
+                </button>
+            </form>
+
+        </div>
+
+
+
     </div>
-</div>
 
 </div>
 

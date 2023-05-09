@@ -22,6 +22,7 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
+
 def getClassroomView():
     return render_template("view_inside_of_classroom.html")
 
@@ -432,7 +433,7 @@ def reserve_class():
         conn.close()
         return render_template("return_success_message_classroom_reserved.html")
     else:
-        if existing_reservation and existing_reservation[2] == date and existing_reservation[3] == start_time and existing_reservation[4] == end_time and existing_reservation[5] == session['username'] and existing_reservation[7] == class_code :
+        if existing_reservation and existing_reservation[2] == date and existing_reservation[3] == start_time and existing_reservation[4] == end_time and existing_reservation[5] == session['username'] and existing_reservation[7] == class_code:
             reservation_already_happened = "Reservation failed: you have already reserved this slot."
             return render_template(role + "_reservation_screen.html", reservation_already_happened=reservation_already_happened, options=classroom_code_options)
         elif existing_reservation:
@@ -850,3 +851,23 @@ def clearMessages():
 
     conn.close()
     return render_template('chat_class_generic.html', rows=data, user_name=session["username"], message="No Messages Recieved Yet")
+
+
+def makeAnnouncment():
+    news_message = request.form.get('news_message')
+    date = request.form.get('date')
+    time = request.form.get('time')
+    date_end = request.form.get('date_end')
+    time_end = request.form.get('time_end')
+    sender = session["username"]
+    role = session["role"]
+    UR.insert_news_to_newsdb(
+        news_message=news_message,
+        time=time,
+        date=date,
+        time_end=time_end,
+        date_end=date_end,
+        sender=sender,
+        role=role
+    )
+    return render_template("teacher_announcement.html")

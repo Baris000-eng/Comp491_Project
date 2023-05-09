@@ -391,3 +391,4 @@ def change_user_password(email: str, password: str):
               (encrypt_password(password), email))
     conn.commit()
     conn.close()
+
