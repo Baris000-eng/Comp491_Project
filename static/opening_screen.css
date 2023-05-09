@@ -120,7 +120,7 @@ select {
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
-  border-bottom: 2px solid #45a049;
+  border-bottom: 2px solid #a31621;
   font-size: 20px;
   appearance: none;
   background-color: #fff;
@@ -129,7 +129,7 @@ select {
 }
 
 input[type="submit"] {
-  background-color: #45a049;
+  background-color: #a31621;
   color: #fff;
   padding: 14px 20px;
   margin: 8px 0;
@@ -148,7 +148,7 @@ input[type="submit"]:hover {
   background-color: red;
   color: darkblue;
   transform: scale(1.35);
-  border-color: #a600ff;
+  border-color: #a31621;
 }
 
 form > * {
@@ -170,7 +170,7 @@ button {
   display: block;
   margin: 0 auto;
   padding: 10px 20px;
-  background-color: #4caf50;
+  background-color: #a31621;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -184,7 +184,7 @@ button:hover {
 }
 
 input[type="button"][value="Login"] {
-  background-color: #4caf50;
+  background-color: #a31621;
   border: none;
   border-radius: 4px;
   color: white;
@@ -233,23 +233,23 @@ input[type="submit"] {
   font-size: 16px;
   font-weight: bold;
   color: white;
-  background-color: blue;
+  background-color: #a28f9d;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 #description-button:hover,
 #opening-screen-help-button:hover {
-  background-color: #a600ff;
+  background-color: #a31621;
   transform: scale(1.35);
   border-color: darkgreen;
 }
 
 input[type="button"]:hover {
-  background-color: red;
+  background-color: lightblue;
   color: darkblue;
   transform: scale(1.35);
-  border-color: #a600ff;
+  border-color: #a28f9d;
 }
 
 @keyframes slideIn {
@@ -317,7 +317,7 @@ figcaption {
 }
 
 input[type="submit"] {
-  border: 5px solid rgb(12, 178, 0);
+  border: 5px solid rgb(163, 22, 33);
   animation: rotate-border 5s linear infinite;
   font-size: 16px;
 }
