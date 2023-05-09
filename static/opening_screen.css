@@ -3,11 +3,10 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url("../static/images/classroom.png");
+  background-image: url("../static/images/SNAB172.png");
   background-size: cover;
   font-family: Arial, Helvetica, sans-serif;
 }
-
 p {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;

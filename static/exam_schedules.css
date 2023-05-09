@@ -1,11 +1,15 @@
 body {
-    background-color: #198e42;
-    font-family: 'Goudy Old Style', serif;
-    color: #ffffff;
-    background-image: url("../static/images/classroom.png");
-    background-size: cover;
-
+  background-color: #198e42;
+  font-family: "Goudy Old Style", serif;
+  color: #ffffff;
 }
+
+form {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 h1 {
     font-size: 48px;
     font-weight: bold;
