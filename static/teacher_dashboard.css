@@ -2,6 +2,8 @@ body {
   margin: 0;
   padding: 0;
   background-color: yellowgreen;
+  background-image: url("../static/images/classroom.png");
+  background-size: cover;
 }
 
 .container {

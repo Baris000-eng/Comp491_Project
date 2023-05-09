@@ -1,6 +1,8 @@
 body {
   background-color: #003638;
   font-family: Arial, sans-serif;
+  background-image: url("../static/images/classroom.png");
+  background-size: cover;
 }
 
 h1 {

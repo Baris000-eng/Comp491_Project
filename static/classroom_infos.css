@@ -2,6 +2,8 @@ body {
   background-color: #198e42;
   font-family: "Goudy Old Style", serif;
   color: #ffffff;
+  background-image: url("../static/images/classroom.png");
+  background-size: cover;
 }
 
 form {

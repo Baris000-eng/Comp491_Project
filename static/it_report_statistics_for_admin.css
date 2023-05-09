@@ -1,6 +1,8 @@
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     background-color: lightseagreen;
+    background-image: url("../static/images/classroom.png");
+    background-size: cover;
   }
   
   h1 {

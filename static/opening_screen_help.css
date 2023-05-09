@@ -3,6 +3,8 @@ body {
   font-family: 'Montserrat', sans-serif;
   text-align: center;
   padding-top: 50px;
+  background-image: url("../static/images/classroom.png");
+  background-size: cover;
 }
 
 #opening_screen_help {

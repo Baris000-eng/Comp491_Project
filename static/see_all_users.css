@@ -10,6 +10,8 @@
 
   body:hover {
     background-color: aquamarine;
+    background-image: url("../static/images/classroom.png");
+    background-size: cover;
   }
   
   h1 {

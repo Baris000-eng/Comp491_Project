@@ -10,6 +10,8 @@ body {
     font-size: 18px;
     line-height: 1.5;
     background-color: rgb(17, 196, 17);
+    background-image: url("../static/images/classroom.png");
+    background-size: cover;
 }
 
 h1 {

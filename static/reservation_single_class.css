@@ -4,6 +4,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url("../static/images/classroom.png");
+    background-size: cover;
 }
 
 .content {

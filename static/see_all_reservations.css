@@ -1,5 +1,7 @@
 body {
     background-color: aquamarine;
+    background-image: url("../static/images/classroom.png");
+    background-size: cover;
 }
 
 table {

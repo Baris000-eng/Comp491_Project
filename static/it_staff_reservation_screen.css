@@ -1,6 +1,8 @@
 body {
   background-color: darkslategray;
   font-family: Arial, sans-serif;
+  background-image: url("../static/images/classroom.png");
+  background-size: cover;
 }
 
 .card {

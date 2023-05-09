@@ -6,6 +6,8 @@ body {
   font-family: Arial, sans-serif;
   padding: 20px;
   background-color: pink;
+  background-image: url("../static/images/classroom.png");
+  background-size: cover;
 }
 
 h1 {
