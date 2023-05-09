@@ -2,6 +2,41 @@ body {
   background-color: darkblue;
 }
 
+button {
+  background-color: darkred;
+  color: white;
+  border-color: black;
+  width: 275px;
+  height: 125px;
+  font-weight: bold;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 25px;
+  margin-top: 15px;
+}
+
+.button_container {
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  border-radius: 4px;
+  background-color: black;
+  color: white;
+  border-color: red;
+  font-weight: bold;
+  font-size: 40px;
+  text-align: center;
+}
+
+button:hover {
+  background-color: black;
+}
+
 #image-container {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

@@ -2,10 +2,40 @@
 <html>
   <head>
     <title>View Inside of Classrooms Via Pagination</title>
-    <link rel="stylesheet" type="text/css" href="../static/pagination_classroom_view.css">
-    <script type="text/javascript" src="../static/pagination_classroom_view.js"></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../static/pagination_classroom_view.css"
+    />
+    <script
+      type="text/javascript"
+      src="../static/pagination_classroom_view.js"
+    ></script>
   </head>
   <body>
+    {% if 'role' in session %} {% if session['role'] == 'teacher' %}
+    <form action="teacher/dashboard">
+      <div class="button_container">
+        <button>Go To Teacher Dashboard</button>
+      </div>
+    </form>
+    {% elif session['role'] == 'it_staff' %}
+    <form action="it_staff/dashboard">
+      <div class="button_container">
+        <button>Go To IT Staff Dashboard</button>
+      </div>
+    </form>
+    {% elif session['role'] == 'student' %}
+    <form action="student/dashboard">
+      <div class="button_container">
+        <button>Go To Student Dashboard</button>
+      </div>
+    </form>
+    {% endif %} {% endif %}
+    <br />
+    <br />
+    <br />
+    <h1>Classroom Views</h1>
     <div id="image-container">
       <img src="../static/images/SCI103.png" width="300" height="300" />
       <img src="../static/images/SOS104.png" width="300" height="300" />

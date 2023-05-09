@@ -336,5 +336,5 @@ button {
 }
 
 .buttons button:hover {
-  animation: rainbow 1.5s linear infinite;
+  animation: rainbow 1.50s linear infinite;
 }

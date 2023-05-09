@@ -1,86 +1,85 @@
 body {
-    background-color: #222;
-    color: #fff;
-    font-family: Arial, sans-serif;
-  }
-  
-  .buttons_box {
-    background-color: #333;
-    border-radius: 5px;
-    box-shadow: 0px 0px 5px #111;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 800px;
-  }
+  background-color: #222;
+  color: #fff;
+  font-family: Arial, sans-serif;
+}
 
-  h1 {
-    font-family: Arial, sans-serif;
-    font-size: 3em;
-    color: #fff;
-    text-align: center;
-    text-shadow: 2px 2px 2px #000;
-    background-color: #900;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px #000;
-    margin: 50px auto;
-    max-width: 800px;
-  }
-  
-  label {
-    display: inline-block;
-    width: 150px;
-  }
-  
-  input[type="text"],
-  select {
-    border-radius: 5px;
-    border: none;
-    padding: 5px;
-    background-color: #444;
-    color: #fff;
-    font-size: 1em;
-    margin-right: 10px;
-    width: 200px;
-  }
-  
-  input[type="checkbox"] {
-    margin-left: 10px;
-  }
-  
-  button {
-    border-radius: 5px;
-    border: none;
-    padding: 10px 20px;
-    background-color: #800000;
-    color: #fff;
-    font-size: 1em;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  button#show-all-btn {
-    background-color: #008000;
-    margin-right: 10px;
-  }
-  
-  select#big_small_eq {
-    margin-right: 10px;
-  }
-  
-  select#outlets_for_students {
-    margin-right: 10px;
-  }
-  
-  br {
-    clear: both;
-  }
-  
-  button:hover {
-    background-color: #c00;
-  }
-  
-  button#show-all-btn:hover {
-    background-color: #0c0;
-  }
-  
+.buttons_box {
+  background-color: #333;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #111;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+h1 {
+  font-family: Arial, sans-serif;
+  font-size: 3em;
+  color: #fff;
+  text-align: center;
+  text-shadow: 2px 2px 2px #000;
+  background-color: #900;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #000;
+  margin: 50px auto;
+  max-width: 800px;
+}
+
+label {
+  display: inline-block;
+  width: 150px;
+}
+
+input[type="text"],
+select {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  background-color: #444;
+  color: #fff;
+  font-size: 1em;
+  margin-right: 10px;
+  width: 200px;
+}
+
+input[type="checkbox"] {
+  margin-left: 10px;
+}
+
+button {
+  border-radius: 5px;
+  border: none;
+  padding: 10px 20px;
+  background-color: #800000;
+  color: #fff;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button#show-all-btn {
+  background-color: #008000;
+  margin-right: 10px;
+}
+
+select#big_small_eq {
+  margin-right: 10px;
+}
+
+select#outlets_for_students {
+  margin-right: 10px;
+}
+
+br {
+  clear: both;
+}
+
+button:hover {
+  background-color: #c00;
+}
+
+button#show-all-btn:hover {
+  background-color: #0c0;
+}
