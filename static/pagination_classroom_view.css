@@ -16,6 +16,7 @@ button {
   text-align: center;
   font-size: 25px;
   margin-top: 15px;
+  border-radius: 35px;
 }
 
 .button_container {
