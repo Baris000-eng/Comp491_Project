@@ -26,6 +26,7 @@ button {
   justify-content: center;
 }
 
+
 h1 {
   border-radius: 4px;
   background-color: black;
@@ -81,4 +82,20 @@ button:hover {
 #pagination a:hover {
   background-color: darkred;
   color: white;
+}
+
+img:hover {
+  cursor: progress;
+
+}
+
+
+h2 {
+  border-radius: 4px;
+  background-color: rgb(81, 18, 18);
+  color: white;
+  border-color: red;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
 }
