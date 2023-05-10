@@ -19,8 +19,7 @@
         <label for="">Select your class from dropdown class list</label>&nbsp;<div class="combo-box">
             <select id="class-selector" name="class-code">
                 {% for option in options %}
-                <option value="{{ option }}" {% if selected|length> 3 and option == selected %}selected{% endif %}>{{
-                    option }}</option>
+                <option value="{{ option }}">{{option }}</option>
                 {% endfor %}
             </select>
         </div>
