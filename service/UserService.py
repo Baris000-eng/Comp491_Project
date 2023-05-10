@@ -506,9 +506,10 @@ def see_already_reserved_classes():
 def openStudentReservationScreen():
     options = extract_first_column_of_ku_class_data()
     selected_class_code = request.form.get('class_code')
+    value = request.args.get('value')
     if selected_class_code is not None:
         return render_template('student_reservation_screen.html', options=options, class_code=selected_class_code)
-    return render_template('student_reservation_screen.html', options=options)
+    return render_template('student_reservation_screen.html', options=options, selected=value)
 
 
 def openTeacherReservationScreen():

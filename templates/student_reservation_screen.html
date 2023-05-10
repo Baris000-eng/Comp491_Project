@@ -13,19 +13,22 @@
     <form action="/reserve_class" method="POST" style="text-align:center;">
         <h2>Student Class Reservation Screen</h2>
         {% if 'class_code' in request.args %}
-        <label for="">Class Code:</label>&nbsp;<input type="text" name="class-code" value="{{ request.args['class_code'] }}" readonly>
+        <label for="">Class Code:</label>&nbsp;<input type="text" name="class-code"
+            value="{{ request.args['class_code'] }}" readonly>
         {% else %}
         <label for="">Select your class from dropdown class list</label>&nbsp;<div class="combo-box">
             <select id="class-selector" name="class-code">
                 {% for option in options %}
-                <option value="{{ option }}">{{ option }}</option>
+                <option value="{{ option }}" {% if selected|length> 3 and option == selected %}selected{% endif %}>{{
+                    option }}</option>
                 {% endfor %}
             </select>
         </div>
         {% endif %}
         <br>
         <br>
-        <label>Please specify the starting time: </label>&nbsp;<input required type="time" name="start-time" id="start-time">
+        <label>Please specify the starting time: </label>&nbsp;<input required type="time" name="start-time"
+            id="start-time">
         <label>Please specify the ending time: </label>&nbsp;<input required type="time" name="end-time" id="end-time">
         <label>Please specify the date: </label>&nbsp;<input required type="date" name="date" id="date">
         <br>
@@ -69,4 +72,5 @@
 </div>
 
 </body>
+
 </html>
