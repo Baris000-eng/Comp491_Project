@@ -1,4 +1,4 @@
-window.onload=function(){
+window.onload = function () {
   var iso_str = new Date().toISOString();
   var splitted = iso_str.split('T');
   var today = splitted[0];
