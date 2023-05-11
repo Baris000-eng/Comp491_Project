@@ -54,8 +54,6 @@ def createClassrooms(csv_source: str):
     finally:
         conn.close()
 
-    
-    
     return '', 200
     
 
