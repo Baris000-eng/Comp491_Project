@@ -23,7 +23,18 @@ def initializeExamTable():
 
     conn.commit()
     conn.close()
+def increment_exams_db():
+    exam_excel = 'FALL_22_EXAMS.xlsx'
+    df = pd.read_excel(exam_excel)
+    df['Exam Date'] = pd.to_datetime(df['Exam Date'])
+    df['Exam Date'] = df['Exam Date'] + pd.DateOffset(years=1)
 
+    conn = sqlite3.connect(f"{DB.exams}.db")
+    table_name = 'exams'
+    df.to_sql(table_name, conn, if_exists='replace', index=False)
+
+    conn.commit()
+    conn.close()
 """
 def initializeExamTable():
     conn = sqlite3.connect(f"{DB.exams}.db")
