@@ -4,26 +4,7 @@
 <head>
     <title>Admin Signup</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin_signup.css') }}">
-
-    <style>
-        .box {
-            border: 1px solid #000;
-            padding: 10px;
-            width: 200px;
-            float: right;
-            background-color: aquamarine;
-        }
-
-        .red-label {
-
-            color: red;
-        }
-
-        .green-label {
-            
-            color: green;
-        }
-    </style>
+    <script src="../../static/passwordChecker.js"></script>
 </head>
 <button onclick="location.href='/get_admin_signup_guide';" name="admin-signup-guide" value="admin-signup-guide"
     id="admin-signup-guide">Open Admin Signup Guide</button>
@@ -72,50 +53,6 @@
     Admin Login</button>
 {% endif %}
 </body>
-<script>
-    function checkPasswordStrength(password) {
-        var lowercaseLabel = document.getElementById("lowercase-label");
-        var uppercaseLabel = document.getElementById("uppercase-label");
-        var letterLabel = document.getElementById("letter-label");
-        var lengthLabel = document.getElementById("length-label");
 
-        var lowercaseRegex = /[a-z]/;
-        var uppercaseRegex = /[A-Z]/
-        var letterRegex = /[a-zA-Z]/;
-        var lengthRegex = /.{8,}/;
-
-        if (lowercaseRegex.test(password)) {
-            lowercaseLabel.classList.remove("red-label");
-            lowercaseLabel.classList.add("green-label");
-        } else {
-            lowercaseLabel.classList.remove("green-label");
-            lowercaseLabel.classList.add("red-label");
-        }
-
-        if (uppercaseRegex.test(password)) {
-            uppercaseLabel.classList.remove("red-label");
-            uppercaseLabel.classList.add("green-label");
-        } else {
-            uppercaseLabel.classList.remove("green-label");
-            uppercaseLabel.classList.add("red-label");
-        }
-
-        if (letterRegex.test(password)) {
-            letterLabel.classList.remove("red-label");
-            letterLabel.classList.add("green-label");
-        } else {
-            letterLabel.classList.remove("green-label");
-            letterLabel.classList.add("red-label");
-        }
-
-        if (lengthRegex.test(password)) {
-            lengthLabel.classList.remove("red-label");
-            lengthLabel.classList.add("green-label");
-        } else {
-            lengthLabel.classList.remove("green-label");
-            lengthLabel.classList.add("red-label");
-        }
-    }
-</script>
 
 </html>
