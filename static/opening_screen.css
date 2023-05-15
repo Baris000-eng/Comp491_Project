@@ -51,44 +51,6 @@ h1:hover {
   margin-bottom: 20px;
 }
 
-#description,
-#opening_help {
-  background-color: darkcyan;
-  padding: 20px;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  font-size: 13px;
-  font-weight: bold;
-  display: none;
-  line-height: 1.5;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
-}
-
-#description p:first-child {
-  margin-top: 0px;
-}
-
-#description p:last-child {
-  margin-bottom: 0px;
-}
-
-#help-text {
-  background-color: darkcyan;
-  padding: 20px;
-  font-size: 13px;
-  font-weight: bold;
-  display: none;
-  line-height: 1.5;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
-  margin-bottom: 20px;
-}
-
-#help-text,
-#description {
-  display: none;
-}
-
 form {
   display: flex;
 
