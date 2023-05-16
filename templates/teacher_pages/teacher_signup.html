@@ -3,7 +3,7 @@
 
 <head>
 	<title>Teacher Signup</title>
-	<link rel="stylesheet" type="text/css" href="../static/styles.css">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='teacher_signup.css') }}">
 	<script src="../../static/passwordChecker.js"></script>
 </head>
 <h1>Teacher Signup</h1>
@@ -19,7 +19,7 @@
 	<label for="email">Email:</label>
 	<input required type="email" id="email" name="email" placeholder="Please enter your email address to signup"
 		required maxlength="50">
-	<div class="box" style="background-color:rgb(190, 185, 185); ">
+	<div class="box" >
 		<label class="red-label" id="lowercase-label">Lowercase</label><br>
 		<label class="red-label" id="uppercase-label">Uppercase</label><br>
 		<label class="red-label" id="letter-label">Letter</label><br>
