@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Incoming News</title>
-    <link rel="stylesheet" type="text/css" href="../static/incoming_news.css">
-  </head>
-  <body>
-    <h2>Incoming News</h2>
-    <div class="news">
-      {% if news_data is defined and news_data %}
-        {% for news_item in news_data %}
-          <p>{{news_item}}</p>
-        {% endfor %}
-      {% else %}
-        <p>There are no current news</p>
-      {% endif %}
-    </div>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title>Incoming News</title>
+  <link rel="stylesheet" type="text/css" href="../static/incoming_news.css">
+</head>
+
+<body>
+  <h2>Incoming News</h2>
+  <div class="news">
+    {% if news_data is defined and news_data %}
+    {% for news_item in news_data %}
+    <p>{{news_item}}</p>
+    {% endfor %}
+    {% else %}
+    <p>There are no current news</p>
+    {% endif %}
+  </div>
+
+  <form action="/redirect_Student_dashboard_From_news">
+    <button>Go back to student dashboard</button>
+  </form>
+</body>
+
 </html>
-
-

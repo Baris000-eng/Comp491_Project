@@ -28,6 +28,7 @@ app.route('/allExams')(US.allExams)
 
 app.route("/get_news_count")(US.get_news_count)
 app.route("/open_news")(US.open_news_screen)
+app.route("/redirect_Student_dashboard_From_news")(US.redirect_Student_dashboard_From_news)
 app.route("/get_teacher_signup_guide")(US.get_teacher_signup_guide)
 app.route("/get_admin_signup_guide")(US.get_admin_signup_guide)
 app.route("/get_student_signup_help")(US.get_student_signup_help)

@@ -46,6 +46,12 @@ def open_news_screen():
     return render_template("incoming_news.html", news_data=UR.getNews(), newsCount=UR.getNewsCount())
 
 
+def redirect_Student_dashboard_From_news():
+    newsCount = 0
+    role = "student"
+    return redirect(f'/{role}/dashboard?newsCount={newsCount}')
+
+
 def exam_schedules():
     df = pd.read_excel('FALL_22_EXAMS.xlsx')
 
