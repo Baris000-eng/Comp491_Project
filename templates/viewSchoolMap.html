@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/viewMap.css">
+    <title>Document</title>
+    <style>
+        #cursor-label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #000;
+            color: #fff;
+            padding: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="../static/images/map3d.jpeg" usemap="#image-map" />
+    <div id="cursor-label"></div>
+    <map name="image-map">
+
+        <area shape="rect" class="segment1" coords="0,0,1000,1000" onclick="redirect('page1.html')" />
+        <area shape="rect" class="segment2" coords="100,100,400,400" onclick="redirect('page2.html')" />
+
+    </map>
+</body>
+<script>
+    function redirect(pageUrl) {
+        window.location.href = pageUrl;
+    }
+</script>
+<script>
+    document.addEventListener('mousemove', function (event) {
+
+        var cursorLabel = document.getElementById('cursor-label');
+        var xCoordinate = event.clientX;
+        var yCoordinate = event.clientY;
+
+
+        if (xCoordinate > 1500) {
+            if (xCoordinate < 1800) {
+                if (yCoordinate > 100) {
+                    if (yCoordinate < 250) {
+                        cursorLabel.textContent = "Click here to Reserve a classroom inside SNA"
+                    } else {
+                        cursorLabel.textContent = 'X: ' + event.clientX + ', Y: ' + event.clientY;
+
+                    }
+                } else {
+                    cursorLabel.textContent = 'X: ' + event.clientX + ', Y: ' + event.clientY;
+
+                }
+
+            } else {
+                cursorLabel.textContent = 'X: ' + event.clientX + ', Y: ' + event.clientY;
+
+            }
+
+        }
+
+        else if (xCoordinate > 1335) {
+            if (xCoordinate < 1500) {
+                if (yCoordinate > 260) {
+                    if (yCoordinate < 400) {
+                        cursorLabel.textContent = "Click here to Reserve a classroom inside Case"
+                    } else {
+                        cursorLabel.textContent = 'X: ' + event.clientX + ', Y: ' + event.clientY;
+
+                    }
+                } else {
+                    cursorLabel.textContent = 'X: ' + event.clientX + ', Y: ' + event.clientY;
+
+                }
+
+            } else {
+                cursorLabel.textContent = 'X: ' + event.clientX + ', Y: ' + event.clientY;
+
+            }
+
+        }
+        else {
+            cursorLabel.textContent = 'X: ' + event.clientX + ', Y: ' + event.clientY;
+
+        }
+
+
+        cursorLabel.style.top = (event.clientY + 10) + 'px';
+        cursorLabel.style.left = (event.clientX + 10) + 'px';
+    });
+</script>
+
+</html>

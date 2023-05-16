@@ -24,6 +24,10 @@ app.debug = True
 
 
 def getClassroomView():
+    return render_template("viewSchoolMap.html")
+
+
+def getClassroomView2():
     return render_template("view_inside_of_classroom.html")
 
 
