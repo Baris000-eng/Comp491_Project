@@ -547,3 +547,7 @@ form .box {
     background-color: rgb(255, 172, 220);
     float: right;
 }
+
+form label {
+    margin: 2px;
+  }
