@@ -15,9 +15,13 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 socketio = SocketIO(app)
 
-app.route("/viewInsidesOfClassrooms")(US.getClassroomView)
-app.route("/viewInsidesOfClassrooms2")(US.getClassroomView2)
-app.route("/getFilterAndSearchClassroomsScreen")(CS.showClassroomSearchAndFilterScreen)
+app.route("/viewInsidesOfClassrooms")(US.getClassroomView2)
+app.route("/viewInsidesOfClassrooms2")(US.getClassroomView)
+app.route('/viewFloors')(US.viewFloors)
+app.route(
+    "/getFilterAndSearchClassroomsScreen")(CS.showClassroomSearchAndFilterScreen)
+
+app.route("/openMap")(US.openMap)
 
 
 app.route("/reservation_code")(US.generate_classroom_reservation_code)
@@ -29,7 +33,8 @@ app.route('/allExams')(US.allExams)
 
 app.route("/get_news_count")(US.get_news_count)
 app.route("/open_news")(US.open_news_screen)
-app.route("/redirect_Student_dashboard_From_news")(US.redirect_Student_dashboard_From_news)
+app.route(
+    "/redirect_Student_dashboard_From_news")(US.redirect_Student_dashboard_From_news)
 app.route("/get_teacher_signup_guide")(US.get_teacher_signup_guide)
 app.route("/get_admin_signup_guide")(US.get_admin_signup_guide)
 app.route("/get_student_signup_help")(US.get_student_signup_help)
@@ -60,14 +65,15 @@ app.route("/makeAnnouncment")(US.makeAnnouncment)
 
 app.route('/logout')(go_to_opening_screen)
 app.route('/', methods=['GET', 'POST'])(US.opening_screen)
-app.route('/editReservedClassrooms', methods=['GET'])(US.editClassroomReservations)
+app.route('/editReservedClassrooms',
+          methods=['GET'])(US.editClassroomReservations)
 app.route('/editITReport', methods=['GET'])(US.editITReport)
 app.route('/deleteReservation', methods=['POST'])(US.deleteReservation)
 app.route('/deleteITReport', methods=['POST'])(US.deleteITReport)
 app.route('/seeOnlyMyReserves', methods=['GET'])(US.seeOnlyMyReserves)
 app.route('/createNews', methods=['GET'])(US.createNews)
-app.route('/updateITReport', methods=['POST','GET'])(US.updateITReport)
-app.route('/updateReservation', methods=['POST','GET'])(US.updateReservation)
+app.route('/updateITReport', methods=['POST', 'GET'])(US.updateITReport)
+app.route('/updateReservation', methods=['POST', 'GET'])(US.updateReservation)
 
 
 @app.route('/<role>/screen', methods=['GET'])
@@ -86,13 +92,14 @@ def import_classrooms():
 @allow_roles(['student', 'teacher', 'it_staff'], session, request)
 def get_all_classrooms():
     classrooms = CS.getAllClassrooms()
-    return render_template("classroom_reservation_view.html", classrooms = classrooms)
+    return render_template("classroom_reservation_view.html", classrooms=classrooms)
+
 
 @app.route('/filteredClassrooms', methods=['GET'])
 def get_classrooms_where():
     classrooms = CS.getClassroomsWhere(request.args)
     departments = CS.getAllDepartments()
-    return render_template("classroom_reservation_view.html", classrooms = classrooms, departments = departments)
+    return render_template("classroom_reservation_view.html", classrooms=classrooms, departments=departments)
 
 
 @app.route('/<role>/dashboard', methods=['GET', 'POST'])
@@ -138,18 +145,19 @@ def editUser():
 app.route('/seeTheReservations',
           methods=['GET'])(US.seeTheReservations)
 
+app.route('/viewFloors')(US.viewFloors)
 
 app.route('/seeITReports',
           methods=['GET'])(US.seeITReports)
 
 
 app.route('/createNewsElement', methods=['GET', "POST"])(US.createNewsElement)
-app.route('/get_it_statistics_for_admin', methods=['GET'])(US.it_report_statistics_for_admin)
+app.route('/get_it_statistics_for_admin',
+          methods=['GET'])(US.it_report_statistics_for_admin)
 ###########################################################################################################
 # For Admin
 ###########################################################################################################
 # Testing out role-based signup request
-
 
 
 @app.route('/<role>/signup', methods=['GET', 'POST'])
@@ -162,49 +170,59 @@ def login(role):
     return US.user_login(request, role)
 
 
-
-
 # socket_chat.on("connect")(US.user_connected)
 # socket_chat.on("disconnect")(US.user_disconnected)
 app.route('/send_chat_message_student')(US.send_chat_message_student)
 app.route('/clearMessages')(US.clearMessages)
 
 
-
-
 app.route("/get_it_report_statistics_for_admin")(US.it_report_statistics_for_admin)
 app.route('/see_plot_of_reservation_num_per_role')(PS.plot_reservations_per_role)
 app.route('/see_plot_of_reservation_num_per_class')(PS.plot_reservations_per_class)
-app.route('/see_plot_of_reservation_num_per_purpose')(PS.plot_reservations_per_purpose)
-app.route("/see_plot_of_reservation_num_per_priority")(PS.plot_reservations_per_priority_value)
+app.route(
+    '/see_plot_of_reservation_num_per_purpose')(PS.plot_reservations_per_purpose)
+app.route(
+    "/see_plot_of_reservation_num_per_priority")(PS.plot_reservations_per_priority_value)
 
-app.route('/see_piechart_of_reservation_num_per_role')(PS.piechart_of_reservations_per_role)
-app.route('/see_piechart_of_reservation_num_per_class')(PS.piechart_of_reservations_per_class)
-app.route('/see_piechart_of_reservation_num_per_purpose')(PS.piechart_of_reservations_per_purpose)
-app.route("/see_piechart_of_reservation_num_per_priority")(PS.piechart_reservations_per_priority_value)
+app.route(
+    '/see_piechart_of_reservation_num_per_role')(PS.piechart_of_reservations_per_role)
+app.route(
+    '/see_piechart_of_reservation_num_per_class')(PS.piechart_of_reservations_per_class)
+app.route('/see_piechart_of_reservation_num_per_purpose')(
+    PS.piechart_of_reservations_per_purpose)
+app.route("/see_piechart_of_reservation_num_per_priority")(
+    PS.piechart_reservations_per_priority_value)
 
 
-app.route("/see_plot_of_user_numbers_per_priority_value")(PS.plot_user_numbers_per_priority_value)
+app.route("/see_plot_of_user_numbers_per_priority_value")(
+    PS.plot_user_numbers_per_priority_value)
 app.route("/see_plot_of_user_numbers_per_role")(PS.plot_user_numbers_per_role)
-app.route("/see_piechart_of_user_numbers_per_priority_value")(PS.plot_piechart_of_user_numbers_per_priority_value)
-app.route("/see_piechart_of_user_numbers_per_role")(PS.plot_piechart_of_user_numbers_per_role)
+app.route("/see_piechart_of_user_numbers_per_priority_value")(
+    PS.plot_piechart_of_user_numbers_per_priority_value)
+app.route(
+    "/see_piechart_of_user_numbers_per_role")(PS.plot_piechart_of_user_numbers_per_role)
 
-app.route('/see_histogram_of_it_report_num_by_classroom_name')(PS.plot_histogram_of_it_report_numbers_per_classroom_name)
-app.route('/see_piechart_of_it_report_num_by_classroom_name')(PS.plot_piechart_of_it_report_numbers_per_classroom_name)
+app.route('/see_histogram_of_it_report_num_by_classroom_name')(
+    PS.plot_histogram_of_it_report_numbers_per_classroom_name)
+app.route('/see_piechart_of_it_report_num_by_classroom_name')(
+    PS.plot_piechart_of_it_report_numbers_per_classroom_name)
 
 
-app.route('/see_histogram_of_it_report_num_by_faculty_name')(PS.plot_histogram_of_it_report_numbers_per_faculty_name)
-app.route('/see_piechart_of_it_report_num_by_faculty_name')(PS.plot_piechart_of_it_report_numbers_per_faculty_name)
+app.route('/see_histogram_of_it_report_num_by_faculty_name')(
+    PS.plot_histogram_of_it_report_numbers_per_faculty_name)
+app.route('/see_piechart_of_it_report_num_by_faculty_name')(
+    PS.plot_piechart_of_it_report_numbers_per_faculty_name)
 
-app.route('/see_barchart_of_it_report_num_per_problem_description')(PS.plot_histogram_of_it_report_numbers_per_problem_description)
-app.route('/see_piechart_of_it_report_num_per_problem_description')(PS.plot_piechart_of_it_report_numbers_per_problem_description)
+app.route('/see_barchart_of_it_report_num_per_problem_description')(
+    PS.plot_histogram_of_it_report_numbers_per_problem_description)
+app.route('/see_piechart_of_it_report_num_per_problem_description')(
+    PS.plot_piechart_of_it_report_numbers_per_problem_description)
 
 
 app.route("/seeReservationStatistics")(US.get_reservation_statistics_screen)
 app.route("/seeUserStatistics")(US.open_user_statistics_screen)
 app.route('/successfulUpdateOfITReport')(US.successfulUpdateOfITReport)
 app.route('/successfulUpdateOfReservation')(US.successfulUpdateOfReservation)
-
 
 
 ######################this gets ip address of the device #####################
@@ -215,10 +233,10 @@ def get_ip_address():
     return ip_address
 ######################this gets ip address of the device #####################
 
+
 if __name__ == '__main__':
     setup
     # Setting the host to the IP address of the device #
     host_address = get_ip_address()
-    app.run(host = host_address, debug = True, port = 5000)
+    app.run(host=host_address, debug=True, port=5000)
     app.debug = True
-

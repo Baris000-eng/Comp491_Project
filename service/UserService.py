@@ -865,6 +865,10 @@ def clearMessages():
     return render_template('chat_class_generic.html', rows=data, user_name=session["username"], message="No Messages Recieved Yet")
 
 
+def viewFloors():
+    return render_template("select_floor.html")
+
+
 def makeAnnouncment():
     news_message = request.form.get('news_message')
     date = request.form.get('date')
@@ -883,3 +887,7 @@ def makeAnnouncment():
         role=role
     )
     return render_template("teacher_announcement.html")
+
+
+def openMap():
+    return render_template("viewSchoolMap.html")
