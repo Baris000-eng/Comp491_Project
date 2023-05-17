@@ -1,0 +1,36 @@
+.all_floors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+button {
+    background-color: aqua;
+    margin: 20px;
+    width: 200px;
+    height: 200px;
+    font-size: 50px;
+    border-color: aqua;
+
+
+    color: #000000;
+}
+
+button:hover {
+    background-color: green;
+    color: white;
+    border: 100px;
+    box-shadow: 200px;
+    border-radius: 50;
+    border-color: red;
+}
+
+
+.floors_div {
+    display: flex;
+}
+
+.floors_div:not(:last-child) {
+    margin-bottom: 10px;
+}
