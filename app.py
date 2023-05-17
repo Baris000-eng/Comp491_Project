@@ -16,7 +16,7 @@ app.config['SECRET_KEY'] = '491'
 socketio = SocketIO(app)
 
 app.route("/viewInsidesOfClassrooms")(US.getClassroomView)
-app.route("/viewInsidesOfClassrooms")(US.getClassroomView)
+app.route("/viewInsidesOfClassrooms2")(US.getClassroomView2)
 app.route("/getFilterAndSearchClassroomsScreen")(CS.showClassroomSearchAndFilterScreen)
 
 

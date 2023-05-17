@@ -28,6 +28,7 @@ def getClassroomView():
 
 
 def getClassroomView2():
+    print("hello")
     return render_template("view_inside_of_classroom.html")
 
 
