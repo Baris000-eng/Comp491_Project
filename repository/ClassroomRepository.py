@@ -131,6 +131,7 @@ def getWhereClauseAndParamList(criterion: str, values: List, operation: str):
     
     for value in values:
         where_clauses.append(f"{criterion} {operation} ?")
+        if operation == "like": value = f'%{value}%'
         parameter_list.append(value)
     
     where_clause = f'( {" or ".join(where_clauses)} )'
