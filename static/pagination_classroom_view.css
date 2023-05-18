@@ -85,8 +85,7 @@ button:hover {
 }
 
 img:hover {
-  cursor: progress;
-
+  cursor: pointer;
 }
 
 
