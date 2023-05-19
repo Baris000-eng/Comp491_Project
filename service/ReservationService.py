@@ -18,7 +18,7 @@ def reserve_class():
     option = request.form['option']
     classroom_code_options = CS.getAllClassroomCodes()
 
-    conn = sqlite3.connect('reservations_db.db')
+    conn = sqlite3.connect(f'reservations_db.db')
     c = conn.cursor()
 
     preference = str()
@@ -72,20 +72,15 @@ def see_already_reserved_classes():
     rows = RR.getAllReservations()
     return render_template('classroom_inside_reservation.html', rows=rows)
 
-def seeOnlyMyReserves():
-    incoming_arg = request.args.get('reservationType')
-    if incoming_arg == "myReservations":
-        conn = sqlite3.connect('reservations_db.db')
-        c = conn.cursor()
-        query1 = 'SELECT * FROM reservations_db where username = "' + \
-            session["username"] + '"'
-        c.execute(query1)
-        data = c.fetchall()
-        conn.close()
-        return render_template('classroom_inside_reservation.html', rows=data)
+def getReservations(reservationType):
+    print(f'Incoming arg: {reservationType}')
+    print(f'Username: {session.get("username")}')
+    if reservationType == "myReservations":
+        reservations = RR.getReservationsByUsername(session.get("username"))
+        return render_template('classroom_inside_reservation.html', rows=reservations)
     else:
-        data = RR.getAllReservations()
-        return render_template('classroom_inside_reservation.html', rows=data)
+        reservations = RR.getAllReservations()
+        return render_template('classroom_inside_reservation.html', rows=reservations)
 
 
 def editClassroomReservations():

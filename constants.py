@@ -17,6 +17,7 @@ class DB:
     classrooms = "classrooms_db"
     courses = "courses_db"
     exams = "exams_db"
+    reservations = "reservations_db"
 
 # To map column names to column numbers
 

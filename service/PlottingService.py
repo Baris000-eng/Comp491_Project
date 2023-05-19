@@ -4,12 +4,13 @@ import base64
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as ticker
+from constants import DB
 
 
 def piechart_reservations_per_priority_value():
-    conn = sqlite3.connect('reservations_db.db')
+    conn = sqlite3.connect(f'{DB.reservations}.db')
     c = conn.cursor()
-    c.execute('SELECT priority_reserved, COUNT(*) FROM reservations_db GROUP BY priority_reserved')
+    c.execute(f'SELECT priority_reserved, COUNT(*) FROM {DB.reservations} GROUP BY priority_reserved')
     data = c.fetchall()
     conn.close()
 
@@ -33,9 +34,9 @@ def piechart_reservations_per_priority_value():
 
 
 def piechart_of_reservations_per_class():
-    conn = sqlite3.connect('reservations_db.db')
+    conn = sqlite3.connect(f'{DB.reservations}.db')
     c = conn.cursor()
-    c.execute('SELECT classroom, COUNT(*) FROM reservations_db GROUP BY classroom')
+    c.execute(f'SELECT classroom, COUNT(*) FROM {DB.reservations} GROUP BY classroom')
     data = c.fetchall()
     conn.close()
     
@@ -59,9 +60,9 @@ def piechart_of_reservations_per_class():
 
 
 def piechart_of_reservations_per_purpose():
-    conn = sqlite3.connect('reservations_db.db')
+    conn = sqlite3.connect(f'{DB.reservations}.db')
     c = conn.cursor()
-    c.execute('SELECT public_or_private, COUNT(*) FROM reservations_db GROUP BY public_or_private')
+    c.execute(f'SELECT public_or_private, COUNT(*) FROM {DB.reservations} GROUP BY public_or_private')
     data = c.fetchall()
     conn.close()
     
@@ -85,9 +86,9 @@ def piechart_of_reservations_per_purpose():
 
 
 def piechart_of_reservations_per_role():
-    conn = sqlite3.connect('reservations_db.db')
+    conn = sqlite3.connect(f'{DB.reservations}.db')
     c = conn.cursor()
-    c.execute('SELECT role, COUNT(*) FROM reservations_db GROUP BY role')
+    c.execute(f'SELECT role, COUNT(*) FROM {DB.reservations} GROUP BY role')
     data = c.fetchall()
     conn.close()
     
@@ -111,9 +112,9 @@ def piechart_of_reservations_per_role():
 
 
 def plot_reservations_per_role():
-    conn = sqlite3.connect('reservations_db.db')
+    conn = sqlite3.connect(f'{DB.reservations}.db')
     c = conn.cursor()
-    c.execute('SELECT role, COUNT(*) FROM reservations_db GROUP BY role')
+    c.execute(f'SELECT role, COUNT(*) FROM {DB.reservations} GROUP BY role')
     data = c.fetchall()
     conn.close()
     
@@ -143,9 +144,9 @@ def plot_reservations_per_role():
     return html
 
 def plot_reservations_per_purpose():
-    conn = sqlite3.connect('reservations_db.db')
+    conn = sqlite3.connect(f'{DB.reservations}.db')
     c = conn.cursor()
-    c.execute('SELECT public_or_private, COUNT(*) FROM reservations_db GROUP BY public_or_private')
+    c.execute(f'SELECT public_or_private, COUNT(*) FROM {DB.reservations} GROUP BY public_or_private')
     data = c.fetchall()
     conn.close()
     
@@ -175,9 +176,9 @@ def plot_reservations_per_purpose():
     return html
 
 def plot_reservations_per_class():
-    conn = sqlite3.connect('reservations_db.db')
+    conn = sqlite3.connect(f'{DB.reservations}.db')
     c = conn.cursor()
-    c.execute('SELECT classroom, COUNT(*) FROM reservations_db GROUP BY classroom')
+    c.execute(f'SELECT classroom, COUNT(*) FROM {DB.reservations} GROUP BY classroom')
     data = c.fetchall()
     conn.close()
     
@@ -207,9 +208,9 @@ def plot_reservations_per_class():
     return html
 
 def plot_reservations_per_priority_value():
-    conn = sqlite3.connect('reservations_db.db')
+    conn = sqlite3.connect(f'{DB.reservations}.db')
     c = conn.cursor()
-    c.execute('SELECT priority_reserved, COUNT(*) FROM reservations_db GROUP BY priority_reserved')
+    c.execute(f'SELECT priority_reserved, COUNT(*) FROM {DB.reservations} GROUP BY priority_reserved')
     data = c.fetchall()
     conn.close()
 

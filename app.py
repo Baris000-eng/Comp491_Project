@@ -71,7 +71,12 @@ app.route('/editReservedClassrooms',
 app.route('/editITReport', methods=['GET'])(US.editITReport)
 app.route('/deleteReservation', methods=['POST'])(RS.deleteReservation)
 app.route('/deleteITReport', methods=['POST'])(US.deleteITReport)
-app.route('/seeOnlyMyReserves', methods=['GET'])(RS.seeOnlyMyReserves)
+
+@app.route('/reservations', methods=['GET'])
+def getReservations():
+    reservationType = request.args.get('reservationType')
+    return RS.getReservations(reservationType)
+
 app.route('/createNews', methods=['GET'])(US.createNews)
 app.route('/updateITReport', methods=['POST', 'GET'])(US.updateITReport)
 app.route('/updateReservation', methods=['POST', 'GET'])(RS.updateReservation)
