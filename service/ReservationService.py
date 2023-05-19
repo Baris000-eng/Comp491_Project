@@ -73,14 +73,26 @@ def see_already_reserved_classes():
     return render_template('classroom_inside_reservation.html', rows=rows)
 
 def getReservations(reservationType):
-    print(f'Incoming arg: {reservationType}')
-    print(f'Username: {session.get("username")}')
     if reservationType == "myReservations":
         reservations = RR.getReservationsByUsername(session.get("username"))
         return render_template('classroom_inside_reservation.html', rows=reservations)
     else:
         reservations = RR.getAllReservations()
         return render_template('classroom_inside_reservation.html', rows=reservations)
+
+
+def reservedClassroomsByInterval(start_date, start_time, duration):
+    """
+    Finds the classrooms that are occupied by a reservation between start_date,start_time to start_date,start_time + duration
+    There is an occupation for a classroom if there exists a reservation at that classroom that satisfies all rules:
+    1. Starts before the end of the specified datetime: (start_date,start_time + duration)
+    2. Ends after the start of the specified datetime:  (start_date,start_time)
+
+    :param start_date: String in the form of "YYYY-MM-DD" that specifies the date of interest, ex: "2023-06-24"
+    :param start_time: String in the form of "HH:MM" that specifies the time of interest, ex: "18:45"
+    :param duration: Integer that specifies the duration of interest IN MINUTES
+    """
+    return RR.reservedClassroomsByInterval(start_date, start_time, duration)
 
 
 def editClassroomReservations():

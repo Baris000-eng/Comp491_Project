@@ -1,6 +1,8 @@
 import sqlite3
 from constants import DB
 
+DEBUG = False
+
 def initializeReservationsTable():
     conn = sqlite3.connect(f'{DB.reservations}.db')
     c = conn.cursor()
@@ -61,3 +63,30 @@ def delete_reservation_from_db(role, date, start_time, end_time, username, publi
 
     conn.commit()
     conn.close()
+
+def reservedClassroomsByInterval(start_date, start_time, duration):
+    """
+    Finds the classrooms that are occupied by a reservation between start_date,start_time to start_date,start_time + duration
+    There is an occupation for a classroom if there exists a reservation at that classroom that satisfies all rules:
+    1. Starts before the end of the specified datetime: (start_date,start_time + duration)
+    2. Ends after the start of the specified datetime:  (start_date,start_time)
+
+    :param start_date: String in the form of "YYYY-MM-DD" that specifies the date of interest, ex: "2023-06-24"
+    :param start_time: String in the form of "HH:MM" that specifies the time of interest, ex: "18:45"
+    :param duration: Integer that specifies the duration of interest IN MINUTES
+    """
+    conn = sqlite3.connect(f'{DB.reservations}.db')
+    c = conn.cursor()
+
+    start_datetime = f'{start_date} {start_time}'
+
+    query = f'''SELECT classroom FROM {DB.reservations}
+                WHERE (date || " " || start_time) < datetime("{start_datetime}", "+{duration} minutes")
+                and   (date || " " || end_time) > "{start_datetime}"'''
+
+    c.execute(query)
+    
+    classrooms = c.fetchall()
+    conn.close()
+
+    return classrooms

@@ -134,6 +134,13 @@ app.route('/openTeacherReservationScreen',
 app.route('/openITStaffReservationScreen',
           methods=['GET'])(RS.openITStaffReservationScreen)
 
+@app.route('/reservedClassroomsByInterval', methods=['GET'])
+def reservedClassroomsByInterval():
+    start_date = request.args.get('start_date')
+    start_time = request.args.get('start_time')
+    duration = request.args.get('duration')
+    return RS.reservedClassroomsByInterval(start_date, start_time, duration)
+
 
 app.route('/seeITReport',
           methods=['POST'])(US.seeITReport)
