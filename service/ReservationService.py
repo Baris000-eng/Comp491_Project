@@ -104,7 +104,8 @@ def deleteReservation():
     if request.method == "POST":
         role = request.form['role']
         date = request.form['date']
-        time = request.form['time']
+        start_time = request.form['start_time']
+        end_time = request.form['end_time']
         username = request.form['username_of_reserver']
         public_or_private = request.form['reservation_purpose']
         classroom = request.form['classroom_name']
@@ -112,7 +113,8 @@ def deleteReservation():
         RR.delete_reservation_from_db(
             role=role,
             date=date,
-            time=time,
+            start_time=start_time,
+            end_time=end_time,
             username=username,
             public_or_private=public_or_private,
             classroom=classroom,
@@ -128,7 +130,8 @@ def updateReservation():
         current_reservation_id = request.form['reservation_id']
         user_role = request.form['role']
         reservation_date = request.form['date']
-        reservation_time = request.form['time']
+        reservation_start_time = request.form['start_time']
+        reservation_end_time = request.form['end_time']
         reserver_username = request.form['username_of_reserver']
         reservation_purpose = request.form['reservation_purpose']
         reserved_classroom = request.form['classroom_name']
@@ -136,7 +139,8 @@ def updateReservation():
         RR.updateReservation(
             role=user_role,
             date=reservation_date,
-            time=reservation_time,
+            start_time=reservation_start_time,
+            end_time=reservation_end_time,
             username=reserver_username,
             reservation_purpose=reservation_purpose,
             reserved_classroom=reserved_classroom,
