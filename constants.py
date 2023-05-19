@@ -58,5 +58,6 @@ FilterOperations = {
     "connections": "like",
     "panopto_capture": "like",
     "outlets_for_students": "like",
-    "projector_num": "="
+    "projector_num": "=",
+    "room_type": "like"
 }
