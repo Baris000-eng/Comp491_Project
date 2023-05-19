@@ -52,6 +52,7 @@ label input[type="radio"] {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
+  align-items: center;
   font-size: 18px;
 }
 
@@ -60,3 +61,25 @@ label input[type="radio"] {
   color: darkred;
   font-size: 18px;
 }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+#goToTeacherDashboardButton,
+#goToItStaffDashboardButton,
+#goToStudentDashboardButton {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 18px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+

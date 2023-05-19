@@ -185,16 +185,3 @@ def get_reservation_statistics_screen():
 def successfulUpdateOfReservation():
     return render_template('successfulUpdateOfClassReservation.html')
 
-
-# def extract_first_column_of_ku_class_data():
-#     df = pd.read_excel('KU_Classrooms.xlsx')
-#     options = [x for x in df.iloc[:, 0].dropna().tolist() if x not in [
-#         'CASE', 'SOS', 'SNA', 'ENG', 'SCI']]
-    
-#     codes = CS.getAllClassroomCodes()
-#     if DEBUG:
-#         print(f"Options: {options}")
-
-#         codes = CS.getAllClassroomCodes()
-#         print(f"Codes: {codes}")
-#     return options

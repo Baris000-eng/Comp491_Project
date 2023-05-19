@@ -3,64 +3,70 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Reservation Screen</title>
-    <link rel="stylesheet" href="../static/teacher_reservation_screen.css">
-    <script type="text/javascript" src="../static/teacher_reservation_screen.js"></script>
+    <title>Teacher Class Reservation Page</title>
+    <link rel="stylesheet" type="text/css" href="../static/student_reservation.css">
+    <script type="text/javascript" src="../static/student_reservation_screen.js"></script>
 </head>
-
 <div class="card" id="reservationForm">
-    <form action="/reserve_class" method="POST">
+    <form action="/reserve_class" method="POST" style="text-align:center;">
         <h2>Teacher Class Reservation Screen</h2>
         {% if 'class_code' in request.args %}
-        <label for="">Class Code:</label>
-        <input type="text" name="class-code" value="{{ request.args['class_code'] }}" readonly>
+        <label for="">Class Code:</label>&nbsp;<input type="text" name="class-code"
+            value="{{ request.args['class_code'] }}" readonly>
         {% else %}
-        <label for="">Select your class from dropdown class list</label>
-        <div class="combo-box">
+        <label for="">Select your class from dropdown class list:</label>&nbsp;<div class="combo-box">
             <select id="class-selector" name="class-code">
                 {% for option in options %}
-                <option value="{{ option }}">{{ option }}</option>
+                <option value="{{ option }}">{{option }}</option>
                 {% endfor %}
             </select>
         </div>
         {% endif %}
         <br>
         <br>
-        <label class="other-label" for="Please specify time">Please specify the start time, end time, and date</label>
-        <input required type="time" name="start-time" id="start-time">
-        <input required type="time" name="end-time" id="end-time">
-        <input required type="date" name="date" id="date">
+        <label>Please specify the starting time: </label>&nbsp;<input required type="time" name="start-time"
+            id="start-time">
+        <label>Please specify the ending time: </label>&nbsp;<input required type="time" name="end-time" id="end-time">
+        <label>Please specify the date: </label>&nbsp;<input required type="date" name="date" id="date">
         <br>
-        <label class="other-label" for="">Please specify your purpose of reservation.</label>
-        <label class="option-label">
-            <input required type="radio" name="option" value="exam" required>
-            I want to reserve for an exam.
-        </label>
-        <label class="option-label">
-            <input required type="radio" name="option" value="lecture">
+        <label for="">Specify your reservation purpose:</label>
+        <label>
+            <input type="radio" name="option" value="lecture">
             I want to reserve for a lecture.
         </label>
-        <label class="option-label">
-            <input required type="radio" name="option" value="ps">
+        <label>
+            <input type="radio" name="option" value="ps" checked>
             I want to reserve for a ps.
         </label>
-        <button type="submit" id="submit-btn">Click to submit reservation</button>
+        <label>
+            <input type="radio" name="option" value="exam">
+           I want to reserve for an exam.
+        </label>
+        <br>
+        <button type="submit" id="submit-btn">Click to Submit Reservation</button>
     </form>
 </div>
 
 {% if 'role' in session %}
 {% if session['role'] == 'teacher' %}
 <form action="teacher/dashboard">
-    <button>Go To Teacher Dashboard</button>
+    <div class="button-container">
+    <button id="goToTeacherDashboardButton">Go To Teacher Dashboard</button>
+    </div>
 </form>
 {% elif session['role'] == 'it_staff' %}
 <form action="it_staff/dashboard">
-    <button>Go To IT Staff Dashboard</button>
+    <div class="button-container">
+    <button id="goToItStaffDashboardButton">Go To IT Staff Dashboard</button>
+    </div>
 </form>
 {% elif session['role'] == 'student' %}
 <form action="student/dashboard">
-    <button>Go To Student Dashboard</button>
+    <div class="button-container">
+    <button id="goToStudentDashboardButton">Go To Student Dashboard</button>
+    </div>
 </form>
 {% endif %}
 {% endif %}
@@ -75,4 +81,5 @@
 </div>
 
 </body>
+
 </html>
