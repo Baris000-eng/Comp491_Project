@@ -5,7 +5,7 @@ from typing import List
 from constants import DB
 from constants import FilterOperations as FO
 
-DEBUG = True
+DEBUG = False
 
 def initializeClassroomTables():
     conn = sqlite3.connect(f"{DB.classrooms}.db")
@@ -66,6 +66,16 @@ def getAllClassrooms():
     conn.commit()
     conn.close()
     return classrooms
+
+def getAllClassroomCodes():
+    conn = sqlite3.connect(f"{DB.classrooms}.db")
+    c = conn.cursor()
+    c.execute(f"SELECT code FROM {DB.classrooms} ORDER BY code ASC")
+
+    class_codes = c.fetchall()
+    conn.commit()
+    conn.close()
+    return class_codes
 
 def getClassroomsWhere(criteria: dict, operations: dict):
     """

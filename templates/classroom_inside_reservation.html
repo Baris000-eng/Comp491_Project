@@ -31,13 +31,16 @@
         {% for row in rows %}
         <h3>--------------- Reservation --------------------</h3>
         <ul>
-            <li>Role: {{ row[0] }}</li>
-            <li>Date: {{ row[1] }}</li>
-            <li>Time: {{ row[2] }}</li>
-            <li>Username: {{ row[3] }}</li>
-            <li>Reservation Purpose: {{ row[4] }}</li>
-            <li>Classroom: {{ row[5] }}</li>
-            <li>Priority Reserved: {{ row[6] }}</li>
+            
+            <li>Role: {{ row[1] }}</li>
+            <li>Date: {{ row[2] }}</li>
+            <li>Start Time: {{ row[3] }}</li>
+            <li>End Time: {{ row[4] }}</li>
+            <li>Username: {{ row[5] }}</li>
+            <!-- <li>Reservation Purpose: {{ row[6] }}</li> -->
+            <li>Publicity: {{ row[6] }}</li>
+            <li>Classroom: {{ row[7] }}</li>
+            <li>Priority Reserved: {{ row[8] }}</li>
         </ul>
         <form action="/editReserved" method="GET">
             <input type="hidden" name="row_data" value="{{ row|join(',') }}">
@@ -45,7 +48,7 @@
         </form>
         <form action="/enterChat" method="GET">
             <input type="hidden" name="row_data" value="{{ row|join(',') }}">
-            <input type="hidden" name="classroom" value="{{ row[5] }}">
+            <input type="hidden" name="classroom" value="{{ row[7] }}">
             <button>Enter Chat for This Classroom</button>
         </form>
         {% endfor %}

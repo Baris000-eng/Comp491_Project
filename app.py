@@ -7,6 +7,7 @@ from service.UserService import select_role, chat_action, report_chat, report_it
 import service.UserService as US
 import service.ClassroomService as CS
 import service.PlottingService as PS
+import service.ReservationService as RS
 from flask_socketio import SocketIO, emit
 from flask import render_template
 
@@ -24,7 +25,7 @@ app.route(
 app.route("/openMap")(US.openMap)
 
 
-app.route("/reservation_code")(US.generate_classroom_reservation_code)
+app.route("/reservation_code")(RS.generate_classroom_reservation_code)
 
 app.route('/class_schedules')(US.course_schedules)
 app.route('/exam_schedules')(US.exam_schedules)
@@ -66,14 +67,14 @@ app.route("/makeAnnouncment")(US.makeAnnouncment)
 app.route('/logout')(go_to_opening_screen)
 app.route('/', methods=['GET', 'POST'])(US.opening_screen)
 app.route('/editReservedClassrooms',
-          methods=['GET'])(US.editClassroomReservations)
+          methods=['GET'])(RS.editClassroomReservations)
 app.route('/editITReport', methods=['GET'])(US.editITReport)
-app.route('/deleteReservation', methods=['POST'])(US.deleteReservation)
+app.route('/deleteReservation', methods=['POST'])(RS.deleteReservation)
 app.route('/deleteITReport', methods=['POST'])(US.deleteITReport)
-app.route('/seeOnlyMyReserves', methods=['GET'])(US.seeOnlyMyReserves)
+app.route('/seeOnlyMyReserves', methods=['GET'])(RS.seeOnlyMyReserves)
 app.route('/createNews', methods=['GET'])(US.createNews)
 app.route('/updateITReport', methods=['POST', 'GET'])(US.updateITReport)
-app.route('/updateReservation', methods=['POST', 'GET'])(US.updateReservation)
+app.route('/updateReservation', methods=['POST', 'GET'])(RS.updateReservation)
 
 
 @app.route('/<role>/screen', methods=['GET'])
@@ -108,10 +109,10 @@ def dashboard(role):
     return US.user_dashboard(role)
 
 
-app.route('/reserve_class', methods=['POST'])(US.reserve_class)
+app.route('/reserve_class', methods=['POST'])(RS.reserve_class)
 app.route('/already_reserved_classes',
-          methods=['POST'])(US.see_already_reserved_classes)
-app.route('/OpenReserveScreen', methods=['POST'])(US.OpenReserveScreen)
+          methods=['POST'])(RS.see_already_reserved_classes)
+app.route('/OpenReserveScreen', methods=['POST'])(RS.OpenReserveScreen)
 ###########################################################################################################
 
 app.route('/enterChat',
@@ -123,11 +124,11 @@ app.route('/openITReportScreen',
 
 
 app.route('/openStudentReservationScreen',
-          methods=['GET'])(US.openStudentReservationScreen)
+          methods=['GET'])(RS.openStudentReservationScreen)
 app.route('/openTeacherReservationScreen',
-          methods=['GET'])(US.openTeacherReservationScreen)
+          methods=['GET'])(RS.openTeacherReservationScreen)
 app.route('/openITStaffReservationScreen',
-          methods=['GET'])(US.openITStaffReservationScreen)
+          methods=['GET'])(RS.openITStaffReservationScreen)
 
 
 app.route('/seeITReport',
@@ -143,7 +144,7 @@ def editUser():
 
 
 app.route('/seeTheReservations',
-          methods=['GET'])(US.seeTheReservations)
+          methods=['GET'])(RS.seeTheReservations)
 
 app.route('/viewFloors')(US.viewFloors)
 
@@ -219,10 +220,10 @@ app.route('/see_piechart_of_it_report_num_per_problem_description')(
     PS.plot_piechart_of_it_report_numbers_per_problem_description)
 
 
-app.route("/seeReservationStatistics")(US.get_reservation_statistics_screen)
+app.route("/seeReservationStatistics")(RS.get_reservation_statistics_screen)
 app.route("/seeUserStatistics")(US.open_user_statistics_screen)
 app.route('/successfulUpdateOfITReport')(US.successfulUpdateOfITReport)
-app.route('/successfulUpdateOfReservation')(US.successfulUpdateOfReservation)
+app.route('/successfulUpdateOfReservation')(RS.successfulUpdateOfReservation)
 
 
 ######################this gets ip address of the device #####################

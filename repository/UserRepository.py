@@ -6,16 +6,6 @@ from constants import ROLES
 from constants import DB
 from constants import UserModel
 import sqlite3
-  
-def updateReservation(role, date, start_time, end_time, username, reservation_purpose, reserved_classroom, priority_reserved, id):
-    conn = sqlite3.connect("reservations_db.db")
-    c = conn.cursor()
-
-    c.execute("UPDATE reservations_db SET role=?, date=?, start_time=?, end_time=?, username=?, public_or_private=?, classroom = ?, priority_reserved=? WHERE id=?", 
-                (role, date, start_time, end_time, username, reservation_purpose, reserved_classroom, priority_reserved, id))
-
-    conn.commit()
-    conn.close()
 
 def updateITReport(report_no, room_name, faculty_name, problem_description, date, time):
     conn = sqlite3.connect("IT_Report_logdb.db")
@@ -50,24 +40,6 @@ def delete_it_report_from_db(report_no, room_name, faculty_name, problem_descrip
     conn.commit()
     conn.close()
 
-def delete_reservation_from_db(role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved):
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
-
-    c.execute('''DELETE FROM reservations_db WHERE
-                 role = ? AND
-                 date = ? AND
-                 start_time = ? AND
-                 end_time = ? AND 
-                 username = ? AND
-                 public_or_private = ? AND
-                 classroom = ? AND
-                 priority_reserved = ?''',
-              (role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved))
-
-    conn.commit()
-    conn.close()
-
 
 def insert_news_to_newsdb(news_message, time, date, time_end, date_end, sender, role):
     conn = sqlite3.connect('news_db.db')
@@ -99,13 +71,7 @@ def getAllITReports():
     return rows
     
 
-def getAllReservations():
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
-    c.execute('SELECT * FROM reservations_db')
-    data = c.fetchall()
-    conn.close()
-    return data
+
 
 def getAllUsernames():
     conn = sqlite3.connect('users_db.db')
@@ -154,20 +120,7 @@ def createITReport(room_name, faculty_name, problem_description, date, time):
     conn.close()
 
 
-def initializeReservationsTable():
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
 
-    c.execute('''CREATE TABLE IF NOT EXISTS reservations_db (
-              id INTEGER PRIMARY KEY AUTOINCREMENT, 
-              role TEXT NOT NULL,
-              date DATE NOT NULL, 
-              start_time TIME NOT NULL, 
-              end_time TIME NOT NULL,
-              username TEXT DEFAULT "NO_NAME_GIVEN", 
-              public_or_private TEXT,
-              classroom TEXT,
-              priority_reserved INTEGER)''')
 
 
 def initializeChatTable():

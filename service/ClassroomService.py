@@ -7,7 +7,12 @@ def showTheClassroomAndInfo():
     return render_template("Classroom_reservation_students_view.html")
 
 def getAllClassrooms():
-     return CR.getAllClassrooms()
+    return CR.getAllClassrooms()
+
+def getAllClassroomCodes():
+    codes_tuples = CR.getAllClassroomCodes()
+    codes_list = [code[0] for code in codes_tuples] 
+    return codes_list
 
 def createClassrooms(csv_source: str):
     """
