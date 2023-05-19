@@ -6,6 +6,11 @@ body {
   background-size: cover;
 }
 
+#makeAnnouncement{
+  margin-left: 10px; 
+  width: 200px;
+}
+
 .container {
   max-width: 800px;
   margin: 0 auto;

@@ -6,7 +6,8 @@ from service.UserService import password_change_success, go_to_opening_screen
 from service.UserService import select_role, chat_action, report_chat, report_it
 import service.UserService as US
 import service.ClassroomService as CS
-import service.PlottingService as PS
+import service.PiechartPlottingService as PPS
+import service.HistogramPlottingService as HPS
 import service.ReservationService as RS
 from flask_socketio import SocketIO, emit
 from flask import render_template
@@ -56,13 +57,11 @@ app.route('/password_change_success')(password_change_success)
 
 app.route('/select_role', methods=['POST'])(select_role)
 app.route('/chat_action')(chat_action)
-# @socketio.on('connect')
-# @socketio.on('message')
 
 app.route('/reportingChat', methods=['POST'])(report_chat)
 app.route('/reportingIT', methods=['POST'])(report_it)
 
-app.route("/makeAnnouncment")(US.makeAnnouncment)
+app.route("/makeAnnouncement")(US.makeAnnouncment)
 
 app.route('/logout')(go_to_opening_screen)
 app.route('/', methods=['GET', 'POST'])(US.opening_screen)
@@ -183,46 +182,46 @@ app.route('/clearMessages')(US.clearMessages)
 
 
 app.route("/get_it_report_statistics_for_admin")(US.it_report_statistics_for_admin)
-app.route('/see_plot_of_reservation_num_per_role')(PS.plot_reservations_per_role)
-app.route('/see_plot_of_reservation_num_per_class')(PS.plot_reservations_per_class)
+app.route('/see_plot_of_reservation_num_per_role')(HPS.plot_reservations_per_role)
+app.route('/see_plot_of_reservation_num_per_class')(HPS.plot_reservations_per_class)
 app.route(
-    '/see_plot_of_reservation_num_per_purpose')(PS.plot_reservations_per_purpose)
+    '/see_plot_of_reservation_num_per_purpose')(HPS.plot_reservations_per_purpose)
 app.route(
-    "/see_plot_of_reservation_num_per_priority")(PS.plot_reservations_per_priority_value)
+    "/see_plot_of_reservation_num_per_priority")(HPS.plot_reservations_per_priority_value)
 
 app.route(
-    '/see_piechart_of_reservation_num_per_role')(PS.piechart_of_reservations_per_role)
+    '/see_piechart_of_reservation_num_per_role')(PPS.piechart_of_reservations_per_role)
 app.route(
-    '/see_piechart_of_reservation_num_per_class')(PS.piechart_of_reservations_per_class)
+    '/see_piechart_of_reservation_num_per_class')(PPS.piechart_of_reservations_per_class)
 app.route('/see_piechart_of_reservation_num_per_purpose')(
-    PS.piechart_of_reservations_per_purpose)
+    PPS.piechart_of_reservations_per_purpose)
 app.route("/see_piechart_of_reservation_num_per_priority")(
-    PS.piechart_reservations_per_priority_value)
+    PPS.piechart_reservations_per_priority_value)
 
 
 app.route("/see_plot_of_user_numbers_per_priority_value")(
-    PS.plot_user_numbers_per_priority_value)
-app.route("/see_plot_of_user_numbers_per_role")(PS.plot_user_numbers_per_role)
+    HPS.plot_user_numbers_per_priority_value)
+app.route("/see_plot_of_user_numbers_per_role")(HPS.plot_user_numbers_per_role)
 app.route("/see_piechart_of_user_numbers_per_priority_value")(
-    PS.plot_piechart_of_user_numbers_per_priority_value)
+    PPS.plot_piechart_of_user_numbers_per_priority_value)
 app.route(
-    "/see_piechart_of_user_numbers_per_role")(PS.plot_piechart_of_user_numbers_per_role)
+    "/see_piechart_of_user_numbers_per_role")(PPS.plot_piechart_of_user_numbers_per_role)
 
 app.route('/see_histogram_of_it_report_num_by_classroom_name')(
-    PS.plot_histogram_of_it_report_numbers_per_classroom_name)
+    HPS.plot_histogram_of_it_report_numbers_per_classroom_name)
 app.route('/see_piechart_of_it_report_num_by_classroom_name')(
-    PS.plot_piechart_of_it_report_numbers_per_classroom_name)
+    PPS.plot_piechart_of_it_report_numbers_per_classroom_name)
 
 
 app.route('/see_histogram_of_it_report_num_by_faculty_name')(
-    PS.plot_histogram_of_it_report_numbers_per_faculty_name)
+    HPS.plot_histogram_of_it_report_numbers_per_faculty_name)
 app.route('/see_piechart_of_it_report_num_by_faculty_name')(
-    PS.plot_piechart_of_it_report_numbers_per_faculty_name)
+    PPS.plot_piechart_of_it_report_numbers_per_faculty_name)
 
 app.route('/see_barchart_of_it_report_num_per_problem_description')(
-    PS.plot_histogram_of_it_report_numbers_per_problem_description)
+    HPS.plot_histogram_of_it_report_numbers_per_problem_description)
 app.route('/see_piechart_of_it_report_num_per_problem_description')(
-    PS.plot_piechart_of_it_report_numbers_per_problem_description)
+    PPS.plot_piechart_of_it_report_numbers_per_problem_description)
 
 
 app.route("/seeReservationStatistics")(RS.get_reservation_statistics_screen)

@@ -7,7 +7,6 @@ body {
     background-size: cover;
   }
 
-  /* Description style */
   #description {
     font-size: 18px;
     line-height: 1.6;
@@ -19,7 +18,6 @@ body {
     border-radius: 10px;
   }
   
-  /* Description header style */
   #description::before {
     content: "";
     display: block;
@@ -28,7 +26,6 @@ body {
     border-radius: 10px 10px 0 0;
   }
   
-  /* Button style */
   button {
     display: block;
     padding: 12px 24px;
@@ -43,12 +40,10 @@ body {
     transition: all 0.2s ease-in-out;
   }
   
-  /* Button hover style */
   button:hover {
     background-color: #2980b9;
   }
   
-  /* Link style */
   a {
     color: #3498db;
     text-decoration: none;
@@ -59,7 +54,7 @@ body {
   }
 
   h1 {
-     color: white;
+     color: black;
      font-size: bold;
   }
 
