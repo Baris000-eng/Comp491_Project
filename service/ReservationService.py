@@ -9,6 +9,9 @@ import service.ClassroomService as CS
 
 DEBUG = True
 
+def check_course_or_exam_conflict():
+    return "Hello World"
+
 def check_time_interval_conflict(date, start_time, end_time, class_code):
     with sqlite3.connect('reservations_db.db') as conn:
         c = conn.cursor()
@@ -19,7 +22,7 @@ def check_time_interval_conflict(date, start_time, end_time, class_code):
         new_start_time = datetime.datetime.strptime(start_time, "%H:%M") ### string to datetime
         new_end_time = datetime.datetime.strptime(end_time, "%H:%M") ### string to datetime
 
-        for reservation in existing_reservations:
+        for reservation in existing_reservations: ######iterate through all existing reservations####
             existing_start_time = datetime.datetime.strptime(reservation[3], "%H:%M")
             existing_end_time = datetime.datetime.strptime(reservation[4], "%H:%M")
 
@@ -73,11 +76,12 @@ def reserve_class():
         conn.close()
         return render_template("return_success_message_classroom_reserved.html")
     else:
-        if existing_reservation:
-            another_user_reserved = "Reservation failed! This slot has already been reserved by another user."
-            return render_template(role + "_reservation_screen.html",
-                                   another_user_reserved=another_user_reserved,
-                                   options=classroom_code_options)
+        if existing_reservation and existing_reservation[2] == date and existing_reservation[3] == start_time and existing_reservation[4] == end_time and existing_reservation[5] == session['username'] and existing_reservation[7] == class_code:
+            reservation_already_happened = "Reservation failed: you have already reserved this slot."
+            return render_template(role + "_reservation_screen.html", reservation_already_happened=reservation_already_happened, options=classroom_code_options)
+        elif existing_reservation:
+            another_user_reserved = "Reservation failed: slot already reserved by another user."
+            return render_template(role + "_reservation_screen.html", another_user_reserved=another_user_reserved, options=classroom_code_options)
         elif check_time_interval_conflict(date, start_time, end_time, class_code):
             time_interval_conflict = "Reservation failed! The time interval coincides with another reservation."
             return render_template(role + "_reservation_screen.html",
