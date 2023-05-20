@@ -1,89 +1,129 @@
 body {
-    background-color: aquamarine;
+    background-color: #f6d7dd;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
     background-image: url("../static/images/classroom.png");
     background-size: cover;
 }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-h1 {
+h2 {
+    font-size: 40px;
     font-weight: bold;
-    color: darkcyan;
+    color: black;
     text-align: center;
-    text-transform: capitalize;
+    margin: 30px 0 50px;
+    font-family: "Times New Roman", Times, serif;
 }
 
-
-
-.reservations {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-
-
-.reservations th {
-    background-color: #791e1e;
+h3 {
+    font-size: 24px;
     font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    margin: 20px 0;
+    background-color: #ab6da7;
+    padding: 10px;
+    border-radius: 5px;
 }
 
+.content {
+    padding: 20px;
+    width: 80%;
+    box-sizing: border-box;
+    background-color: lightblue;
+}
 
-table {
-    font-family: Arial, sans-serif;
-    border-collapse: collapse;
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+button.edit-report-button {
+    align-self: flex-start;
     width: 100%;
-    margin-bottom: 20px;
-}
-
-table thead th {
-    background-color: #4CAF50;
-    color: white;
-    text-align: left;
-    padding: 8px;
-}
-
-table tbody td {
-    border: 1px solid black;
-    padding: 8px;
+    max-width: 400px;
+    padding: 20px;
+    font-size: 24px;
     font-weight: bold;
-    color: darkblue;
-}
-
-
-button {
-    background-color: #f44336;
-    color: white;
+    text-align: center;
+    color: blue;
+    border-color: aquamarine;
+    background-color: #ab6da7;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
     border: none;
-    padding: 8px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin: 4px 2px;
+    position: left;
     cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
 }
 
-button:hover {
-    background-color: #d32f2f;
-}
-
-
-td:nth-child(6) {
-    font-weight: bold;
-    color: darkblue;
-}
-
-
-tbody tr:hover {
-    background-color: green;
-}
-
-
-tbody tr.selected {
+.box {
     background-color: lightgoldenrodyellow;
+    margin: 0 10% 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+button#it-staff-button {
+    margin: 20px auto;
+    display: block;
+    max-width: 400px;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    color: blue;
+    border-color: aquamarine;
+    background-color: #ab6da7;
+    border-radius: 5px;
+    padding: 20px;
+    width: 400px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+#it-staff-button:hover {
+    background-color: #ff8692;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.edit-report-button.button:hover {
+    background-color: #ff8692;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+form button {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #ab6da7;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+}
+
+form button:hover {
+    background-color: #ff8692;
+    transform: scale(1.05);
 }

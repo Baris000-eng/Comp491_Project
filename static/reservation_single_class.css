@@ -1,17 +1,75 @@
-.box {
-    background-color: green;
-    margin: 0 10%;
-    display: flex;
-    justify-content: center;
+/* CSS for filterReservations section */
+.filterReservations {
+    background-color: rgba(16, 16, 16, 0.79);
+
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #8a2e2e;
+    border-radius: 5px;
+    width: 30%;
     align-items: center;
+}
+.filterReservations button{
+    background-color: darkred;
+}
+
+.filterReservations label {
+    align-items: center;
+}
+
+.filterReservations form {
+    align-items: center;
+}
+
+* {
+    align-items: center;
+}
+
+.filterReservations label {
+    margin-right: 10px;
+    padding: 0px;
+}
+
+.filterReservations.input :hover {
+    background-color: blanchedalmond;
+}
+*{
+    color: white;
+}
+body {
+    background-color: darkred;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
     background-image: url("../static/images/classroom.png");
     background-size: cover;
+}
+
+h2 {
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    margin: 30px 0 50px;
+    font-family: "Times New Roman", Times, serif;
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    margin: 20px 0;
+    background-color: darkred;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .content {
     padding: 20px;
     width: 80%;
     box-sizing: border-box;
+    background-color: rgba(16, 16, 16, 0.79);
 }
 
 ul {
@@ -24,79 +82,105 @@ ul li {
     margin-bottom: 10px;
 }
 
-button {
+button.edit-report-button {
+    align-self: flex-start;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    border-color: aquamarine;
+    background-color: darkblue;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: left;
     margin-top: 20px;
-}
-
-body {
-    background-color: violet;
-}
-
-h3 {
-    background-color: aqua;
+    margin-bottom: 20px;
+    border: none;
+    position: left;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .box {
-    vertical-align: auto;
-    height: 500px;
-    border: 5px solid black;
-    border-color: purple;
-    /* For a scrollable box when wieving the classes reservations */
-    overflow-y: scroll;
 
-}
-
-.filterReservations {
+    margin: 0 10% 50px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 50px;
 }
 
-.filterReservations form {
-    margin-top: 10px;
+button#it-staff-button {
+    margin: 20px auto;
+    display: block;
+    max-width: 400px;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    color: blue;
+    border-color: aquamarine;
+    background-color: rgba(16, 16, 16, 0.041);
+    border-radius: 5px;
+    padding: 20px;
+    width: 400px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
+#it-staff-button:hover {
+    background-color: #ff8692;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
 
-/* CSS for filterReservations section */
+.edit-report-button.button:hover {
+    background-color: #ff8692;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+form button {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #ab6da7;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    background-color: darkblue;
+    align-items: center;
+}
+
+form button:hover {
+    background-color: #ff8692;
+    transform: scale(1.05);
+}
+
+.reservation_edit {
+    align-items: center;
+}
+
 .filterReservations {
-    background-color: #ffa3cc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #8a2e2e;
     border-radius: 5px;
     width: 30%;
-}
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
 
-.filterReservations form {
-    display: inline-block;
-}
-
-.filterReservations label {
-    margin-right: 10px;
-    padding: 0px;
-}
-
-.filterReservations.input :hover {
-    background-color: blanchedalmond;
-}
-
-.filterReservations input[type="radio"]:checked+label {
-    animation: flashGreen 3s infinite;
-}
-
-.filterReservations input[type="radio"]+label {
-    background-color: red;
-}
-
-@keyframes flashGreen {
-    0% {
-        background-color: green;
-    }
-
-    50% {
-        background-color: rgb(141, 233, 141);
-    }
-
-    100% {
-        background-color: green;
-    }
 }
