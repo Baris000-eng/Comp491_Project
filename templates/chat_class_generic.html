@@ -13,10 +13,10 @@
     <h1> Chat for: {{ class_room_no }} </h1>
     <div id="chat-history">
         {% for row in rows %}
-
-        <p class="p1">{{row[3]}} :{{row[4]}}
-        </p>
+        {% if row[3] and row[4]%}
+        <p class="p1">{{row[3]}}: {{row[4]}}</p>
         <br>
+        {% endif %}
         {% endfor %}
     </div>
 

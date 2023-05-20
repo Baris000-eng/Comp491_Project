@@ -1,5 +1,5 @@
 Reservation System
-    1- Exam and course conflict.
+    1- Exam and course conflict.  
     2-duration limitleme (change start time and duration)
     3- Reservation deletion periodically
     4-Reservation count by looking at total reservations

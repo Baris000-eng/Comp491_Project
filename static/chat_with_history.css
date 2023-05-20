@@ -1,74 +1,77 @@
 body {
-    background-color: #e5e5e5;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
-  h1 {
-    background-color: #075e54;
-    color: #fff;
-    padding: 20px;
-    margin: 0;
-    text-align: center;
-  }
-  
-  #chat-history {
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    max-width: 800px;
-    padding: 20px;
-  }
-  
-  
-  p{
-    background-color: #c9eb5a;
-    border-radius: 5px;
-    padding: 10px;
-  }
-  
-  
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  #messages {
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    max-width: 800px;
-    padding: 20px;
-  }
-  
-  form {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  input[type="text"] {
-    border: none;
-    border-radius: 30px;
-    padding: 10px 20px;
-    width: 400px;
-    margin-right: 10px;
-  }
-  
-  button {
-    background-color: #075e54;
-    border: none;
-    border-radius: 30px;
-    color: #fff;
-    cursor: pointer;
-    padding: 10px 20px;
-  }
-  
-  button:hover {
-    background-color: #128c7e;
-  }
-  
+  background-color: #e5e5e5;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  background-color: #075e54;
+  color: #fff;
+  padding: 20px;
+  margin: 0;
+  text-align: center;
+}
+
+#chat-history {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  height: 400;
+
+  max-width: 800px;
+  overflow-y: scroll;
+  padding: 20px;
+
+}
+
+
+p {
+  background-color: #c9eb5a;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#messages {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 20px;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+input[type="text"] {
+  border: none;
+  border-radius: 30px;
+  padding: 10px 20px;
+  width: 400px;
+  margin-right: 10px;
+}
+
+button {
+  background-color: #075e54;
+  border: none;
+  border-radius: 30px;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+button:hover {
+  background-color: #128c7e;
+}

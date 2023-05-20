@@ -61,21 +61,6 @@ def insert_news_to_newsdb(news_message, time, date, time_end, date_end, sender, 
     conn.close()
 
 
-def delete_chat_messages():
-    conn = sqlite3.connect('chat_db.db')
-    c = conn.cursor()
-
-    c.execute("SELECT COUNT(*) FROM chat_db")
-    count = c.fetchone()[0]
-
-    if count > 10:
-        c.execute("DELETE FROM chat_db")
-        print("Deleted all chat messages.")
-
-    conn.commit()
-    conn.close()
-
-
 def getAllITReports():
     conn = sqlite3.connect('IT_Report_logdb.db')
     c = conn.cursor()
