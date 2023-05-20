@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../static/student_reservation.css">
     <script type="text/javascript" src="../static/student_reservation_screen.js"></script>
 </head>
-<div class="card" id="reservationForm">
+<div class="card" class="reservationFo">
     <form action="/reserve_class" method="POST" style="text-align:center;">
         <h2>Student Class Reservation Screen</h2>
         {% if 'class_code' in request.args %}
