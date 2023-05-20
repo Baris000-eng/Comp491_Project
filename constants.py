@@ -62,3 +62,5 @@ FilterOperations = {
     "projector_num": "=",
     "room_type": "like"
 }
+
+VacancyCheckRequirements = ["date", "start_time", "duration"]
