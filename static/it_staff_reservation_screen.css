@@ -83,13 +83,26 @@ label input[type="radio"] {
   justify-content: center;
 }
 
-#error-messages{
-  text-align: center;
-  justify-content:center;
-  color: black;
-  background-color:lightpink;
-  font-weight: bold;
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.error-messages {
+  text-align: center;
+  color: black;
+  background-color: lightgreen;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+
+
+
+
 
 
 

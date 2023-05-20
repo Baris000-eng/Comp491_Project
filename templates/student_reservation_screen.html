@@ -67,6 +67,7 @@
 {% endif %}
 {% endif %}
 
+<div class="error-container">
 <div class="error-messages">
     {% if reservation_already_happened %}
     <p>{{ reservation_already_happened }}</p>
@@ -77,6 +78,7 @@
     {% if time_interval_conflict %}
     <p>{{ time_interval_conflict }}</p>
     {% endif %}
+</div>
 </div>
 
 </body>
