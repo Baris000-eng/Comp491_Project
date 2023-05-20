@@ -148,10 +148,9 @@ app.route('/seeTheUsers',
           methods=['GET'])(US.seeTheUsers)
 
 
-@app.route('/editUser', methods=['GET'])
-def editUser():
-    username = request.args.get('username')
-    return US.editUser(username=username)
+@app.route('/getUserEditingScreenForAdmin', methods=['GET'])
+def getUserEditingScreenForAdmin():
+    return US.getUserEditingScreenForAdmin()
 
 
 app.route('/seeTheReservations',
@@ -235,6 +234,13 @@ app.route("/seeReservationStatistics")(RS.get_reservation_statistics_screen)
 app.route("/seeUserStatistics")(US.open_user_statistics_screen)
 app.route('/successfulUpdateOfITReport')(US.successfulUpdateOfITReport)
 app.route('/successfulUpdateOfReservation')(RS.successfulUpdateOfReservation)
+
+
+app.route("/deleteUser", methods=["POST"])(US.deleteUser)
+app.route("/updateUserInformation", methods=["POST"])(US.updateUserInformation)
+
+app.route("/successfulDeletionOfUser")(US.successfulDeletionOfUser)
+app.route("/successfulUpdateOfUserInformation")(US.successfulUpdateOfUserInformation)
 
 
 ######################this gets ip address of the device #####################

@@ -477,15 +477,45 @@ def updateITReport():
     else:
         return render_template('editITReport.html')
 
+def updateUserInformation():
+    if request.method == 'POST':
+        user_id = request.form['user_id']
+        username = request.form['username']
+        user_password = request.form['user_password']
+        user_email = request.form['user_email']
+        user_role = request.form['user_role']
+        user_priority = request.form['user_priority']
+        
+        UR.updateUserInformation(user_id, username, user_password, user_email, user_role, user_priority)
+        
+        return redirect(url_for('successfulUpdateOfUserInformation'))
+    else:
+        return render_template('admin_edits_users.html')
 
+
+def deleteUser():
+    if request.method == 'POST':
+        username = request.form["username"]
+        user_password = request.form["user_password"]
+        user_email = request.form["user_email"]
+        user_role = request.form["user_role"]
+        user_priority = request.form["user_priority"]
+        user_id = request.form["user_id"]
+        
+        UR.deleteUser(username, user_password, user_email, user_role, user_priority,user_id)
+        return redirect(url_for('successfulDeletionOfUser'))
+    else:
+        return render_template('admin_edits_users.html')
+    
 
 def seeTheUsers():
-    usernames = UR.getAllUsernames()
-    return render_template('admin_pages/admin_see_users.html', usernames=usernames)
+    users = UR.getAllUsers()
+    return render_template('admin_pages/admin_see_users.html', users=users)
 
 
-def editUser(username):
-    return render_template('edit_users.html', username=username)
+def getUserEditingScreenForAdmin():
+    user = request.args.get('row_data').split(',')
+    return render_template('admin_edits_users.html', user=user)
 
 
 def editITReport():
@@ -657,6 +687,12 @@ def open_user_statistics_screen():
 
 def successfulUpdateOfITReport():
     return render_template('successfulUpdateOfITReport.html')
+
+def successfulUpdateOfUserInformation():
+    return render_template("successfulUserUpdate.html")
+
+def successfulDeletionOfUser():
+    return render_template("successfulDeletionOfUser.html")
 
 
 def clearMessages():

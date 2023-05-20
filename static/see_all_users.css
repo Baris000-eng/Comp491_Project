@@ -1,74 +1,71 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    background-color: goldenrod;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: goldenrod;
+  margin: 0;
+  padding: 20px;
+}
+
+body:hover {
+  background-color: aquamarine;
+  background-image: url("../static/images/classroom.png");
+  background-size: cover;
+}
+
+h1 {
+  text-align: center;
+  color: black;
+  background-color: lightseagreen;
+  margin-bottom: 20px;
+}
+
+.users {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.users th,
+.users td {
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 2px solid #000;
+  border-right: 2px solid #000;
+}
+
+.users th {
+  background-color: yellow;
+  color: black;
+  border-bottom-width: 2px;
+}
+
+.users td {
+  background-color: lightblue;
+  color: black;
+}
+
+.users td:hover {
+  background-color: darkblue;
+  color: white;
+  cursor: pointer;
+}
+
+.users td:last-child {
+  border-right: none;
+}
+
+@media screen and (max-width: 600px) {
+  .users {
+    font-size: 14px;
   }
 
-  body:hover {
-    background-color: aquamarine;
-    background-image: url("../static/images/classroom.png");
-    background-size: cover;
+  .users th,
+  .users td {
+    padding: 8px 10px;
   }
-  
-  h1 {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 36px;
-    font-weight: bold;
-    color: #3366ff;
-  }
-  
-  ul {
-    list-style: none;
-    margin-top: 30px;
-  }
-  
-  li {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    border: 2px solid #3366ff;
-    border-top-color: #ff6600;
-    border-left-color: #ff6600;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  li button {
-    background-color: #3366ff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-  
-  li:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px);
-    background-color: #ccebff;
-    border-color: #ff6600;
-  }
-  
-  li:hover button {
-    background-color: #ff6600;
-  }
-  
-  @media screen and (max-width: 768px) {
-    li {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    li button {
-      margin-top: 10px;
-    }
-  }
-  
+}

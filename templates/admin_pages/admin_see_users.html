@@ -6,21 +6,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/see_all_users.css">
-    <title>SeeUsers</title>
+    <title>Admin See Users</title>
 </head>
 
-<h1>All Users</h1>
+<body>
+    <h1>All Users</h1>
 
-<ul>
-    {% for username in usernames %}
-
-    <form method="GET" action="/editUser">
-        <li>{{ username }} <button type="submit">Edit User</button></li>
-    </form>
-
-    {% endfor %}
-</ul>
-</body>
+    <table class="users">
+        <thead>
+            <tr>
+                <th>User Id</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Priority</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user[0] }}</td>
+                <td>{{ user[1] }}</td>
+                <td>{{ user[2] }}</td>
+                <td>{{ user[3] }}</td>
+                <td>{{ user[4] }}</td>
+                <td>{{ user[5] }}</td>
+                <td>
+                    <form action="/getUserEditingScreenForAdmin" method="GET">
+                      <input
+                        type="hidden"
+                        name="row_data"
+                        value="{{ user|join(',') }}"
+                      />
+                      <button>Edit User Information</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 
 </html>

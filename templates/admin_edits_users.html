@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width= initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../static/editReservations.css"/>
+    <script src="../static/adminEditUsers.js"></script>
+    <title>Admin Edit Users</title>
+  </head>
+
+  <body>
+    <h1>User Information</h1>
+    <form action="/updateUserInformation" method="POST">
+      <ul>
+        <li>
+          <label for="user_id">User Id:</label>
+          <input
+            type="text"
+            id="user_id"
+            name="user_id"
+            value="{{ user[0] }}"
+            readonly
+          />
+        </li>
+        <li>
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" value="{{ user[1] }}" />
+          <button
+            class="save_field_button"
+            type="button"
+            onclick="makeNonEditable('username')"
+          >
+            Save
+          </button>
+        </li>
+        <li>
+          <label for="user_password">Password:</label>
+          <input type="text" id="user_password" name="user_password" value="{{ user[2] }}" />
+          <button
+            class="save_field_button"
+            type="button"
+            onclick="makeNonEditable('user_password')">
+            Save
+          </button>
+        </li>
+        <li>
+          <label for="user_email">User Email:</label>
+          <input type="text" id="user_email" name="user_email" value="{{ user[3] }}" />
+          <button
+            class="save_field_button"
+            type="button"
+            onclick="makeNonEditable('user_email')"
+          >
+            Save
+          </button>
+        </li>
+        <li>
+          <label for="user_role">User Role:</label>
+          <input type="text" id="user_role" name="user_role" value="{{ user[4] }}" />
+          <button
+            class="save_field_button"
+            type="button"
+            onclick="makeNonEditable('user_role')"
+          >
+            Save
+          </button>
+        </li>
+        <li>
+            <label for="user_priority">User Priority:</label>
+            <input type="text" id="user_priority" name="user_priority" value="{{ user[5] }}" />
+            <button
+              class="save_field_button"
+              type="button"
+              onclick="makeNonEditable('user_priority')"
+            >
+              Save
+            </button>
+          </li>
+        </ul>
+      <button class="save_user_information" type="submit">
+        Click here to save the edited user information
+      </button>
+    </form>
+    <form action="/deleteUser" method="POST">
+      <input type="hidden" name="user_id" value="{{ user[0] }}" />
+      <input type="hidden" name="username" value="{{ user[1] }}" />
+      <input type="hidden" name="user_password" value="{{ user[2] }}" />
+      <input type="hidden" name="user_email" value="{{ user[3] }}" />
+      <input type="hidden" name="user_role" value="{{ user[4] }}" />
+      <input type="hidden" name="user_priority" value="{{ user[5] }}" />
+      <button class="delete_user" type="submit">
+        Click here to delete the user
+      </button>
+    </form>
+  </body>
+</html>
