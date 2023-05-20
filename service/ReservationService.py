@@ -58,7 +58,7 @@ def reserve_class():
         elif existing_reservation:
             another_user_reserved = "Reservation failed: slot already reserved by another user."
             return render_template(role + "_reservation_screen.html", another_user_reserved=another_user_reserved, options=classroom_code_options)
-        elif RR.check_time_interval_conflict(date, start_time, end_time, class_code):
+        elif RR.check_time_interval_conflict(date,start_time, end_time, class_code):
             time_interval_conflict = "Reservation failed! The time interval coincides with another reservation."
             return render_template(role + "_reservation_screen.html",
                                 time_interval_conflict=time_interval_conflict,

@@ -1,6 +1,7 @@
 import sqlite3
 import datetime
 from constants import DB
+import datetime
 
 DEBUG = False
 
@@ -92,13 +93,8 @@ def reservedClassroomsByInterval(start_date, start_time, duration):
 
     return classrooms
 
-def check_time_interval_conflict(date, start_time, end_time, class_code):
-   
-    with sqlite3.connect('reservations_db.db') as conn:
-        c = conn.cursor()
 
-        c.execute('''SELECT * FROM reservations_db WHERE date=? AND classroom=?''', (date, class_code))
-        existing_reservations = c.fetchall()
+def check_time_interval_conflict(date, start_time, end_time, class_code):
         start_time_upper = start_time.upper()
         end_time_upper = end_time.upper()
 
@@ -110,21 +106,16 @@ def check_time_interval_conflict(date, start_time, end_time, class_code):
 
        # Call reservedClassroomsByInterval
         occupied_classrooms = reservedClassroomsByInterval(date, start_time_upper, duration_in_minutes)
-        print(occupied_classrooms)
 
-        new_start_time = datetime.datetime.strptime(start_time, "%H:%M") ### string to datetime
-        new_end_time = datetime.datetime.strptime(end_time, "%H:%M") ### string to datetime
+        occupied_class_names = list()
+        for occupied_class_tuple in occupied_classrooms:
+            name_of_occupied_class = occupied_class_tuple[0]
+            occupied_class_names.append(name_of_occupied_class)
 
-        for reservation in existing_reservations: ######iterate through all existing reservations####
-            existing_start_time = datetime.datetime.strptime(reservation[3], "%H:%M")
-            existing_end_time = datetime.datetime.strptime(reservation[4], "%H:%M")
+        if class_code in occupied_class_names:
+            return True
+        else:
+            return False
+    
+             
 
-            if (
-                (existing_start_time <= new_start_time and new_start_time <= existing_end_time) or
-                (existing_start_time <= new_end_time and new_end_time <= existing_end_time) or
-                (new_start_time <= existing_start_time and existing_start_time <= new_end_time) or
-                (new_start_time <= existing_end_time and existing_end_time <= new_end_time)
-            ):
-                return True
-
-        return False
