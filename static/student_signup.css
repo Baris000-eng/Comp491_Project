@@ -6,7 +6,9 @@ body {
     background-color: rgb(0, 255, 238);
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 100px;
-
+    background-image: url("../static/images/student_login.png");
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -16,7 +18,7 @@ h1 {
     margin-bottom: 60px;
     text-shadow: 2px 2px #888888;
     color: #333;
-    background-color: green;
+    background-color: blue;
     border: 10px;
     border-radius: 10px;
     padding: 20px;
@@ -148,18 +150,14 @@ button {
     display: block;
     margin: 0 auto;
     padding: 10px 20px;
-    background-color: #4caf50;
+    background-color: blue;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin-bottom: 20px;
 }
-button{
-    background-color: blue;
-}
-h1{
-    background-color: blue;
-}
+
 button:hover {
     background-color: red;
     transform: scale(1.15);
@@ -253,14 +251,6 @@ input[type="email"]:focus {
     border-radius: 10px;
 }
 
-h1 {
-    text-align: center;
-}
-
-button {
-    margin-bottom: 20px;
-}
-
 form {
     display: flex;
     flex-direction: column;
@@ -270,6 +260,7 @@ form {
     padding: 20px;
     width: 100%;
     max-width: 750px;
+    background-color: aquamarine;  
     margin: 0;
 }
 
@@ -387,9 +378,9 @@ input[type="submit"]:hover {
 }
 
 #roles input[type="radio"]:checked+img {
-    transform: scale(1.4) translateY(-20%);
+    transform: scale(1.25) translateY(-20%);
     border: 20px 40px 40px 40px solid green;
-    transform: scale(1.4) translateY(-20%);
+    transform: scale(1.25) translateY(-20%);
 }
 
 .excel-wrapper {
@@ -495,59 +486,47 @@ input[type="submit"] {
 }
 
 .box {
-    border: 3px solid #000;
-    padding: 10px;
+    border: 2px solid #000;
+    padding: 5px;
     background-color: azure;
     float: right;
 }
 
 .red-label {
-    padding: 10px;
+    padding: 4px;
     background-color: #eb0000;
     color: white;
 }
 
-form box {
-    z-index: 9999;
-    border-color: black;
-    background-color: antiquewhite;
-}
-
 .green-label {
-    padding: 10px;
+    padding: 4px;
     background-color: #45a049;
     color: white;
 }
 
-form{
- background-color: aquamarine;   
-}
-
-body{
-    background-image: url("../static/images/student_login.png");
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-
-button{
-    background-color: blue;
-}
-h1{
-    background-color: blue;
-}
-
 form .box {
-    border: 3px solid #000;
-    padding: 10px;
+    border: 1px solid #000;
+    padding: 3px;
     background-color: rgb(255, 172, 220);
     float: right;
 }
 
 form label {
-    margin: 2px;
-  }
+    margin: 0.5px;
+}
+
+#lowercase-label{
+    font-size: 14px;
+}
+
+#uppercase-label{
+    font-size: 14px;
+}
+
+#letter-label{
+    font-size: 14px;
+}
+
+#length-label{
+    font-size: 14px;
+}
