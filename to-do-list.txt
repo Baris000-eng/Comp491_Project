@@ -1,0 +1,28 @@
+Reservation System
+    1- Exam and course conflict.
+    2-duration limitleme (change start time and duration)
+    3- Reservation deletion periodically
+    4-Reservation count by looking at total reservations
+    5- See reservations ui gelştirme
+    6- Reservation join, başkasının reservation una katılma
+    7- Reservation edit yok (adminde zaten var, studenta ekliycez)
+    8-Reserve a classroom yeşil buton var kaldırmak lazım
+    9-map te seçilen binaya göre search and filter edilmiş bi şekilde sınıfları görmea
+    10-exam search, sadece name ve class code a göre filterlama kalsın
+    11-student ta news count nerden gelirsen gel (redirect olursan ol) null olmasın, anlık count u göstersin
+    12
+Admin
+    1-histogram tiklere background
+    2-edit user password güncellerken hasle sonra koy
+Teacher
+    1-Reserve a classroom yeşil buton var kaldırmak lazım
+Other
+    1-All classroom images, and their captions
+    2-Siyah büyüme animasyonu kaldır
+    3-Opening screen sna sınıfı background
+    4-Kayan yıldızlar(student)
+    5-IT kayan bilgisayarlar (it dashboard)
+
+Chat 
+    3-her sınıf için ayrı up history
+    4-UI

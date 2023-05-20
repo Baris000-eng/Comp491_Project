@@ -7,6 +7,7 @@ from constants import DB
 from constants import UserModel
 import sqlite3
 
+
 def getAllUsers():
     conn = sqlite3.connect('users_db.db')
     c = conn.cursor()
@@ -15,12 +16,13 @@ def getAllUsers():
     conn.close()
     return users
 
+
 def updateITReport(report_no, room_name, faculty_name, problem_description, date, time):
     conn = sqlite3.connect("IT_Report_logdb.db")
     c = conn.cursor()
 
-    c.execute("UPDATE IT_Report_logdb SET room_name=?, faculty_name=?, problem_description=?, date=?, time=? WHERE it_report_no=?", 
-                (room_name, faculty_name, problem_description, date, time, report_no))
+    c.execute("UPDATE IT_Report_logdb SET room_name=?, faculty_name=?, problem_description=?, date=?, time=? WHERE it_report_no=?",
+              (room_name, faculty_name, problem_description, date, time, report_no))
 
     conn.commit()
     conn.close()
@@ -33,6 +35,7 @@ def getAllITReports():
     data = c.fetchall()
     conn.close()
     return data
+
 
 def delete_it_report_from_db(report_no, room_name, faculty_name, problem_description, date, time):
     conn = sqlite3.connect('IT_Report_logdb.db')
@@ -57,6 +60,7 @@ def insert_news_to_newsdb(news_message, time, date, time_end, date_end, sender, 
     conn.commit()
     conn.close()
 
+
 def delete_chat_messages():
     conn = sqlite3.connect('chat_db.db')
     c = conn.cursor()
@@ -71,14 +75,13 @@ def delete_chat_messages():
     conn.commit()
     conn.close()
 
+
 def getAllITReports():
     conn = sqlite3.connect('IT_Report_logdb.db')
     c = conn.cursor()
     c.execute('SELECT * FROM IT_Report_logdb')
     rows = c.fetchall()
     return rows
-    
-
 
 
 def getAllUsernames():
@@ -88,6 +91,7 @@ def getAllUsernames():
     usernames = [row[0] for row in c.fetchall()]
     conn.close()
     return usernames
+
 
 def initializeUserTables():
     conn = sqlite3.connect(DB.users + '.db')
@@ -126,9 +130,6 @@ def createITReport(room_name, faculty_name, problem_description, date, time):
              VALUES (?, ?, ?, ?, ?)''', (room_name, faculty_name, problem_description, date, time))
     conn.commit()
     conn.close()
-
-
-
 
 
 def initializeChatTable():
@@ -177,7 +178,6 @@ def getNewsCount():
     return news_count
 
 
-
 def createNews(news_message, time, date, time_end, date_end, sender, role):
     """
     Given a news_message, time, date, time_end, date_end, sender, role insert new news message into the news_db database
@@ -218,9 +218,6 @@ def createChat(classroom, time, date, sender, role, flagged):
 
     conn.commit()
     conn.close()
-
-
-
 
 
 def createUser(username: str, password: str, email: str, role: str, priority: int):
@@ -353,26 +350,24 @@ def change_user_password(email: str, password: str):
     conn.commit()
     conn.close()
 
-def deleteUser(username, user_password, user_email, user_role, user_priority, user_id):
+
+def deleteUser(username, user_email, user_role, user_priority, user_id):
     conn = sqlite3.connect(f'{DB.users}.db')
     c = conn.cursor()
 
-    c.execute(f"DELETE FROM {DB.users} WHERE username=? AND password=? AND email=? AND role=? AND priority=? AND id=?", (username, user_password, user_email, user_role, user_priority,user_id))
+    c.execute(f"DELETE FROM {DB.users} WHERE username=? AND email=? AND role=? AND priority=? AND id=?",
+              (username, user_email, user_role, user_priority, user_id))
 
     conn.commit()
     conn.close()
 
 
-
-def updateUserInformation(user_id, username, user_password, user_email, user_role, user_priority):
+def updateUserInformation(user_id, username, user_email, user_role, user_priority):
     conn = sqlite3.connect(f'{DB.users}.db')
     c = conn.cursor()
 
-    c.execute(f"UPDATE {DB.users} SET username=?, password=?, email=?, role=?, priority=? WHERE id=?", 
-                (username, user_password, user_email, user_role, user_priority, user_id))
+    c.execute(f"UPDATE {DB.users} SET username=?, email=?, role=?, priority=? WHERE id=?",
+              (username, user_email, user_role, user_priority, user_id))
 
     conn.commit()
     conn.close()
-
-
-
