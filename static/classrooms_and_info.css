@@ -22,8 +22,7 @@ body {
     border-radius: 10px;
     padding: 20px;
     color: white;
-    filter: brightness(1.2) saturate(1.5);
-    transition: box-shadow 0.3s ease-in-out;
+    filter: brightness(1.1) saturate(1.5);
     top: 10;
     left: 0;
     right: 0;
@@ -280,7 +279,6 @@ body {
     color: white;
     background-color: blue;
     cursor: pointer;
-    transition: background-color 0.2s ease;
   }
   
   #description-button:hover,
@@ -306,7 +304,6 @@ body {
     border: 2px solid #f5c6cb;
     padding: 10px;
     border-radius: 5px;
-    transition: transform 0.3s ease-in-out;
   }
   
   #error-message:hover {
@@ -322,7 +319,6 @@ body {
     border: 2px solid #f5c6cb;
     padding: 10px;
     border-radius: 5px;
-    transition: transform 0.3s ease-in-out;
   }
   
   .error-message:hover {
@@ -370,7 +366,6 @@ body {
     margin-left: 40px;
     margin-top: 40px;
     width: 80px;
-    transition: all 0.3s ease-in-out;
   }
   
   #roles label:hover img {

@@ -69,7 +69,6 @@ button[type="submit"] {
   margin-top: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
-  transition: background-color 0.2s ease-in-out;
 }
 
 button[type="button"]:hover,

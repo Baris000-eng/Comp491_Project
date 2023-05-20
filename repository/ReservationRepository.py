@@ -1,4 +1,5 @@
 import sqlite3
+import datetime
 from constants import DB
 
 DEBUG = False
@@ -90,3 +91,40 @@ def reservedClassroomsByInterval(start_date, start_time, duration):
     conn.close()
 
     return classrooms
+
+def check_time_interval_conflict(date, start_time, end_time, class_code):
+   
+    with sqlite3.connect('reservations_db.db') as conn:
+        c = conn.cursor()
+
+        c.execute('''SELECT * FROM reservations_db WHERE date=? AND classroom=?''', (date, class_code))
+        existing_reservations = c.fetchall()
+        start_time_upper = start_time.upper()
+        end_time_upper = end_time.upper()
+
+        # Calculate duration in minutes
+        start_datetime = datetime.datetime.strptime(start_time_upper, "%H:%M")
+        end_datetime = datetime.datetime.strptime(end_time_upper, "%H:%M")
+        duration = end_datetime - start_datetime
+        duration_in_minutes = duration.total_seconds() // 60
+
+       # Call reservedClassroomsByInterval
+        occupied_classrooms = reservedClassroomsByInterval(date, start_time_upper, duration_in_minutes)
+        print(occupied_classrooms)
+
+        new_start_time = datetime.datetime.strptime(start_time, "%H:%M") ### string to datetime
+        new_end_time = datetime.datetime.strptime(end_time, "%H:%M") ### string to datetime
+
+        for reservation in existing_reservations: ######iterate through all existing reservations####
+            existing_start_time = datetime.datetime.strptime(reservation[3], "%H:%M")
+            existing_end_time = datetime.datetime.strptime(reservation[4], "%H:%M")
+
+            if (
+                (existing_start_time <= new_start_time and new_start_time <= existing_end_time) or
+                (existing_start_time <= new_end_time and new_end_time <= existing_end_time) or
+                (new_start_time <= existing_start_time and existing_start_time <= new_end_time) or
+                (new_start_time <= existing_end_time and existing_end_time <= new_end_time)
+            ):
+                return True
+
+        return False

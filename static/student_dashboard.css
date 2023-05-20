@@ -158,7 +158,6 @@ button {
   background-color: red;
   color: white;
   transform: scale(1.05);
-  transition: transform 0.3s ease-in-out;
 }
 
 button {
@@ -171,18 +170,10 @@ button {
   box-shadow: #00ff62;
 }
 
-
-#hover_effect {
-  transition: transform 5s;
-}
-
 #hover_effect:hover {
   transform: scale(1.1);
 }
 
-.buttons button {
-  transition: transform 3s;
-}
 
 .buttons button:hover {
   transform: scale(1.1);

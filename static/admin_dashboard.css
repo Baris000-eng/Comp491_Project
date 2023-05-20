@@ -76,8 +76,7 @@ button:hover {
     margin-bottom: 10px;
     background-color: purple;
     color: white;
-    transform: scale(1.30);
-    transition: transform 0.3s ease-in-out;
+    transform: scale(1.25);
 }
 
 

@@ -38,7 +38,6 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
 }
 
 button:hover {
@@ -69,7 +68,6 @@ h1 {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
   margin-top: 30px;
 }
 

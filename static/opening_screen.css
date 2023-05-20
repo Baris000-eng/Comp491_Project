@@ -33,7 +33,6 @@ h1 {
   padding: 20px;
   color: white;
   filter: brightness(1.2) saturate(1.5);
-  transition: box-shadow 0.3s ease-in-out;
   text-align: center;
   top: 10;
   left: 0;
@@ -100,7 +99,6 @@ input[type="submit"] {
   cursor: pointer;
   align-items: center;
   font-size: 20px;
-  transition: background-color 0.3s;
   font-family: inherit;
   text-transform: uppercase;
   border-bottom: 10px;
@@ -198,7 +196,6 @@ input[type="submit"] {
   color: white;
   background-color: #a28f9d;
   cursor: pointer;
-  transition: background-color 0.2s ease;
 }
 
 #description-button:hover,
@@ -244,7 +241,6 @@ input[type="button"]:hover {
   margin-left: 40px;
   margin-top: 40px;
   width: 80px;
-  transition: all 0.3s ease-in-out;
 }
 
 #roles label:hover img {
