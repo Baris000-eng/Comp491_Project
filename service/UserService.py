@@ -550,54 +550,48 @@ def it_report_statistics_for_admin():
 
 
 def enterChat():
+
+    row_data = request.args.get('row_data')
+    array = row_data.split(",")
+    class_no = request.args.get("classroom")
     conn = sqlite3.connect('chat_db.db')
     c = conn.cursor()
-    # Retrieve all the rows from the reservations_db table
-    # where classroom = "' + \    session["classroom"] + '"'
-    query1 = 'SELECT * FROM chat_db'
+    query1 = f'SELECT * FROM chat_db WHERE classroom = "{class_no}"'
+
     c.execute(query1)
     data = c.fetchall()
-    # Close the database connection
     conn.close()
-    # Retrieve the classroom parameter
-    session["classroom"] = request.args.get('classroom')
-
-    return render_template('chat_class_generic.html', rows=data)
+    return render_template('chat_class_generic.html', rows=data, class_room_no=class_no)
 
 
-def delete_old_chat_messages():
-    UR.delete_chat_messages()
+
 
 
 def send_chat_message_student():
-    classroom = session['classroom']
     time = str(datetime.datetime.now().time())
     date = str(datetime.date.today())
     sender = session['username']
-    role = session['role']
-    flagged = False
+
     message = request.args.get('message')
-    session['message'] = message
-    message = request.args.get('message')
-    classroom = message
+    class_no = request.args.get("class_no")
     conn = sqlite3.connect('chat_db.db')
     c = conn.cursor()
 
-    c.execute("INSERT INTO chat_db (classroom, time, date, sender, role, flagged) VALUES (?, ?, ?, ?, ?, ?)",
-              (classroom, time, date, sender, role, flagged))
+    c.execute("INSERT INTO chat_db (classroom, time, date, sender, message) VALUES (?, ?, ?, ?, ?)",
+              (class_no, time, date, sender, message))
 
     conn.commit()
     conn.close()
 
     conn = sqlite3.connect('chat_db.db')
     c = conn.cursor()
-    query1 = 'SELECT * FROM chat_db'
+    query1 = f'SELECT * FROM chat_db WHERE classroom = "{class_no}"'
     c.execute(query1)
     data = c.fetchall()
     data.append(('classroom', session["classroom"]))
-
+    class_no = session['classroom']
     conn.close()
-    return render_template('chat_class_generic.html', rows=data, class_data=classroom, user_name=session["username"], message=message)
+    return render_template('chat_class_generic.html', rows=data, class_room_no=class_no, user_name=session["username"], message=message)
 
 
 def myExamsOnly():

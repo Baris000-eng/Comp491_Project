@@ -9,14 +9,15 @@
     <link rel="stylesheet" type="text/css" href="../static/student_reservation.css">
     <script type="text/javascript" src="../static/student_reservation_screen.js"></script>
 </head>
+<h2>Teacher Class Reservation Screen</h2>
 <div class="card" id="reservationForm">
     <form action="/reserve_class" method="POST" style="text-align:center;">
-        <h2>Teacher Class Reservation Screen</h2>
+
         {% if 'class_code' in request.args %}
-        <label for="">Class Code:</label>&nbsp;<input type="text" name="class-code"
+        <label for="">Class Code:</label><input type="text" name="class-code"
             value="{{ request.args['class_code'] }}" readonly>
         {% else %}
-        <label for="">Select your class from dropdown class list:</label>&nbsp;<div class="combo-box">
+        <label for="">Select your class from dropdown class list:</label><div class="combo-box">
             <select id="class-selector" name="class-code">
                 {% for option in options %}
                 <option value="{{ option }}">{{option }}</option>
@@ -42,36 +43,32 @@
         </label>
         <label>
             <input type="radio" name="option" value="exam">
-           I want to reserve for an exam.
+            I want to reserve for an exam.
         </label>
         <br>
         <button type="submit" id="submit-btn">Click to Submit Reservation</button>
     </form>
-</div>
-
-{% if 'role' in session %}
-{% if session['role'] == 'teacher' %}
-<form action="teacher/dashboard">
-    <div class="button-container">
-    <button id="goToTeacherDashboardButton">Go To Teacher Dashboard</button>
-    </div>
-</form>
-{% elif session['role'] == 'it_staff' %}
-<form action="it_staff/dashboard">
-    <div class="button-container">
-    <button id="goToItStaffDashboardButton">Go To IT Staff Dashboard</button>
-    </div>
-</form>
-{% elif session['role'] == 'student' %}
-<form action="student/dashboard">
-    <div class="button-container">
-    <button id="goToStudentDashboardButton">Go To Student Dashboard</button>
-    </div>
-</form>
-{% endif %}
-{% endif %}
-
-<div class="error-container">
+    {% if 'role' in session %}
+    {% if session['role'] == 'teacher' %}
+    <form action="teacher/dashboard">
+        <div class="button-container">
+            <button id="goToTeacherDashboardButton">Go To Teacher Dashboard</button>
+        </div>
+    </form>
+    {% elif session['role'] == 'it_staff' %}
+    <form action="it_staff/dashboard">
+        <div class="button-container">
+            <button id="goToItStaffDashboardButton">Go To IT Staff Dashboard</button>
+        </div>
+    </form>
+    {% elif session['role'] == 'student' %}
+    <form action="student/dashboard">
+        <div class="button-container">
+            <button id="goToStudentDashboardButton">Go To Student Dashboard</button>
+        </div>
+    </form>
+    {% endif %}
+    {% endif %}
     <div class="error-messages">
         {% if reservation_already_happened %}
         <p>{{ reservation_already_happened }}</p>
@@ -84,6 +81,12 @@
         {% endif %}
     </div>
 </div>
+
+
+
+
+
+
 
 </body>
 

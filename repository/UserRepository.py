@@ -141,8 +141,7 @@ def initializeChatTable():
               time TIME NOT NULL, 
               date DATE NOT NULL, 
               sender TEXT DEFAULT "NO_NAME_GIVEN", 
-              role TEXT NOT NULL,
-              flagged BOOLEAN NOT NULL)''')  # the flagged boolean helps keep tracking of reported chat actions
+              message TEXT )''')
 
 
 def initializeNewsTable():
@@ -206,15 +205,15 @@ def createNews(news_message, time, date, time_end, date_end, sender, role):
     conn.close()
 
 
-def createChat(classroom, time, date, sender, role, flagged):
+def createChat(classroom, time, date, sender, message):
     """
     Given a classroom, time, date, sender, role, flagged, insert new chat message into the chat database
     """
     conn = sqlite3.connect('chat_db.db')
     c = conn.cursor()
 
-    c.execute('''INSERT INTO chat_db (classroom, time, date, sender, role, flagged) 
-             VALUES (?, ?, ?, ?, ?, ?)''', (classroom, time, date, sender, role, flagged))
+    c.execute('''INSERT INTO chat_db (classroom, time, date, sender, message) 
+             VALUES (?, ?, ?, ?, ?)''', (classroom, time, date, sender, message))
 
     conn.commit()
     conn.close()

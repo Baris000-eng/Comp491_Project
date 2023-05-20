@@ -10,13 +10,12 @@
 </head>
 
 <body>
-    <h1> Chat for : {{class_data }} </h1>
+    <h1> Chat for: {{ class_room_no }} </h1>
     <div id="chat-history">
         {% for row in rows %}
-        <p class="p1">Date, time ** {{ row[2] }} {{ row[1] }} **</p>
-        <p class="p1">Sender : {{row[3]}}
+
+        <p class="p1">{{row[3]}} :{{row[4]}}
         </p>
-        <p class="p2"> Message :{{row[0]}}</p>
         <br>
         {% endfor %}
     </div>
@@ -24,6 +23,7 @@
     <ul id="messages"></ul>
     <div>
         <form action="/send_chat_message_student" method="get">
+            <input type="hidden" name="class_no" value="{{ class_room_no }}" />
             <input type="text" name="message" id="message">
             <button type="submit">Send message.</button>
         </form>

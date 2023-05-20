@@ -1,99 +1,74 @@
 body {
-    background-color: rgb(103, 185, 158);
+    background-color: #e5e5e5;
     font-family: Arial, sans-serif;
-    background-image: url("../static/images/classroom.png");
-    background-size: cover;
-
-}
-
-
-h1 {
-    font-size: 36px;
-    text-align: center;
-    margin-top: 20px;
-    background-color: chartreuse;
-}
-
-
-div {
-    background-color: #612d2d;
-    border: 1px solid #ccc;
-    margin: 20px auto;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    background-color: #075e54;
+    color: #fff;
     padding: 20px;
-    height: 100%;
-    height: auto;
-    width: 80%;
-    margin: auto;
-
-
-}
-
-
-h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-
-ul {
+    margin: 0;
+    text-align: center;
+  }
+  
+  #chat-history {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+  }
+  
+  
+  p{
+    background-color: #c9eb5a;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  
+  ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-}
-
-
-li {
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-
-
-li:first-child {
-    font-weight: bold;
-    background-color: aqua;
-}
-
-li:nth-child(2) {
-    font-weight: bold;
-    background-color: lightcoral;
-}
-
-li:nth-child(3) {
-    background-color: rgb(189, 5, 189);
-    font-style: italic;
-}
-
-
-li:last-child {
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-
-#chat-history {
-    overflow-y: scroll;
-    max-height: 300px;
-    scroll-behavior: smooth;
-}
-
-
-#chat-history p:hover {
-    background-color: green;
-    color: white;
-}
-
-.p1{
-    background-color: aqua;
-}
-
-.p2{
-    background-color: rgb(20, 173, 255);
-}
-
-#chat-history{
-    background-color: rgb(238, 99, 173);
-}
-
-br{
-    background-color: black;
-}
+  }
+  
+  #messages {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+    padding: 20px;
+  }
+  
+  form {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  input[type="text"] {
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    width: 400px;
+    margin-right: 10px;
+  }
+  
+  button {
+    background-color: #075e54;
+    border: none;
+    border-radius: 30px;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px 20px;
+  }
+  
+  button:hover {
+    background-color: #128c7e;
+  }
+  
