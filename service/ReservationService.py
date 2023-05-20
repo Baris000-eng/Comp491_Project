@@ -92,7 +92,9 @@ def reservedClassroomsByInterval(start_date, start_time, duration):
     :param start_time: String in the form of "HH:MM" that specifies the time of interest, ex: "18:45"
     :param duration: Integer that specifies the duration of interest IN MINUTES
     """
-    return RR.reservedClassroomsByInterval(start_date, start_time, duration)
+    codes_tuples = RR.reservedClassroomsByInterval(start_date, start_time, duration)
+    codes_list = [code[0] for code in codes_tuples] 
+    return codes_list
 
 
 def editClassroomReservations():

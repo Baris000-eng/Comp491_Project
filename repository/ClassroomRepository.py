@@ -120,7 +120,7 @@ def getQuery(criteria: dict, operations: dict={}):
 
 
     where_clause = f'{" and ".join(where_clauses)}'
-    query = f"SELECT * FROM {DB.classrooms} WHERE {where_clause}"
+    query = f"SELECT * FROM {DB.classrooms} WHERE {where_clause} ORDER BY code ASC"
     return query, parameter_list
 
 def getWhereClauseAndParamList(criterion: str, values: List, operation: str):
