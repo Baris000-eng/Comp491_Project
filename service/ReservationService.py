@@ -3,11 +3,35 @@ import sqlite3
 import random
 import string
 import pandas as pd
-
+import datetime
 import repository.ReservationRepository as RR
 import service.ClassroomService as CS
 
 DEBUG = True
+
+def check_time_interval_conflict(date, start_time, end_time, class_code):
+    with sqlite3.connect('reservations_db.db') as conn:
+        c = conn.cursor()
+
+        c.execute('''SELECT * FROM reservations_db WHERE date=? AND classroom=?''', (date, class_code))
+        existing_reservations = c.fetchall()
+
+        new_start_time = datetime.datetime.strptime(start_time, "%H:%M") ### string to datetime
+        new_end_time = datetime.datetime.strptime(end_time, "%H:%M") ### string to datetime
+
+        for reservation in existing_reservations:
+            existing_start_time = datetime.datetime.strptime(reservation[3], "%H:%M")
+            existing_end_time = datetime.datetime.strptime(reservation[4], "%H:%M")
+
+            if (
+                (existing_start_time <= new_start_time and new_start_time <= existing_end_time) or
+                (existing_start_time <= new_end_time and new_end_time <= existing_end_time) or
+                (new_start_time <= existing_start_time and existing_start_time <= new_end_time) or
+                (new_start_time <= existing_end_time and existing_end_time <= new_end_time)
+            ):
+                return True
+
+        return False
 
 def reserve_class():
     role = session["role"]
@@ -18,7 +42,7 @@ def reserve_class():
     option = request.form['option']
     classroom_code_options = CS.getAllClassroomCodes()
 
-    conn = sqlite3.connect(f'reservations_db.db')
+    conn = sqlite3.connect('reservations_db.db')
     c = conn.cursor()
 
     preference = str()
@@ -41,28 +65,36 @@ def reserve_class():
     c.execute('''SELECT * FROM reservations_db WHERE date=? AND start_time=? AND end_time = ? AND classroom=?''',
               (date, start_time, end_time, class_code))
     existing_reservation = c.fetchone()
-
     if existing_reservation and existing_reservation[8] < session['priority']:
         c.execute('''UPDATE reservations_db SET role=?, username=?, public_or_private=?, priority_reserved=?
-                    WHERE date=? AND start_time=? AND end_time=? AND classroom=? AND priority_reserved < ?''', (role, session["username"], preference, session['priority'], date, start_time, end_time, class_code, session['priority']))
+                    WHERE date=? AND start_time=? AND end_time=? AND classroom=? AND priority_reserved < ?''',
+                  (role, session["username"], preference, session['priority'], date, start_time, end_time, class_code, session['priority']))
         conn.commit()
         conn.close()
         return render_template("return_success_message_classroom_reserved.html")
     else:
-        if existing_reservation and existing_reservation[2] == date and existing_reservation[3] == start_time and existing_reservation[4] == end_time and existing_reservation[5] == session['username'] and existing_reservation[7] == class_code:
-            reservation_already_happened = "Reservation failed: you have already reserved this slot."
-            return render_template(role + "_reservation_screen.html", reservation_already_happened=reservation_already_happened, options=classroom_code_options)
-        elif existing_reservation:
-            another_user_reserved = "Reservation failed: slot already reserved by another user."
-            return render_template(role + "_reservation_screen.html", another_user_reserved=another_user_reserved, options=classroom_code_options)
-        else:
-            c.execute('''INSERT INTO reservations_db (role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', (role, date, start_time, end_time, session["username"], preference, class_code, session['priority']))
-            conn.commit()
-            conn.close()
-            return render_template("return_success_message_classroom_reserved.html")
-        
+        if existing_reservation:
+            another_user_reserved = "Reservation failed! This slot has already been reserved by another user."
+            return render_template(role + "_reservation_screen.html",
+                                   another_user_reserved=another_user_reserved,
+                                   options=classroom_code_options)
+        elif check_time_interval_conflict(date, start_time, end_time, class_code):
+            time_interval_conflict = "Reservation failed! The time interval coincides with another reservation."
+            return render_template(role + "_reservation_screen.html",
+                                time_interval_conflict=time_interval_conflict,
+                                options=classroom_code_options)
 
+        c.execute('''INSERT INTO reservations_db (role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', (role, date,start_time, end_time, session["username"], preference, class_code, session['priority']))
+
+    conn.commit()
+    conn.close()
+    return render_template("return_success_message_classroom_reserved.html")
+
+
+
+
+        
 def seeTheReservations():
     data = RR.getAllReservations()
     return render_template('admin_pages/see_the_reservations.html', reservations=data)

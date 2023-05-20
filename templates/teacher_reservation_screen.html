@@ -78,6 +78,9 @@
     {% if another_user_reserved %}
     <p>{{ another_user_reserved }}</p>
     {% endif %}
+    {% if time_interval_conflict %}
+    <p>{{ time_interval_conflict }}</p>
+    {% endif %}
 </div>
 
 </body>

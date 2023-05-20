@@ -83,6 +83,15 @@ label input[type="radio"] {
   justify-content: center;
 }
 
+#error-messages{
+  text-align: center;
+  justify-content:center;
+  color: black;
+  background-color:lightpink;
+  font-weight: bold;
+}
+
+
 
 
 
