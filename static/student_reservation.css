@@ -1,19 +1,48 @@
-body {
-  background-color: darkred;
-  color: #fff;
-  font-family: Arial, sans-serif;
-  background-image: url("../static/images/classroom.png");
-  background-size: cover;
-}
 
+
+.whitel{color: black;}
+
+label{
+  color:white;
+}
+input{
+  color: white;
+}
 .card {
-  width: 100%;
-  margin: auto;
-  padding: 40px;
-  background-color: darkred;
-  border-radius: 10px;
-  height: 100%;
-  box-shadow: 0px 0px 10px 0px #ccc;
+
+  background-color: #333;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #111;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+
+}
+body{
+    background-image: url("../static/images/classroom.png");
+
+}
+h2{
+
+  background-color: #333;
+  border-radius: 5px;
+
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+}
+option{
+  color:black;
+}
+.card2 {
+
+  background-color: #333;
+  border-radius: 5px;
+
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+
 }
 
 h2 {
@@ -77,8 +106,24 @@ label input[type="radio"] {
   display: flex;
   justify-content: center;
 }
-button{
+
+button {
   background-color: darkblue;
+}
+.error-container{
+    background-color: lightblue;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0px 0px 5px #111;
+    padding: 0px;
+    margin: 10px auto;
+    max-width: 800px;
+    font-size: 22px;
+  
+
+}
+.error-container label{
+  color: white;
 }
 
 #goToTeacherDashboardButton,
@@ -97,6 +142,15 @@ button{
   justify-content: center;
 }
 
-* {
-  color: white;
+h2{
+  font-family: Arial, sans-serif;
+  font-size: 3em;
+  color: #fff;
+  text-align: center;
+  background-color: #900;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #000;
+  margin: auto;
+  max-width: 800px;
 }
