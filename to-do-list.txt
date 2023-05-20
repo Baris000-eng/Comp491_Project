@@ -26,3 +26,7 @@ Other
 Chat 
     3-her sınıf için ayrı up history
     4-UI
+
+Notification
+    1-Sending reservation information and reservation code via email
+    2-send mail from admin to a single mail address (login signup)
