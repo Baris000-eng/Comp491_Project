@@ -11,6 +11,7 @@ import service.HistogramPlottingService as HPS
 import service.ReservationService as RS
 from flask_socketio import SocketIO, emit
 from flask import render_template
+import service.MailSendingService as MSS
 
 app = Flask(__name__)
 app.secret_key = '491'
@@ -241,6 +242,9 @@ app.route("/updateUserInformation", methods=["POST"])(US.updateUserInformation)
 
 app.route("/successfulDeletionOfUser")(US.successfulDeletionOfUser)
 app.route("/successfulUpdateOfUserInformation")(US.successfulUpdateOfUserInformation)
+
+app.route("/sendReservationInformationAsEmail", methods=["POST"])(MSS.sendReservationInformationAsEmail)
+app.route("/getReservationInformation")(MSS.getReservationInformation)
 
 
 ######################this gets ip address of the device #####################
