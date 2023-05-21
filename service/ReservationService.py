@@ -41,38 +41,6 @@ def reserve_class():
     elif option == "repair":
         preference = "Repair"
 
-    # conn = sqlite3.connect('reservations_db.db')
-    # c = conn.cursor()
-
-    # Retrieve existing reservation
-    # c.execute('''SELECT * FROM reservations_db WHERE date=? AND start_time=? AND end_time = ? AND classroom=?''',
-    #           (date, start_time, end_time, class_code))
-    # existing_reservation = c.fetchone()
-    # if existing_reservation and existing_reservation[8] < session['priority']:
-    #     c.execute('''UPDATE reservations_db SET role=?, username=?, public_or_private=?, priority_reserved=?
-    #                 WHERE date=? AND start_time=? AND end_time=? AND classroom=? AND priority_reserved < ?''',
-    #               (role, session["username"], preference, session['priority'], date, start_time, end_time, class_code, session['priority']))
-    #     conn.commit()
-    #     conn.close()
-    #     return render_template("return_success_message_classroom_reserved.html")
-    # else:
-    #     if existing_reservation and existing_reservation[2] == date and existing_reservation[3] == start_time and existing_reservation[4] == end_time and existing_reservation[5] == session['username'] and existing_reservation[7] == class_code:
-    #         reservation_already_happened = "Reservation failed: you have already reserved this slot."
-    #         return render_template(role + "_reservation_screen.html", reservation_already_happened=reservation_already_happened, options=classroom_code_options)
-    #     elif existing_reservation:
-    #         another_user_reserved = "Reservation failed: slot already reserved by another user."
-    #         return render_template(role + "_reservation_screen.html", another_user_reserved=another_user_reserved, options=classroom_code_options)
-    #     elif check_time_interval_conflict(date,start_time, end_time, class_code):
-    #         time_interval_conflict = "Reservation failed! The time interval coincides with another reservation."
-    #         return render_template(role + "_reservation_screen.html",
-    #                             time_interval_conflict=time_interval_conflict,
-    #                             options=classroom_code_options)
-
-        # c.execute('''INSERT INTO reservations_db (role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved)
-        # VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', (role, date,start_time, end_time, session["username"], preference, class_code, session['priority']))
-    # conn.commit()
-    # conn.close()
-
     username = session.get("username")
     priority = US.getPriorityByUsername(username)
 
@@ -80,8 +48,6 @@ def reserve_class():
 
     if is_valid:
         # Reserv is valid, create reservation
-        if DEBUG:
-            print(f"Reserv is valid, create reservation")
         RR.createReservation(role, date, start_time, end_time, username, preference, class_code, priority)
         return render_template("return_success_message_classroom_reserved.html")
     

@@ -72,15 +72,6 @@
 </div>
 <div class="error-container">
     <div class="error-messages">
-        {% if reservation_already_happened %}
-        <p>{{ reservation_already_happened }}</p>
-        {% endif %}
-        {% if another_user_reserved %}
-        <p>{{ another_user_reserved }}</p>
-        {% endif %}
-        {% if time_interval_conflict %}
-        <p>{{ time_interval_conflict }}</p>
-        {% endif %}
         {% if error_msg %}
         <p>{{ error_msg }}</p>
         {% endif %}

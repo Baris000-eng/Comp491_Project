@@ -69,4 +69,4 @@ class ReservationConstants:
     RESERVATION_UPPER_LIMIT = 180
     reservation_in_past_error = "This reservation is for the past!"
     reservation_too_long_error = f"The duration of a reservation cannot exceed {(RESERVATION_UPPER_LIMIT/60):.0f} hours"
-    reservation_conflicting_error = "There is another reservation that conflicts with your reservation intervals."
+    reservation_conflicting_error = "There is another reservation that conflicts with your reservation interval."
