@@ -6,7 +6,7 @@ from constants import ROLES
 from constants import DB
 from constants import UserModel
 import sqlite3
-
+   
 
 def getAllUsers():
     conn = sqlite3.connect('users_db.db')
@@ -48,6 +48,10 @@ def delete_it_report_from_db(report_no, room_name, faculty_name, problem_descrip
                  date = ? AND
                  time = ?''',
               (report_no, room_name, faculty_name, problem_description, date, time))
+    c.execute(f'''
+        UPDATE {DB.itReports}
+        SET it_report_no = (SELECT COUNT(*) FROM {DB.itReports} AS sub WHERE sub.it_report_no < {DB.itReports}.it_report_no) + 1
+    ''')
     conn.commit()
     conn.close()
 
@@ -349,7 +353,7 @@ def change_user_password(email: str, password: str):
               (encrypt_password(password), email))
     conn.commit()
     conn.close()
-
+   
 
 def deleteUser(username, user_email, user_role, user_priority, user_id):
     conn = sqlite3.connect(f'{DB.users}.db')
@@ -358,6 +362,10 @@ def deleteUser(username, user_email, user_role, user_priority, user_id):
     c.execute(f"DELETE FROM {DB.users} WHERE username=? AND email=? AND role=? AND priority=? AND id=?",
               (username, user_email, user_role, user_priority, user_id))
 
+    c.execute(f'''
+        UPDATE {DB.users}
+        SET id = (SELECT COUNT(*) FROM {DB.users} AS sub WHERE sub.id < {DB.users}.id) + 1
+    ''')
     conn.commit()
     conn.close()
 

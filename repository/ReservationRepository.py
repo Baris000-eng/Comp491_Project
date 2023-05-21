@@ -59,7 +59,6 @@ def getPriorityById(id):
     conn.close()
     return priority
 
-
 def updateReservation(role, date, start_time, end_time, username, reservation_purpose, reserved_classroom, priority_reserved, id):
     conn = sqlite3.connect(f'{DB.reservations}.db')
     c = conn.cursor()
@@ -85,6 +84,10 @@ def delete_reservation_from_db(role, date, start_time, end_time, username, publi
                  priority_reserved = ?''',
               (role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved))
 
+    c.execute(f'''
+        UPDATE {DB.reservations}
+        SET id = (SELECT COUNT(*) FROM {DB.reservations} AS sub WHERE sub.id < {DB.reservations}.id) + 1
+    ''')
     conn.commit()
     conn.close()
 
