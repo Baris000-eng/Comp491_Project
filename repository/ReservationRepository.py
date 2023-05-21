@@ -5,6 +5,9 @@ import datetime
 
 DEBUG = True
 
+def sendReservationCode():
+    return "Reservation Code Sent"
+
 def initializeReservationsTable():
     conn = sqlite3.connect(f'{DB.reservations}.db')
     c = conn.cursor()
