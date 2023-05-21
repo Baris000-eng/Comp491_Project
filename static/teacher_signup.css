@@ -162,7 +162,7 @@ button {
 
 button:hover {
     background-color: red;
-    transform: scale(1.15);
+    transform: scale(1.05);
     border-color: black;
 }
 
@@ -292,13 +292,13 @@ input[type="submit"] {
     background-color: #a600ff;
     border-color: blue;
     border-color: black;
-    transform: scale(1.35);
+    transform: scale(1.05);
 }
 
 input[type="button"]:hover {
     background-color: red;
     border-color: black;
-    transform: scale(1.3);
+    transform: scale(1.05);
 }
 
 #error-message {
@@ -313,7 +313,7 @@ input[type="button"]:hover {
 }
 
 #error-message:hover {
-    transform: scale(1.01);
+    transform: scale(1.05);
 }
 
 .error-message {
@@ -328,25 +328,25 @@ input[type="button"]:hover {
 }
 
 .error-message:hover {
-    transform: scale(1.01);
+    transform: scale(1.05);
 }
 
 #teacher-signup-button:hover {
     background-color: red;
     border-color: black;
-    transform: scale(1.35);
+    transform: scale(1.05);
 }
 
 #teacher-signup-guide:hover {
     background-color: red;
     border-color: rgb(0, 0, 0);
-    transform: scale(1.35);
+    transform: scale(1.05);
 }
 
 input[type="submit"]:hover {
     background-color: red;
     border-color: black;
-    transform: scale(1.35);
+    transform: scale(1.05);
 }
 
 #roles {
@@ -379,14 +379,8 @@ input[type="submit"]:hover {
 }
 
 #roles input[type="radio"]:checked+img {
-    transform: scale(1.2) translateY(-50%);
+    transform: scale(1.2) translateY(-20%);
     border: 3px solid green;
-}
-
-#roles input[type="radio"]:checked+img {
-    transform: scale(1.4) translateY(-20%);
-    border: 20px 40px 40px 40px solid green;
-    transform: scale(1.4) translateY(-20%);
 }
 
 .excel-wrapper {

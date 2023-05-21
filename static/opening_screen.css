@@ -107,7 +107,7 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: red;
   color: darkblue;
-  transform: scale(1.35);
+  transform: scale(1.05);
   border-color: #a31621;
 }
 
@@ -139,7 +139,7 @@ button {
 
 button:hover {
   background-color: red;
-  transform: scale(1.15);
+  transform: scale(1.05);
   border-color: pink;
 }
 
@@ -201,14 +201,14 @@ input[type="submit"] {
 #description-button:hover,
 #opening-screen-help-button:hover {
   background-color: #a31621;
-  transform: scale(1.35);
+  transform: scale(1.05);
   border-color: darkgreen;
 }
 
 input[type="button"]:hover {
   background-color: lightblue;
   color: darkblue;
-  transform: scale(1.35);
+  transform: scale(1.05);
   border-color: #a28f9d;
 }
 
@@ -244,14 +244,12 @@ input[type="button"]:hover {
 }
 
 #roles label:hover img {
-  transform: translateY(-10px);
+  transform: translateY(-5px);
 }
 
 #roles input[type="radio"]:checked+img {
   transform: scale(1.2) translateY(-20%);
   border: 3px solid green;
-  position: relative;
-  z-index: 1;
 }
 
 .excel-wrapper {

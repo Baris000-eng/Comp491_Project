@@ -65,7 +65,7 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: blue;
-  transform: scale(1.25);
+  transform: scale(1.05);
 }
 
 .right_half {

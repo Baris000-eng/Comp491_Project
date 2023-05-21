@@ -367,14 +367,8 @@ input[type="submit"]:hover {
 }
 
 #roles input[type="radio"]:checked+img {
-    transform: scale(1.2) translateY(-50%);
+    transform: scale(1.2) translateY(-20%);
     border: 3px solid green;
-}
-
-#roles input[type="radio"]:checked+img {
-    transform: scale(1.4) translateY(-20%);
-    border: 20px 40px 40px 40px solid green;
-    transform: scale(1.4) translateY(-20%);
 }
 
 .excel-wrapper {
