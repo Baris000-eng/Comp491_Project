@@ -226,7 +226,7 @@ def user_login(request, role: str):
         else:
             # Render template with message and button to go to signup screen
             screen_name = beautify_role_names(role_str=role)
-            message = f"You haven't signed up yet. Please go to {screen_name} signup screen by clicking below button."
+            message = f"You haven't signed up yet. Please go to {screen_name} Signup Screen by clicking below button."
             button_text = f"Go To {screen_name} Signup Screen"
             page_to_be_rendered = str()
             page_to_be_rendered += concat_folder_dir_based_on_role(role=role)
