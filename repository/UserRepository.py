@@ -273,6 +273,7 @@ def getUserByUsernameAndEmail(username: str, email: str):
     user = c.fetchone()
     conn.commit()
     conn.close()
+    print(user)
     return user
 
 
@@ -307,6 +308,7 @@ def checkUserRole(user, role: str):
     Given a user and a role, check if user.role matches with role
     """
     return role == user[UserModel.role]
+
 
 
 def encrypt_password(password: str):
