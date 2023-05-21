@@ -21,6 +21,9 @@ def sendReservationInformationAsEmail():
     email_content += f'Code of Reserved Class: {reservation_info[3]}\n'
     email_content += f'Reservation Start Time: {reservation_info[4]}\n'
     email_content += f'Reservation End Time: {reservation_info[5]}\n'
+
+    reservation_duration = RS.calculateDuration(reservation_info[4], reservation_info[5])
+    email_content += f'Reservation Duration: {reservation_duration} minutes\n'
     email_content += f'Reservation Date: {reservation_info[6]}\n'
     email_content += f'Reservation Purpose: {reservation_info[7]}\n'
     
