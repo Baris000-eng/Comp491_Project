@@ -1,126 +1,97 @@
+html,
 body {
-    background-color: #f6d7dd;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    background-image: url("../static/images/classroom.png");
-    background-size: cover;
+  margin: 0;
+  padding: 0;
 }
 
-h2 {
-    font-size: 40px;
-    font-weight: bold;
-    color: black;
-    text-align: center;
-    margin: 30px 0 50px;
-    font-family: "Times New Roman", Times, serif;
+body {
+  font-family: Arial, sans-serif;
+  background-color: darkred;
+  padding: 20px;
 }
 
-h3 {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ffffff;
-    text-align: center;
-    margin: 20px 0;
-    background-color: #ab6da7;
-    padding: 10px;
-    border-radius: 5px;
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: aqua;
+  border-radius: 20px;
 }
 
-.content {
-    padding: 20px;
-    width: 80%;
-    box-sizing: border-box;
-    background-color: lightblue;
+table.reservations {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: darkgoldenrod;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #000;
 }
 
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+table.reservations thead th {
+  padding: 10px;
+  font-weight: bold;
+  text-align: left;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  border-right: 1px solid #000;
+  background-color: darkgoldenrod;
 }
 
-ul li {
-    margin-bottom: 10px;
+table.reservations tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #000;
+  background-color: lightblue;
 }
 
-button.edit-report-button {
-    align-self: flex-start;
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    color: blue;
-    border-color: aquamarine;
-    background-color: #ab6da7;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: left;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: none;
-    position: left;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.box {
-    background-color: lightgoldenrodyellow;
-    margin: 0 10% 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 50px;
-}
-
-button#it-staff-button {
-    margin: 20px auto;
-    display: block;
-    max-width: 400px;
-    font-weight: bold;
-    font-size: 24px;
-    text-align: center;
-    color: blue;
-    border-color: aquamarine;
-    background-color: #ab6da7;
-    border-radius: 5px;
-    padding: 20px;
-    width: 400px;
-    width: 100%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-#it-staff-button:hover {
-    background-color: #ff8692;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.edit-report-button.button:hover {
-    background-color: #ff8692;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+table.reservations tbody td:first-child {
+  background-color: lightskyblue;
+  color: black;
 }
 
 form button {
-    font-size: 20px;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #ab6da7;
-    border-radius: 5px;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 form button:hover {
-    background-color: #ff8692;
-    transform: scale(1.05);
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  table.reservations {
+    font-size: 14px;
+  }
+
+  table.reservations thead {
+    display: none;
+  }
+
+  table.reservations tbody td {
+    display: block;
+    padding: 10px;
+    text-align: left;
+  }
+
+  table.reservations tbody td:before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  form button {
+    width: 100%;
+  }
+}
+
+table.reservations tbody tr:not(:last-child) td {
+  border-bottom: 1px solid #000;
+}
+
+table.reservations tbody td:not(:last-child) {
+  border-right: 1px solid #000;
 }
