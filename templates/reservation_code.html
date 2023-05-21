@@ -10,10 +10,17 @@
   </head>
   <body>
     <form action="/sendReservationInformationAsEmail" method="POST">
-      <input type="text" name="reservationInfoReceiver" value="kuclass2023@gmail.com" readonly>
-      <br>
-      <button class="reservationInformation" type="submit">Send Reservation Information To The Specified Email</button>
-    </form>    
+      <input
+        type="text"
+        name="reservationInfoReceiver"
+        value="kuclass2023@gmail.com"
+        readonly
+      />
+      <br />
+      <button class="reservationInformation" type="submit">
+        Send Reservation Information To The Specified Email
+      </button>
+    </form>
     <form class="h1-form">
       <h1>Classroom Reservation Code</h1>
     </form>
@@ -22,8 +29,10 @@
       <h1 class="class_reservation_code">
         You can use this classroom reservation code to save your reservation to
         the daily schedule of classroom you want to reserve before entering it:
-        {{reservation_code}} <br><br>You should type this reservation code to the
-        digital screen of the classroom for saving your reservation.
+        {{reservation_code}} <br/><br/>You should type this reservation code to the
+        digital screen of the classroom for saving your reservation. For viewing
+        the reservation information, please open an email account with an email
+        starting with kuclass2023.
       </h1>
       {% endif %}
     </form>

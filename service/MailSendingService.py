@@ -1,6 +1,7 @@
 import smtplib
 from flask import request
 import service.ReservationService as RS
+from flask import render_template
 
 def sendReservationInformationAsEmail():
     reservation_info = RS.getReservationInformation()
@@ -32,5 +33,5 @@ def sendReservationInformationAsEmail():
     smt.sendmail(email, receiver_email, message)
     smt.quit()
     
-    return "Reservation information sent successfully!"
+    return render_template("successful_reservation_information_sending.html")
 
