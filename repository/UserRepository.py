@@ -235,6 +235,20 @@ def getUserByUsername(username: str):
     return user
 
 
+def getPriorityByUsername(username: str):
+    conn = sqlite3.connect(f'{DB.users}.db')
+    c = conn.cursor()
+
+    # Check if the username exists in the database
+    c.execute(
+        f"SELECT priority FROM {DB.users} WHERE username = ?", (username,))
+
+    priority = c.fetchone()
+    conn.close()
+
+    return priority
+
+
 def getUserByEmail(email: str):
     conn = sqlite3.connect(f'{DB.users}.db')
     c = conn.cursor()

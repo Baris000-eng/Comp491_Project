@@ -240,6 +240,20 @@ def user_login(request, role: str):
     return render_template(rendered_page)
 
 
+def getPriorityByUsername(username):
+    """
+    If user exists, return their priority.
+    Otherwise, return 0.
+    """
+    
+    priority = UR.getPriorityByUsername(username)
+
+    if not priority:
+        return 0
+
+    return priority[0]
+
+
 def get_password_change_screen():
     return render_template('password_change_screen.html')
 

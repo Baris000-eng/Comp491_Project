@@ -4,8 +4,11 @@ import random
 import string
 import pandas as pd
 import datetime
+import pytz
 import repository.ReservationRepository as RR
+import service.UserService as US
 import service.ClassroomService as CS
+from constants import ReservationConstants as RC
 
 DEBUG = True
 
@@ -21,8 +24,6 @@ def reserve_class():
     option = request.form['option']
     classroom_code_options = CS.getAllClassroomCodes()
 
-    conn = sqlite3.connect('reservations_db.db')
-    c = conn.cursor()
 
     preference = str()
     if option == "exam":
@@ -40,41 +41,79 @@ def reserve_class():
     elif option == "repair":
         preference = "Repair"
 
+    # conn = sqlite3.connect('reservations_db.db')
+    # c = conn.cursor()
+
     # Retrieve existing reservation
-    c.execute('''SELECT * FROM reservations_db WHERE date=? AND start_time=? AND end_time = ? AND classroom=?''',
-              (date, start_time, end_time, class_code))
-    existing_reservation = c.fetchone()
-    if existing_reservation and existing_reservation[8] < session['priority']:
-        c.execute('''UPDATE reservations_db SET role=?, username=?, public_or_private=?, priority_reserved=?
-                    WHERE date=? AND start_time=? AND end_time=? AND classroom=? AND priority_reserved < ?''',
-                  (role, session["username"], preference, session['priority'], date, start_time, end_time, class_code, session['priority']))
-        conn.commit()
-        conn.close()
+    # c.execute('''SELECT * FROM reservations_db WHERE date=? AND start_time=? AND end_time = ? AND classroom=?''',
+    #           (date, start_time, end_time, class_code))
+    # existing_reservation = c.fetchone()
+    # if existing_reservation and existing_reservation[8] < session['priority']:
+    #     c.execute('''UPDATE reservations_db SET role=?, username=?, public_or_private=?, priority_reserved=?
+    #                 WHERE date=? AND start_time=? AND end_time=? AND classroom=? AND priority_reserved < ?''',
+    #               (role, session["username"], preference, session['priority'], date, start_time, end_time, class_code, session['priority']))
+    #     conn.commit()
+    #     conn.close()
+    #     return render_template("return_success_message_classroom_reserved.html")
+    # else:
+    #     if existing_reservation and existing_reservation[2] == date and existing_reservation[3] == start_time and existing_reservation[4] == end_time and existing_reservation[5] == session['username'] and existing_reservation[7] == class_code:
+    #         reservation_already_happened = "Reservation failed: you have already reserved this slot."
+    #         return render_template(role + "_reservation_screen.html", reservation_already_happened=reservation_already_happened, options=classroom_code_options)
+    #     elif existing_reservation:
+    #         another_user_reserved = "Reservation failed: slot already reserved by another user."
+    #         return render_template(role + "_reservation_screen.html", another_user_reserved=another_user_reserved, options=classroom_code_options)
+    #     elif check_time_interval_conflict(date,start_time, end_time, class_code):
+    #         time_interval_conflict = "Reservation failed! The time interval coincides with another reservation."
+    #         return render_template(role + "_reservation_screen.html",
+    #                             time_interval_conflict=time_interval_conflict,
+    #                             options=classroom_code_options)
+
+        # c.execute('''INSERT INTO reservations_db (role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved)
+        # VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', (role, date,start_time, end_time, session["username"], preference, class_code, session['priority']))
+    # conn.commit()
+    # conn.close()
+
+    username = session.get("username")
+    priority = US.getPriorityByUsername(username)
+
+    is_valid, error_string = validateReservation(role, date, start_time, end_time, class_code)
+
+    if is_valid:
+        # Reserv is valid, create reservation
+        if DEBUG:
+            print(f"Reserv is valid, create reservation")
+        RR.createReservation(role, date, start_time, end_time, username, preference, class_code, priority)
         return render_template("return_success_message_classroom_reserved.html")
+    
     else:
-        if existing_reservation and existing_reservation[2] == date and existing_reservation[3] == start_time and existing_reservation[4] == end_time and existing_reservation[5] == session['username'] and existing_reservation[7] == class_code:
-            reservation_already_happened = "Reservation failed: you have already reserved this slot."
-            return render_template(role + "_reservation_screen.html", reservation_already_happened=reservation_already_happened, options=classroom_code_options)
-        elif existing_reservation:
-            another_user_reserved = "Reservation failed: slot already reserved by another user."
-            return render_template(role + "_reservation_screen.html", another_user_reserved=another_user_reserved, options=classroom_code_options)
-        elif RR.check_time_interval_conflict(date,start_time, end_time, class_code):
-            time_interval_conflict = "Reservation failed! The time interval coincides with another reservation."
+        if error_string != RC.reservation_conflicting_error:
+            # Reserv is not valid, throw error message
+            if DEBUG:
+                print(f"Reserv is not valid, throw error message")
             return render_template(role + "_reservation_screen.html",
-                                time_interval_conflict=time_interval_conflict,
+                                error_msg=error_string,
                                 options=classroom_code_options)
-
-        c.execute('''INSERT INTO reservations_db (role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', (role, date,start_time, end_time, session["username"], preference, class_code, session['priority']))
-
-    conn.commit()
-    conn.close()
-    return render_template("return_success_message_classroom_reserved.html")
-
-
-
-
         
+        else:
+            conflicting_ids = getConflictingIds(date, start_time, calculateDuration(start_time, end_time), class_code)
+            isOverrideable = isConflictOverrideable(conflicting_ids, priority)
+            if not isOverrideable:
+                # Reserv is neither valid nor overrideable, throw error message
+                if DEBUG:
+                    print(f"Reserv is neither valid nor overrideable, throw error message")
+                return render_template(role + "_reservation_screen.html",
+                    error_msg=error_string,
+                    options=classroom_code_options)
+            else:
+                # Reserv is not valid, but overrideable, remove conflicting reservations, create this reservation
+                if DEBUG:
+                    print(f"Reserv is not valid, but overrideable, remove conflicting reservations, create this reservation")
+                for conflicting_id in conflicting_ids:
+                    RR.deleteReservationById(conflicting_id)
+                RR.createReservation(role, date, start_time, end_time, username, preference, class_code, priority)
+                return render_template("return_success_message_classroom_reserved.html")
+
+
 def seeTheReservations():
     data = RR.getAllReservations()
     return render_template('admin_pages/see_the_reservations.html', reservations=data)
@@ -104,10 +143,80 @@ def reservedClassroomsByInterval(start_date, start_time, duration):
     :param start_time: String in the form of "HH:MM" that specifies the time of interest, ex: "18:45"
     :param duration: Integer that specifies the duration of interest IN MINUTES
     """
-    codes_tuples = RR.reservedClassroomsByInterval(start_date, start_time, duration)
-    codes_list = [code[0] for code in codes_tuples] 
-    return codes_list
 
+    info_tuples = RR.reservedClassroomsByInterval(start_date, start_time, duration)
+    ids_list = [code[0] for code in info_tuples]
+    codes_list = [code[1] for code in info_tuples]
+
+    if DEBUG:
+        print(f"ids_list: {ids_list}")
+
+    return ids_list, codes_list
+
+def check_time_interval_conflict(date, start_time, duration_in_minutes, class_code):
+    # Call reservedClassroomsByInterval
+    _, occupied_classcodes = reservedClassroomsByInterval(date, start_time, duration_in_minutes)
+
+    if class_code in occupied_classcodes:
+        return True
+    else:
+        return False
+    
+
+def getConflictingIds(date, start_time, duration_in_minutes, class_code):
+    reservation_ids, occupied_classcodes = reservedClassroomsByInterval(date, start_time, duration_in_minutes)
+    conflicting_ids = [res_id for i, res_id in enumerate(reservation_ids) if occupied_classcodes[i] == class_code]
+
+    return conflicting_ids
+
+def isConflictOverrideable(conflicting_ids, priority):
+    if not conflicting_ids:
+        return False
+    
+    conflicting_priorities = [RR.getPriorityById(id)[0] for id in conflicting_ids]
+    max_priority = max(conflicting_priorities)
+    if DEBUG:
+        print(f'conflicting_ids: {conflicting_ids}')
+        print(f'conflicting_priorities: {conflicting_priorities}')
+        print(f'max_priority: {max_priority}')
+        print(f'priority: {priority}')
+    if max_priority >= priority:
+        return False
+    
+    return True
+
+
+def calculateDuration(start_time, end_time):
+    # Calculate duration in minutes
+    start_datetime = datetime.datetime.strptime(start_time, "%H:%M")
+    end_datetime = datetime.datetime.strptime(end_time, "%H:%M")
+    duration = end_datetime - start_datetime
+    duration_in_minutes = duration.total_seconds() // 60
+    if duration_in_minutes < 0:
+        duration_in_minutes += 1440
+
+    return duration_in_minutes
+
+
+def validateReservation(role, date, start_time, end_time, class_code):
+    duration = calculateDuration(start_time, end_time)
+    timezone = pytz.timezone("Turkey")
+    current_datetime = datetime.datetime.now(timezone)
+    start_datetime_obj = datetime.datetime.strptime(f'{date} {start_time}', ("%Y-%m-%d %H:%M"))
+    start_datetime_obj = timezone.localize(start_datetime_obj)
+
+    if start_datetime_obj < current_datetime:
+        if DEBUG:
+            print("DEBUG MODE: This is not a valid time. It is in past")
+        return False, RC.reservation_in_past_error
+    
+    if duration > RC.RESERVATION_UPPER_LIMIT:
+        return False, RC.reservation_too_long_error
+    
+    if check_time_interval_conflict(date, start_time, duration, class_code):
+        return False, RC.reservation_conflicting_error
+    
+    return True, ""
 
 def editClassroomReservations():
     row = request.args.get('row_data').split(',')

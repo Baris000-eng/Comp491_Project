@@ -79,7 +79,9 @@
         {% if time_interval_conflict %}
         <p>{{ time_interval_conflict }}</p>
         {% endif %}
-
+        {% if error_msg %}
+        <p>{{ error_msg }}</p>
+        {% endif %}
 </div>
 </div>
 
