@@ -11,15 +11,8 @@
 </head>
 
 <h1>Your class has been successfully reserved.</h1>
-<form action="/reservation_code">
+<form action="/get_reservation_code_viewing_screen">
 <button id="reservation-code" name="reservation-code">Get Class Reservation Code</button>
-</form>
-<form action="/getReservationInformation" method="GET" id="reservation-info-form">
-    <input type="hidden" name="class-code">
-    <input type="hidden" name="start-time">
-    <input type="hidden" name="end-time">
-    <input type="hidden" name="date">
-    <input type="hidden" name="option">
 </form>
 
 {% if 'role' in session %}

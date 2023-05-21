@@ -12,6 +12,15 @@ from constants import ReservationConstants as RC
 
 DEBUG = True
 
+reservation_information = list()
+
+def view_reservation_code_viewing_screen():
+    reservation_code = generate_classroom_reservation_code()
+    return render_template("reservation_code.html", reservation_code=reservation_code)
+
+def getReservationInformation():
+    return reservation_information
+    
 def check_course_or_exam_conflict():
     return "Hello World"
 
@@ -23,7 +32,6 @@ def reserve_class():
     date = request.form['date']
     option = request.form['option']
     classroom_code_options = CS.getAllClassroomCodes()
-
 
     preference = str()
     if option == "exam":
@@ -43,6 +51,16 @@ def reserve_class():
 
     username = session.get("username")
     priority = US.getPriorityByUsername(username)
+
+    global reservation_information
+    reservation_information.append(username)
+    reservation_information.append(role)
+    reservation_information.append(priority)
+    reservation_information.append(class_code)
+    reservation_information.append(start_time)
+    reservation_information.append(end_time)
+    reservation_information.append(date)
+    reservation_information.append(preference)
 
     is_valid, error_string = validateReservation(role, date, start_time, end_time, class_code)
 
@@ -239,9 +257,7 @@ def updateReservation():
         return redirect(url_for('successfulUpdateOfReservation'))
     else:
         return render_template('editReservations.html')
-
-
-
+    
 def generate_classroom_reservation_code():
     alphabet = string.ascii_letters + string.digits
     if 'reservation_code' in session:
@@ -249,8 +265,7 @@ def generate_classroom_reservation_code():
     else:
         reservation_code = ''.join(random.choice(alphabet) for i in range(8))
         session['reservation_code'] = reservation_code
-    print(reservation_code)
-    return render_template("reservation_code.html", reservation_code=reservation_code)
+    return reservation_code
 
 def openStudentReservationScreen():
     options = CS.getAllClassroomCodes()

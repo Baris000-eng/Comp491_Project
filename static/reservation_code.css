@@ -10,6 +10,41 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+button.reservationInformation {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    padding: 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+button.reservationInformation:hover {
+    background-color: darkred;
+}
+
+button.reservationInformation:focus {
+    outline: none;
+}
+
+button.reservationInformation:active {
+    background-color: #3e8e41;
 }
 
 h1 {
@@ -21,20 +56,27 @@ h1 {
 
 form.h1-form h1 {
     margin-bottom: 20px;
+    font-weight: bold;
     text-align: center;
-    color: blue;
+    color: white;
+    background-color: darkred;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 0 auto;
 }
 
 .class_reservation_code {
-    font-size: 1.2em;
+    font-size: 14px;
     text-align: center;
-    margin-top: 50px;
-    font-size: 10px;
-    color: #333;
-    background-color: #f8f8f8;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 30px;
+    color: black;
+    background-color: skyblue;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 form.reservation-code-form .class_reservation_code {
@@ -44,4 +86,18 @@ form.reservation-code-form .class_reservation_code {
     background-color: lightblue;
     padding: 20px;
     border-radius: 10px;
+}
+
+button {
+    background-color: darkred;
+    border-radius: 15px;
+    padding: 25px 50px;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    background-color: red;
 }

@@ -26,8 +26,7 @@ app.route(
 
 app.route("/openMap")(US.openMap)
 
-
-app.route("/reservation_code")(RS.generate_classroom_reservation_code)
+app.route("/get_reservation_code_viewing_screen")(RS.view_reservation_code_viewing_screen)
 
 app.route('/class_schedules')(US.course_schedules)
 app.route('/exam_schedules')(US.exam_schedules)
@@ -244,7 +243,6 @@ app.route("/successfulDeletionOfUser")(US.successfulDeletionOfUser)
 app.route("/successfulUpdateOfUserInformation")(US.successfulUpdateOfUserInformation)
 
 app.route("/sendReservationInformationAsEmail", methods=["POST"])(MSS.sendReservationInformationAsEmail)
-app.route("/getReservationInformation")(MSS.getReservationInformation)
 
 
 ######################this gets ip address of the device #####################
