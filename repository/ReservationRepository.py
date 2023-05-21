@@ -127,13 +127,8 @@ def reservedClassroomsByInterval(start_date, start_time, duration):
                     and datetime(date || " " || end_time, "+1 days") > "{start_datetime}"
                     and start_time > end_time)'''
 
-    c.execute(query)
-    
+    c.execute(query)    
     reservation_info = c.fetchall()
-
-    if DEBUG:
-        print(f'Conflicting: {reservation_info}')
-        print(f'conflict check query: {query}')
     conn.close()
 
     return reservation_info

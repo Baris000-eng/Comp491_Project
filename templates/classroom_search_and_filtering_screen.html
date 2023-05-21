@@ -20,7 +20,7 @@
               >&nbsp;<input type="checkbox" name="checkbox_code" value="code"/>
             <br />
             <br />
-            <label>Department name:</label>&nbsp;
+            <label>Department name:</label>
             <select id="department" name="department">
               {% for department in departments %}
               <option value="{{department}}">{{department}}</option>
@@ -34,7 +34,7 @@
             />&nbsp;<input type="checkbox" name="checkbox_room_type" value="room_type"/>
             <br />
             <br />
-            <label>Seats:</label>&nbsp;
+            <label>Seats:</label>
             <select id="big_small_eq" name="operation_seats">
               <option value=">">&gt;</option>
               <option value="&lt;">&lt;</option>
@@ -97,6 +97,14 @@
               type="text"
               name="projector_num"
             />&nbsp;<input type="checkbox" name="checkbox_projector_num" value="projector_num"/>
+            <br />
+            <br />
+            <label>Available for: </label>
+            <input type="date" name="date" id="date" class="custom-input" />
+            <input type="time" name="start_time" id="start_time" class="custom-input" />
+            <input type="number" id="duration" name="duration" step="1" min="0" max="999" placeholder="Enter duration" class="custom-input custom-input-number"/>&nbsp;
+            <input type="checkbox" name="checkbox_vacant" value="vacant"/>
+
             <br />
             <br />
             <button>Show classes</button>

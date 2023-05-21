@@ -52,7 +52,7 @@ def getClassroomsWhere(criteria: dict={}):
     
     # if not empty
     if vacant_criteria: 
-        busy_classrooms_codes = RS.reservedClassroomsByInterval(*vacant_criteria)
+        _, busy_classrooms_codes = RS.reservedClassroomsByInterval(*vacant_criteria)
         classrooms = excludeClassrooms(classrooms, busy_classrooms_codes)
 
     return classrooms

@@ -34,6 +34,7 @@ label {
   width: 150px;
 }
 
+
 input[type="text"],
 select {
   border-radius: 5px;
@@ -45,6 +46,21 @@ select {
   margin-right: 10px;
   width: 200px;
 }
+
+.custom-input {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  background-color: #444;
+  color: #fff;
+  font-size: 1em;
+  margin-right: 10px;
+}
+
+.custom-input-number {
+  width: 125px;
+}
+
 
 input[type="checkbox"] {
   margin-left: 10px;
