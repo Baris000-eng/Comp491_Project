@@ -760,6 +760,17 @@ def seeNewsInfo():
     news_5 = request.form.get('news_5')
     news_6 = request.form.get('news_6')
 
-
     return render_template('news_attendance.html', title=title, news_1=news_1, news_2=news_2, news_4=news_4, news_5=news_5, news_6=news_6)
 
+
+def attend_or_not():
+    title = request.form.get('title')
+    news_1 = request.form.get('news_1')
+    news_2 = request.form.get('news_2')
+    news_4 = request.form.get('news_4')
+    news_5 = request.form.get('news_5')
+    news_6 = request.form.get('news_6')
+    UR.createAttendee(title=title, news_1=news_1, news_2=news_2,
+                      news_4=news_4, news_5=news_5, news_6=news_6)
+
+    return render_template('success_message_attendance.html', title=title, news_1=news_1, news_2=news_2, news_4=news_4, news_5=news_5, news_6=news_6)

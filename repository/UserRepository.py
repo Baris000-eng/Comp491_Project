@@ -382,3 +382,23 @@ def updateUserInformation(user_id, username, user_email, user_role, user_priorit
 
     conn.commit()
     conn.close()
+
+
+def initializeClubsDb():
+    conn = sqlite3.connect('clubs_db.db')
+    c = conn.cursor()
+
+    c.execute('''CREATE TABLE IF NOT EXISTS clubs_db
+                 (title TEXT, news_1 TEXT, news_2 TEXT, news_4 TEXT, news_5 TEXT, news_6 TEXT)''')
+
+
+def createAttendee(title, news_1, news_2, news_4, news_5, news_6):
+    initializeClubsDb()
+    conn = sqlite3.connect('clubs_db.db')
+    c = conn.cursor()
+    c.execute("INSERT INTO clubs_db VALUES (?, ?, ?, ?, ?, ?)",
+              (title, news_1, news_2, news_4, news_5, news_6))
+
+    conn.commit()
+    conn.close()
+   

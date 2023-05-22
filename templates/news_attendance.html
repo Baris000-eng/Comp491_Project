@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/../static/news_attendance.css">
     <title>Inside The News</title>
 </head>
 
@@ -12,23 +13,33 @@
     <div class="top_header">If you want to attend in this event, please click on attend.</div>
     <div class="middle_middle">
 
+
+        </form>
+        <div class="container">
+            <p>{{title}}</p>
+            <p>{{news_1}}</p>
+            <p>{{news_2}}</p>
+            <p>{{news_3}}</p>
+            <p>{{news_4}}</p>
+            <p>{{news_5}}</p>
+            <p>{{news_6}}</p>
+        </div>
         <form action="/redirect_Student_dashboard_From_news">
 
-            <button>No, I dont wan't to attend</button>
+            <button style="background-color: red;">No, I dont wan't to attend</button>
         </form>
 
 
         <form action="/attend_or_not">
+            <input type="hidden" name="title" value="{{title}}">
+            <input type="hidden" name="news_1" value="{{news_1}}">
+            <input type="hidden" name="news_1" value="{{news_2}}">
+            <input type="hidden" name="news_2" value="{{news_3}}">
+            <input type="hidden" name="news_4" value="{{news_4}}">
+            <input type="hidden" name="news_5" value="{{news_5}}">
+            <input type="hidden" name="news_6" value="{{news_6}}">
+            <button>Yes, I want to attend</button>
 
-            <button value="don_t_attend">Yes, I want to attend</button>
-        </form>
-        <p>{{title}}</p>
-        <p>{{news_1}}</p>
-        <p>{{news_2}}</p>
-        <p>{{news_3}}</p>
-        <p>{{news_4}}</p>
-        <p>{{news_5}}</p>
-        <p>{{news_6}}</p>
     </div>
     <div class="bottom"></div>
 </body>

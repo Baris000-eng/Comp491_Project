@@ -122,6 +122,11 @@ app.route('/already_reserved_classes',
 app.route('/OpenReserveScreen', methods=['POST'])(RS.OpenReserveScreen)
 ###########################################################################################################
 
+
+
+app.route('/attend_or_not')(US.attend_or_not)
+
+
 app.route('/enterChat',
           methods=['GET'])(US.enterChat)
 
