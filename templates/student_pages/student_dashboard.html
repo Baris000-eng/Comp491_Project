@@ -15,7 +15,13 @@
                 <img width="50" height="50" src="{{ url_for('static', filename='images/notification.png') }}"
                     alt="Notification Icon">
                 <div class="count" id="newsCount">
-                    {{request.args.get("newsCount") }}
+                    {% if request.args.get("newsCount") is none %}
+                    {{ 0 }}
+                    {% else %}
+                    {{ request.args.get("newsCount") }}
+                    {% endif %}
+
+
                 </div>
             </div>
         </div>

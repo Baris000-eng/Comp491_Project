@@ -6,7 +6,7 @@ from constants import ROLES
 from constants import DB
 from constants import UserModel
 import sqlite3
-   
+
 
 def getAllUsers():
     conn = sqlite3.connect('users_db.db')
@@ -163,7 +163,11 @@ def getNewsCount():
     c.execute('SELECT COUNT(*) FROM news_db')
     news_count = c.fetchone()[0]
     conn.close()
-    return news_count
+    if news_count == None:
+        return 0
+    else:
+        session["news_count"] = news_count
+    return session["news_count"]
 
 
 def createNews(news_message, time, date, time_end, date_end, sender, role):
@@ -314,7 +318,6 @@ def checkUserRole(user, role: str):
     return role == user[UserModel.role]
 
 
-
 def encrypt_password(password: str):
     """
     Takes a string, applies salting and hashing
@@ -353,7 +356,7 @@ def change_user_password(email: str, password: str):
               (encrypt_password(password), email))
     conn.commit()
     conn.close()
-   
+
 
 def deleteUser(username, user_email, user_role, user_priority, user_id):
     conn = sqlite3.connect(f'{DB.users}.db')
@@ -379,5 +382,3 @@ def updateUserInformation(user_id, username, user_email, user_role, user_priorit
 
     conn.commit()
     conn.close()
-
-

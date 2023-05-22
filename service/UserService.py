@@ -39,7 +39,7 @@ def open_news_screen():
 
 
 def redirect_Student_dashboard_From_news():
-    newsCount = 0
+    newsCount = session["news_count"]
     role = "student"
     return redirect(f'/{role}/dashboard?newsCount={newsCount}')
 
@@ -221,8 +221,11 @@ def user_login(request, role: str):
             session["username"] = username
             session["priority"] = ROLES[role].priority
             session["role"] = role
+            newsCount = session["news_count"]
             newsCount = UR.getNewsCount()
+            newsCount = session["news_count"]
             return redirect(f'/{role}/dashboard?newsCount={newsCount}')
+
         else:
             # Render template with message and button to go to signup screen
             screen_name = beautify_role_names(role_str=role)
@@ -459,6 +462,7 @@ def user_screen(role: str):
 
 
 def user_dashboard(role: str):
+    newsCount = session["news_count"]
     return render_template(f'{role}_pages/{role}_dashboard.html', news_data=UR.getNews(), newsCount=UR.getNewsCount())
 
 
@@ -749,4 +753,13 @@ def openMap():
 
 
 def seeNewsInfo():
-    return render_template("news_attandance.html")
+    title = request.form.get('title')
+    news_1 = request.form.get('news_1')
+    news_2 = request.form.get('news_2')
+    news_4 = request.form.get('news_4')
+    news_5 = request.form.get('news_5')
+    news_6 = request.form.get('news_6')
+
+
+    return render_template('news_attendance.html', title=title, news_1=news_1, news_2=news_2, news_4=news_4, news_5=news_5, news_6=news_6)
+

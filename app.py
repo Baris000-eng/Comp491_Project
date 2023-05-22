@@ -124,7 +124,8 @@ app.route('/OpenReserveScreen', methods=['POST'])(RS.OpenReserveScreen)
 
 app.route('/enterChat',
           methods=['GET'])(US.enterChat)
-app.route('/seeNewsInfo')(US.seeNewsInfo)
+
+app.route('/seeNewsInfo', methods=['POST'])(US.seeNewsInfo)
 
 app.route('/openITReportScreen',
           methods=['GET'])(US.openITReportScreen)
