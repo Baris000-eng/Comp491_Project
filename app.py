@@ -26,7 +26,8 @@ app.route(
 
 app.route("/openMap")(US.openMap)
 
-app.route("/get_reservation_code_viewing_screen")(RS.view_reservation_code_viewing_screen)
+app.route(
+    "/get_reservation_code_viewing_screen")(RS.view_reservation_code_viewing_screen)
 
 app.route('/class_schedules')(US.course_schedules)
 app.route('/exam_schedules')(US.exam_schedules)
@@ -71,10 +72,12 @@ app.route('/editITReport', methods=['GET'])(US.editITReport)
 app.route('/deleteReservation', methods=['POST'])(RS.deleteReservation)
 app.route('/deleteITReport', methods=['POST'])(US.deleteITReport)
 
+
 @app.route('/reservations', methods=['GET'])
 def getReservations():
     reservationType = request.args.get('reservationType')
     return RS.getReservations(reservationType)
+
 
 app.route('/createNews', methods=['GET'])(US.createNews)
 app.route('/updateITReport', methods=['POST', 'GET'])(US.updateITReport)
@@ -121,7 +124,7 @@ app.route('/OpenReserveScreen', methods=['POST'])(RS.OpenReserveScreen)
 
 app.route('/enterChat',
           methods=['GET'])(US.enterChat)
-
+app.route('/seeNewsInfo')(US.seeNewsInfo)
 
 app.route('/openITReportScreen',
           methods=['GET'])(US.openITReportScreen)
@@ -133,6 +136,7 @@ app.route('/openTeacherReservationScreen',
           methods=['GET'])(RS.openTeacherReservationScreen)
 app.route('/openITStaffReservationScreen',
           methods=['GET'])(RS.openITStaffReservationScreen)
+
 
 @app.route('/reservedClassroomsByInterval', methods=['GET'])
 def reservedClassroomsByInterval():
@@ -242,7 +246,8 @@ app.route("/updateUserInformation", methods=["POST"])(US.updateUserInformation)
 app.route("/successfulDeletionOfUser")(US.successfulDeletionOfUser)
 app.route("/successfulUpdateOfUserInformation")(US.successfulUpdateOfUserInformation)
 
-app.route("/sendReservationInformationAsEmail", methods=["POST"])(MSS.sendReservationInformationAsEmail)
+app.route("/sendReservationInformationAsEmail",
+          methods=["POST"])(MSS.sendReservationInformationAsEmail)
 
 
 ######################this gets ip address of the device #####################

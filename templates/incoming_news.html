@@ -8,20 +8,48 @@
 </head>
 
 <body>
-  <h2>Incoming News</h2>
+  <div class="top">
+    <h2 class="news_h2">Incoming News</h2>
+    <form class="dashboard" action="/redirect_Student_dashboard_From_news">
+      <button>Go back to student dashboard</button>
+    </form>
+  </div>
+
   <div class="news">
     {% if news_data is defined and news_data %}
     {% for news_item in news_data %}
-    <p>{{news_item}}</p>
+    <form action="/seeNewsInfo">
+ <div class="individual_news">
+      <div class="leftmost">
+        <p class="news_2">{{news_item[1]}}</p>
+      </div>
+      <div class="left_left">
+        <p class="news_1">{{news_item[2]}}</p>
+        <p class="news_1">{{news_item[3]}}</p>
+      </div>
+      <div class="middle">
+
+        <p class="news_3">Time:{{news_item[0]}}</p>
+      </div>
+      <div class="right">
+        <p class="news_4">{{news_item[4]}}</p>
+        <p class="news_5">{{news_item[5]}}</p>
+      </div>
+      <div class="right_rigth">
+        <p class="news_6">{{news_item[6]}}</p>
+      </div>
+          <button class="right_most">></button>
+    </div>
+
+    </form>
+   
     {% endfor %}
     {% else %}
     <p>There are no current news</p>
     {% endif %}
   </div>
 
-  <form action="/redirect_Student_dashboard_From_news">
-    <button>Go back to student dashboard</button>
-  </form>
+
 </body>
 
 </html>

@@ -379,3 +379,5 @@ def updateUserInformation(user_id, username, user_email, user_role, user_priorit
 
     conn.commit()
     conn.close()
+
+

@@ -245,7 +245,7 @@ def getPriorityByUsername(username):
     If user exists, return their priority.
     Otherwise, return 0.
     """
-    
+
     priority = UR.getPriorityByUsername(username)
 
     if not priority:
@@ -341,7 +341,7 @@ def validate_credentials(username, password, email, role):
         is_valid = False
         not_ku_error = "This email address is not from the KU Domain."
         return is_valid, render_template(page_rendered, not_ku_error=not_ku_error)
-    elif UR.userExistsByUsernameAndEmail(username, email) and UR.checkUserRole(UR.getUserByUsernameAndEmail(username=username,email=email), role=role):
+    elif UR.userExistsByUsernameAndEmail(username, email) and UR.checkUserRole(UR.getUserByUsernameAndEmail(username=username, email=email), role=role):
         is_valid = False
         screen_name = beautify_role_names(role_str=role)
         signup_error_message = "This account already exists. Please go to " + \
@@ -577,9 +577,6 @@ def enterChat():
     return render_template('chat_class_generic.html', rows=data, class_room_no=class_no)
 
 
-
-
-
 def send_chat_message_student():
     time = str(datetime.datetime.now().time())
     date = str(datetime.date.today())
@@ -749,3 +746,7 @@ def makeAnnouncment():
 
 def openMap():
     return render_template("viewSchoolMap.html")
+
+
+def seeNewsInfo():
+    return render_template("news_attandance.html")
