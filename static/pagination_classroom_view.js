@@ -16,3 +16,15 @@ function showPage(pageNumber) {
   }
 }
 
+function redirectToReservationScreen(value, role) {
+  var url = "";
+  if (role == "student") {
+    url = "/openStudentReservationScreen?value=" + value;
+  } else if (role == "teacher") {
+    url = "/openTeacherReservationScreen?value=" + value;
+  } else if (role == "it_staff") {
+    url = "/openITStaffReservationScreen?value=" + value;
+  }
+
+  location.href = url;
+}

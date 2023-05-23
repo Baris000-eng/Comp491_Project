@@ -18,6 +18,9 @@
             {% if 'class_code' in request.args %}
             <label for="">Class Code:</label>&nbsp;<input type="text" name="class-code"
                 value="{{ request.args['class_code'] }}" readonly>
+            {% elif 'value' in request.args %}
+                <label for="">Class Code:</label>&nbsp;<input type="text" name="class-code"
+                    value="{{request.args['value']}}" readonly>
             {% else %}
             <label for="">Select your class from dropdown class list:</label>
             <div class="combo-box">
