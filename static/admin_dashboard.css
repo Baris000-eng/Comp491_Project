@@ -54,7 +54,6 @@ form {
   
   td, th {
     border: 1px solid black;
-    padding: 5px;
     font-size: 11px;
     min-width: 50px;
     min-height: 20px;
@@ -72,13 +71,10 @@ button {
 }
 
 button:hover {
-    margin-top: 10px;
-    margin-bottom: 10px;
     background-color: purple;
     color: white;
-    transform: scale(1.05);
+    transform: scale(1.10);
 }
-
 
 button {
     color: black;

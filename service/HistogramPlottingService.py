@@ -110,16 +110,17 @@ def plot_reservations_per_priority_value():
     priority_values, total_reservations = map(list, zip(*data))
 
     fig, ax = plt.subplots(figsize=(15, 15))
-    bars = ax.bar(priority_values, total_reservations)
+    bars = ax.bar(range(len(priority_values)), total_reservations)
     ax.set_title('Total Reservations by Priority Value')
     ax.set_xlabel('Priority Value')
     ax.set_ylabel('Total Reservations')
 
-    # Calculate the position of x-ticks
-    x_positions = [bar.get_x() + bar.get_width() / 2 for bar in bars]
-    ax.set_xticks(x_positions)
+    ax.set_xticks(range(len(priority_values)))
     ax.set_xticklabels(priority_values, rotation=45, ha='right')
 
+    # Adjust x-tick positions dynamically
+    ax.set_xlim(-0.5, len(priority_values) - 0.5)
+    
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
     buffer.seek(0)
