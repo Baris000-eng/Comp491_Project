@@ -14,11 +14,11 @@
 
 <div class="filterReservations">
     <form action="/reservations" method="GET">
-        <input type="radio" name="reservationType" id="myReservations" value="myReservations" checked>
-        <label for="myReservations">See only my reservations</label>
-        <br>
-        <input type="radio" name="reservationType" id="allReservations" value="allReservations">
+        <input type="radio" name="reservationType" id="allReservations" value="allReservations" checked>
         <label for="allReservations">See all reservations</label>
+        <br>
+        <input type="radio" name="reservationType" id="myReservations" value="myReservations">
+        <label for="myReservations">See only my reservations</label>
         <br>
         <br>
         <button>Record changes</button>
@@ -47,7 +47,9 @@
 
             <form action="/editReserved" method="GET">
                 <input type="hidden" name="row_data" value="{{ row|join(',') }}">
+                {% if reservation_type %}
                 <button>Edit your reservation</button>
+                {% endif %}
             </form>
             <form action="/enterChat" method="GET">
                 <input type="hidden" name="row_data" value="{{ row|join(',') }}">

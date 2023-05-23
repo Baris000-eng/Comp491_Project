@@ -110,7 +110,7 @@ def see_already_reserved_classes():
 def getReservations(reservationType):
     if reservationType == "myReservations":
         reservations = RR.getReservationsByUsername(session.get("username"))
-        return render_template('classroom_inside_reservation.html', rows=reservations)
+        return render_template('classroom_inside_reservation.html', rows=reservations, reservation_type = reservationType)
     else:
         reservations = RR.getAllReservations()
         return render_template('classroom_inside_reservation.html', rows=reservations)
