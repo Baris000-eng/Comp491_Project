@@ -84,10 +84,12 @@ button#show-all-btn {
 
 select#big_small_eq {
   margin-right: 10px;
+  width: 50px;
 }
 
 select#outlets_for_students {
   margin-right: 10px;
+  width: 75px;
 }
 
 br {

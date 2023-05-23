@@ -31,7 +31,10 @@ def showClassroomSearchAndFilterScreen():
     return render_template("classroom_search_and_filtering_screen.html", classroom_names = classroom_names, departments = departments)
     
 
-def getClassroomsWhere(criteria: dict={}):
+def getClassroomsWhere(criteria: dict=None):
+    if criteria is None:
+        return CR.getAllClassrooms()
+    
     filtered_criteria, operations = filter_criteria(criteria=criteria)
 
     # Turn each comma-seperated dictionary value to a list of string
@@ -41,20 +44,18 @@ def getClassroomsWhere(criteria: dict={}):
         except AttributeError:
             # Skip values that do not have the attribute 'split'
             continue
-
+    
     if not filtered_criteria:
-        return CR.getAllClassrooms()
+        classrooms = CR.getAllClassrooms()
     
-    classrooms = CR.getClassroomsWhere(filtered_criteria, operations)
+    else:
+        classrooms = CR.getClassroomsWhere(filtered_criteria, operations)
 
-    # Check for vacancy filtering
-    vacant_criteria = filtered_criteria.get("vacant_check")
-    
-    # if not empty
-    if vacant_criteria: 
-        _, busy_classrooms_codes = RS.reservedClassroomsByInterval(*vacant_criteria)
-        classrooms = excludeClassrooms(classrooms, busy_classrooms_codes)
-
+    if isVacanyCheckNeeded(criteria):
+        vacancy_criteria = [criteria.get(req) for req in VCR]
+        _, busy_classrooms_codes = RS.reservedClassroomsByInterval(*vacancy_criteria)
+        classrooms = excludeClassrooms(classrooms, busy_classrooms_codes)    
+        
     return classrooms
 
 def getAllDepartments():
@@ -71,9 +72,6 @@ def filter_criteria(criteria: dict):
 
         if "operation" in key:
             operations[key[10:]] = value
-
-    if isVacanyCheckNeeded(criteria):
-        filtered_criteria["vacant_check"] = [criteria[key] for key in VCR]
 
     return filtered_criteria, operations
 

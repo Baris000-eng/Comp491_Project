@@ -28,10 +28,16 @@
             >&nbsp;<input type="checkbox" name="checkbox_department" value="department"/>
             <br />
             <br />
-            <label>Room type:</label>&nbsp;<input
-              type="text"
-              name="room_type"
-            />&nbsp;<input type="checkbox" name="checkbox_room_type" value="room_type"/>
+            <label>Classroom Area:</label>
+            <select id="big_small_eq" name="operation_area">
+              <option value="&gt;">&gt;</option>
+              <option value="&lt;">&lt;</option>
+              <option value="=">=</option></select>
+            <input type="number" name="area" class="custom-input custom-input-number" min="0" placeholder="Area (m&sup2)" />&nbsp;<input
+              type="checkbox"
+              name="checkbox_area"
+              value="area"
+            />
             <br />
             <br />
             <label>Seats:</label>
@@ -39,24 +45,10 @@
               <option value=">">&gt;</option>
               <option value="&lt;">&lt;</option>
               <option value="=">=</option></select
-            >&nbsp;<input type="text" name="seats" />&nbsp;<input
+            >&nbsp;<input type="number" name="seats" class="custom-input custom-input-number" min="0" placeholder="Seat #" />&nbsp;<input
               type="checkbox"
               name="checkbox_seats"
               value="seats"
-            />
-            <br />
-            <br />
-            <label>Classroom Area:</label>&nbsp;<select
-              id="big_small_eq"
-              name="operation_area"
-            >
-              <option value="&gt;">&gt;</option>
-              <option value="&lt;">&lt;</option>
-              <option value="=">=</option></select
-            >&nbsp;<input type="text" name="area" />&nbsp;<input
-              type="checkbox"
-              name="checkbox_area"
-              value="area"
             />
             <br />
             <br />
@@ -67,11 +59,26 @@
               <option value="&gt;">&gt;</option>
               <option value="&lt;">&lt;</option>
               <option value="=">=</option></select
-            >&nbsp;<input type="text" name="board_number" />&nbsp;<input
+            >&nbsp;<input type="number" name="board_number" class="custom-input custom-input-number" min="0" placeholder="Board #" />&nbsp;<input
               type="checkbox"
               name="checkbox_board_number"
               value="board_number"
             />
+            <br />
+            <br />
+            <label>Projector Number:</label>
+            <select id="big_small_eq" name="operation_projector_num">
+              <option value="&gt;">&gt;</option>
+              <option value="&lt;">&lt;</option>
+              <option value="=">=</option></select>
+            <input type="number" name="projector_num" class="custom-input custom-input-number" min="0" placeholder="Projector #"/>
+            <input type="checkbox" name="checkbox_projector_num" value="projector_num"/>
+            <br />
+            <br />
+            <label>Room type:</label>&nbsp;<input
+            type="text"
+            name="room_type"
+          />&nbsp;<input type="checkbox" name="checkbox_room_type" value="room_type"/>
             <br />
             <br />
             <label>Connections:</label>&nbsp;<input
@@ -89,20 +96,14 @@
             <label>Outlets for Students:</label>&nbsp;
             <select id="outlets_for_students" name="outlets_for_students">
               <option value="yes">Yes</option>
-              <option value="no">No</option></select
-            >&nbsp;<input type="checkbox" name="checkbox_outlets_for_students" value="outlets_for_students"/>
-            <br />
-            <br />
-            <label>Projector Number:</label>&nbsp;<input
-              type="text"
-              name="projector_num"
-            />&nbsp;<input type="checkbox" name="checkbox_projector_num" value="projector_num"/>
+              <option value="no">No</option></select>&nbsp;
+            <input type="checkbox" name="checkbox_outlets_for_students" value="outlets_for_students"/>
             <br />
             <br />
             <label>Available for: </label>
             <input type="date" name="date" id="date" class="custom-input" />
             <input type="time" name="start_time" id="start_time" class="custom-input" />
-            <input type="number" id="duration" name="duration" step="1" min="0" max="999" placeholder="Enter duration" class="custom-input custom-input-number"/>&nbsp;
+            <input type="number" id="duration" name="duration" step="1" min="0" max="999" placeholder="Duration (min)" class="custom-input custom-input-number"/>
             <input type="checkbox" name="checkbox_vacant" value="vacant"/>
 
             <br />
