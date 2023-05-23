@@ -20,6 +20,13 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
+openedNewsDuringCurrentRuntime = False
+
+
+def toggleOpenedNewsDuringCurrentRuntime():
+    global openedNewsDuringCurrentRuntime
+    openedNewsDuringCurrentRuntime = not openedNewsDuringCurrentRuntime
+
 
 def getClassroomView():
     return render_template("viewSchoolMap.html")
@@ -30,18 +37,29 @@ def getClassroomView2():
     return render_template("view_inside_of_classroom.html")
 
 
+def getNewsCount(fromWhere):
+    if openedNewsDuringCurrentRuntime == True:
+        return 0
+    if fromWhere == "news":
+        toggleOpenedNewsDuringCurrentRuntime()
+        return UR.getNewsCount()
+    else:
+        return 0
+
+
 def get_news_count():
     return UR.getNewsCount()
 
 
 def open_news_screen():
-    return render_template("incoming_news.html", news_data=UR.getNews(), newsCount=UR.getNewsCount())
+    nc = getNewsCount("news")
+    return render_template("incoming_news.html", news_data=UR.getNews(), newsCount=nc)
 
 
 def redirect_Student_dashboard_From_news():
-    newsCount = session["news_count"]
+    nc = getNewsCount("news")
     role = "student"
-    return redirect(f'/{role}/dashboard?newsCount={newsCount}')
+    return redirect(f'/{role}/dashboard?newsCount={nc}')
 
 
 def exam_schedules():
@@ -153,8 +171,8 @@ def user_signup(request, role: str):
         session["username"] = username
         session["role"] = role
         session["priority"] = ROLES[role].priority
-        newsCount = UR.getNewsCount()
-        return redirect(f'/{role}/dashboard?newsCount={newsCount}')
+        nc = getNewsCount("no_news")
+        return redirect(f'/{role}/dashboard?newsCount={nc}')
 
     page_rendered = str()
     page_rendered += concat_folder_dir_based_on_role(role=role)
@@ -221,10 +239,8 @@ def user_login(request, role: str):
             session["username"] = username
             session["priority"] = ROLES[role].priority
             session["role"] = role
-            newsCount = session["news_count"]
-            newsCount = UR.getNewsCount()
-            newsCount = session["news_count"]
-            return redirect(f'/{role}/dashboard?newsCount={newsCount}')
+            nc = getNewsCount("no_news")
+            return redirect(f'/{role}/dashboard?newsCount={nc}')
 
         else:
             # Render template with message and button to go to signup screen
@@ -462,8 +478,9 @@ def user_screen(role: str):
 
 
 def user_dashboard(role: str):
-    newsCount = session["news_count"]
-    return render_template(f'{role}_pages/{role}_dashboard.html', news_data=UR.getNews(), newsCount=UR.getNewsCount())
+    nc = getNewsCount("no_news")
+
+    return render_template(f'{role}_pages/{role}_dashboard.html', news_data=UR.getNews(), newsCount=nc)
 
 
 def go_to_opening_screen():
