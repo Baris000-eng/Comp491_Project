@@ -66,7 +66,7 @@ app.route("/makeAnnouncement")(US.makeAnnouncment)
 
 app.route('/logout')(go_to_opening_screen)
 app.route('/', methods=['GET', 'POST'])(US.opening_screen)
-app.route('/editReservedClassrooms',
+app.route('/editReservedClassroom',
           methods=['GET'])(RS.editClassroomReservations)
 app.route('/editITReport', methods=['GET'])(US.editITReport)
 app.route('/deleteReservation', methods=['POST'])(RS.deleteReservation)
