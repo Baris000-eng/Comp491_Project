@@ -109,16 +109,16 @@ def plot_reservations_per_priority_value():
 
     priority_values, total_reservations = map(list, zip(*data))
 
-    fig, ax = plt.subplots(figsize=(15,15))
-    ax.bar(priority_values, total_reservations)
+    fig, ax = plt.subplots(figsize=(15, 15))
+    bars = ax.bar(priority_values, total_reservations)
     ax.set_title('Total Reservations by Priority Value')
     ax.set_xlabel('Priority Value')
     ax.set_ylabel('Total Reservations')
 
-    ax.set_xticks(range(len(priority_values)))
-    ax.set_xticklabels(priority_values)
-    plt.xticks(rotation=45, ha="right")
-    ax.set_xlim(-0.5, len(priority_values) - 0.5)
+    # Calculate the position of x-ticks
+    x_positions = [bar.get_x() + bar.get_width() / 2 for bar in bars]
+    ax.set_xticks(x_positions)
+    ax.set_xticklabels(priority_values, rotation=45, ha='right')
 
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
@@ -129,6 +129,7 @@ def plot_reservations_per_priority_value():
     html = f'<img src="data:image/png;base64,{png_image_base64}"/>'
     return html
 
+
 def plot_user_numbers_per_priority_value():
     conn = sqlite3.connect('users_db.db')
     c = conn.cursor()
@@ -137,15 +138,17 @@ def plot_user_numbers_per_priority_value():
     conn.close()
 
     priority_values, total_number_of_users = map(list, zip(*data))
-    fig, ax = plt.subplots(figsize=(15,15))
-    ax.bar(priority_values, total_number_of_users)
+
+    fig, ax = plt.subplots(figsize=(15, 15))
+    bars = ax.bar(range(len(priority_values)), total_number_of_users)
     ax.set_title('Total Number of Users for Each Priority Value')
     ax.set_xlabel('Priority Value')
     ax.set_ylabel('Total Number of Users')
 
     ax.set_xticks(range(len(priority_values)))
-    ax.set_xticklabels(priority_values)
-    plt.xticks(rotation=45, ha="right")
+    ax.set_xticklabels(priority_values, rotation=45, ha='right')
+
+    # Adjust x-tick positions dynamically
     ax.set_xlim(-0.5, len(priority_values) - 0.5)
 
     buffer = io.BytesIO()
