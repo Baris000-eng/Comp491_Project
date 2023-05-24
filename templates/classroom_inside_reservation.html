@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- a-->
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,8 +9,6 @@
     <title>Already-Reserved Classrooms</title>
 </head>
 <br>
-
-
 <div class="filterReservations">
     <form action="/reservations" method="GET">
         <input type="radio" name="reservationType" id="allReservations" value="allReservations" checked>
@@ -22,18 +18,15 @@
         <label for="myReservations">See only my reservations</label>
         <br>
         <br>
-        <button>Record changes</button>
+        <button class = "record_changes_button">Record changes</button>
     </form>
 </div>
-
 <br>
 <div class="box">
     <div class="content">
-
         {% for row in rows %}
         <h3> Reservation </h3>
         <ul>
-
             <li>Role: {{ row[1] }}</li>
             <li>Date: {{ row[2] }}</li>
             <li>Start Time: {{ row[3] }}</li>
@@ -44,19 +37,17 @@
             <li>Priority Reserved: {{ row[8] }}</li>
         </ul>
         <div class="reservation_edit">
-
-
             <form action="/editReservedClassroom" method="GET">
                 <input type="hidden" name="row_data" value="{{ row|join(',') }}">
                 {% if reservation_type %}
-                <button>Edit your reservation</button>
+                <button class="editing">Edit your reservation</button>
                 {% endif %}
             </form>
             <form action="/enterChat" method="GET">
                 <input type="hidden" name="row_data" value="{{ row|join(',') }}">
                 <input type="hidden" name="classroom" value="{{ row[7] }}">
                 <br>
-                <button>Enter Chat for This Classroom</button>
+                <button class="chatting">Enter Chat for This Classroom</button>
             </form>
         </div>
         {% endfor %}
@@ -78,12 +69,4 @@
 {% endif %}
 {% endif %}
 </body>
-
-
-
-
-
-
-
-
 </html>
