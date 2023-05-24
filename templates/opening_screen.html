@@ -10,17 +10,18 @@
 
 <body>
   <h1>Welcome to KuClass App</h1>
-
-  <div class="images">
-    <p class="blackout" style="height:0px; background-color: rgb(255, 0, 0);">KUCLASSAPP</p>
-    <img src="../static/images/img1.png" style="background-color: white;" class="image" width="500" height="250" />
-  </div>
   <button id="description-button" onclick="location.href='/open_description_text';">
     See KuClass Description Text
   </button>
   <button id="opening-screen-help-button" onclick="location.href='/get_opening_help';">
     See Opening Screen Help
   </button>
+  <div class="images">
+    <p class="blackout" style="height:0px; background-color: rgb(255, 0, 0);">KUCLASSAPP</p>
+    <img class="hi" src="../static/images/img1.png" style="background-color: white;" class="image" width="500"
+      height="250" style="z-index: 0;" />
+  </div>
+
   <form action="/select_role" method="post">
     <label for="roles" class="role_selection">Select your role</label>
     <div id="roles">

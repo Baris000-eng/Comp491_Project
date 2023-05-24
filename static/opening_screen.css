@@ -4,7 +4,7 @@ body {
   justify-content: center;
   align-items: center;
   background-size: cover;
-  background-repeat:no-repeat;
+  background-repeat: no-repeat;
   background-image: url("../static/images/class_room.jpeg");
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -283,10 +283,15 @@ figcaption {
 
 input[type="submit"] {
   border: 5px solid rgb(163, 22, 33);
- 
+
   font-size: 16px;
 }
 
 .buttons_box {
   align-items: flex-start;
+}
+
+.hi {
+  margin-bottom: 80px;
+  opacity: 0;
 }
