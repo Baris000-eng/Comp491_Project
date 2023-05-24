@@ -1,6 +1,7 @@
 import smtplib
 from flask import request, render_template
 import service.ReservationService as RS
+import string
 
 def sendReservationInformationAsEmail():
     reservation_info = RS.getReservationInformation()
@@ -44,5 +45,36 @@ def sendReservationInformationAsEmail():
     smt.quit()
 
     return render_template("successful_reservation_information_sending.html")
+
+def sendReservationOverrideMail(usernames):
+    email = 'bkaplan10001@gmail.com'
+    receiver_email = 'kuclass2023@gmail.com'
+    random_password = 'cvvbsgxqkuziqgsd'
+    protocol = 'smtp.gmail.com'
+
+    result = ", ".join(usernames)
+
+    email_subject = 'Your Reservation was Overriden'
+    email_content = f"""Subject: {email_subject}
+
+
+    Dear {result},
+
+    Your reservations were overriden. Please check your reservations to get more information on your overriden reservations.
+
+    If you have any questions or need further assistance, please feel free to contact us.
+
+    Best regards,
+    KuClass Team
+    """
+
+    smt = smtplib.SMTP(protocol, 587)
+    smt.ehlo()
+    smt.starttls()
+    smt.login(email, random_password)
+    smt.sendmail(email, receiver_email, email_content)
+    smt.quit()
+
+    return ""
 
 

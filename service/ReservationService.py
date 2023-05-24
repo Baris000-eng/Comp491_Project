@@ -8,6 +8,7 @@ import pytz
 import repository.ReservationRepository as RR
 import service.UserService as US
 import service.ClassroomService as CS
+import service.MailSendingService as MSS
 from constants import ReservationConstants as RC
 
 DEBUG = True
@@ -92,8 +93,14 @@ def reserve_class():
                 # Reserv is not valid, but overrideable, remove conflicting reservations, create this reservation
                 if DEBUG:
                     print(f"Reserv is not valid, but overrideable, remove conflicting reservations, create this reservation")
+                
+                usernames = getUsernameByReservationId(conflicting_ids)
+                MSS.sendReservationOverrideMail(usernames)
+
                 for conflicting_id in conflicting_ids:
                     RR.deleteReservationById(conflicting_id)
+                
+
                 RR.createReservation(role, date, start_time, end_time, username, preference, class_code, priority)
                 return render_template("return_success_message_classroom_reserved.html")
 
@@ -101,6 +108,12 @@ def reserve_class():
 def seeTheReservations():
     data = RR.getAllReservations()
     return render_template('admin_pages/see_the_reservations.html', reservations=data)
+
+def getUsernameByReservationId(ids):
+    usernames = RR.getUsernameByReservationId(ids)
+    if DEBUG:
+        print(usernames)
+    return usernames
 
 
 def see_already_reserved_classes():

@@ -133,3 +133,14 @@ def reservedClassroomsByInterval(start_date, start_time, duration):
 
     return reservation_info
 
+def getUsernameByReservationId(ids):
+    conn = sqlite3.connect(DB.kuclass_db)
+    c = conn.cursor()
+    id_string = ', '.join(map(str, ids))
+    c.execute(f"SELECT DISTINCT username FROM {DB.reservations} WHERE id IN ({id_string})")
+
+    users = c.fetchall()
+    users = [user[0] for user in users]
+
+    conn.close()
+    return users
