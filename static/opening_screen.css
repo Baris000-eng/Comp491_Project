@@ -281,7 +281,7 @@ figcaption {
 
 input[type="submit"] {
   border: 5px solid rgb(163, 22, 33);
-  animation: rotate-border 5s linear infinite;
+ 
   font-size: 16px;
 }
 

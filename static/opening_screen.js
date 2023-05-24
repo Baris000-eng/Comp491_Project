@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     currentImageIndex = (currentImageIndex + 1) % images.length;
     const nextImageSrc = images[currentImageIndex];
     imageElement.setAttribute("src", nextImageSrc);
-  }, 1000);
+  }, 7000);
 });
 
 setInterval(function () {
