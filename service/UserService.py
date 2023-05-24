@@ -195,11 +195,14 @@ def user_login(request, role: str):
         existing_user = UR.getUserByUsernameAndEmail(username, email)
 
         if not existing_user or not UR.checkUserRole(existing_user, role=role):
-            notExistMessage = f"There is no {ROLES[role].name} with this Username & Email pair."
-            folder_directory = concat_folder_dir_based_on_role(role=role)
-            page_to_be_displayed += folder_directory
-            page_to_be_displayed += f'{role}_login.html'
-            return render_template(page_to_be_displayed, notExistMessage=notExistMessage)
+            screen_name = beautify_role_names(role_str=role)
+            message = f"There is no {ROLES[role].name} with this Username & Email pair."
+            button_text = f"Go To {screen_name} Signup Screen"
+            page_to_be_rendered = str()
+            page_to_be_rendered += concat_folder_dir_based_on_role(role=role)
+            page_to_be_rendered += f'{role}_login.html'
+            button_url = f"/{role}_signup"
+            return render_template(page_to_be_rendered, message=message, button_text=button_text, button_url=button_url, username=username)
 
         password_check = UR.check_password(existing_user, password)
 
@@ -213,14 +216,11 @@ def user_login(request, role: str):
 
         else:
             # Render template with message and button to go to signup screen
-            screen_name = beautify_role_names(role_str=role)
-            message = f"You haven't signed up yet. Please go to {screen_name} Signup Screen by clicking below button."
-            button_text = f"Go To {screen_name} Signup Screen"
-            page_to_be_rendered = str()
-            page_to_be_rendered += concat_folder_dir_based_on_role(role=role)
-            page_to_be_rendered += f'{role}_login.html'
-            button_url = f"/{role}_signup"
-            return render_template(page_to_be_rendered, message=message, button_text=button_text, button_url=button_url, username=username)
+            notExistMessage = f"Invalid password"
+            folder_directory = concat_folder_dir_based_on_role(role=role)
+            page_to_be_displayed += folder_directory
+            page_to_be_displayed += f'{role}_login.html'
+            return render_template(page_to_be_displayed, notExistMessage=notExistMessage)
 
     rendered_page = str()
     rendered_page += concat_folder_dir_based_on_role(role=role)
