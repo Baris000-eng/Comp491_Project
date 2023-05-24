@@ -1,4 +1,17 @@
-/* CSS for filterReservations section */
+.teacher_class,
+.student_class {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.dashboard-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 20px;
+}
 .filterReservations {
     background-color: rgba(16, 16, 16, 0.79);
 

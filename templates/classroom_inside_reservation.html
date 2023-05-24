@@ -64,11 +64,15 @@
 {% if 'role' in session %}
 {% if session['role'] == 'teacher' %}
 <form action=" /teacher/dashboard">
-    <button>Go To Teacher Dashboard</button>
+  <div class="dashboard-button-container">
+    <button class="teacher_class">Go To Teacher Dashboard</button>
+  </div>
 </form>
 {% elif session['role'] == 'student' %}
 <form action="/student/dashboard">
-    <button>Go To Student Dashboard</button>
+  <div class="dashboard-button-container">
+    <button class="student_class">Go To Student Dashboard</button>
+  </div>
 </form>
 {% endif %}
 {% endif %}
