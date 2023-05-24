@@ -619,8 +619,6 @@ def send_chat_message_student():
     query1 = f'SELECT * FROM chat_db WHERE classroom = "{class_no}"'
     c.execute(query1)
     data = c.fetchall()
-    data.append(('classroom', session["classroom"]))
-    class_no = session['classroom']
     conn.close()
     return render_template('chat_class_generic.html', rows=data, class_room_no=class_no, user_name=session["username"], message=message)
 

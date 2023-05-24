@@ -90,3 +90,33 @@ input[type="text"] {
   box-shadow: 2px 2px #333;
   transform: scale(1.05);
 }
+
+.save_reservation {
+  background-color: red;
+  color: white;
+  font-size: 30px;
+  padding: 20px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.save_reservation:hover{
+  background-color: darkred;
+}
+
+.delete_class_reservation {
+  background-color: red;
+  color: white;
+  font-size: 30px;
+  padding: 20px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.delete_class_reservation:hover{
+  background-color: darkred;
+}
