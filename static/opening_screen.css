@@ -3,7 +3,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url("../static/images/SNAB172.png");
+  background-size: cover;
+  background-repeat:no-repeat;
+  background-image: url("../static/images/class_room.jpeg");
   font-family: Arial, Helvetica, sans-serif;
 }
 

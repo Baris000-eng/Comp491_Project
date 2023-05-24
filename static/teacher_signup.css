@@ -6,8 +6,7 @@ body {
     background-color: rgb(0, 255, 238);
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 100px;
-    background-image: url("../static/images/classroom.png");
-    background-image: url("../static/images/student_login.png");
+    background-image: url("../static/images/class_room.jpeg");
     display: flex;
     flex-direction: column;
     justify-content: center;
