@@ -2,15 +2,9 @@ from flask import session
 from typing import List
 from flask import render_template, redirect, session,  flash, request, Flask, url_for, jsonify
 import sqlite3
-import openpyxl
-import secrets
-import matplotlib.pyplot as plt
-import io
-import base64
 from constants import ROLES, DB
 import pandas as pd
 import repository.UserRepository as UR
-import deprecation
 import datetime
 import html
 
@@ -20,44 +14,19 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
-openedNewsDuringCurrentRuntime = False
-
-
-def toggleOpenedNewsDuringCurrentRuntime():
-    global openedNewsDuringCurrentRuntime
-    openedNewsDuringCurrentRuntime = not openedNewsDuringCurrentRuntime
-
-
 def getClassroomView():
     return render_template("viewSchoolMap.html")
 
-
-def getClassroomView2():
-    print("hello")
-    return render_template("view_inside_of_classroom.html")
-
-
-def getNewsCount(fromWhere):
-    if openedNewsDuringCurrentRuntime == True:
-        return 0
-    if fromWhere == "news":
-        toggleOpenedNewsDuringCurrentRuntime()
-        return UR.getNewsCount()
-    else:
-        return 0
-
-
-def get_news_count():
+def getNewsCount():
     return UR.getNewsCount()
 
-
 def open_news_screen():
-    nc = getNewsCount("news")
+    nc = getNewsCount()
     return render_template("incoming_news.html", news_data=UR.getNews(), newsCount=nc)
 
 
-def redirect_Student_dashboard_From_news():
-    nc = getNewsCount("news")
+def redirect_student_dashboard_from_news():
+    nc = getNewsCount()
     role = "student"
     return redirect(f'/{role}/dashboard?newsCount={nc}')
 
@@ -171,7 +140,7 @@ def user_signup(request, role: str):
         session["username"] = username
         session["role"] = role
         session["priority"] = ROLES[role].priority
-        nc = getNewsCount("no_news")
+        nc = getNewsCount()
         return redirect(f'/{role}/dashboard?newsCount={nc}')
 
     page_rendered = str()
@@ -239,7 +208,7 @@ def user_login(request, role: str):
             session["username"] = username
             session["priority"] = ROLES[role].priority
             session["role"] = role
-            nc = getNewsCount("no_news")
+            nc = getNewsCount()
             return redirect(f'/{role}/dashboard?newsCount={nc}')
 
         else:
@@ -405,7 +374,6 @@ def openITReportScreen():
 
 #########OTHER SCREENS #######################################################
 def select_role():
-
     role = request.form.get('roles')
     if role in ROLES:
         return redirect(f'/{role}/screen')
@@ -450,7 +418,7 @@ def chat_action():
     return render_template("chat_pages/chat_room.html", class_no=class_no)
 
 
-def user_connected(info):
+"""def user_connected(info):
     with open('chat_data.txt', 'a') as f:
         f.write(session['username'] + " entered the chat to room " +
                 session['classroom'] + " \n")
@@ -463,7 +431,7 @@ def user_disconnected():
         f.write(session['username'] + " exited the chat to room " +
                 session['classroom'] + " \n")
     print(session['username'] +
-          " left the chat room (room : " + session['classroom'] + ")")
+          " left the chat room (room : " + session['classroom'] + ")")"""
 
 
 #########################################################################################################################################################################
@@ -478,8 +446,7 @@ def user_screen(role: str):
 
 
 def user_dashboard(role: str):
-    nc = getNewsCount("no_news")
-
+    nc = getNewsCount()
     return render_template(f'{role}_pages/{role}_dashboard.html', news_data=UR.getNews(), newsCount=nc)
 
 

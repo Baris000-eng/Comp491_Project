@@ -1,34 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reporting to IT Screen</title>
-    <link rel="stylesheet" type="text/css" href="../static/reporting_IT.css">
+    <link rel="stylesheet" type="text/css" href="../static/reporting_IT.css" />
     <script type="text/javascript" src="../static/reporting_IT.js"></script>
-</head>
-
-<div class="right_half" id="itForm">
-    <form action="/reportingIT" method="POST" style="text-align:center;">
+  </head>
+  <body>
+    {% if 'role' in session %} {% if session['role'] == 'teacher' %}
+    <form action="teacher/dashboard">
+      <button>Go To Teacher Dashboard</button>
+    </form>
+    {% elif session['role'] == 'it_staff' %}
+    <form action="it_staff/dashboard">
+      <button>Go To IT Staff Dashboard</button>
+    </form>
+    {% elif session['role'] == 'student' %}
+    <form action="redirect_student_dashboard">
+      <button>Go To Student Dashboard</button>
+    </form>
+    {% endif %} {% endif %}
+    <div class="right_half" id="itForm">
+      <form action="/reportingIT" method="POST" style="text-align: center">
         <h2>Report An IT Problem</h2>
         <h4>Information of the Room Code:</h4>
-        <input type="text" name="room_number" required placeholder="Enter Room Code">
+        <input
+          type="text"
+          name="room_number"
+          required
+          placeholder="Enter Room Code"
+        />
         <h4>Information of the Faculty Name:</h4>
-        <input type="text" required name="faculty_name" placeholder="Enter Faculty Name">
+        <input
+          type="text"
+          required
+          name="faculty_name"
+          placeholder="Enter Faculty Name"
+        />
         <h4>What is the problem? Describe the problem in detail. Thank you.</h4>
-        <textarea required name="problem_description" placeholder="Describe the It Problem Here"></textarea>
+        <textarea
+          required
+          name="problem_description"
+          placeholder="Describe the It Problem Here"
+        ></textarea>
         <h4>Please specify date and time:</h4>
-        <input required type="date" name="date">
-        <input required type="time" name="time">
+        <input required type="date" name="date" />
+        <input required type="time" name="time" />
         <button type="submit">Click to submit the problem to IT</button>
-
-
-    </form>
-</div>
-
-</body>
-
-
+      </form>
+    </div>
+  </body>
 </html>

@@ -163,12 +163,7 @@ def getNewsCount():
     c.execute('SELECT COUNT(*) FROM news_db')
     news_count = c.fetchone()[0]
     conn.close()
-    if news_count == None:
-        return 0
-    else:
-        session["news_count"] = news_count
-    return session["news_count"]
-
+    return news_count
 
 def createNews(news_message, time, date, time_end, date_end, sender, role):
     """

@@ -1,29 +1,38 @@
 img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 body {
-    background-color: rgb(172, 172, 231);
+  background-color: rgb(172, 172, 231);
 }
 
-
 .segment1 {
-    background-color: red;
+  background-color: red;
 }
 
 .segment2 {
-    background-color: blue;
+  background-color: blue;
 }
 
 #image-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .segment {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-  }
-  
+  position: relative;
+  display: inline-block;
+}
+
+.segment {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+#cursor-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  color: #fff;
+  padding: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}

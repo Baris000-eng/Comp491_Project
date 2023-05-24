@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../static/reservation_single_class.css">
+    <script src="../static/reservation_single_class.js"></script>
     <title>Already-Reserved Classrooms</title>
 </head>
 <br>
@@ -69,7 +70,7 @@
   </div>
 </form>
 {% elif session['role'] == 'student' %}
-<form action="/student/dashboard">
+<form action="redirect_student_dashboard">
   <div class="dashboard-button-container">
     <button class="student_class">Go To Student Dashboard</button>
   </div>

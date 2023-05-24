@@ -18,8 +18,7 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 socketio = SocketIO(app)
 
-app.route("/viewInsidesOfClassrooms")(US.getClassroomView2)
-app.route("/viewInsidesOfClassrooms2")(US.getClassroomView)
+app.route("/viewInsidesOfClassrooms")(US.getClassroomView)
 app.route('/viewFloors')(US.viewFloors)
 app.route(
     "/getFilterAndSearchClassroomsScreen")(CS.showClassroomSearchAndFilterScreen)
@@ -34,10 +33,8 @@ app.route('/exam_schedules')(US.exam_schedules)
 app.route('/myExamsOnly')(US.myExamsOnly)
 app.route('/allExams')(US.allExams)
 
-app.route("/get_news_count")(US.get_news_count)
 app.route("/open_news")(US.open_news_screen)
-app.route(
-    "/redirect_Student_dashboard_From_news")(US.redirect_Student_dashboard_From_news)
+app.route("/redirect_student_dashboard")(US.redirect_student_dashboard_from_news)
 app.route("/get_teacher_signup_guide")(US.get_teacher_signup_guide)
 app.route("/get_admin_signup_guide")(US.get_admin_signup_guide)
 app.route("/get_student_signup_help")(US.get_student_signup_help)
