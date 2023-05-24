@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] = '491'
 app.debug = True
 
 def getClassroomView():
-    return render_template("viewSchoolMap.html")
+    return render_template("view_inside_of_classroom.html")
 
 def getNewsCount():
     return UR.getNewsCount()
