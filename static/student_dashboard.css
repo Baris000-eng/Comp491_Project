@@ -1,9 +1,11 @@
 body {
-  margin: 0;
+  margin: 20px;
   padding: 0;
   background-color: yellowgreen;
   background-image: url("../static/images/classroom.png");
   background-size: cover;
+  justify-content: center;
+  align-items: center;
 }
 
 .header {
@@ -18,10 +20,12 @@ body {
 
 .group1,
 .group2 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.group1,.group2 {
+  flex-basis: calc(100% / 3);
 }
 
 .group1 {
@@ -83,36 +87,14 @@ h1 {
   font-weight: bold;
   text-align: center;
   margin-top: 40px;
-
   color: brown;
   border: 10px;
   width: auto;
   align-items: center;
 }
 
-.buttons {
-  margin-bottom: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.buttons.form.button.hover {
-  background-color: red;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.buttons button:hover {
-  background-color: red;
-  color: white;
-}
-
-button {
-  display: block;
-  width: 100%;
+.buttons button {
   max-width: 400px;
   padding: 20px;
   font-size: 24px;
@@ -123,41 +105,22 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 10px;
 }
 
-.button.clicked {
-  transform: scale(1.05);
-  background-color: red;
-}
-
-.button.hover {
+.button.clicked,
+.button.hover,
+.form.clicked,
+.form.hover,
+.buttons button:hover {
   transform: scale(1.05);
   background-color: red;
   color: red;
 }
 
-.form.clicked {
-  transform: scale(1.05);
-  background-color: red;
-}
-
-.form.hover {
-  transform: scale(1.05);
-  background-color: red;
-}
-
-.buttons button {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
 .buttons button:hover {
   background-color: red;
   color: white;
-  transform: scale(1.05);
 }
 
 button {
@@ -175,6 +138,7 @@ button {
 }
 
 
-.buttons button:hover {
-  transform: scale(1.05);
-}
+
+
+
+
