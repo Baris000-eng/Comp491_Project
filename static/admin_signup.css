@@ -516,7 +516,8 @@ form {
 }
 
 body {
-  background-image: url("../static/images/admin_cartoon.jpeg");
+  background-image: url("../static/images/class_room.jpeg");
+  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: center;
