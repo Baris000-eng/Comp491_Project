@@ -7,7 +7,7 @@ import secrets
 import matplotlib.pyplot as plt
 import io
 import base64
-from constants import ROLES
+from constants import ROLES, DB
 import pandas as pd
 import repository.UserRepository as UR
 import deprecation
@@ -588,7 +588,7 @@ def enterChat():
     row_data = request.args.get('row_data')
     array = row_data.split(",")
     class_no = request.args.get("classroom")
-    conn = sqlite3.connect('chat_db.db')
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
     query1 = f'SELECT * FROM chat_db WHERE classroom = "{class_no}"'
 
@@ -605,7 +605,7 @@ def send_chat_message_student():
 
     message = request.args.get('message')
     class_no = request.args.get("class_no")
-    conn = sqlite3.connect('chat_db.db')
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     c.execute("INSERT INTO chat_db (classroom, time, date, sender, message) VALUES (?, ?, ?, ?, ?)",
@@ -614,7 +614,7 @@ def send_chat_message_student():
     conn.commit()
     conn.close()
 
-    conn = sqlite3.connect('chat_db.db')
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
     query1 = f'SELECT * FROM chat_db WHERE classroom = "{class_no}"'
     c.execute(query1)
@@ -722,7 +722,7 @@ def successfulDeletionOfUser():
 
 
 def clearMessages():
-    conn = sqlite3.connect('chat_db.db')
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     c.execute("DELETE FROM chat_db")
@@ -730,7 +730,7 @@ def clearMessages():
     conn.commit()
     conn.close()
 
-    conn = sqlite3.connect('chat_db.db')
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
     query1 = 'SELECT * FROM chat_db'
     c.execute(query1)

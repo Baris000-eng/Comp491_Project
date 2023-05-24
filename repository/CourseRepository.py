@@ -19,7 +19,7 @@ from typing import List
 def initializeCourseTable():
     courses_excel = 'SPR_23_COURSES.xlsx'
     df = pd.read_excel(courses_excel)
-    conn = sqlite3.connect(f"{DB.courses}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
 
     table_name = 'courses'
     df.to_sql(table_name, conn, if_exists='replace', index=False)
@@ -29,7 +29,7 @@ def initializeCourseTable():
 
 """
 def initializeCourseTables():
-    conn = sqlite3.connect(f"{DB.courses}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     c.execute(f'''CREATE TABLE IF NOT EXISTS {DB.courses}
@@ -55,7 +55,7 @@ def initializeCourseTables():
 """
 """
 def initializeCourseTable():
-    conn = sqlite3.connect(f"{DB.courses}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     c.execute(f'''CREATE TABLE IF NOT EXISTS {DB.courses}
@@ -91,7 +91,7 @@ def initializeCourseTable():
     conn.close()
 
 def createCourses(csv_source: str):
-    conn = sqlite3.connect(f"{DB.courses}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     try:

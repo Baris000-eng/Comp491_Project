@@ -8,7 +8,7 @@ from constants import FilterOperations as FO
 DEBUG = False
 
 def initializeClassroomTables():
-    conn = sqlite3.connect(f"{DB.classrooms}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     c.execute(f'''CREATE TABLE IF NOT EXISTS {DB.classrooms}
@@ -33,7 +33,7 @@ def initializeClassroomTables():
     conn.close()
 
 def createClassrooms(csv_source: str):
-    conn = sqlite3.connect(f"{DB.classrooms}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     try:
@@ -58,7 +58,7 @@ def createClassrooms(csv_source: str):
     
 
 def getAllClassrooms():
-    conn = sqlite3.connect(f"{DB.classrooms}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
     c.execute(f"SELECT * FROM {DB.classrooms}")
 
@@ -68,7 +68,7 @@ def getAllClassrooms():
     return classrooms
 
 def getAllClassroomCodes():
-    conn = sqlite3.connect(f"{DB.classrooms}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
     c.execute(f"SELECT code FROM {DB.classrooms} ORDER BY code ASC")
 
@@ -87,7 +87,7 @@ def getClassroomsWhere(criteria: dict, operations: dict):
         print(f'Query: {query}')
         print(f'Parameters: {parameters}')
 
-    conn = sqlite3.connect(f"{DB.classrooms}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
     c.execute(query, parameters)
 
@@ -150,7 +150,7 @@ def getWhereClauseAndParamList(criterion: str, values: List, operation: str):
 
 
 def getAllDepartmentNames():
-    conn = sqlite3.connect(f"{DB.classrooms}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
     c.execute(f"SELECT DISTINCT department FROM {DB.classrooms}")
 
@@ -165,7 +165,7 @@ def getAllDepartmentNames():
     return returned_department_names
 
 def getAllClassroomNames():
-    conn = sqlite3.connect(f"{DB.classrooms}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
     c.execute(f"SELECT code FROM {DB.classrooms}")
 

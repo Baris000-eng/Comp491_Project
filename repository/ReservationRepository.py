@@ -9,7 +9,7 @@ def sendReservationCode():
     return "Reservation Code Sent"
 
 def initializeReservationsTable():
-    conn = sqlite3.connect(f'{DB.reservations}.db')
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     c.execute(f'''CREATE TABLE IF NOT EXISTS {DB.reservations} (
@@ -24,7 +24,7 @@ def initializeReservationsTable():
               priority_reserved INTEGER)''')
     
 def createReservation(role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved):
-    conn = sqlite3.connect(f'{DB.reservations}.db')
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
     c.execute('''INSERT INTO reservations_db (role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)''', (role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved))
@@ -34,7 +34,7 @@ def createReservation(role, date, start_time, end_time, username, public_or_priv
 
 
 def getAllReservations():
-    conn = sqlite3.connect(f'{DB.reservations}.db')
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
     c.execute(f'SELECT * FROM {DB.reservations}')
     data = c.fetchall()
@@ -42,7 +42,7 @@ def getAllReservations():
     return data
 
 def getReservationsByUsername(username: str):
-    conn = sqlite3.connect(f'{DB.reservations}.db')
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     c.execute(f"SELECT * FROM {DB.reservations} WHERE username = ?", (username,))
@@ -51,7 +51,7 @@ def getReservationsByUsername(username: str):
     return data
 
 def getPriorityById(id):
-    conn = sqlite3.connect(f'{DB.reservations}.db')
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     c.execute(f"SELECT priority_reserved FROM {DB.reservations} WHERE id = ?", (id,))
@@ -60,7 +60,7 @@ def getPriorityById(id):
     return priority
 
 def updateReservation(role, date, start_time, end_time, username, reservation_purpose, reserved_classroom, priority_reserved, id):
-    conn = sqlite3.connect(f'{DB.reservations}.db')
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     c.execute(f"UPDATE {DB.reservations} SET role=?, date=?, start_time=?, end_time=?, username=?, public_or_private=?, classroom = ?, priority_reserved=? WHERE id=?", 
@@ -70,7 +70,7 @@ def updateReservation(role, date, start_time, end_time, username, reservation_pu
     conn.close()
 
 def delete_reservation_from_db(role, date, start_time, end_time, username, public_or_private, classroom, priority_reserved):
-    conn = sqlite3.connect(f'{DB.reservations}.db')
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     c.execute(f'''DELETE FROM {DB.reservations} WHERE
@@ -92,7 +92,7 @@ def delete_reservation_from_db(role, date, start_time, end_time, username, publi
     conn.close()
 
 def deleteReservationById(id):
-    conn = sqlite3.connect(f'{DB.reservations}.db')
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     c.execute(f'''DELETE FROM {DB.reservations} WHERE
@@ -112,7 +112,7 @@ def reservedClassroomsByInterval(start_date, start_time, duration):
     :param start_time: String in the form of "HH:MM" that specifies the time of interest, ex: "18:45"
     :param duration: Integer that specifies the duration of interest IN MINUTES
     """
-    conn = sqlite3.connect(f'{DB.reservations}.db')
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     start_datetime = f'{start_date} {start_time}'

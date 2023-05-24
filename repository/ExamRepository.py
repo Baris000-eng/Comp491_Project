@@ -17,7 +17,7 @@ def initializeExamTable():
     exam_excel = 'FALL_22_EXAMS.xlsx'
     df = pd.read_excel(exam_excel)
 
-    conn = sqlite3.connect(f"{DB.exams}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
     table_name = 'exams'
     df.to_sql(table_name, conn, if_exists='replace', index=False)
 
@@ -29,7 +29,7 @@ def increment_exams_db():
     df['Exam Date'] = pd.to_datetime(df['Exam Date'])
     df['Exam Date'] = df['Exam Date'] + pd.DateOffset(years=1)
 
-    conn = sqlite3.connect(f"{DB.exams}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
     table_name = 'exams'
     df.to_sql(table_name, conn, if_exists='replace', index=False)
 
@@ -37,7 +37,7 @@ def increment_exams_db():
     conn.close()
 """
 def initializeExamTable():
-    conn = sqlite3.connect(f"{DB.exams}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     c.execute(f'''CREATE TABLE IF NOT EXISTS {DB.exams}
@@ -60,7 +60,7 @@ def initializeExamTable():
     conn.close()
 
 def createExams(csv_source: str):
-    conn = sqlite3.connect(f"{DB.exams}.db")
+    conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     try:
