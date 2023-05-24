@@ -1,62 +1,53 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Incoming News</title>
+    <link rel="stylesheet" type="text/css" href="../static/incoming_news.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <title>Incoming News</title>
-  <link rel="stylesheet" type="text/css" href="../static/incoming_news.css">
-</head>
-
-<body>
-  <div class="top">
-    <h2 class="news_h2">Incoming News</h2>
+  <body>
+    <div class="top">
+      <h2 class="news_h2">Incoming News</h2>
+    </div>
     <form class="dashboard" action="/redirect_student_dashboard">
-      <button>Go back to student dashboard</button>
+      <button>Go to Student Dashboard</button>
     </form>
-  </div>
-
-  <div class="news">
-    {% if news_data is defined and news_data %}
-    {% for news_item in news_data %}
-    <form action="/seeNewsInfo" method="POST">
-
-      <div class="individual_news">
-        <div class="leftmost">
-          <p class="news_2">{{news_item[1]}}</p>
+    <div class="news">
+      {% if news_data is defined and news_data %} {% for news_item in news_data
+      %}
+      <form action="/seeNewsInfo" method="POST">
+        <div class="individual_news">
+          <div class="leftmost">
+            <p class="news_2">{{news_item[1]}}</p>
+          </div>
+          <div class="left_left">
+            <p class="news_1">{{news_item[2]}}</p>
+            <p class="news_1">{{news_item[3]}}</p>
+          </div>
+          <div class="middle">
+            <p class="news_3">Title:{{news_item[0]}}</p>
+          </div>
+          <div class="right">
+            <p class="news_4">{{news_item[4]}}</p>
+            <p class="news_5">{{news_item[5]}}</p>
+          </div>
+          <div class="right_right">
+            <p class="news_6">{{news_item[6]}}</p>
+          </div>
+          <input type="hidden" name="title" value="{{news_item[0]}}" />
+          <input type="hidden" name="news_1" value="{{news_item[2]}}" />
+          <input type="hidden" name="news_2" value="{{news_item[3]}}" />
+          <input type="hidden" name="news_4" value="{{news_item[4]}}" />
+          <input type="hidden" name="news_5" value="{{news_item[5]}}" />
+          <input type="hidden" name="news_6" value="{{news_item[6]}}" />
+          <button class="right_most">></button>
         </div>
-        <div class="left_left">
-          <p class="news_1">{{news_item[2]}}</p>
-          <p class="news_1">{{news_item[3]}}</p>
-        </div>
-        <div class="middle">
+      </form>
 
-          <p class="news_3">Title:{{news_item[0]}}</p>
-        </div>
-        <div class="right">
-          <p class="news_4">{{news_item[4]}}</p>
-          <p class="news_5">{{news_item[5]}}</p>
-        </div>
-        <div class="right_rigth">
-          <p class="news_6">{{news_item[6]}}</p>
-        </div>
-        <input type="hidden" name="title" value="{{news_item[0]}}">
-        <input type="hidden" name="news_1" value="{{news_item[2]}}">
-        <input type="hidden" name="news_2" value="{{news_item[3]}}">
-        <input type="hidden" name="news_4" value="{{news_item[4]}}">
-        <input type="hidden" name="news_5" value="{{news_item[5]}}">
-        <input type="hidden" name="news_6" value="{{news_item[6]}}">
-        <button class="right_most">></button>
-      </div>
-
-    </form>
-
-    {% endfor %}
-    {% else %}
-    <p>There are no current news</p>
-    {% endif %}
-  </div>
-
-
-</body>
-
+      {% endfor %} {% else %}
+      <p>There are no current news</p>
+      {% endif %}
+    </div>
+  </body>
 </html>
