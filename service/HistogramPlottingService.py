@@ -18,7 +18,7 @@ def plot_reservations_per_role():
     total_reservations = [row[1] for row in data]
 
     fig, ax = plt.subplots(figsize=(15,15))
-    ax.bar(roles, total_reservations)
+    bars = ax.bar(range(len(roles)), total_reservations)
     ax.set_title('Total Reservations by Role')
     ax.set_xlabel('Role')
     ax.set_ylabel('Total Reservations')
@@ -28,6 +28,12 @@ def plot_reservations_per_role():
     ax.set_xticklabels(roles)
     plt.xticks(rotation=45, ha="right")
     ax.set_xlim(-0.5, len(roles) - 0.5)
+    
+    for i, bar in enumerate(bars):
+        height = bar.get_height()
+        ax.annotate(height, xy=(bar.get_x() + bar.get_width() / 2, height),
+                    xytext=(0, 3), textcoords='offset points',
+                    ha='center', va='bottom')
 
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
@@ -49,7 +55,7 @@ def plot_reservations_per_purpose():
     total_reservations = [row[1] for row in data]
      
     fig, ax = plt.subplots(figsize=(15,15))
-    ax.bar(reservation_purposes, total_reservations)
+    bars = ax.bar(range(len(reservation_purposes)), total_reservations)
     ax.set_title('Total Reservations by Reservation Purpose')
     ax.set_xlabel('Reservation Purpose')
     ax.set_ylabel('Total Reservations')
@@ -59,6 +65,12 @@ def plot_reservations_per_purpose():
     ax.set_xticklabels(reservation_purposes)
     plt.xticks(rotation=45, ha="right")
     ax.set_xlim(-0.5, len(reservation_purposes) - 0.5)
+    
+    for i, bar in enumerate(bars):
+        height = bar.get_height()
+        ax.annotate(height, xy=(bar.get_x() + bar.get_width() / 2, height),
+                    xytext=(0, 3), textcoords='offset points',
+                    ha='center', va='bottom')
 
 
     buffer = io.BytesIO()
@@ -81,7 +93,7 @@ def plot_reservations_per_class():
     total_reservations = [row[1] for row in data]
 
     fig, ax = plt.subplots(figsize=(15,15))
-    ax.bar(classroom_names, total_reservations)
+    bars = ax.bar(range(len(classroom_names)), total_reservations)
     ax.set_title('Total Reservations by Classroom Name')
     ax.set_xlabel('Classroom Name')
     ax.set_ylabel('Total Reservations')
@@ -90,6 +102,12 @@ def plot_reservations_per_class():
     ax.set_xticklabels(classroom_names)
     plt.xticks(rotation=45, ha="right")
     ax.set_xlim(-0.5, len(classroom_names) - 0.5)
+    
+    for i, bar in enumerate(bars):
+        height = bar.get_height()
+        ax.annotate(height, xy=(bar.get_x() + bar.get_width() / 2, height),
+                    xytext=(0, 3), textcoords='offset points',
+                    ha='center', va='bottom')
 
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
@@ -120,6 +138,11 @@ def plot_reservations_per_priority_value():
 
     # Adjust x-tick positions dynamically
     ax.set_xlim(-0.5, len(priority_values) - 0.5)
+    for i, bar in enumerate(bars):
+        height = bar.get_height()
+        ax.annotate(height, xy=(bar.get_x() + bar.get_width() / 2, height),
+                    xytext=(0, 3), textcoords='offset points',
+                    ha='center', va='bottom')
     
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
@@ -151,6 +174,12 @@ def plot_user_numbers_per_priority_value():
 
     # Adjust x-tick positions dynamically
     ax.set_xlim(-0.5, len(priority_values) - 0.5)
+    
+    for i, bar in enumerate(bars):
+        height = bar.get_height()
+        ax.annotate(height, xy=(bar.get_x() + bar.get_width() / 2, height),
+                    xytext=(0, 3), textcoords='offset points',
+                    ha='center', va='bottom')
 
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
@@ -171,7 +200,7 @@ def plot_user_numbers_per_role():
     user_roles, total_number_of_users = map(list, zip(*data))
 
     fig, ax = plt.subplots(figsize=(15,15))
-    ax.bar(user_roles, total_number_of_users)
+    bars = ax.bar(range(len(user_roles)), total_number_of_users)
     ax.set_title('Total Number of Users for Each User Role')
     ax.set_xlabel('Role')
     ax.set_ylabel('Number of Users')
@@ -180,6 +209,12 @@ def plot_user_numbers_per_role():
     ax.set_xticklabels(user_roles)
     plt.xticks(rotation=45, ha="right")
     ax.set_xlim(-0.5, len(user_roles) - 0.5)
+    
+    for i, bar in enumerate(bars):
+        height = bar.get_height()
+        ax.annotate(height, xy=(bar.get_x() + bar.get_width() / 2, height),
+                    xytext=(0, 3), textcoords='offset points',
+                    ha='center', va='bottom')
 
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
@@ -202,7 +237,7 @@ def plot_histogram_of_it_report_numbers_per_problem_description():
     problem_descriptions, total_number_of_it_reports = map(list, zip(*data))
 
     fig, ax = plt.subplots(figsize=(15,15))
-    ax.bar(problem_descriptions, total_number_of_it_reports)
+    bars = ax.bar(range(len(problem_descriptions)), total_number_of_it_reports)
     ax.set_title('Number of IT Reports per Problem Description')
     ax.set_xlabel('Problem Descriptions')
     ax.set_ylabel('Number of IT Reports')
@@ -212,6 +247,12 @@ def plot_histogram_of_it_report_numbers_per_problem_description():
     ax.grid(axis='y', linestyle='--')
     plt.xticks(rotation=45, ha="right")
     ax.set_xlim(-0.5, len(problem_descriptions) - 0.5)
+    
+    for i, bar in enumerate(bars):
+        height = bar.get_height()
+        ax.annotate(height, xy=(bar.get_x() + bar.get_width() / 2, height),
+                    xytext=(0, 3), textcoords='offset points',
+                    ha='center', va='bottom')
     
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
@@ -232,7 +273,7 @@ def plot_histogram_of_it_report_numbers_per_classroom_name():
     room_names, total_number_of_it_reports = map(list, zip(*data))
 
     fig, ax = plt.subplots(figsize=(15, 15))
-    ax.bar(range(len(room_names)), total_number_of_it_reports)
+    bars = ax.bar(range(len(room_names)), total_number_of_it_reports)
     ax.set_title('Number of IT Reports for Each Classroom')
     ax.set_xlabel('Classroom Names')
     ax.set_ylabel('Number of IT Reports')
@@ -243,6 +284,12 @@ def plot_histogram_of_it_report_numbers_per_classroom_name():
     plt.xticks(rotation=45, ha="right")
 
     ax.set_xlim(-0.5, len(room_names) - 0.5)
+    
+    for i, bar in enumerate(bars):
+        height = bar.get_height()
+        ax.annotate(height, xy=(bar.get_x() + bar.get_width() / 2, height),
+                    xytext=(0, 3), textcoords='offset points',
+                    ha='center', va='bottom')
 
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
@@ -263,7 +310,7 @@ def plot_histogram_of_it_report_numbers_per_faculty_name():
     faculty_names, total_number_of_it_reports = map(list, zip(*data))
 
     fig, ax = plt.subplots(figsize=(15, 15))
-    ax.bar(range(len(faculty_names)), total_number_of_it_reports)
+    bars = ax.bar(range(len(faculty_names)), total_number_of_it_reports)
     ax.set_title('Number of IT Reports for Each Faculty')
     ax.set_xlabel('Faculty')
     ax.set_ylabel('Number of IT Reports')
@@ -274,6 +321,12 @@ def plot_histogram_of_it_report_numbers_per_faculty_name():
     ax.grid(axis='y', linestyle='--')
 
     ax.set_xlim(-0.5, len(faculty_names) - 0.5)
+    
+    for i, bar in enumerate(bars):
+        height = bar.get_height()
+        ax.annotate(height, xy=(bar.get_x() + bar.get_width() / 2, height),
+                    xytext=(0, 3), textcoords='offset points',
+                    ha='center', va='bottom')
 
     buffer = io.BytesIO()
     plt.savefig(buffer, format='png')
