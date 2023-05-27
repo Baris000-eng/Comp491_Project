@@ -28,7 +28,7 @@ h1 {
 
 
 p {
-  background-color: #c9eb5a;
+  background-color:  skyblue;
   border-radius: 5px;
   padding: 10px;
 }
@@ -73,7 +73,7 @@ button {
 }
 
 button:hover {
-  background-color: #128c7e;
+  background-color: skyblue;
 }
 
 .chat-history {
