@@ -6,6 +6,19 @@ body {
   background-size: cover;
   justify-content: center;
   align-items: center;
+
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0, 255, 238);
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 100px;
+
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
 }
 
 .header {
@@ -19,12 +32,14 @@ body {
 }
 
 .group1,
-.group2 {
+.group2,
+.group3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
 
-.group1,.group2 {
+.group1,.group2
+.group3 {
   flex-basis: calc(100% / 3);
 }
 
@@ -33,7 +48,10 @@ body {
 }
 
 .group2 {
-  flex-direction: row;
+  flex-direction: column;
+}
+.group3 {
+  flex-direction: column;
 }
 
 .group2 .buttons {
@@ -95,9 +113,8 @@ h1 {
 
 
 .buttons button {
-  max-width: 400px;
   padding: 20px;
-  font-size: 24px;
+  font-size: 35px;
   font-weight: bold;
   text-align: center;
   color: #ffffff;
@@ -105,7 +122,15 @@ h1 {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: 10px;
+  margin: 70px;
+  width: 450px;
+  min-width: 450px;
+  max-width: 450px;
+  height: 150px;
+  min-height: 150px;
+  max-height: 150px;
+  border-radius: 40px;
+
 }
 
 .button.clicked,
@@ -123,9 +148,6 @@ h1 {
   color: white;
 }
 
-button {
-  color: black;
-}
 
 .news {
   border-radius: 10px;

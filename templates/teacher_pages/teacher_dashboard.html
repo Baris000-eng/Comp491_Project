@@ -6,76 +6,81 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="../static/teacher_dashboard.css">
+    <link rel="stylesheet" type="text/css" href="../static/student_dashboard.css">
 </head>
-<h1>Welcome To Teacher Dashboard</h1>
 
-<div class="container">
-    <div class="group1">
-        <div class="buttons">
-            <form action="/openTeacherReservationScreen" method="GET"> <button>Reserve A Classroom</button>
-            </form>
-        </div>
-        <div class="buttons">
-            <form action="/viewInsidesOfClassrooms" method="GET">
-                <button>View Insides of Classrooms</button>
-            </form>
-        </div>
-        <div class="buttons">
-            <form action="/openITReportScreen" method="GET"> <button>Report To IT</button></form>
-        </div>
-
-        <div class="buttons">
-            <form action="/reservations" method="GET"> <button>See Reserved Classes</button></form>
-        </div>
+<body>
+    <div class="header">
+        <h1>Teacher Dashboard</h1>
     </div>
 
-    <div class="group2">
-        <div class="buttons">
-            <form action="/getFilterAndSearchClassroomsScreen" method="GET">
-                <button>Filter and Search Classrooms</button>
-            </form>
-            <form action="/makeAnnouncement">
-                <button onclick="location.href='/makeAnnouncement';" 
-                name="makeAnnouncement" 
-                value="makeAnnouncement" 
-                id="makeAnnouncement">
-                    Make Announcement To Students
-                </button>
-            </form>
-        </div>
-        <div class="buttons">
-            <form action="/classrooms" method="GET">
-                <button>Show Classroom Information</button>
-            </form>
-        </div>
+    <div class="container">
+        <div class="group1">
+            <div class="buttons">
+                <form action="/exam_schedules">
+                    <button onclick="location.href='/exam_schedules';" name="exam-schedules" value="exam-schedules"
+                        id="exam-schedules">
+                        View Exam Schedules
+                    </button>
+                </form>
+            </div>
+            <div class="buttons">
+                <form action="/openITReportScreen" method="GET"> <button>Report To IT</button></form>
+            </div>
 
-        <div class="buttons">
-            <form action="/exam_schedules">
-                <button onclick="location.href='/exam_schedules';" name="exam-schedules" value="exam-schedules"
-                    id="exam-schedules">
-                    View Exam Schedules
-                </button>
-            </form>
-
+            <div class="buttons">
+                <form action="/reservations" method="GET"> <button>See Reserved Classes</button></form>
+            </div>
         </div>
 
-        <div class="buttons">
-            <form action="/class_schedules">
-                <button onclick="location.href='/class_schedules';" name="class-schedules" value="class-schedules"
-                    id="class-schedules">
-                    View Course Schedules
-                </button>
-            </form>
+        <div class="group2">
+            <div class="buttons">
+                <form action="/getFilterAndSearchClassroomsScreen" method="GET">
+                    <button>Filter and Search Classrooms</button>
+                </form>
+            </div>
+            <div class="buttons">
+                <form action="/makeAnnouncement">
+                    <button onclick="location.href='/makeAnnouncement';" name="makeAnnouncement"
+                        value="makeAnnouncement" id="makeAnnouncement">
+                        Make Announcement To Students
+                    </button>
+                </form>
+            </div>
 
+            <div class="buttons">
+                <form action="/openTeacherReservationScreen" method="GET"> <button>Reserve A Classroom</button>
+                </form>
+            </div>
         </div>
 
 
+        <div class="group3">
+            <div class="buttons">
+                <form action="/viewInsidesOfClassrooms" method="GET">
+                    <button>View Insides of Classrooms</button>
+                </form>
+            </div>
 
+            <div class="buttons">
+                <form action="/classrooms" method="GET">
+                    <button>Show Classroom Information</button>
+                </form>
+            </div>
+
+            <div class="buttons">
+                <form action="/class_schedules">
+                    <button onclick="location.href='/class_schedules';" name="class-schedules" value="class-schedules"
+                        id="class-schedules">
+                        View Course Schedules
+                    </button>
+                </form>
+
+            </div>
+
+
+        </div>
     </div>
-
-</div>
-
 </body>
 
 </html>
