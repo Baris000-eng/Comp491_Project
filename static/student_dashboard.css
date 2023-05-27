@@ -1,5 +1,5 @@
 body {
-  margin: 20px;
+
   padding: 0;
   background-color: yellowgreen;
   background-image: url("../static/images/classroom.png");
@@ -14,7 +14,7 @@ body {
   align-items: center;
   background-color: rgb(0, 255, 238);
   font-family: Arial, Helvetica, sans-serif;
-  margin-top: 100px;
+
 
   display: flex;
   flex-direction: column;
