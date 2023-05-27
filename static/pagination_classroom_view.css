@@ -2,6 +2,7 @@ body {
   background-color: darkblue;
   background-image: url("../static/images/classroom.png");
   background-size: cover;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 button {
@@ -43,8 +44,8 @@ button:hover {
 
 #image-container {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(0, 1fr));
   gap: 10px;
   border: 2px solid black;
   padding: 10px;
@@ -57,7 +58,7 @@ button:hover {
   display: none;
 }
 
-#image-container img:nth-child(-n + 9) {
+#image-container img:nth-child(-n + 16) {
   display: block;
 }
 
@@ -90,11 +91,20 @@ img:hover {
 
 
 h2 {
-  border-radius: 4px;
-  background-color: rgb(81, 18, 18);
-  color: white;
+  border-radius: 10px;
+  /* background-color: rgb(81, 18, 18); */
+  background-color: skyblue;
+  color: black;
   border-color: red;
   font-weight: bold;
   font-size: 30px;
   text-align: center;
+  max-width: fit-content;
+  padding: 10px;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
