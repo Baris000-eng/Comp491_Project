@@ -11,7 +11,7 @@
 
 <body>
     <h1> Chat for: {{ class_room_no }} </h1>
-    <div id="chat-history">
+    <div class="chat-history">
         {% for row in rows %}
         {% if row[3] and row[4]%}
         <p class="p1">{{row[3]}}: {{row[4]}}</p>
@@ -27,9 +27,15 @@
             <input type="text" name="message" id="message">
             <button type="submit">Send message.</button>
         </form>
-        <form action="/report_message_student"><button>Report message.</button></form>
-        <form action="/clearMessages"> <button>Clear Messages (Warning, cannot be undone.)</button></form>
+        <!-- <form action="/report_message_student"><button>Report message.</button></form> -->
+        <!--<form action="/clearMessages"> <button>Clear Messages (Warning, cannot be undone.)</button></form> -->
     </div>
 </body>
+<script>
 
+    window.addEventListener('DOMContentLoaded', function() {
+      var element = document.getElementByClass('chat-history');
+      element.scrollTop = element.scrollHeight;
+    });
+  </script>
 </html>

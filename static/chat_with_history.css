@@ -75,3 +75,12 @@ button {
 button:hover {
   background-color: #128c7e;
 }
+
+.chat-history {
+  margin-left: 400px;
+  overflow-y: scroll;
+  height: 400px; 
+  width: 50%; 
+  scroll-padding-bottom: 9999px; 
+
+}
