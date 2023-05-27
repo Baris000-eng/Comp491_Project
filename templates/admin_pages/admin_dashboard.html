@@ -19,9 +19,13 @@
 		<form action="/seeUserStatistics" method="GET">
 			<button>See User Statistics</button>
 		</form>
-		<form action="/createNews" method="GET">
-			<button>Create news</button>
+		<form action="/exam_schedules">
+			<button onclick="location.href='/exam_schedules';" name="exam-schedules" value="exam-schedules"
+				id="exam-schedules">
+				View Exam Schedules
+			</button>
 		</form>
+
 	</div>
 
 	<div class="group">
@@ -43,17 +47,11 @@
 		<form action="/get_it_report_statistics_for_admin" method="GET">
 			<button>See Statistics of IT Reports</button>
 		</form>
-	</div>
-
-
-	<div class="group">
-		<form action="/exam_schedules">
-			<button onclick="location.href='/exam_schedules';" name="exam-schedules" value="exam-schedules"
-				id="exam-schedules">
-				View Exam Schedules
-			</button>
+		<form action="/createNews" method="GET">
+			<button>Create news</button>
 		</form>
 	</div>
+
 
 	<div class="group">
 		<form action="/class_schedules">
@@ -62,7 +60,11 @@
 				View Course Schedules
 			</button>
 		</form>
+
 	</div>
+
+
+	
 
 </div>
 
