@@ -1,0 +1,41 @@
+Roles:
+    -Student
+        *Reserve a classroom
+        *View inside Classrooms
+        *See Reserved Classess
+        *Filter and Search Classrooms
+        *Report To IT
+        *Show Classroom Information
+        *View Exam Schedule
+        *View Course Schedules
+        *Chat for each classroom
+        *Read News
+        *Attending club events
+        *Open Map
+    -Teacher
+        *Reserve a classroom
+        *View inside Classrooms
+        *See Reserved Classess
+        *Filter and Search Classrooms
+        *Report To IT
+        *Create Announcements
+        *Show Classroom Information
+        *View Exam Schedule
+        *View Course Schedules
+        *Chat for each classroom
+    -Admin
+        *See, Edit or Delete Users
+        *See, Edit or Delete Reservations
+        *See, Edit or Delete IT Reports
+        *See User Statistics
+        *See Reservation Statistics
+        *See Statistics of IT Reports
+        *Create News
+        *View Inside Of Classrooms
+        *View Exam Schedules
+        *View Course Schedules
+    -IT Staff
+        *Open IT Problems
+        *Filter and Search Classrooms
+        *View Inside Of Classrooms
+        *Show Classroom Information
