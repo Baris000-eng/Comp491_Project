@@ -1,5 +1,6 @@
 import repository.ClassroomRepository as CR
 import service.ReservationService as RS
+import service.ExamService as ES
 from constants import VacancyCheckRequirements as VCR
 from constants import ClassroomModel as CM
 from flask import render_template
@@ -53,8 +54,8 @@ def getClassroomsWhere(criteria: dict=None):
 
     if isVacanyCheckNeeded(criteria):
         vacancy_criteria = [criteria.get(req) for req in VCR]
-        _, busy_classrooms_codes = RS.reservedClassroomsByInterval(*vacancy_criteria)
-        classrooms = excludeClassrooms(classrooms, busy_classrooms_codes)    
+        classrooms = excludeAllBusyClassrooms(vacancy_criteria, classrooms)
+
         
     return classrooms
 
@@ -88,6 +89,25 @@ def isVacanyCheckNeeded(criteria: dict):
 
     return True
 
+def excludeAllBusyClassrooms(vacancy_criteria, classrooms):
+    classrooms = excludeReservedClassrooms(vacancy_criteria, classrooms)
+    classrooms = excludeExamClassrooms(vacancy_criteria, classrooms)
+
+    return classrooms
+
+
+def excludeReservedClassrooms(vacancy_criteria, classrooms):
+    _, busy_classrooms_codes = RS.reservedClassroomsByInterval(*vacancy_criteria)
+    filtered_classrooms = excludeClassrooms(classrooms, busy_classrooms_codes)
+    return filtered_classrooms
+
+def excludeExamClassrooms(vacancy_criteria, classrooms):
+    _, exam_classcodes = ES.examsByInterval(*vacancy_criteria)
+    filtered_classrooms = excludeClassrooms(classrooms, exam_classcodes)
+    return filtered_classrooms
+
+
 def excludeClassrooms(source_classrooms, exclude_codes):
+    exclude_codes = [code.replace(" ", "") for code in exclude_codes]
     exclude_codes_set = set(exclude_codes) # Turn to a set for efficiency
-    return [classroom for classroom in source_classrooms if classroom[CM.code] not in exclude_codes_set]
+    return [classroom for classroom in source_classrooms if classroom[CM.code].replace(" ", "") not in exclude_codes_set]

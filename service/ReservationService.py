@@ -9,6 +9,7 @@ import repository.ReservationRepository as RR
 import service.UserService as US
 import service.ClassroomService as CS
 import service.MailSendingService as MSS
+import service.ExamService as ES
 from constants import ReservationConstants as RC
 
 DEBUG = True
@@ -145,20 +146,21 @@ def reservedClassroomsByInterval(start_date, start_time, duration):
     ids_list = [code[0] for code in info_tuples]
     codes_list = [code[1] for code in info_tuples]
 
-    if DEBUG:
-        print(f"ids_list: {ids_list}")
 
     return ids_list, codes_list
-
-def check_time_interval_conflict(date, start_time, duration_in_minutes, class_code):
-    # Call reservedClassroomsByInterval
-    _, occupied_classcodes = reservedClassroomsByInterval(date, start_time, duration_in_minutes)
-
-    if class_code in occupied_classcodes:
-        return True
-    else:
-        return False
     
+def check_exam_conflict(date, start_time, duration_in_minutes: int, class_code: str):
+    _, exam_classcodes = ES.examsByInterval(date, start_time, duration_in_minutes)
+    isConflict = class_code.replace(" ", "") in exam_classcodes
+
+    return isConflict
+
+def check_reservation_conflict(date, start_time, duration_in_minutes: int, class_code: str):
+    _, occupied_classcodes = reservedClassroomsByInterval(date, start_time, duration_in_minutes)
+    isConflict = class_code in occupied_classcodes
+    
+    return isConflict
+
 
 def getConflictingIds(date, start_time, duration_in_minutes, class_code):
     reservation_ids, occupied_classcodes = reservedClassroomsByInterval(date, start_time, duration_in_minutes)
@@ -203,14 +205,15 @@ def validateReservation(role, date, start_time, end_time, class_code):
     start_datetime_obj = timezone.localize(start_datetime_obj)
 
     if start_datetime_obj < current_datetime:
-        if DEBUG:
-            print("DEBUG MODE: This is not a valid time. It is in past")
         return False, RC.reservation_in_past_error
     
     if duration > RC.RESERVATION_UPPER_LIMIT:
         return False, RC.reservation_too_long_error
-    
-    if check_time_interval_conflict(date, start_time, duration, class_code):
+
+    if check_exam_conflict(date, start_time, duration, class_code):
+        return False, RC.exam_conflicting_error
+
+    if check_reservation_conflict(date, start_time, duration, class_code):
         return False, RC.reservation_conflicting_error
     
     return True, ""
