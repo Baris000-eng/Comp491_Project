@@ -4,12 +4,12 @@ from typing import List
 
 from constants import DB
 from constants import FilterOperations as FO
+import repository.Repository as Repo
 
 DEBUG = False
 
 def initializeClassroomTables():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     c.execute(f'''CREATE TABLE IF NOT EXISTS {DB.classrooms}
                 (code TEXT PRIMARY KEY, 
@@ -33,8 +33,7 @@ def initializeClassroomTables():
     conn.close()
 
 def createClassrooms(csv_source: str):
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     try:
         with open(csv_source, 'r') as csv_file:
@@ -58,8 +57,7 @@ def createClassrooms(csv_source: str):
     
 
 def getAllClassrooms():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute(f"SELECT * FROM {DB.classrooms}")
 
     classrooms = c.fetchall()
@@ -68,8 +66,7 @@ def getAllClassrooms():
     return classrooms
 
 def getAllClassroomCodes():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute(f"SELECT code FROM {DB.classrooms} ORDER BY code ASC")
 
     class_codes = c.fetchall()
@@ -87,8 +84,7 @@ def getClassroomsWhere(criteria: dict, operations: dict):
         print(f'Query: {query}')
         print(f'Parameters: {parameters}')
 
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute(query, parameters)
 
     classrooms = c.fetchall()
@@ -150,8 +146,7 @@ def getWhereClauseAndParamList(criterion: str, values: List, operation: str):
 
 
 def getAllDepartmentNames():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute(f"SELECT DISTINCT department FROM {DB.classrooms}")
 
     departments = c.fetchall()
@@ -165,8 +160,7 @@ def getAllDepartmentNames():
     return returned_department_names
 
 def getAllClassroomNames():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute(f"SELECT code FROM {DB.classrooms}")
 
     classrooms = c.fetchall()

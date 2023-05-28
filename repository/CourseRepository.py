@@ -6,6 +6,7 @@ import openpyxl
 from constants import ROLES
 import pandas as pd
 import repository.UserRepository as UR
+import repository.Repository as Repo
 import deprecation
 import datetime
 import html
@@ -19,7 +20,7 @@ from typing import List
 def initializeCourseTable():
     courses_excel = 'SPR_23_COURSES.xlsx'
     df = pd.read_excel(courses_excel)
-    conn = sqlite3.connect(DB.kuclass_db)
+    _, conn = Repo.getCursorAndConnection()
 
     table_name = 'courses'
     df.to_sql(table_name, conn, if_exists='replace', index=False)
@@ -29,8 +30,7 @@ def initializeCourseTable():
 
 """
 def initializeCourseTables():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     c.execute(f'''CREATE TABLE IF NOT EXISTS {DB.courses}
                 (code TEXT PRIMARY KEY, 
@@ -55,8 +55,7 @@ def initializeCourseTables():
 """
 """
 def initializeCourseTable():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     c.execute(f'''CREATE TABLE IF NOT EXISTS {DB.courses}
                 (component TEXT,
@@ -91,8 +90,7 @@ def initializeCourseTable():
     conn.close()
 
 def createCourses(csv_source: str):
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     try:
         with open(csv_source, 'r') as csv_file:

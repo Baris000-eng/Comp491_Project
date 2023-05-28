@@ -112,8 +112,7 @@ def seeTheReservations():
 
 def getUsernameByReservationId(ids):
     usernames = RR.getUsernameByReservationId(ids)
-    if DEBUG:
-        print(usernames)
+
     return usernames
 
 
@@ -229,7 +228,6 @@ def deleteReservation():
         date = request.form['date']
         start_time = request.form['start_time']
         end_time = request.form['end_time']
-        username = request.form['username_of_reserver']
         public_or_private = request.form['reservation_purpose']
         classroom = request.form['classroom_name']
         priority_reserved = request.form['priority_reserved']
@@ -238,7 +236,6 @@ def deleteReservation():
             date=date,
             start_time=start_time,
             end_time=end_time,
-            username=username,
             public_or_private=public_or_private,
             classroom=classroom,
             priority_reserved=priority_reserved
@@ -255,7 +252,6 @@ def updateReservation():
         reservation_date = request.form['date']
         reservation_start_time = request.form['start_time']
         reservation_end_time = request.form['end_time']
-        reserver_username = request.form['username_of_reserver']
         reservation_purpose = request.form['reservation_purpose']
         reserved_classroom = request.form['classroom_name']
         priority_reserved = request.form['priority_reserved']
@@ -264,7 +260,6 @@ def updateReservation():
             date=reservation_date,
             start_time=reservation_start_time,
             end_time=reservation_end_time,
-            username=reserver_username,
             reservation_purpose=reservation_purpose,
             reserved_classroom=reserved_classroom,
             priority_reserved=priority_reserved,

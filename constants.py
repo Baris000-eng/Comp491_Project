@@ -20,6 +20,7 @@ class DB:
     reservations = "reservations_db"
     itReports = "IT_Report_logdb"
     kuclass_db = "kuclass.db"
+    user_reservation = "user_reservation_db"
 
 # To map column names to column numbers
 

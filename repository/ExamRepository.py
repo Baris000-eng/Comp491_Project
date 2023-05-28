@@ -7,6 +7,7 @@ import datetime
 from constants import ROLES
 import pandas as pd
 import repository.UserRepository as UR
+import repository.Repository as Repo
 from constants import DB
 import csv
 from typing import List
@@ -14,8 +15,7 @@ from typing import List
 DEBUG = True
 
 # def initializeExamTable():
-#     conn = sqlite3.connect(DB.kuclass_db)
-#     c = conn.cursor()
+#     c, conn = Repo.getCursorAndConnection()
 
 #     c.execute(f'''CREATE TABLE IF NOT EXISTS {DB.exams}
 #                 (subject TEXT,
@@ -52,7 +52,7 @@ def populateWithIncrement():
     df['start_time'] = [t.strftime('%H:%M') for t in df['start_time']]
     df['end_time'] = [t.strftime('%H:%M') for t in df['end_time']]
 
-    conn = sqlite3.connect(DB.kuclass_db)
+    _, conn = Repo.getCursorAndConnection()
     table_name = DB.exams
     df.to_sql(table_name, conn, if_exists='replace', index=False)
     conn.commit()
@@ -70,8 +70,7 @@ def examsByInterval(start_date, start_time, duration):
     :param start_time: String in the form of "HH:MM" that specifies the time of interest, ex: "18:45"
     :param duration: Integer that specifies the duration of interest IN MINUTES
     """
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     start_datetime = f'{start_date} {start_time}'
 
@@ -96,7 +95,7 @@ def read_exam_excel():
     exam_excel = 'FALL_22_EXAMS.xlsx'
     df = pd.read_excel(exam_excel)
 
-    conn = sqlite3.connect(DB.kuclass_db)
+    _, conn = Repo.getCursorAndConnection()
     table_name = 'exams'
     df.to_sql(table_name, conn, if_exists='replace', index=False)
 
@@ -104,8 +103,7 @@ def read_exam_excel():
     conn.close()
 
 def createExams(csv_source: str):
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     try:
         with open(csv_source, 'r') as csv_file:
