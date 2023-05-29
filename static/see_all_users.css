@@ -69,3 +69,30 @@ h1 {
     padding: 8px 10px;
   }
 }
+
+button {
+  border-radius: 15px;
+  background-color: lightgreen;
+  color: black;
+  padding: 15px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+  background-color: lime;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  transform: scale(0.95);
+}

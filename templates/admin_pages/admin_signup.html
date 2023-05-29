@@ -15,16 +15,17 @@
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" placeholder="Please enter your password to signup" required
         onkeyup="checkPasswordStrength(this.value)">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="Please enter your email to signup" required="email"
+        maxlength="50">
+    <br>
     <div class="box">
         <label class="red-label" id="lowercase-label">Lowercase</label><br>
         <label class="red-label" id="uppercase-label">Uppercase</label><br>
         <label class="red-label" id="letter-label">Letter</label><br>
         <label class="red-label" id="length-label">At least 8 characters</label>
     </div>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" placeholder="Please enter your email to signup" required="email"
-        maxlength="50">
-    <br><br>
+    <br>
     <input id="admin-signup-button" type="submit" value="Signup">
 
 </form>

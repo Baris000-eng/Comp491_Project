@@ -7,8 +7,8 @@ body {
 
 h1 {
   text-align: center;
-  margin-top: 50px;
-  font-size: 60px;
+  margin-top: 40px;
+  font-size: 45px;
   font-weight: bold;
   color: black;
   background-color: lightgreen;
@@ -34,7 +34,7 @@ li {
 }
 
 input[type="text"] {
-  padding: 5px;
+  padding: 4px;
   font-size: 2rem;
   border-radius: 5px;
   border: 2px solid #222;
@@ -65,11 +65,15 @@ input[type="text"] {
 }
 
 .edit_it_button,
-.delete_it_button {
+.delete_it_button,
+.save_reservation,
+.save_user_information,
+.delete_class_reservation,
+.delete_user {
   display: block;
-  margin: 0 auto;
-  margin-top: 20px;
-  background-color: #dd2c00;
+  margin: 5px auto; 
+  margin-top: 5px;
+  background-color: red;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
@@ -84,40 +88,13 @@ input[type="text"] {
 }
 
 .edit_it_button:hover,
-.delete_it_button:hover {
-  background-color: #ff3d00;
+.delete_it_button:hover,
+.save_reservation:hover,
+.save_user_information:hover,
+.delete_class_reservation:hover,
+.delete_user:hover {
+  background-color: darkred;
   color: #ffffff;
   box-shadow: 2px 2px #333;
   transform: scale(1.05);
 }
-
-.save_reservation {
-  background-color: red;
-  color: white;
-  font-size: 30px;
-  padding: 20px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
-
-.save_reservation:hover{
-  background-color: darkred;
-}
-
-.delete_class_reservation {
-  background-color: red;
-  color: white;
-  font-size: 30px;
-  padding: 20px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
-
-.delete_class_reservation:hover{
-  background-color: darkred;
-}
-
