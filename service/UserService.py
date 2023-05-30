@@ -388,8 +388,6 @@ def select_role():
 
 
 ############################################################################################################################################################################################################
-
-
 def report_it():
     room_number = request.form['room_number']
     faculty_name = request.form['faculty_name']
@@ -403,46 +401,23 @@ def report_it():
         date,
         time
     )
-    return render_template("it_staff_pages/IT_report_success_screen.html")
+    newsCount = UR.getNewsCount()
+    return redirect(url_for('open_it_report_success', newsCount=newsCount))
 
-
+def open_it_report_success():
+    newsCount = request.args.get('newsCount')
+    return render_template("it_staff_pages/it_report_success_screen.html", newsCount=newsCount)
+    
 def seeITReport():
     rows = UR.getAllITReports()
-    return render_template('it_staff_pages/IT_Report_list.html', rows=rows)
-
-
-def report_chat():
-    problem_description = request.form['problem_description']
-    with open('IT_Chat_Problems.txt', 'a') as f:
-        f.write(f'Problem Description: {problem_description}\n\n')
-    return 'Thank you for reporting the problem to IT!'
+    return render_template('it_staff_pages/it_report_list.html', rows=rows)
 
 
 def chat_action():
     classroom = request.args.get("classroom")
     session['classroom'] = classroom
     return render_template("chat_pages/chat_room.html", classroom=classroom)
-
-
-"""def user_connected(info):
-    with open('chat_data.txt', 'a') as f:
-        f.write(session['username'] + " entered the chat to room " +
-                session['classroom'] + " \n")
-    print(session['username'] +
-          " joined the chat (room : " + session['classroom'] + ")")
-
-
-def user_disconnected():
-    with open('chat_data.txt', 'a') as f:
-        f.write(session['username'] + " exited the chat to room " +
-                session['classroom'] + " \n")
-    print(session['username'] +
-          " left the chat room (room : " + session['classroom'] + ")")"""
-
-
 #########################################################################################################################################################################
-
-
 def opening_screen():
     return render_template("opening_screen.html")
 
@@ -557,44 +532,38 @@ def it_report_statistics_for_admin():
 
 
 def enterChat():
-    row_data = request.args.get('row_data')
-    array = row_data.split(",")
     classroom = request.args.get("classroom")
     conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
-    query1 = f'SELECT * FROM chat_db WHERE classroom = ?'
+    chat_query = f'SELECT * FROM chat_db WHERE classroom = ?'
     
-    c.execute(query1, (classroom,))
+    c.execute(chat_query, (classroom,))
     data = c.fetchall()
     conn.close()
+
     return render_template('chat_class_generic.html', rows=data, classroom=classroom)
 
-
-
 def send_chat_message_student():
-    time = str(datetime.datetime.now().time())
-    date = str(datetime.date.today())
-    sender = session['username']
+    if request.method == 'POST':
+        time = str(datetime.datetime.now().time())
+        date = str(datetime.date.today())
+        sender = session['username']
 
-    message = request.args.get('message')
-    classroom = request.args.get("classroom")
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+        message = request.form.get('message')
+        classroom = request.form.get("classroom")
+        conn = sqlite3.connect(DB.kuclass_db)
+        c = conn.cursor()
 
-    c.execute("INSERT INTO chat_db (classroom, time, date, sender, message) VALUES (?, ?, ?, ?, ?)",
-              (classroom, time, date, sender, message))
+        c.execute("INSERT INTO chat_db (classroom, time, date, sender, message) VALUES (?, ?, ?, ?, ?)",
+                  (classroom, time, date, sender, message))
 
-    conn.commit()
-    conn.close()
+        conn.commit()
+        conn.close()
 
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
-    query = f'SELECT * FROM chat_db WHERE classroom = "{classroom}"'
-    c.execute(query)
-    data = c.fetchall()
-    conn.close()
-    return render_template('chat_class_generic.html', rows=data, classroom=classroom, user_name=session["username"], message=message)
-
+        return redirect(url_for('enterChat', classroom=classroom, message = message))
+    else:
+        pass
+    
 def allExams():
     return exam_schedules()
 

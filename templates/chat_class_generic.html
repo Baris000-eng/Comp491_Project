@@ -20,12 +20,11 @@
     </div>
 
     <div>
-        <form action="/send_chat_message_student" method="get">
+        <form action="/send_chat_message_student" method="POST">
             <input type="hidden" name="classroom" value="{{classroom}}">
             <input type="text" name="message" id="message">
             <button type="submit">Send Message</button>
         </form>
     </div>
 </body>
-
 </html>

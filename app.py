@@ -3,7 +3,7 @@ import setup
 import socket
 from rbac import allow_roles
 from service.UserService import password_change_success, go_to_opening_screen
-from service.UserService import select_role, chat_action, report_chat, report_it
+from service.UserService import select_role, chat_action, report_it
 import service.UserService as US
 import service.ClassroomService as CS
 import service.PiechartPlottingService as PPS
@@ -55,8 +55,6 @@ app.route('/password_change_success')(password_change_success)
 
 app.route('/select_role', methods=['POST'])(select_role)
 app.route('/chat_action')(chat_action)
-
-app.route('/reportingChat', methods=['POST'])(report_chat)
 app.route('/reportingIT', methods=['POST'])(report_it)
 
 app.route("/makeAnnouncement")(US.makeAnnouncment)
@@ -78,7 +76,9 @@ def getReservations():
 
 app.route('/createNews', methods=['GET'])(US.createNews)
 app.route('/updateITReport', methods=['POST', 'GET'])(US.updateITReport)
+app.route('/open_it_report_success', methods=['GET'])(US.open_it_report_success)
 app.route('/updateReservation', methods=['POST', 'GET'])(RS.updateReservation)
+
 
 
 @app.route('/<role>/screen', methods=['GET'])
@@ -137,10 +137,6 @@ app.route('/OpenReserveScreen', methods=['POST'])(RS.OpenReserveScreen)
 
 
 app.route('/attend_or_not')(US.attend_or_not)
-
-
-app.route('/enterChat',
-          methods=['GET'])(US.enterChat)
 
 app.route('/seeNewsInfo', methods=['POST'])(US.seeNewsInfo)
 
@@ -205,7 +201,8 @@ def login(role):
 
 # socket_chat.on("connect")(US.user_connected)
 # socket_chat.on("disconnect")(US.user_disconnected)
-app.route('/send_chat_message_student')(US.send_chat_message_student)
+app.route('/send_chat_message_student', methods=["GET", "POST"])(US.send_chat_message_student)
+app.route('/enterChat', methods=['GET'])(US.enterChat)
 app.route('/clearMessages')(US.clearMessages)
 
 
