@@ -214,7 +214,6 @@ app.route('/get_it_statistics_for_admin',
 ###########################################################################################################
 # Testing out role-based signup request
 
-
 @app.route('/<role>/signup', methods=['GET', 'POST'])
 def signup(role):
     return US.user_signup(request, role)
