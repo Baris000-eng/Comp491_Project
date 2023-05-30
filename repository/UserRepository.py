@@ -85,7 +85,8 @@ def initializeUserTables():
                 email TEXT NOT NULL,
                 role TEXT NOT NULL,
                 priority INTEGER)''')
-
+    conn.commit()
+    conn.close()
 
 def intializeITReportLog():
     c, conn = Repo.getCursorAndConnection()
@@ -99,7 +100,8 @@ def intializeITReportLog():
                  date DATE NOT NULL, 
                  time TIME NOT NULL
                  )''')
-
+    conn.commit()
+    conn.close()
 
 def createITReport(room_name, faculty_name, problem_description, date, time):
     c, conn = Repo.getCursorAndConnection()
@@ -120,7 +122,8 @@ def initializeChatTable():
               date DATE NOT NULL, 
               sender TEXT DEFAULT "NO_NAME_GIVEN", 
               message TEXT )''')
-
+    conn.commit()
+    conn.close()
 
 def initializeNewsTable():
     c, conn = Repo.getCursorAndConnection()
@@ -134,7 +137,8 @@ def initializeNewsTable():
               sender TEXT DEFAULT "NO_NAME_GIVEN", 
               role TEXT DEFAULT "NO_NAME_GIVEN"
               )''')
-
+    conn.commit()
+    conn.close()
 
 def getNews():
     c, conn = Repo.getCursorAndConnection()
