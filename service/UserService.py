@@ -636,7 +636,7 @@ def clearMessages():
 def viewFloors():
     return render_template("select_floor.html")
 
-
+    
 def makeAnnouncement():
     if request.method == "POST":
         news_message = request.form.get('news_message')
