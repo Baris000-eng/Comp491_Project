@@ -15,6 +15,10 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
+def replace_dashes_with_slashes(string:str):
+    string = string.replace('-', '/')
+    return string
+
 def getAnnouncementScreen():
     return render_template("teacher_announcement.html")
 
@@ -24,9 +28,32 @@ def getClassroomView():
 def getNewsCount():
     return UR.getNewsCount()
 
+def split_based_on_slash(string: str):
+    parts = string.split("/")
+    return parts
+
+def replace_day_and_year(date_field_list: list):
+    year_field = date_field_list[0]
+    date_field_list[0] = date_field_list[2]
+    date_field_list[2] = year_field
+    return date_field_list
+
 def open_news_screen():
-    nc = getNewsCount()
-    return render_template("incoming_news.html", news_data=UR.getNews(), newsCount=nc)
+    all_news = UR.getNews()
+    modified_news = []
+    for new in all_news:
+        new_list = list(new)
+        new_list[2] = replace_dashes_with_slashes(new_list[2])
+        sec_date_field_list = split_based_on_slash(new_list[2])
+        new_list[2] = '/'.join(replace_day_and_year(sec_date_field_list))
+        
+        new_list[4] = replace_dashes_with_slashes(new_list[4])
+        fourth_date_field_list = split_based_on_slash(new_list[4])
+        new_list[4] = '/'.join(replace_day_and_year(fourth_date_field_list))
+        
+        modified_news.append(new_list)
+        
+    return render_template("incoming_news.html", news_data=modified_news)
 
 
 def redirect_student_dashboard_from_news():
@@ -37,11 +64,7 @@ def redirect_student_dashboard_from_news():
 
 def exam_schedules():
     df = pd.read_excel('FALL_22_EXAMS.xlsx')
-
-    # Replace missing values with an empty string #
     df.fillna("", inplace=True)
-
-    # Escape special characters #
     df = df.applymap(lambda x: html.escape(str(x))
                      if isinstance(x, str) else x)
 
@@ -52,14 +75,9 @@ def exam_schedules():
 
 def course_schedules():
     df = pd.read_excel('SPR_23_COURSES.xlsx')
-
-    # Replace missing values with an empty string #
     df.fillna("", inplace=True)
-
-    # Escape special characters #
     df = df.applymap(lambda x: html.escape(str(x))
                      if isinstance(x, str) else x)
-
     html_table = df.to_html(index=False, header=False)
     header_fields = df.columns.tolist()
     return render_template("course_schedules.html", html_table=html_table, header_fields=header_fields)
