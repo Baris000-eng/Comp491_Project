@@ -14,40 +14,44 @@
       <button>Go to Student Dashboard</button>
     </form>
     <div class="news">
-      {% if news_data is defined and news_data %} {% for news_item in news_data
-      %}
-      <form action="/seeNewsInfo" method="POST">
-        <div class="individual_news">
-          <div class="leftmost">
-            <p class="news_2">{{news_item[1]}}</p>
-          </div>
-          <div class="left_left">
-            <p class="news_1">{{news_item[2]}}</p>
-            <p class="news_1">{{news_item[3]}}</p>
-          </div>
-          <div class="middle">
-            <p class="news_3">Title:{{news_item[0]}}</p>
-          </div>
-          <div class="right">
-            <p class="news_4">{{news_item[4]}}</p>
-            <p class="news_5">{{news_item[5]}}</p>
-          </div>
-          <div class="right_right">
-            <p class="news_6">{{news_item[6]}}</p>
-          </div>
-          <input type="hidden" name="title" value="{{news_item[0]}}" />
-          <input type="hidden" name="news_1" value="{{news_item[2]}}" />
-          <input type="hidden" name="news_2" value="{{news_item[3]}}" />
-          <input type="hidden" name="news_4" value="{{news_item[4]}}" />
-          <input type="hidden" name="news_5" value="{{news_item[5]}}" />
-          <input type="hidden" name="news_6" value="{{news_item[6]}}" />
-          <button class="right_most">></button>
-        </div>
-      </form>
-
-      {% endfor %} {% else %}
+      {% if news_data is defined and news_data %}
+      <table class="news_table">
+        <thead>
+          <tr>
+            <th>Time Interval</th>
+            <th>Date Interval</th>
+            <th>Sender</th>
+            <th>Title</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for news_item in news_data %}
+          <tr>
+            <td>{{ news_item[1] }} - {{ news_item[3] }}</td>
+            <td>{{ news_item[2] }} - {{ news_item[4] }}</td>
+            <td>{{ news_item[5] }} ({{ news_item[6] }})</td>
+            <td>{{ news_item[0] }}</td>
+            <td>
+              <form action="/seeNewsInfo" method="POST">
+                <input type="hidden" name="title" value="{{ news_item[0] }}" />
+                <input type="hidden" name="news_1" value="{{ news_item[2] }}" />
+                <input type="hidden" name="news_2" value="{{ news_item[3] }}" />
+                <input type="hidden" name="news_4" value="{{ news_item[4] }}" />
+                <input type="hidden" name="news_5" value="{{ news_item[5] }}" />
+                <input type="hidden" name="news_6" value="{{ news_item[6] }}" />
+                <button class="right_most">></button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
       <p>There are no current news</p>
       {% endif %}
     </div>
   </body>
 </html>
+
+
