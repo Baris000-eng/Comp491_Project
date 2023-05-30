@@ -55,6 +55,8 @@ app.route("/get_it_staff_login_help")(US.get_it_staff_login_help)
 app.route("/open_description_text")(US.get_description_text)
 app.route("/get_opening_help")(US.get_opening_help)
 app.route("/goToOpeningScreen")(US.goToOpeningScreen)
+app.route("/openFeatures")(US.openFeatures)
+
 
 app.route('/get_password_change_screen',
           methods=['GET'])(US.get_password_change_screen)

@@ -109,6 +109,9 @@ def get_opening_help():
 def goToOpeningScreen():
     return render_template("opening_screen.html")
 
+def openFeatures():
+    return render_template("features.html")
+
 
 def includes_ignore_case(s1: str, s2: str) -> bool:
     return (s1.lower() in s2.lower())
