@@ -15,7 +15,7 @@ ROLES = {
 class DB:
     users = "users_db"
     classrooms = "classrooms_db"
-    courses = "courses_db"
+    courses = "courses"
     exams = "exams_db"
     reservations = "reservations_db"
     itReports = "IT_Report_logdb"

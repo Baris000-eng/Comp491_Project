@@ -18,6 +18,9 @@ from typing import List
 
 
 def initializeCourseTable():
+    if courseTableExists():
+        return
+        
     courses_excel = 'SPR_23_COURSES.xlsx'
     df = pd.read_excel(courses_excel)
     _, conn = Repo.getCursorAndConnection()
@@ -27,6 +30,16 @@ def initializeCourseTable():
 
     conn.commit()
     conn.close()
+
+def courseTableExists():
+    c, conn = Repo.getCursorAndConnection()
+    c.execute(f"SELECT name FROM sqlite_master WHERE type='table' and name='{DB.courses}'")
+    table_exists = c.fetchone()
+    conn.close()
+
+    if table_exists:
+        return True
+    return False
 
 """
 def initializeCourseTables():

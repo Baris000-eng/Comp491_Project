@@ -37,11 +37,12 @@ DEBUG = True
 #     conn.close()
 
 def initializeExamTable():
+    if examTableExists():
+        return
     populateExamTable()
 
 def populateExamTable():
     populateWithIncrement()
-
 
 def populateWithIncrement():
     exam_excel = 'FALL_22_EXAMS.xlsx'
@@ -57,6 +58,16 @@ def populateWithIncrement():
     df.to_sql(table_name, conn, if_exists='replace', index=False)
     conn.commit()
     conn.close()
+
+def examTableExists():
+    c, conn = Repo.getCursorAndConnection()
+    c.execute(f"SELECT name FROM sqlite_master WHERE type='table' and name='{DB.exams}'")
+    table_exists = c.fetchone()
+    conn.close()
+
+    if table_exists:
+        return True
+    return False
 
 
 def examsByInterval(start_date, start_time, duration):
