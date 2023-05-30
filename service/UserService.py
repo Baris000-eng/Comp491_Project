@@ -15,6 +15,9 @@ app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 app.debug = True
 
+def getAnnouncementScreen():
+    return render_template("teacher_announcement.html")
+
 def getClassroomView():
     return render_template("view_inside_of_classroom.html")
 
@@ -634,24 +637,25 @@ def viewFloors():
     return render_template("select_floor.html")
 
 
-def makeAnnouncment():
-    news_message = request.form.get('news_message')
-    date = request.form.get('date')
-    time = request.form.get('time')
-    date_end = request.form.get('date_end')
-    time_end = request.form.get('time_end')
-    sender = session["username"]
-    role = session["role"]
-    UR.insert_news_to_newsdb(
-        news_message=news_message,
-        time=time,
-        date=date,
-        time_end=time_end,
-        date_end=date_end,
-        sender=sender,
-        role=role
-    )
-    return render_template("teacher_announcement.html")
+def makeAnnouncement():
+    if request.method == "POST":
+        news_message = request.form.get('news_message')
+        date = request.form.get('date')
+        time = request.form.get('time')
+        date_end = request.form.get('date_end')
+        time_end = request.form.get('time_end')
+        sender = session["username"]
+        role = session["role"]
+        UR.insert_news_to_newsdb(
+            news_message=news_message,
+            time=time,
+            date=date,
+            time_end=time_end,
+            date_end=date_end,
+            sender=sender,
+            role=role
+        )
+        return render_template("successful_announcement_sending.html")
 
 
 def openMap():

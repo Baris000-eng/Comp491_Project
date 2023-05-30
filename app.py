@@ -42,6 +42,10 @@ def getCoursesWithPagination():
     return COS.getCoursesWithPagination(pageNumber)
 
 
+
+app.route("/getAnnouncementScreen")(US.getAnnouncementScreen)
+
+
 app.route("/open_news")(US.open_news_screen)
 app.route("/redirect_student_dashboard")(US.redirect_student_dashboard_from_news)
 app.route("/get_teacher_signup_guide")(US.get_teacher_signup_guide)
@@ -79,7 +83,7 @@ app.route('/select_role', methods=['POST'])(select_role)
 app.route('/chat_action')(chat_action)
 app.route('/reportingIT', methods=['POST'])(report_it)
 
-app.route("/makeAnnouncement")(US.makeAnnouncment)
+app.route("/makeAnnouncement", methods=['GET','POST'])(US.makeAnnouncement)
 
 app.route('/logout')(go_to_opening_screen)
 app.route('/', methods=['GET', 'POST'])(US.opening_screen)
@@ -96,7 +100,7 @@ def getReservations():
     return RS.getReservations(reservationType)
 
 
-app.route('/createNews', methods=['GET'])(US.createNews)
+app.route('/getCreateNewsScreen', methods=['GET'])(US.createNews)
 app.route('/updateITReport', methods=['POST', 'GET'])(US.updateITReport)
 app.route('/open_it_report_success', methods=['GET'])(US.open_it_report_success)
 app.route('/updateReservation', methods=['POST', 'GET'])(RS.updateReservation)
@@ -202,7 +206,7 @@ app.route('/seeITReports',
           methods=['GET'])(US.seeITReports)
 
 
-app.route('/createNewsElement', methods=['GET', "POST"])(US.createNewsElement)
+app.route('/createNewsElement', methods=["GET", "POST"])(US.createNewsElement)
 app.route('/get_it_statistics_for_admin',
           methods=['GET'])(US.it_report_statistics_for_admin)
 ###########################################################################################################
