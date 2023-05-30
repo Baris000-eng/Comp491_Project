@@ -17,6 +17,9 @@
         <input type="radio" name="reservationType" id="myReservations" value="myReservations">
         <label for="myReservations">See only my reservations</label>
         <br>
+        <input type="radio" name="reservationType" id="joinedReservations" value="joinedReservations">
+        <label for="joinedReservations">See only joined reservations</label>
+        <br>
         <br>
         <button class = "record_changes_button">Record changes</button>
     </form>
@@ -37,18 +40,37 @@
             <li>Priority Reserved: {{ row[8] }}</li>
         </ul>
         <div class="reservation_edit">
-            <form action="/editReservedClassroom" method="GET">
-                <input type="hidden" name="row_data" value="{{ row|join(',') }}">
-                {% if reservation_type %}
-                <button class="editing">Edit your reservation</button>
-                {% endif %}
-            </form>
             <form action="/enterChat" method="GET">
                 <input type="hidden" name="row_data" value="{{ row|join(',') }}">
                 <input type="hidden" name="classroom" value="{{ row[7] }}">
-                <br>
                 <button class="chatting">Enter Chat for This Classroom</button>
             </form>
+
+            <form action="/editReservedClassroom" method="GET">
+                <input type="hidden" name="row_data" value="{{ row|join(',') }}">
+                {% if reservation_type %}
+                {% if reservation_type == 'myReservations' %}
+                <br>
+                <button class="editing">Edit your reservation</button>
+                {% endif %}
+                {% endif %}
+            </form>
+
+            <form action="/joinOrLeaveReservation" method="POST">
+                <input type="hidden" name="row_data" value="{{ row|join(',') }}">
+                {% if reservation_type %}
+                {% if reservation_type == 'joinedReservations' %}
+                <br>
+                <input type="hidden" name="joinOrLeave" value="leave">
+                <button class="editing">Leave reservation</button>
+                {% endif %}
+                {% else %}
+                <br>
+                <input type="hidden" name="joinOrLeave" value="join">
+                <button class="editing">Join reservation</button>
+                {% endif %}
+            </form>
+            
         </div>
         {% endfor %}
     </div>

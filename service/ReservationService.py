@@ -7,6 +7,7 @@ import datetime
 import pytz
 import repository.ReservationRepository as RR
 import service.UserService as US
+import service.UserReservationService as URS
 import service.ClassroomService as CS
 import service.MailSendingService as MSS
 import service.ExamService as ES
@@ -74,8 +75,6 @@ def reserve_class():
     else:
         if error_string != RC.reservation_conflicting_error:
             # Reserv is not valid, throw error message
-            if DEBUG:
-                print(f"Reserv is not valid, throw error message")
             return render_template(role + "_reservation_screen.html",
                                 error_msg=error_string,
                                 options=classroom_code_options)
@@ -85,16 +84,11 @@ def reserve_class():
             isOverrideable = isConflictOverrideable(conflicting_ids, priority)
             if not isOverrideable:
                 # Reserv is neither valid nor overrideable, throw error message
-                if DEBUG:
-                    print(f"Reserv is neither valid nor overrideable, throw error message")
                 return render_template(role + "_reservation_screen.html",
                     error_msg=error_string,
                     options=classroom_code_options)
             else:
                 # Reserv is not valid, but overrideable, remove conflicting reservations, create this reservation
-                if DEBUG:
-                    print(f"Reserv is not valid, but overrideable, remove conflicting reservations, create this reservation")
-                
                 usernames = getUsernameByReservationId(conflicting_ids)
                 MSS.sendReservationOverrideMail(usernames)
 
@@ -106,16 +100,59 @@ def reserve_class():
                 return render_template("return_success_message_classroom_reserved.html")
 
 
+def joinOrLeaveReservation(joinOrLeave: str, reserv_id: int, username: str):
+    user_id = US.getIdByUsername(username)
+    isIn = RR.isUserInReservation(user_id, reserv_id)
+    if joinOrLeave == "join":
+        if isIn:
+            return render_template("join_or_leave_reservation.html", message = RC.already_joined_error)
+        else:
+            isPublic = "public" in getPublicityById(reserv_id).lower()
+            if not isPublic:
+                return render_template("join_or_leave_reservation.html", message = RC.joining_private_error)
+            
+            num_seats = CS.getSeatsByCode(getClassById(reserv_id))
+            num_users = URS.getNumberOfUsersInReservation(reserv_id)
+            if num_seats <= num_users:
+                return render_template("join_or_leave_reservation.html", message = RC.reservation_full_error)
+            
+            URS.createUserReservation(reserv_id, user_id, False)
+            return render_template("join_or_leave_reservation.html", message = RC.join_successfully)
+    else:
+        if not isIn:
+            return render_template("join_or_leave_reservation.html", message = RC.already_not_joined_error)
+        else:
+            isOwner = RR.isReservationOwner(user_id, reserv_id)
+            if isOwner:
+                return render_template("join_or_leave_reservation.html", message = RC.owner_cant_leave_error)               
+            else:
+                URS.deleteUserReservation(reserv_id, user_id)
+                return render_template("join_or_leave_reservation.html", message = RC.left_successfully)
+
 def seeTheReservations():
     data = RR.getAllReservations()
     return render_template('admin_pages/see_the_reservations.html', reservations=data)
 
 def getUsernameByReservationId(ids):
     usernames = RR.getUsernameByReservationId(ids)
-    if DEBUG:
-        print(usernames)
+
     return usernames
 
+def getPublicityById(id):
+    publicity = RR.getPublicityById(id)
+
+    if not publicity:
+        return False
+    
+    return publicity[0]
+
+def getClassById(id):
+    class_code = RR.getClassById(id)
+
+    if not class_code:
+        return ""
+    
+    return class_code[0]
 
 def see_already_reserved_classes():
     rows = RR.getAllReservations()
@@ -123,7 +160,10 @@ def see_already_reserved_classes():
 
 def getReservations(reservationType):
     if reservationType == "myReservations":
-        reservations = RR.getReservationsByUsername(session.get("username"))
+        reservations = RR.getOwnedReservationsByUsername(session.get("username"))
+        return render_template('classroom_inside_reservation.html', rows=reservations, reservation_type = reservationType)
+    if reservationType == "joinedReservations":
+        reservations = RR.getJoinedReservationsByUsername(session.get("username"))
         return render_template('classroom_inside_reservation.html', rows=reservations, reservation_type = reservationType)
     else:
         reservations = RR.getAllReservations()
@@ -174,11 +214,6 @@ def isConflictOverrideable(conflicting_ids, priority):
     
     conflicting_priorities = [RR.getPriorityById(id)[0] for id in conflicting_ids]
     max_priority = max(conflicting_priorities)
-    if DEBUG:
-        print(f'conflicting_ids: {conflicting_ids}')
-        print(f'conflicting_priorities: {conflicting_priorities}')
-        print(f'max_priority: {max_priority}')
-        print(f'priority: {priority}')
     if max_priority >= priority:
         return False
     
@@ -229,7 +264,6 @@ def deleteReservation():
         date = request.form['date']
         start_time = request.form['start_time']
         end_time = request.form['end_time']
-        username = request.form['username_of_reserver']
         public_or_private = request.form['reservation_purpose']
         classroom = request.form['classroom_name']
         priority_reserved = request.form['priority_reserved']
@@ -238,7 +272,6 @@ def deleteReservation():
             date=date,
             start_time=start_time,
             end_time=end_time,
-            username=username,
             public_or_private=public_or_private,
             classroom=classroom,
             priority_reserved=priority_reserved
@@ -255,7 +288,6 @@ def updateReservation():
         reservation_date = request.form['date']
         reservation_start_time = request.form['start_time']
         reservation_end_time = request.form['end_time']
-        reserver_username = request.form['username_of_reserver']
         reservation_purpose = request.form['reservation_purpose']
         reserved_classroom = request.form['classroom_name']
         priority_reserved = request.form['priority_reserved']
@@ -264,7 +296,6 @@ def updateReservation():
             date=reservation_date,
             start_time=reservation_start_time,
             end_time=reservation_end_time,
-            username=reserver_username,
             reservation_purpose=reservation_purpose,
             reserved_classroom=reserved_classroom,
             priority_reserved=priority_reserved,

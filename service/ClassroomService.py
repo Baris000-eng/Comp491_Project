@@ -20,6 +20,9 @@ def getAllClassroomCodes():
     codes_list = [code[0] for code in codes_tuples] 
     return codes_list
 
+def getSeatsByCode(class_code):
+    return CR.getSeatsByCode(class_code)
+
 def createClassrooms(csv_source: str):
     """
     Given a path to csv file import data to classroom repository

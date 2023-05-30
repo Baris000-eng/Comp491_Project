@@ -1,16 +1,15 @@
 import sqlite3
 import bcrypt
-import deprecation
 from flask import session
 from constants import ROLES
 from constants import DB
 from constants import UserModel
+import repository.Repository as Repo
 import sqlite3
 
 
 def getAllUsers():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute('SELECT * FROM users_db')
     users = c.fetchall()
     conn.close()
@@ -18,8 +17,7 @@ def getAllUsers():
 
 
 def updateITReport(report_no, room_name, faculty_name, problem_description, date, time):
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     c.execute("UPDATE IT_Report_logdb SET room_name=?, faculty_name=?, problem_description=?, date=?, time=? WHERE it_report_no=?",
               (room_name, faculty_name, problem_description, date, time, report_no))
@@ -29,8 +27,7 @@ def updateITReport(report_no, room_name, faculty_name, problem_description, date
 
 
 def getAllITReports():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute('SELECT * FROM IT_Report_logdb')
     data = c.fetchall()
     conn.close()
@@ -38,8 +35,7 @@ def getAllITReports():
 
 
 def delete_it_report_from_db(report_no, room_name, faculty_name, problem_description, date, time):
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute('''DELETE FROM IT_Report_logdb WHERE
                  it_report_no = ? AND
                  room_name = ? AND
@@ -57,8 +53,7 @@ def delete_it_report_from_db(report_no, room_name, faculty_name, problem_descrip
 
 
 def insert_news_to_newsdb(news_message, time, date, time_end, date_end, sender, role):
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute('''INSERT INTO news_db (news_message, time, date, time_end, date_end, sender, role) 
                  VALUES (?, ?, ?, ?, ?, ?, ?)''', (news_message, time, date, time_end, date_end, sender, role))
     conn.commit()
@@ -66,16 +61,14 @@ def insert_news_to_newsdb(news_message, time, date, time_end, date_end, sender, 
 
 
 def getAllITReports():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute('SELECT * FROM IT_Report_logdb')
     rows = c.fetchall()
     return rows
 
 
 def getAllUsernames():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute('SELECT username FROM users_db')
     usernames = [row[0] for row in c.fetchall()]
     conn.close()
@@ -83,8 +76,7 @@ def getAllUsernames():
 
 
 def initializeUserTables():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     c.execute(f'''CREATE TABLE IF NOT EXISTS {DB.users}
                 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -96,8 +88,7 @@ def initializeUserTables():
 
 
 def intializeITReportLog():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     # Create the students_signup_db table if it doesn't exist yet
     c.execute('''CREATE TABLE IF NOT EXISTS IT_Report_logdb
@@ -111,8 +102,7 @@ def intializeITReportLog():
 
 
 def createITReport(room_name, faculty_name, problem_description, date, time):
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     # Create the students_signup_db table if it doesn't exist yet
     c.execute('''INSERT INTO IT_Report_logdb (room_name, faculty_name, problem_description, date, time) 
@@ -122,8 +112,7 @@ def createITReport(room_name, faculty_name, problem_description, date, time):
 
 
 def initializeChatTable():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     c.execute('''CREATE TABLE IF NOT EXISTS chat_db
              (classroom TEXT,
@@ -134,8 +123,7 @@ def initializeChatTable():
 
 
 def initializeNewsTable():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     c.execute('''CREATE TABLE IF NOT EXISTS news_db
              (news_message TEXT,
@@ -149,8 +137,7 @@ def initializeNewsTable():
 
 
 def getNews():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute('SELECT * FROM news_db')
     news_data = c.fetchall()
     conn.close()
@@ -158,8 +145,7 @@ def getNews():
 
 
 def getNewsCount():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute('SELECT COUNT(*) FROM news_db')
     news_count = c.fetchone()[0]
     conn.close()
@@ -169,8 +155,7 @@ def createNews(news_message, time, date, time_end, date_end, sender, role):
     """
     Given a news_message, time, date, time_end, date_end, sender, role insert new news message into the news_db database
     """
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     if news_message == None:
         news_message = "not specified"
     if time == None:
@@ -197,8 +182,7 @@ def createChat(classroom, time, date, sender, message):
     """
     Given a classroom, time, date, sender, role, flagged, insert new chat message into the chat database
     """
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     c.execute('''INSERT INTO chat_db (classroom, time, date, sender, message) 
              VALUES (?, ?, ?, ?, ?)''', (classroom, time, date, sender, message))
@@ -213,8 +197,7 @@ def createUser(username: str, password: str, email: str, role: str, priority: in
     """
 
     session["username"] = username
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     priority = ROLES[role].priority
     c.execute(
         f"INSERT INTO {DB.users} (username, password, email, role, priority) VALUES (?, ?, ?, ?, ?)",
@@ -225,8 +208,7 @@ def createUser(username: str, password: str, email: str, role: str, priority: in
 
 
 def getUserByUsername(username: str):
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     # Check if the username exists in the database
     c.execute(
@@ -239,8 +221,7 @@ def getUserByUsername(username: str):
 
 
 def getPriorityByUsername(username: str):
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     # Check if the username exists in the database
     c.execute(
@@ -252,9 +233,27 @@ def getPriorityByUsername(username: str):
     return priority
 
 
+def getIdByUsername(username: str):
+    c, conn = Repo.getCursorAndConnection()
+
+    c.execute(
+        f"SELECT id FROM {DB.users} WHERE username = ?", (username,))
+
+    user_id = c.fetchone()
+    conn.close()
+
+    # TODO: Add a useful try except block in case user_id is None.
+    try:
+        user_id = user_id[0]
+    except TypeError:
+        print("Be careful, could not fetch reservation id")
+        user_id = -1
+
+    return user_id
+
+
 def getUserByEmail(email: str):
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     # Check if the username exists in the database
     c.execute(
@@ -267,8 +266,7 @@ def getUserByEmail(email: str):
 
 
 def getUserByUsernameAndEmail(username: str, email: str):
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     c.execute(
         f"SELECT * FROM {DB.users} WHERE username = ? AND email = ?", (username, email))
@@ -343,8 +341,7 @@ def check_email(user, email: str):
 
 def change_user_password(email: str, password: str):
 
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     # Update the password for the student with the given email
     c.execute(f"UPDATE {DB.users} SET password = ? WHERE email = ?",
@@ -354,23 +351,18 @@ def change_user_password(email: str, password: str):
 
 
 def deleteUser(username, user_email, user_role, user_priority, user_id):
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     c.execute(f"DELETE FROM {DB.users} WHERE username=? AND email=? AND role=? AND priority=? AND id=?",
               (username, user_email, user_role, user_priority, user_id))
 
-    c.execute(f'''
-        UPDATE {DB.users}
-        SET id = (SELECT COUNT(*) FROM {DB.users} AS sub WHERE sub.id < {DB.users}.id) + 1
-    ''')
+
     conn.commit()
     conn.close()
 
 
 def updateUserInformation(user_id, username, user_email, user_role, user_priority):
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     c.execute(f"UPDATE {DB.users} SET username=?, email=?, role=?, priority=? WHERE id=?",
               (username, user_email, user_role, user_priority, user_id))
@@ -380,8 +372,7 @@ def updateUserInformation(user_id, username, user_email, user_role, user_priorit
 
 
 def initializeClubsDb():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     c.execute('''CREATE TABLE IF NOT EXISTS clubs_db
                  (title TEXT, news_1 TEXT, news_2 TEXT, news_4 TEXT, news_5 TEXT, news_6 TEXT)''')
@@ -389,8 +380,7 @@ def initializeClubsDb():
 
 def createAttendee(title, news_1, news_2, news_4, news_5, news_6):
     initializeClubsDb()
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute("INSERT INTO clubs_db VALUES (?, ?, ?, ?, ?, ?)",
               (title, news_1, news_2, news_4, news_5, news_6))
 

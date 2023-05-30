@@ -17,6 +17,7 @@ app = Flask(__name__)
 app.secret_key = '491'
 app.config['SECRET_KEY'] = '491'
 socketio = SocketIO(app)
+DEBUG = True
 
 app.route("/viewInsidesOfClassrooms")(US.getClassroomView)
 app.route('/viewFloors')(US.viewFloors)
@@ -113,6 +114,21 @@ def dashboard(role):
 
 
 app.route('/reserve_class', methods=['POST'])(RS.reserve_class)
+
+
+@app.route('/joinOrLeaveReservation', methods=['POST'])
+def joinOrLeaveReservation():
+    if "joinOrLeave" not in request.form:
+        return getReservations()
+    
+    joinType = request.form.get("joinOrLeave")
+    reserv_id = request.form.get("row_data").split(",")[0]
+    username = session.get("username")
+
+    return RS.joinOrLeaveReservation(joinType, reserv_id, username)
+    
+    
+
 app.route('/already_reserved_classes',
           methods=['POST'])(RS.see_already_reserved_classes)
 app.route('/OpenReserveScreen', methods=['POST'])(RS.OpenReserveScreen)

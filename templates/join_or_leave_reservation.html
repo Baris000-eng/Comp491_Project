@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/success_deletion.css">
+    <title>Success/Fail message</title>
+
+</head>
+
+<h1>{{message}}</h1>
+
+{% if 'role' in session %}
+{% if session['role'] == 'teacher' %}
+<form action="teacher/dashboard">
+    <button>Go To Teacher Dashboard</button>
+</form>
+{% elif session['role'] == 'it_staff' %}
+<form action="it_staff/dashboard">
+    <button>Go To IT Staff Dashboard</button>
+</form>
+{% elif session['role'] == 'student' %}
+<form action="redirect_student_dashboard">
+    <button>Go To Student Dashboard</button>
+</form>
+{% endif %}
+{% endif %}
+
+</body>
+
+</html>

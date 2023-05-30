@@ -5,10 +5,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as ticker
 from constants import DB
+import repository.Repository as Repo
 
 def piechart_reservations_per_priority_value():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute(f'SELECT priority_reserved, COUNT(*) FROM {DB.reservations} GROUP BY priority_reserved')
     data = c.fetchall()
     conn.close()
@@ -33,8 +33,7 @@ def piechart_reservations_per_priority_value():
 
 
 def piechart_of_reservations_per_class():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute(f'SELECT classroom, COUNT(*) FROM {DB.reservations} GROUP BY classroom')
     data = c.fetchall()
     conn.close()
@@ -58,8 +57,7 @@ def piechart_of_reservations_per_class():
 
 
 def piechart_of_reservations_per_purpose():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute(f'SELECT public_or_private, COUNT(*) FROM {DB.reservations} GROUP BY public_or_private')
     data = c.fetchall()
     conn.close()
@@ -84,8 +82,7 @@ def piechart_of_reservations_per_purpose():
 
 
 def piechart_of_reservations_per_role():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute(f'SELECT role, COUNT(*) FROM {DB.reservations} GROUP BY role')
     data = c.fetchall()
     conn.close()
@@ -109,8 +106,7 @@ def piechart_of_reservations_per_role():
     return html
 
 def plot_piechart_of_user_numbers_per_priority_value():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute('SELECT priority, COUNT(*) FROM users_db GROUP BY priority')
     data = c.fetchall()
     conn.close()
@@ -132,8 +128,7 @@ def plot_piechart_of_user_numbers_per_priority_value():
     return html
 
 def plot_piechart_of_user_numbers_per_role():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute('SELECT role, COUNT(*) FROM users_db GROUP BY role')
     data = c.fetchall()
     conn.close()
@@ -155,8 +150,7 @@ def plot_piechart_of_user_numbers_per_role():
     return html
 
 def plot_piechart_of_it_report_numbers_per_faculty_name():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute('SELECT faculty_name, COUNT(*) FROM IT_Report_logdb GROUP BY faculty_name')
     data = c.fetchall()
     conn.close()
@@ -176,8 +170,7 @@ def plot_piechart_of_it_report_numbers_per_faculty_name():
     return html
 
 def plot_piechart_of_it_report_numbers_per_classroom_name():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute('SELECT room_name, COUNT(*) FROM IT_Report_logdb GROUP BY room_name')
     data = c.fetchall()
     conn.close()
@@ -199,8 +192,7 @@ def plot_piechart_of_it_report_numbers_per_classroom_name():
     return html
 
 def plot_piechart_of_it_report_numbers_per_problem_description():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     c.execute('SELECT problem_description, COUNT(*) FROM IT_Report_logdb GROUP BY problem_description')
     data = c.fetchall()
     conn.close()

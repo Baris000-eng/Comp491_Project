@@ -5,6 +5,7 @@ import sqlite3
 from constants import ROLES, DB
 import pandas as pd
 import repository.UserRepository as UR
+import repository.Repository as Repo
 import datetime
 import html
 
@@ -240,6 +241,11 @@ def getPriorityByUsername(username):
         return 0
 
     return priority[0]
+
+def getIdByUsername(username):
+    user_id = UR.getIdByUsername(username)
+
+    return user_id
 
 
 def get_password_change_screen():
@@ -687,16 +693,14 @@ def successfulDeletionOfUser():
 
 
 def clearMessages():
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
 
     c.execute("DELETE FROM chat_db")
 
     conn.commit()
     conn.close()
 
-    conn = sqlite3.connect(DB.kuclass_db)
-    c = conn.cursor()
+    c, conn = Repo.getCursorAndConnection()
     query1 = 'SELECT * FROM chat_db'
     c.execute(query1)
     data = c.fetchall()
