@@ -589,64 +589,11 @@ def send_chat_message_student():
 
     conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
-    query1 = f'SELECT * FROM chat_db WHERE classroom = "{classroom}"'
-    c.execute(query1)
+    query = f'SELECT * FROM chat_db WHERE classroom = "{classroom}"'
+    c.execute(query)
     data = c.fetchall()
     conn.close()
     return render_template('chat_class_generic.html', rows=data, classroom=classroom, user_name=session["username"], message=message)
-
-
-"""def myExamsOnly():
-    df = pd.read_excel('FALL_22_EXAMS.xlsx')
-    df.fillna("", inplace=True)
-    df = df.applymap(lambda x: html.escape(str(x))
-                     if isinstance(x, str) else x)
-
-    args_array = []
-
-    class_name = request.args.get('class_name')
-    class_code = request.args.get('class_code')
-    subject = request.args.get('subject')
-    catalog = request.args.get('catalog')
-    description = request.args.get('description')
-    section = request.args.get('section')
-    courseid = request.args.get('courseid')
-    examdate = request.args.get('examdate')
-    starttime = request.args.get('starttime')
-    endtime = request.args.get('endtime')
-    facilid = request.args.get('facilid')
-    examtype = request.args.get('examtype')
-    instructorname = request.args.get('instructorname')
-    totalenr = request.args.get('totalenr')
-    acadorg = request.args.get('acadorg')
-
-    args_array.append(("class_name", class_name))
-    args_array.append(("class_code", class_code))
-    args_array.append(("subject", subject))
-    args_array.append(("catalog", catalog))
-    args_array.append(("description", description))
-    args_array.append(("section", section))
-    args_array.append(("courseid", courseid))
-    args_array.append(("examdate", examdate))
-    args_array.append(("starttime", starttime))
-    args_array.append(("endtime", endtime))
-    args_array.append(("facilid", facilid))
-    args_array.append(("examtype", examtype))
-    args_array.append(("instructorname", instructorname))
-    args_array.append(("totalenr", totalenr))
-    args_array.append(("acadorg", acadorg))
-
-    search_args = ["|".join([x[1] for x in args_array if x[1]])]
-    search_args.extend([f"{key}={value}" for key, value in request.args.items(
-    ) if value and key != "class_code"])
-
-    df = df[df.apply(lambda row: row.astype(str).str.startswith(tuple(search_args)).any() or
-                     row.astype(str).str.startswith(class_code).any(), axis=1)]
-
-    html_table = df.to_html(index=False, header=False)
-    header_fields = df.columns.tolist()
-    return render_template("exam_schedules.html", html_table=html_table, header_fields=header_fields)"""
-
 
 def allExams():
     return exam_schedules()
