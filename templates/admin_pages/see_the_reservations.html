@@ -51,13 +51,11 @@
           </td>
           <td>
             <form action="/enterChat" method="GET">
-              <input
-                type="hidden"
-                name="row_data"
-                value="{{ row|join(',') }}"
-              />
-              <button>Enter Chat for this class</button>
-            </form>
+              <input type="hidden" name="row_data" value="{{ row|join(',') }}">
+              <input type="hidden" name="classroom" value="{{ row[7] }}">
+              <br>
+              <button class="chatting">Enter Chat for This Classroom</button>
+          </form>
           </td>
         </tr>
         {% endfor %}

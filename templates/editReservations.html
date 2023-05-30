@@ -149,8 +149,6 @@
       <button class="delete_class_reservation" type="submit">
         Click here to delete the reservation
       </button>
-
-      
     </form>
 
     {% if 'role' in session %}
@@ -165,6 +163,11 @@
     {% elif session['role'] == 'student' %}
     <form action="student/dashboard">
         <button class="dashboard" type="submit">Go To Student Dashboard</button>
+    </form>
+    {% endif %}
+    {% elif session['role'] == 'admin' %}
+    <form action="admin/dashboard">
+        <button class="dashboard" type="submit">Go To Admin Dashboard</button>
     </form>
     {% endif %}
     {% endif %}

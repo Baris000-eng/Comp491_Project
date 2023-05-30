@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <title>{{class_no}}</title>
+    <title>{{classroom}}</title>
     <link rel="stylesheet" type="text/css" href="../static/chat_room_theme.css">
 
 </head>
 
-<h1>Welcome to chatroom for {{class_no}}. Please be nice.</h1>
+<h1>Welcome to chatroom for {{classroom}}. Please be nice.</h1>
 
 
 <div class="message_hist" id="message_hist">Chat history</div>
@@ -15,7 +15,7 @@
 <form>
     <label for="">Enter text to chat</label>
     <input required type="text" name="message_input required " placeholder="Enter message">
-    <button type="submit" onClick="send_the_message()"></button>>Send message</button>
+    <button type="submit" onclick="send_the_message()"></button>>Send message</button>
 </form>
 <form action="/reportingChat" method="POST" class="chat_report" id="chat_report">
     <label for="report-label">Report Unethical Chat Users From Here:</label>

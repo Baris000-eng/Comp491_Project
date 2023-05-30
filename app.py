@@ -30,7 +30,6 @@ app.route(
 
 app.route('/class_schedules')(US.course_schedules)
 app.route('/exam_schedules')(US.exam_schedules)
-app.route('/myExamsOnly')(US.myExamsOnly)
 app.route('/allExams')(US.allExams)
 
 app.route("/open_news")(US.open_news_screen)

@@ -49,6 +49,7 @@ input[type="text"] {
   border-radius: 5px;
   font-size: 1.6rem;
   margin-right: 20px;
+  margin-bottom: 10px; /* Add margin between buttons and other elements */
   cursor: pointer;
   font-weight: bold;
   text-align: center;
@@ -71,14 +72,13 @@ input[type="text"] {
 .delete_class_reservation,
 .delete_user {
   display: block;
-  margin: 5px auto; 
-  margin-top: 5px;
+  margin: 10px auto; /* Add margin between buttons */
   background-color: red;
   color: #ffffff;
   border: none;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border-radius: 5px;
-  font-size: 2rem;
+  font-size: 1.6rem;
   cursor: pointer;
   font-weight: bold;
   text-align: center;
@@ -93,8 +93,23 @@ input[type="text"] {
 .save_user_information:hover,
 .delete_class_reservation:hover,
 .delete_user:hover {
-  background-color: darkred;
-  color: #ffffff;
+  background-color: #ff0000;
   box-shadow: 2px 2px #333;
   transform: scale(1.05);
+}
+
+.dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+  background-color: blue;
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
 }

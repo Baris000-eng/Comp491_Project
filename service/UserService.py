@@ -413,9 +413,9 @@ def report_chat():
 
 
 def chat_action():
-    class_no = request.args.get("classroom")
-    session['classroom'] = class_no
-    return render_template("chat_pages/chat_room.html", class_no=class_no)
+    classroom = request.args.get("classroom")
+    session['classroom'] = classroom
+    return render_template("chat_pages/chat_room.html", classroom=classroom)
 
 
 """def user_connected(info):
@@ -551,18 +551,18 @@ def it_report_statistics_for_admin():
 
 
 def enterChat():
-
     row_data = request.args.get('row_data')
     array = row_data.split(",")
-    class_no = request.args.get("classroom")
+    classroom = request.args.get("classroom")
     conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
-    query1 = f'SELECT * FROM chat_db WHERE classroom = "{class_no}"'
-
-    c.execute(query1)
+    query1 = f'SELECT * FROM chat_db WHERE classroom = ?'
+    
+    c.execute(query1, (classroom,))
     data = c.fetchall()
     conn.close()
-    return render_template('chat_class_generic.html', rows=data, class_room_no=class_no)
+    return render_template('chat_class_generic.html', rows=data, classroom=classroom)
+
 
 
 def send_chat_message_student():
@@ -571,26 +571,26 @@ def send_chat_message_student():
     sender = session['username']
 
     message = request.args.get('message')
-    class_no = request.args.get("class_no")
+    classroom = request.args.get("classroom")
     conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
 
     c.execute("INSERT INTO chat_db (classroom, time, date, sender, message) VALUES (?, ?, ?, ?, ?)",
-              (class_no, time, date, sender, message))
+              (classroom, time, date, sender, message))
 
     conn.commit()
     conn.close()
 
     conn = sqlite3.connect(DB.kuclass_db)
     c = conn.cursor()
-    query1 = f'SELECT * FROM chat_db WHERE classroom = "{class_no}"'
+    query1 = f'SELECT * FROM chat_db WHERE classroom = "{classroom}"'
     c.execute(query1)
     data = c.fetchall()
     conn.close()
-    return render_template('chat_class_generic.html', rows=data, class_room_no=class_no, user_name=session["username"], message=message)
+    return render_template('chat_class_generic.html', rows=data, classroom=classroom, user_name=session["username"], message=message)
 
 
-def myExamsOnly():
+"""def myExamsOnly():
     df = pd.read_excel('FALL_22_EXAMS.xlsx')
     df.fillna("", inplace=True)
     df = df.applymap(lambda x: html.escape(str(x))
@@ -639,7 +639,7 @@ def myExamsOnly():
 
     html_table = df.to_html(index=False, header=False)
     header_fields = df.columns.tolist()
-    return render_template("exam_schedules.html", html_table=html_table, header_fields=header_fields)
+    return render_template("exam_schedules.html", html_table=html_table, header_fields=header_fields)"""
 
 
 def allExams():
