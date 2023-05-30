@@ -687,7 +687,7 @@ def attend_or_not():
 
 
 
-def openSCIENCE():
+def openSCI():
     return render_template("science.html")
 
 def openSOS():

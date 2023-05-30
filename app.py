@@ -62,7 +62,7 @@ app.route("/goToOpeningScreen")(US.goToOpeningScreen)
 app.route("/openFeatures")(US.openFeatures)
 
 #classrooms
-app.route("/openSCIENCE")(US.openSCIENCE)
+app.route("/openSCI")(US.openSCI)
 app.route("/openSNAA")(US.openSNAA)
 app.route("/openSNAB")(US.openSNAB)
 app.route("/openENG")(US.openENG)
