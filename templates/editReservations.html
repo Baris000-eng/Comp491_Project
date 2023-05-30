@@ -135,7 +135,6 @@
         Click here to save the edited reservation
       </button>
     </form>
-    <br>
     <form action="/deleteReservation" method="POST">
       <input type="hidden" name="reservation_id" value="{{ row[0] }}" />
       <input type="hidden" name="role" value="{{ row[1] }}" />
@@ -150,26 +149,22 @@
         Click here to delete the reservation
       </button>
     </form>
-
-    {% if 'role' in session %}
-    {% if session['role'] == 'teacher' %}
+    {% if 'role' in session %} {% if session['role'] == 'teacher' %}
     <form action="teacher/dashboard">
-        <button class="dashboard" type="submit">Go To Teacher Dashboard</button>
+      <button class="dashboard" type="submit">Go To Teacher Dashboard</button>
     </form>
     {% elif session['role'] == 'it_staff' %}
     <form action="it_staff/dashboard">
-        <button class="dashboard" type="submit">Go To IT Staff Dashboard</button>
+      <button class="dashboard" type="submit">Go To IT Staff Dashboard</button>
     </form>
     {% elif session['role'] == 'student' %}
     <form action="student/dashboard">
-        <button class="dashboard" type="submit">Go To Student Dashboard</button>
+      <button class="dashboard" type="submit">Go To Student Dashboard</button>
     </form>
-    {% endif %}
     {% elif session['role'] == 'admin' %}
     <form action="admin/dashboard">
-        <button class="dashboard" type="submit">Go To Admin Dashboard</button>
+      <button class="dashboard" type="submit">Go To Admin Dashboard</button>
     </form>
-    {% endif %}
-    {% endif %}
+    {% endif %} {% endif %}
   </body>
 </html>

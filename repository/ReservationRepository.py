@@ -127,7 +127,6 @@ def getReservationId(role, date, start_time, end_time, public_or_private, classr
     reservation_id = c.fetchone()
     conn.close()
     
-    # TODO: Add a useful try except block in case reservation_id is None.
     try:
         reservation_id = reservation_id[0]
     except TypeError:
@@ -214,7 +213,6 @@ def reservedClassroomsByInterval(start_date, start_time, duration):
 def getUsernameByReservationId(ids):
     c, conn = Repo.getCursorAndConnection()
     id_string = ', '.join(map(str, ids))
-    # c.execute(f"SELECT DISTINCT username FROM {DB.reservations} WHERE id IN ({id_string})")
 
     query = f'''SELECT DISTINCT username
                 FROM {DB.user_reservation} as UR

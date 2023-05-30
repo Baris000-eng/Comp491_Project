@@ -3,6 +3,7 @@ body {
   font-family: Arial, sans-serif;
   background-image: url("../static/images/classroom.png");
   background-size: cover;
+  margin: 10px;
 }
 
 h1 {
@@ -13,16 +14,17 @@ h1 {
   color: black;
   background-color: lightgreen;
   border-radius: 4px;
+  margin: 10px;
 }
 
 ul {
   list-style: none;
   padding: 0;
-  margin: 0 0 20px;
   background-color: #ffffff;
   border: 2px solid #222;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin: 10px;
 }
 
 li {
@@ -49,7 +51,7 @@ input[type="text"] {
   border-radius: 5px;
   font-size: 1.6rem;
   margin-right: 20px;
-  margin-bottom: 10px; /* Add margin between buttons and other elements */
+  margin-bottom: 7px;
   cursor: pointer;
   font-weight: bold;
   text-align: center;
@@ -70,14 +72,15 @@ input[type="text"] {
 .save_reservation,
 .save_user_information,
 .delete_class_reservation,
-.delete_user {
+.delete_user,
+.dashboard {
   display: block;
-  margin: 10px auto; /* Add margin between buttons */
+  margin: 10px auto;
   background-color: red;
   color: #ffffff;
   border: none;
   padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: 15px;
   font-size: 1.6rem;
   cursor: pointer;
   font-weight: bold;
@@ -92,24 +95,15 @@ input[type="text"] {
 .save_reservation:hover,
 .save_user_information:hover,
 .delete_class_reservation:hover,
-.delete_user:hover {
+.delete_user:hover,
+.dashboard:hover {
   background-color: #ff0000;
   box-shadow: 2px 2px #333;
   transform: scale(1.05);
 }
 
-.dashboard {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px auto;
-  background-color: blue;
-  color: #ffffff;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 1.6rem;
-  cursor: pointer;
-  font-weight: bold;
-  text-align: center;
-}
+
+
+
+
+

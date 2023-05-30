@@ -49,7 +49,7 @@ h1 {
 }
 
 .IT_Report_logdb tbody td button:hover {
-  background-color: darkred;
+  background-color: skyblue;
 }
 
 @media only screen and (max-width: 600px) {
