@@ -80,3 +80,5 @@ class ReservationConstants:
     reservation_full_error = "This reservation is full. You cannot join."
     join_successfully = "You have joined the reservation."
     left_successfully = "You have left the reservation."
+
+PAGE_SIZE = 50

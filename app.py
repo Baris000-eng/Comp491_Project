@@ -6,6 +6,7 @@ from service.UserService import password_change_success, go_to_opening_screen
 from service.UserService import select_role, chat_action, report_it
 import service.UserService as US
 import service.ClassroomService as CS
+import service.CourseService as COS
 import service.PiechartPlottingService as PPS
 import service.HistogramPlottingService as HPS
 import service.ReservationService as RS
@@ -29,9 +30,17 @@ app.route("/openMap")(US.openMap)
 app.route(
     "/get_reservation_code_viewing_screen")(RS.view_reservation_code_viewing_screen)
 
-app.route('/class_schedules')(US.course_schedules)
+app.route('/class_schedules')(COS.course_schedules)
 app.route('/exam_schedules')(US.exam_schedules)
 app.route('/allExams')(US.allExams)
+
+@app.route('/courses', methods=['GET'])
+def getCoursesWithPagination():
+    if DEBUG:
+        print(f"request.args: {request.args}")
+    pageNumber = request.args.get('pageNumber')
+    return COS.getCoursesWithPagination(pageNumber)
+
 
 app.route("/open_news")(US.open_news_screen)
 app.route("/redirect_student_dashboard")(US.redirect_student_dashboard_from_news)

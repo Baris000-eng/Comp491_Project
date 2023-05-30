@@ -4,7 +4,10 @@
 <head>
   <title>Course Schedules</title>
   <link rel="stylesheet" type="text/css" href="../static/course_schedules.css">
+  <script type="text/javascript" src="../static/pagination_course_view.js"></script>
 </head>
+
+<h1>Course Schedules</h1>
 
 <body>
   {% if 'role' in session %} {% if session['role'] == 'teacher' %}
@@ -19,22 +22,72 @@
   <form action="redirect_student_dashboard">
     <button>Go To Student Dashboard</button>
   </form>
-  {% endif %} {% endif %}
-  <h1>Course Schedules</h1>
-  <div class="excel-wrapper">
-    <table>
+  {% endif %} 
+  <br>
+  {% endif %}
+  <div class="table-container">
+    <table id="course-table">
       <thead>
         <tr>
-          {% for field in header_fields %}
-          <th>{{ field }}</th>
-          {% endfor %}
+          <th>Component</th>
+          <th>Subject</th>
+          <th>Catalog</th>
+          <th>Section</th>
+          <th>Course ID</th>
+          <th>Descr.</th>
+          <th>Descr. 1</th>
+          <th>Tot. Enrl.</th>
+          <th>Career</th>
+          <th>Acad. Org.</th>
+          
+          <th>Mon</th>
+          <th>Tues</th>
+          <th>Wed</th>
+          <th>Thurs</th>
+          <th>Fri</th>
+          <th>Sat</th>
+          <th>Sun</th>
+          <th>Facil. ID</th>
+          <th>Type</th>
+          <th>Capacity</th>
+          
+          <th>Mtg. Start</th>
+          <th>Mtg. End</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Pat</th>
+          <th>Role</th>
+          <th>Name</th>
+          <th>Topic ID</th>
+          <th>Term</th>
+          <th>Class Nbr</th>
+          
+          <th>Mode</th>
+          <th>Crse Attr</th>
+
         </tr>
       </thead>
       <tbody>
-        {{ html_table|safe }}
+        {% for row in courses %}
+        <tr>
+          {% for val in row %}
+          <td>{{ val }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
       </tbody>
     </table>
   </div>
+
+  <!-- This Jinja syntax is valid and should be ignored by the IDE -->
+  <div id="pagination">
+    {% if pageNumber %}
+      {% for i in range(1, pageNumber + 1) %}
+        <a href="#" onclick="showPage({{ i }})">{{ i }}</a>
+      {% endfor %}
+    {% endif %}
+  </div>
+
 </body>
 
 </html>

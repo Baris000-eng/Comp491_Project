@@ -1,19 +1,8 @@
-from flask import session
-from typing import List
-from flask import render_template, redirect, session,  flash, request, Flask, url_for, jsonify
-import sqlite3
-import openpyxl
-from constants import ROLES
 import pandas as pd
+import math
 import repository.UserRepository as UR
 import repository.Repository as Repo
-import deprecation
-import datetime
-import html
-import random
-import string
 from constants import DB
-import csv
 from typing import List
 
 
@@ -40,6 +29,35 @@ def courseTableExists():
     if table_exists:
         return True
     return False
+
+def getAllCourses():
+    c, conn = Repo.getCursorAndConnection()
+    c.execute(f"SELECT * FROM '{DB.courses}'")
+
+    courses = c.fetchall()
+    conn.close()
+
+    return courses
+
+
+def getCoursesWithPagination(limit, offset):
+    c, conn = Repo.getCursorAndConnection()
+    c.execute(f"SELECT * FROM '{DB.courses}' LIMIT {limit} OFFSET {offset}")
+
+    courses = c.fetchall()
+    conn.close()
+
+    return courses
+
+def getNumberOfPages(pageSize):
+    c, conn = Repo.getCursorAndConnection()
+    c.execute(f"SELECT COUNT(*) FROM '{DB.courses}'")
+
+    count = c.fetchone()[0]
+    conn.close()
+
+    num_pages = math.ceil(count / pageSize)
+    return num_pages
 
 """
 def initializeCourseTables():
