@@ -3,6 +3,8 @@ document.addEventListener("mousemove", function (event) {
   var xCoordinate = event.clientX;
   var yCoordinate = event.clientY;
 
+  
+
   if (
     xCoordinate > 1500 &&
     xCoordinate < 1800 &&

@@ -680,3 +680,32 @@ def attend_or_not():
                       news_4=news_4, news_5=news_5, news_6=news_6)
 
     return render_template('success_message_attendance.html', title=title, news_1=news_1, news_2=news_2, news_4=news_4, news_5=news_5, news_6=news_6)
+
+
+
+def openSCIENCE():
+    return render_template("science.html")
+
+def openSOS():
+    return render_template("sos.html")
+
+def openENG():
+    return render_template("eng.html")
+
+def openCASE():
+    return render_template("case.html")
+
+def openELC():
+    return render_template("elc.html")
+
+def openLIB():
+    return render_template("lib.html")
+
+def openSTD():
+    return render_template("std.html")
+
+def openSNAA():
+    return render_template("snaa.html")
+
+def openSNAB():
+    return render_template("snab.html")

@@ -57,6 +57,17 @@ app.route("/get_opening_help")(US.get_opening_help)
 app.route("/goToOpeningScreen")(US.goToOpeningScreen)
 app.route("/openFeatures")(US.openFeatures)
 
+#classrooms
+app.route("/openSCIENCE")(US.openSCIENCE)
+app.route("/openSNAA")(US.openSNAA)
+app.route("/openSNAB")(US.openSNAB)
+app.route("/openENG")(US.openENG)
+app.route("/openLIB")(US.openLIB)
+app.route("/openELC")(US.openELC)
+app.route("/openSOS")(US.openSOS)
+app.route("/openCASE")(US.openCASE)
+app.route("/openSTD")(US.openSTD)
+
 
 app.route('/get_password_change_screen',
           methods=['GET'])(US.get_password_change_screen)
