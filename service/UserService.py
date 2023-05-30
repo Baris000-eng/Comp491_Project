@@ -576,23 +576,24 @@ def createNews():
 
 
 def createNewsElement():
-    news_message = request.form.get('news_message')
-    date = request.form.get('date')
-    time = request.form.get('time')
-    date_end = request.form.get('date_end')
-    time_end = request.form.get('time_end')
-    sender = session["username"]
-    role = session["role"]
-    UR.insert_news_to_newsdb(
-        news_message=news_message,
-        time=time,
-        date=date,
-        time_end=time_end,
-        date_end=date_end,
-        sender=sender,
-        role=role
-    )
-    return render_template("admin_create_news.html")
+    if request.method == "POST":
+        news_message = request.form.get('news_message')
+        date = request.form.get('date')
+        time = request.form.get('time')
+        date_end = request.form.get('date_end')
+        time_end = request.form.get('time_end')
+        sender = session["username"]
+        role = session["role"]
+        UR.insert_news_to_newsdb(
+            news_message=news_message,
+            time=time,
+            date=date,
+            time_end=time_end,
+            date_end=date_end,
+            sender=sender,
+            role=role
+        )
+        return render_template("successful_news_creation_of_admin.html")
 
 
 def open_user_statistics_screen():
