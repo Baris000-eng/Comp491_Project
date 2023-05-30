@@ -15,12 +15,10 @@
         {% for row in rows %}
         {% if row[3] and row[4]%}
         <p class="p1">{{row[3]}}: {{row[4]}}</p>
-        <br>
         {% endif %}
         {% endfor %}
     </div>
 
-    <ul id="messages"></ul>
     <div>
         <form action="/send_chat_message_student" method="get">
             <input type="hidden" name="classroom" value="{{classroom}}">
