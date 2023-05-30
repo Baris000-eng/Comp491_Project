@@ -55,20 +55,37 @@ def getAllReservations():
     data = c.fetchall()
     conn.close()
 
-    if DEBUG:
-        print("getAllReservations")
-
     return data
     
 
-def getReservationsByUsername(username: str):
+def getOwnedReservationsByUsername(username: str):
     c, conn = Repo.getCursorAndConnection()
 
     query = f"""SELECT r.id, r.role, r.date, r.start_time, r.end_time, u.username, r.public_or_private, r.classroom, r.priority_reserved
                 FROM {DB.reservations} as r
                 JOIN {DB.user_reservation} AS ur ON r.id = ur.reservation_id
                 JOIN {DB.users} AS u ON ur.user_id = u.id
-                WHERE u.username = '{username}'"""
+                WHERE u.username = '{username}' and ur.is_owner = true"""
+
+    c.execute(query)
+    data = c.fetchall()
+    conn.close()
+    return data
+
+
+def getJoinedReservationsByUsername(username: str):
+    c, conn = Repo.getCursorAndConnection()
+
+    query = f"""SELECT r.id, r.role, r.date, r.start_time, r.end_time, owner.username, r.public_or_private, r.classroom, r.priority_reserved
+                FROM {DB.reservations} as r
+                JOIN {DB.user_reservation} AS ur ON r.id = ur.reservation_id
+                JOIN {DB.users} AS owner ON ur.user_id = owner.id
+				WHERE ur.is_owner = true AND r.id IN (
+				SELECT r2.id
+				FROM {DB.reservations} as r2
+				JOIN {DB.user_reservation} AS ur2 ON r2.id = ur2.reservation_id
+				JOIN {DB.users} AS u ON ur2.user_id = u.id
+				WHERE ur2.is_owner = false AND u.username = '{username}')"""
 
     c.execute(query)
     data = c.fetchall()
@@ -80,6 +97,22 @@ def getPriorityById(id):
     c, conn = Repo.getCursorAndConnection()
 
     c.execute(f"SELECT priority_reserved FROM {DB.reservations} WHERE id = ?", (id,))
+    priority = c.fetchone()
+    conn.close()
+    return priority
+
+def getPublicityById(id):
+    c, conn = Repo.getCursorAndConnection()
+
+    c.execute(f"SELECT public_or_private FROM {DB.reservations} WHERE id = ?", (id,))
+    priority = c.fetchone()
+    conn.close()
+    return priority
+
+def getClassById(id):
+    c, conn = Repo.getCursorAndConnection()
+
+    c.execute(f"SELECT classroom FROM {DB.reservations} WHERE id = ?", (id,))
     priority = c.fetchone()
     conn.close()
     return priority
@@ -102,6 +135,26 @@ def getReservationId(role, date, start_time, end_time, public_or_private, classr
         reservation_id = -1
 
     return reservation_id   
+
+
+def isUserInReservation(user_id, reservation_id):
+    c, conn = Repo.getCursorAndConnection()
+
+    c.execute(f"SELECT COUNT(*) FROM {DB.user_reservation} WHERE user_id = '{user_id}' AND reservation_id = '{reservation_id}'")
+    isIn = c.fetchone()[0] > 0
+
+    conn.close()
+    return isIn
+
+
+def isReservationOwner(user_id, reservation_id):
+    c, conn = Repo.getCursorAndConnection()
+
+    c.execute(f"SELECT COUNT(*) FROM {DB.user_reservation} WHERE user_id = '{user_id}' AND reservation_id = '{reservation_id}' AND is_owner = true")
+    isOwner = c.fetchone()[0] > 0
+
+    conn.close()
+    return isOwner
 
 
 def updateReservation(role, date, start_time, end_time, reservation_purpose, reserved_classroom, priority_reserved, id):

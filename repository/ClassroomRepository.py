@@ -74,15 +74,26 @@ def getAllClassroomCodes():
     conn.close()
     return class_codes
 
+
+def getSeatsByCode(class_code):
+    c, conn = Repo.getCursorAndConnection()
+
+    c.execute(f"SELECT seats FROM {DB.classrooms} WHERE code = '{class_code}'")
+    seats = c.fetchone()
+
+    conn.close()
+
+    if seats:
+        return seats[0]
+    return 0
+
+
+
 def getClassroomsWhere(criteria: dict, operations: dict):
     """
     Given filtering opitons as a dictionary, return the classrooms that fit the filtering 
     """
     query, parameters = getQuery(criteria, operations)
-
-    if DEBUG:
-        print(f'Query: {query}')
-        print(f'Parameters: {parameters}')
 
     c, conn = Repo.getCursorAndConnection()
     c.execute(query, parameters)
