@@ -690,19 +690,44 @@ def openEventAttendanceScreen():
         end_date = request.form.get('end_date')
         sender = request.form.get('sender')
         role = request.form.get('role')
-        return render_template("news_attendance.html",
-                               attendeeUsername=attendeeUsername,
-                               attendeeRole=attendeeRole,
-                               title=title,
-                               start_time=start_time,
-                               end_time=end_time,
-                               start_date=start_date,
-                               end_date=end_date,
-                               sender=sender,
-                               role=role)
+        return redirect(url_for("news_attendance",
+                                attendeeUsername=attendeeUsername,
+                                attendeeRole=attendeeRole,
+                                title=title,
+                                start_time=start_time,
+                                end_time=end_time,
+                                start_date=start_date,
+                                end_date=end_date,
+                                sender=sender,
+                                role=role))
     else:
-        return render_template("incoming_news.html")
-    
+        return redirect(url_for("incoming_news"))
+
+
+def incoming_news():
+    return render_template("incoming_news.html")
+
+
+def news_attendance():
+    attendeeUsername = request.args.get("attendeeUsername")
+    attendeeRole = request.args.get("attendeeRole")
+    title = request.args.get("title")
+    start_time = request.args.get("start_time")
+    end_time = request.args.get("end_time")
+    start_date = request.args.get("start_date")
+    end_date = request.args.get("end_date")
+    sender = request.args.get("sender")
+    role = request.args.get("role")
+    return render_template("news_attendance.html",
+                           attendeeUsername=attendeeUsername,
+                           attendeeRole=attendeeRole,
+                           title=title,
+                           start_time=start_time,
+                           end_time=end_time,
+                           start_date=start_date,
+                           end_date=end_date,
+                           sender=sender,
+                           role=role)
 
 ########################for convenience in table field updating######################
 def drop():
@@ -724,7 +749,7 @@ def attend_or_not():
         sender = request.form.get('sender')
         role = request.form.get('role')
         if UR.checkPreviousEventAttendance(username=attendeeUsername, event_title=title):
-            return render_template("alreadyAttendedEvent.html")
+            return redirect(url_for("already_attended_event"))
         else:
             UR.createAttendee(
             attendeeUsername = attendeeUsername,
@@ -737,10 +762,20 @@ def attend_or_not():
             sender=sender, 
             role=role
             )
-            return render_template("success_message_attendance.html")
-    else:
-        return render_template("news_attendance.html")
+            return redirect(url_for('success_message_attendance'))
+    elif request.method == "GET":
+        return redirect(url_for("get_news_attendance"))
             
+
+def get_news_attendance():
+    return render_template("news_attendance.html")
+
+def already_attended_event():
+    return render_template("alreadyAttendedEvent.html")
+
+def success_message_attendance():
+    return render_template("success_message_attendance.html")
+
 def openSCI():
     return render_template("science.html")
 

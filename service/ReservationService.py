@@ -340,7 +340,7 @@ def openITStaffReservationScreen():
     return render_template('it_staff_reservation_screen.html', options=options)
 
 
-def OpenReserveScreen():
+def open_reserve_screen():
     class_code = request.args.get('class_code')
     return render_template("student_reservation_screen.html")
 

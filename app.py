@@ -20,6 +20,10 @@ app.config['SECRET_KEY'] = '491'
 socketio = SocketIO(app)
 DEBUG = True
 
+app.route("/get_news_attendance")(US.get_news_attendance)
+app.route("/already_attended_event")(US.already_attended_event)
+
+app.route("/news_attendance")(US.news_attendance)
 app.route("/drop")(US.drop)
 
 app.route("/viewInsidesOfClassrooms")(US.getClassroomView)
@@ -46,7 +50,7 @@ def getCoursesWithPagination():
 
 
 app.route("/getAnnouncementScreen")(US.getAnnouncementScreen)
-
+app.route("/successMessageAttendance")(US.success_message_attendance)
 
 app.route("/open_news")(US.open_news_screen)
 app.route("/redirect_student_dashboard")(US.redirect_student_dashboard_from_news)
@@ -155,12 +159,12 @@ def joinOrLeaveReservation():
 
     return RS.joinOrLeaveReservation(joinType, reserv_id, username)
     
-    
+
 app.route('/already_reserved_classes',
           methods=['POST'])(RS.see_already_reserved_classes)
-app.route('/OpenReserveScreen', methods=['POST'])(RS.OpenReserveScreen)
+app.route('/open_reserve_screen', methods=['POST'])(RS.open_reserve_screen)
 ###########################################################################################################
-
+app.route('/incoming_news')(US.incoming_news)
 app.route('/attend_or_not', methods=['GET','POST'])(US.attend_or_not)
 app.route('/openEventAttendanceScreen', methods=['GET','POST'])(US.openEventAttendanceScreen)
 
