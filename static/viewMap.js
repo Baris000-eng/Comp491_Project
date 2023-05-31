@@ -8,6 +8,7 @@ var elcURL = '../static/images/elc.png';
 var dormsURL = '../static/images/dorms.png';
 var snaaURL = '../static/images/snaa.png';
 var snabURL = '../static/images/snab.png';
+var engURL = '../static/images/eng.png';
 
 
 function changeImageURLSNA(isHovered) {
@@ -56,7 +57,10 @@ function changeImageURLSNAB(isHovered) {
     var mapImage = document.getElementById('map-image');
     mapImage.src = isHovered ? originalImageURL : snabURL;
 }
-
+function changeImageURLENG(isHovered) {
+    var mapImage = document.getElementById('map-image');
+    mapImage.src = isHovered ? originalImageURL : engURL;
+}
 
 
 

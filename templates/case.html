@@ -1,39 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/select_floor.css">
-    <title>Please select floor</title>
+    <title>View Inside of Classrooms Via Pagination</title>
+    <link rel="stylesheet" type="text/css" href="../static/pagination_classroom_view.css" />
+    <script type="text/javascript" src="../static/pagination_classroom_view.js"></script>
 </head>
 
 <body>
-    <h1>Select your floor</h1>
-    <div class="all_floors">
-        <br>
-        <label for="">Floors above ground floor.</label>
-        <br>
-        <div class="floors_div">
+    {% if 'role' in session %} {% if session['role'] == 'teacher' %}
+    <form action="teacher/dashboard">
+        <div class="button_container">
+            <button>Go To Teacher Dashboard</button>
+        </div>
+    </form>
+    {% elif session['role'] == 'it_staff' %}
+    <form action="it_staff/dashboard">
+        <div class="button_container">
+            <button>Go To IT Staff Dashboard</button>
+        </div>
+    </form>
+    {% elif session['role'] == 'student' %}
+    <form action="redirect_student_dashboard">
+        <div class="button_container">
+            <button>Go To Student Dashboard</button>
+        </div>
+    </form>
+    {% endif %} {% endif %}
+    <br />
+    <div class="center-container">
+        <h2>Press classroom image to reserve the classroom.</h2>
+    </div>
+    <div id="image-container">
 
-            <br>
-            <form action="/viewInsidesOfClassrooms2"><button>Floor : 3</button></form>
-            <form action="/viewInsidesOfClassrooms2"><button>Floor : 2</button></form>
-            <form action="/viewInsidesOfClassrooms2"><button>Floor : 1</button></form>
-        </div>
-        <div class="floors_div">
-            <form action="/viewInsidesOfClassrooms2"><button>Ground Floor</button></form>
-        </div>
-        <br>
-        <label for="">Floors above ground floor.</label>
-        <br>
-        <div class="floors_div">
+        <img src="../static/images/CASEB19.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B19', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEZ48.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE Z48', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEZ33.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE Z33', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEZ27.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE Z27', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEZ26.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE Z26', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEZ25.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE Z25', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEZ24.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE Z24', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEZ16C.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE Z16C', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEZ16B.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE Z16B', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEZ16A.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE Z16A', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEZ08.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE Z08', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB41.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B41', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASE133.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE 133', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB40.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B40', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB39.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B39', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB38.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B38', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB35.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B35', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB34.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B34', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB33.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B33', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB31.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B31', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB30B.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B30B', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB30A.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B30A', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB26.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B26', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB24.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B24', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB15.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B15', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB13.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B13', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASEB12.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE B12', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASE216.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE 216', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASE124.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE 124', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASE136.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE 136', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
+        <img src="../static/images/CASE134.png" width="300" height="300"
+            onclick="redirectToReservationScreen('CASE 134', '{{ session.role }}')" name="openStudentReservationScreen"
+            value="openStudentReservationScreen" />
 
-            <form action="/viewInsidesOfClassrooms2"><button>Floor : -1</button></form>
-            <form action="/viewInsidesOfClassrooms2"><button>Floor : -2</button></form>
-            <form action="/viewInsidesOfClassrooms2"><button>Floor : -3</button></form>
-        </div>
+
+
+
+
+
+
+
+    </div>
+    <div id="pagination">
+        <a href="#" onclick="showPage(1)">1</a>
+        <a href="#" onclick="showPage(2)">2</a>
+        <a href="#" onclick="showPage(3)">3</a>
+        <a href="#" onclick="showPage(4)">4</a>
+        <a href="#" onclick="showPage(5)">5</a>
+        <a href="#" onclick="showPage(6)">6</a>
+        <a href="#" onclick="showPage(7)">7</a>
+        <a href="#" onclick="showPage(8)">8</a>
+        <a href="#" onclick="showPage(9)">9</a>
+        <a href="#" onclick="showPage(10)">10</a>
+        <a href="#" onclick="showPage(11)">11</a>
+        <a href="#" onclick="showPage(12)">12</a>
+        <a href="#" onclick="showPage(13)">13</a>
+        <a href="#" onclick="showPage(14)">14</a>
+        <a href="#" onclick="showPage(15)">15</a>
     </div>
 </body>
 
