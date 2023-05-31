@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>View Inside of Classrooms Via Pagination</title>
+    <title>View SNA-B Classrooms</title>
     <link rel="stylesheet" type="text/css" href="../static/pagination_classroom_view.css" />
     <script type="text/javascript" src="../static/pagination_classroom_view.js"></script>
 </head>
+
 <body>
+    <button></button>
     {% if 'role' in session %} {% if session['role'] == 'teacher' %}
     <form action="teacher/dashboard">
         <div class="button_container">
@@ -90,4 +93,5 @@
         <a href="#" onclick="showPage(2)">2</a>
     </div>
 </body>
+
 </html>
