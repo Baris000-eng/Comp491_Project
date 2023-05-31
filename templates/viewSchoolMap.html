@@ -2,51 +2,66 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/viewMap.css">
-    <script type="text/javascript" src="../static/viewMap.js"></script>
-    <title>Koç University School Map</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="../static/viewMap.js"></script>
+  <link rel="stylesheet" type="text/css" href="../static/viewMap.css">
+  <title>Document</title>
 </head>
+
 <body>
+  <div class="dashboards">
     {% if 'role' in session %} {% if session['role'] == 'teacher' %}
-    <form action="/teacher/dashboard">
-      <button>Go To Teacher Dashboard</button>
+    <form action="teacher/dashboard">
+      <button class="dashboard" type="submit">Go To Teacher Dashboard</button>
     </form>
     {% elif session['role'] == 'it_staff' %}
-    <form action="/it_staff/dashboard">
-      <button>Go To IT Staff Dashboard</button>
+    <form action="it_staff/dashboard">
+      <button class="dashboard" type="submit">Go To IT Staff Dashboard</button>
     </form>
     {% elif session['role'] == 'student' %}
-    <form action="redirect_student_dashboard">
-      <button>Go To Student Dashboard</button>
+    <form action="student/dashboard">
+      <button class="dashboard" type="submit">Go To Student Dashboard</button>
     </form>
-    {% endif %} {% endif %} 
-    <br>
-    <br>
-    <img src="../static/images/map3d.jpeg" usemap="#image-map" />
-    <div id="cursor-label"></div>
-    <map name="image-map">
-        <area shape="rect" class="segment1" coords="0,0,1000,1000" onclick="location.href='/viewFloors'" />
-        <area shape="rect" class="segment2" coords="100,100,400,400" onclick="location.href='/viewFloors'" />
-
-        <area shape="rect" class="segment1" coords="2130,240,2400,370" onclick="location.href='/openSNAA'" />
-        <area shape="rect" class="segment1" coords="2130,430,2400,850" onclick="location.href='/openSNAB'" />
-        <area shape="rect" class="segment1" coords="1460,500,1900,790" onclick="location.href='/openCASE'" />
-        <area shape="rect" class="segment1" coords="2130,430,2400,850" onclick="location.href='/openSOS'" />
-        <area shape="rect" class="segment1" coords="2320,400,2630,600" onclick="location.href='/openENG'" />
-        <area shape="rect" class="segment1" coords="2020,420,2500,720" onclick="location.href='/openSCI'" />
-        <area shape="rect" class="segment1" coords="900,750,1400,1080" onclick="location.href='/openSTD'" />
-        <area shape="rect" class="segment1" coords="1196,460,1530,710" onclick="location.href='/openLIB'" />
-        <area shape="rect" class="segment1" coords="1350,400,1600,560" onclick="location.href='/openELC'" />
-
-        
-
-        
+    {% elif session['role'] == 'admin' %}
+    <form action="admin/dashboard">
+      <button class="dashboard" type="submit">Go To Admin Dashboard</button>
+    </form>
+    {% endif %} {% endif %}
+  </div>
+  <img src="/static/images/map3d.png" alt="" id="map-image">
+  <br>
+  <div class="classButtons">
 
 
+    <form action=""><button onmouseover="changeImageURLSOS()" class="building-button dorms">SOS BUILDING</button>
+    </form>
+    <form action=""><button onmouseover="changeImageURLCASE()" class="building-button dorms">CASE BUILDING</button>
+    </form>
+    <form action=""> <button onmouseover="changeImageURLSTUDENTCENTER()" class="building-button dorms">STUDENT
+        CENTER</button>
+    </form>
+    <form action=""> <button onmouseover="changeImageURLSCIENCE()" class="building-button dorms">SCIENCE
+        BUILDING</button>
+    </form>
+    <form action=""> <button onmouseover="changeImageURLLIBRARY()" class="building-button dorms">LIBRARY
+        BUILDING</button>
+    </form>
+    <form action=""><button onmouseover="changeImageURLELC()" class="building-button dorms">ELC BUILDING</button>
+    </form>
+    <form action="">
+      <button onmouseover="changeImageURLDORMS()" class="building-button dorms">DORMS BUILDING</button>
+    </form>
+    <form action=""><button onmouseover="changeImageURLSNAA()" class="building-button dorms">SNA A BUILDING</button>
+    </form>
+    <form action=""> <button onmouseover="changeImageURLSNAB()" class="building-button dorms">SNA B BUILDING</button>
 
-    </map>
+    </form>
+
+  </div>
+
+
 </body>
+
 </html>

@@ -40,13 +40,13 @@ app.route('/class_schedules')(COS.course_schedules)
 app.route('/exam_schedules')(US.exam_schedules)
 app.route('/allExams')(US.allExams)
 
+
 @app.route('/courses', methods=['GET'])
 def getCoursesWithPagination():
     if DEBUG:
         print(f"request.args: {request.args}")
     pageNumber = request.args.get('pageNumber')
     return COS.getCoursesWithPagination(pageNumber)
-
 
 
 app.route("/getAnnouncementScreen")(US.getAnnouncementScreen)
@@ -67,7 +67,7 @@ app.route("/get_opening_help")(US.get_opening_help)
 app.route("/goToOpeningScreen")(US.goToOpeningScreen)
 app.route("/openFeatures")(US.openFeatures)
 
-#classrooms
+# classrooms
 app.route("/openSCI")(US.openSCI)
 app.route("/openSNAA")(US.openSNAA)
 app.route("/openSNAB")(US.openSNAB)
@@ -89,7 +89,7 @@ app.route('/select_role', methods=['POST'])(select_role)
 app.route('/chat_action')(chat_action)
 app.route('/reportingIT', methods=['POST'])(report_it)
 
-app.route("/makeAnnouncement", methods=['GET','POST'])(US.makeAnnouncement)
+app.route("/makeAnnouncement", methods=['GET', 'POST'])(US.makeAnnouncement)
 
 app.route('/logout')(go_to_opening_screen)
 app.route('/', methods=['GET', 'POST'])(US.opening_screen)
@@ -108,9 +108,9 @@ def getReservations():
 
 app.route('/getCreateNewsScreen', methods=['GET'])(US.createNews)
 app.route('/updateITReport', methods=['POST', 'GET'])(US.updateITReport)
-app.route('/open_it_report_success', methods=['GET'])(US.open_it_report_success)
+app.route('/open_it_report_success',
+          methods=['GET'])(US.open_it_report_success)
 app.route('/updateReservation', methods=['POST', 'GET'])(RS.updateReservation)
-
 
 
 @app.route('/<role>/screen', methods=['GET'])
@@ -152,21 +152,22 @@ app.route('/reserve_class', methods=['POST'])(RS.reserve_class)
 def joinOrLeaveReservation():
     if "joinOrLeave" not in request.form:
         return getReservations()
-    
+
     joinType = request.form.get("joinOrLeave")
     reserv_id = request.form.get("row_data").split(",")[0]
     username = session.get("username")
 
     return RS.joinOrLeaveReservation(joinType, reserv_id, username)
-    
+
 
 app.route('/already_reserved_classes',
           methods=['POST'])(RS.see_already_reserved_classes)
 app.route('/open_reserve_screen', methods=['POST'])(RS.open_reserve_screen)
 ###########################################################################################################
 app.route('/incoming_news')(US.incoming_news)
-app.route('/attend_or_not', methods=['GET','POST'])(US.attend_or_not)
-app.route('/openEventAttendanceScreen', methods=['GET','POST'])(US.openEventAttendanceScreen)
+app.route('/attend_or_not', methods=['GET', 'POST'])(US.attend_or_not)
+app.route('/openEventAttendanceScreen',
+          methods=['GET', 'POST'])(US.openEventAttendanceScreen)
 
 app.route('/openITReportScreen',
           methods=['GET'])(US.openITReportScreen)
@@ -215,6 +216,7 @@ app.route('/get_it_statistics_for_admin',
 # For Admin
 ###########################################################################################################
 # Testing out role-based signup request
+
 
 @app.route('/<role>/signup', methods=['GET', 'POST'])
 def signup(role):
@@ -290,13 +292,13 @@ app.route("/sendReservationInformationAsEmail",
           methods=["POST"])(MSS.sendReservationInformationAsEmail)
 
 
-######################this gets ip address of the device #####################
+###################### this gets ip address of the device #####################
 def get_ip_address():
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
         s.connect(('8.8.8.8', 80))
         ip_address = s.getsockname()[0]
     return ip_address
-######################this gets ip address of the device #####################
+###################### this gets ip address of the device #####################
 
 
 if __name__ == '__main__':
