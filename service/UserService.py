@@ -690,24 +690,26 @@ def openEventAttendanceScreen():
         end_date = request.form.get('end_date')
         sender = request.form.get('sender')
         role = request.form.get('role')
-        return render_template('news_attendance.html', 
-                            attendeeUsername = attendeeUsername,
-                            attendeeRole = attendeeRole,
-                            title=title, 
-                            start_time=start_time, end_time=end_time, 
-                            start_date=start_date, end_date=end_date, 
-                            sender=sender, role=role)
+        return render_template("news_attendance.html",
+                               attendeeUsername=attendeeUsername,
+                               attendeeRole=attendeeRole,
+                               title=title,
+                               start_time=start_time,
+                               end_time=end_time,
+                               start_date=start_date,
+                               end_date=end_date,
+                               sender=sender,
+                               role=role)
     
 
 ########################for convenience in table field updating######################
 def drop():
     cursor, connection= Repo.getCursorAndConnection()
-    cursor.execute("DROP TABLE IF EXISTS event_announcements_db")
+    cursor.execute("DELETE FROM event_announcements_db")
     connection.commit()
     connection.close()
     return ""
 ########################for convenience in table field updating######################
-
 def attend_or_not():
     if request.method=="POST":
         attendeeUsername = session["username"]
@@ -719,14 +721,9 @@ def attend_or_not():
         end_date = request.form.get('end_date')
         sender = request.form.get('sender')
         role = request.form.get('role')
-        if not UR.checkPreviousAttendance(
-            username=attendeeUsername, 
-            event_title=title,
-            event_start_time=start_time, 
-            event_end_time=end_time, 
-            event_start_date=start_date, 
-            event_end_date=end_date
-        ):
+        if UR.checkPreviousEventAttendance(username=attendeeUsername, event_title=title):
+            return render_template("alreadyAttendedEvent.html")
+        else:
             UR.createAttendee(
             attendeeUsername = attendeeUsername,
             attendeeRole = attendeeRole,
@@ -738,18 +735,8 @@ def attend_or_not():
             sender=sender, 
             role=role
             )
-            return render_template('success_message_attendance.html', 
-                            attendeeUsername = attendeeUsername,
-                            attendeeRole = attendeeRole,
-                            title=title, start_time=start_time, 
-                            end_time=end_time, start_date=start_date, 
-                            end_date=end_date,sender=sender,role=role)
+            return render_template("success_message_attendance.html")
             
-    
-        
-
-
-
 def openSCI():
     return render_template("science.html")
 

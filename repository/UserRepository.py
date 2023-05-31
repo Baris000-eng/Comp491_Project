@@ -393,18 +393,19 @@ def createAttendee(attendeeUsername, attendeeRole, title, start_time, end_time, 
     conn.close()
     
     
-def checkPreviousAttendance(username: str, event_title: str, event_start_time, event_end_time, event_start_date, event_end_date):
+def checkPreviousEventAttendance(username: str, event_title: str):
     cursor, connection = Repo.getCursorAndConnection()
-    cursor.execute("SELECT attendeeUsername FROM event_announcements_db WHERE start_time = ? AND end_time = ? AND start_date = ? AND end_date = ? AND title = ?",
-                   (event_start_time, event_end_time, event_start_date, event_end_date, event_title))
+    cursor.execute("SELECT COUNT(*) FROM event_announcements_db WHERE title = ? AND attendeeUsername = ?",
+                   (event_title, username))
     result = cursor.fetchone()
+    connection.close()
 
-    if result and result[0] == username:
-        connection.close()
+    if result and result[0] > 0:
         return True
 
-    connection.close()
     return False
+
+
 
 
     

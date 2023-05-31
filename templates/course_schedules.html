@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>Course Schedules</title>
   <link rel="stylesheet" type="text/css" href="../static/course_schedules.css">
   <script type="text/javascript" src="../static/pagination_course_view.js"></script>
 </head>
-
 <h1>Course Schedules</h1>
-
 <body>
   {% if 'role' in session %} {% if session['role'] == 'teacher' %}
   <form action="teacher/dashboard">
@@ -83,7 +80,7 @@
   <div id="pagination">
     {% if pageNumber %}
       {% for i in range(1, pageNumber + 1) %}
-        <a href="#" onclick="showPage({{ i }})">{{ i }}</a>
+        <a href="#" onclick="showPage({ i })">{{ i }}</a>
       {% endfor %}
     {% endif %}
   </div>

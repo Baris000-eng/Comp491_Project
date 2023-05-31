@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <link rel="stylesheet" type="text/css" href="/../static/reservation_success.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Event Attendance Success Message Screen</title>
 </head>
-
 <body>
     <div class="container">
-        <h1>You have successfully attended this event. Have fun.</h1>
+        <h1>You have successfully attended this event!</h1>
         {% if 'role' in session %} {% if session['role'] == 'teacher' %}
         <form action="/teacher/dashboard">
           <button>Go To Teacher Dashboard</button>
@@ -28,5 +25,4 @@
         {% endif %} {% endif %}
     </div>
 </body>
-
 </html>
