@@ -7,9 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript" src="../static/viewMap.js"></script>
   <link rel="stylesheet" type="text/css" href="../static/viewMap.css">
-  <title>Document</title>
+  <title>School Map View</title>
 </head>
-
 <body>
   <div class="dashboards">
     {% if 'role' in session %} {% if session['role'] == 'teacher' %}
@@ -21,7 +20,7 @@
       <button class="dashboard" type="submit">Go To IT Staff Dashboard</button>
     </form>
     {% elif session['role'] == 'student' %}
-    <form action="student/dashboard">
+    <form action="/redirect_student_dashboard">
       <button class="dashboard" type="submit">Go To Student Dashboard</button>
     </form>
     {% elif session['role'] == 'admin' %}
@@ -33,17 +32,6 @@
   <img src="/static/images/map3d.png" alt="" id="map-image">
   <br>
   <div class="classButtons">
-
-
-
-
-
-
-
-
-
-
-
     <form action="/openSOS"><button onmouseover="changeImageURLSOS()" class="building-button dorms">SOS
         BUILDING</button>
     </form>
@@ -74,10 +62,6 @@
     <form action="/openENG"><button onmouseover="changeImageURLENG()" class="building-button dorms">ENG
         BUILDING</button>
     </form>
-
   </div>
-
-
 </body>
-
 </html>
