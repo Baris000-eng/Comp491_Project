@@ -567,7 +567,7 @@ def enterChat():
 
     return render_template('chat_class_generic.html', rows=data, classroom=classroom)
 
-def send_chat_message_student():
+def send_chat_message():
     if request.method == 'POST':
         time = str(datetime.datetime.now().time())
         date = str(datetime.date.today())
@@ -585,8 +585,8 @@ def send_chat_message_student():
         conn.close()
 
         return redirect(url_for('enterChat', classroom=classroom, message = message))
-    else:
-        pass
+    elif request.method == "GET":
+        return render_template('chat_class_generic.html')
     
 def allExams():
     return exam_schedules()
