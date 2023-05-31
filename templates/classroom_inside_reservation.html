@@ -11,13 +11,13 @@
 <br>
 <div class="filterReservations">
     <form action="/reservations" method="GET">
-        <input type="radio" name="reservationType" id="allReservations" value="allReservations" checked>
+        <input type="radio" name="reservationType" id="allReservations" value="allReservations" {% if not reservation_type %}checked{% endif %}>
         <label for="allReservations">See all reservations</label>
         <br>
-        <input type="radio" name="reservationType" id="myReservations" value="myReservations">
+        <input type="radio" name="reservationType" id="myReservations" value="myReservations"{% if reservation_type == 'myReservations' %}checked{% endif %}>
         <label for="myReservations">See only my reservations</label>
         <br>
-        <input type="radio" name="reservationType" id="joinedReservations" value="joinedReservations">
+        <input type="radio" name="reservationType" id="joinedReservations" value="joinedReservations"{% if reservation_type == 'joinedReservations' %}checked{% endif %}>
         <label for="joinedReservations">See only joined reservations</label>
         <br>
         <br>
