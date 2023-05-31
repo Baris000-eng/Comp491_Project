@@ -679,29 +679,74 @@ def makeAnnouncement():
 def openMap():
     return render_template("viewSchoolMap.html")
 
+def openEventAttendanceScreen():
+    if request.method == "POST":
+        attendeeUsername = session["username"]
+        attendeeRole = session["role"]
+        title = request.form.get('title')
+        start_time = request.form.get('start_time')
+        end_time = request.form.get('end_time')
+        start_date = request.form.get('start_date')
+        end_date = request.form.get('end_date')
+        sender = request.form.get('sender')
+        role = request.form.get('role')
+        return render_template('news_attendance.html', 
+                            attendeeUsername = attendeeUsername,
+                            attendeeRole = attendeeRole,
+                            title=title, 
+                            start_time=start_time, end_time=end_time, 
+                            start_date=start_date, end_date=end_date, 
+                            sender=sender, role=role)
+    
 
-def seeNewsInfo():
-    title = request.form.get('title')
-    news_1 = request.form.get('news_1')
-    news_2 = request.form.get('news_2')
-    news_4 = request.form.get('news_4')
-    news_5 = request.form.get('news_5')
-    news_6 = request.form.get('news_6')
-
-    return render_template('news_attendance.html', title=title, news_1=news_1, news_2=news_2, news_4=news_4, news_5=news_5, news_6=news_6)
-
+########################for convenience in table field updating######################
+def drop():
+    cursor, connection= Repo.getCursorAndConnection()
+    cursor.execute("DROP TABLE IF EXISTS event_announcements_db")
+    connection.commit()
+    connection.close()
+    return ""
+########################for convenience in table field updating######################
 
 def attend_or_not():
-    title = request.form.get('title')
-    news_1 = request.form.get('news_1')
-    news_2 = request.form.get('news_2')
-    news_4 = request.form.get('news_4')
-    news_5 = request.form.get('news_5')
-    news_6 = request.form.get('news_6')
-    UR.createAttendee(title=title, news_1=news_1, news_2=news_2,
-                      news_4=news_4, news_5=news_5, news_6=news_6)
-
-    return render_template('success_message_attendance.html', title=title, news_1=news_1, news_2=news_2, news_4=news_4, news_5=news_5, news_6=news_6)
+    if request.method=="POST":
+        attendeeUsername = session["username"]
+        attendeeRole = session["role"]
+        title = request.form.get('title')
+        start_time = request.form.get('start_time')
+        end_time = request.form.get('end_time')
+        start_date = request.form.get('start_date')
+        end_date = request.form.get('end_date')
+        sender = request.form.get('sender')
+        role = request.form.get('role')
+        if not UR.checkPreviousAttendance(
+            username=attendeeUsername, 
+            event_title=title,
+            event_start_time=start_time, 
+            event_end_time=end_time, 
+            event_start_date=start_date, 
+            event_end_date=end_date
+        ):
+            UR.createAttendee(
+            attendeeUsername = attendeeUsername,
+            attendeeRole = attendeeRole,
+            title=title, 
+            start_time=start_time, 
+            end_time=end_time,
+            start_date=start_date, 
+            end_date=end_date, 
+            sender=sender, 
+            role=role
+            )
+            return render_template('success_message_attendance.html', 
+                            attendeeUsername = attendeeUsername,
+                            attendeeRole = attendeeRole,
+                            title=title, start_time=start_time, 
+                            end_time=end_time, start_date=start_date, 
+                            end_date=end_date,sender=sender,role=role)
+            
+    
+        
 
 
 

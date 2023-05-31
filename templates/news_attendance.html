@@ -8,39 +8,23 @@
     <link rel="stylesheet" type="text/css" href="/../static/news_attendance.css">
     <title>Inside The News</title>
 </head>
-
 <body>
     <div class="top_header">If you want to attend in this event, please click on attend.</div>
     <div class="middle_middle">
-
-
         </form>
-        <div class="container">
-            <p>{{title}}</p>
-            <p>{{news_1}}</p>
-            <p>{{news_2}}</p>
-            <p>{{news_3}}</p>
-            <p>{{news_4}}</p>
-            <p>{{news_5}}</p>
-            <p>{{news_6}}</p>
-        </div>
-        <form action="/redirect_student_dashboard">
-            <button>No, I do not want to attend</button>
-        </form>
-
-
-        <form action="/attend_or_not">
+        <form action="/attend_or_not" method="POST">
             <input type="hidden" name="title" value="{{title}}">
-            <input type="hidden" name="news_1" value="{{news_1}}">
-            <input type="hidden" name="news_1" value="{{news_2}}">
-            <input type="hidden" name="news_2" value="{{news_3}}">
-            <input type="hidden" name="news_4" value="{{news_4}}">
-            <input type="hidden" name="news_5" value="{{news_5}}">
-            <input type="hidden" name="news_6" value="{{news_6}}">
+            <input type="hidden" name="start_time" value="{{start_time}}">
+            <input type="hidden" name="end_time" value="{{end_time}}">
+            <input type="hidden" name="start_date" value="{{start_date}}">
+            <input type="hidden" name="end_date" value="{{end_date}}">
+            <input type="hidden" name="sender" value="{{sender}}">
+            <input type="hidden" name="role" value="{{role}}">
             <button>Yes, I want to attend</button>
-
+        </form>
+            <form action="/redirect_student_dashboard">
+                <button>No, I do not want to attend</button>
+            </form>
     </div>
-    <div class="bottom"></div>
 </body>
-
 </html>

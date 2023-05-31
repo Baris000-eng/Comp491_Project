@@ -375,19 +375,37 @@ def updateUserInformation(user_id, username, user_email, user_role, user_priorit
     conn.close()
 
 
-def initializeClubsDb():
+def initializeEventAnnouncementsTable():
     c, conn = Repo.getCursorAndConnection()
 
-    c.execute('''CREATE TABLE IF NOT EXISTS clubs_db
-                 (title TEXT, news_1 TEXT, news_2 TEXT, news_4 TEXT, news_5 TEXT, news_6 TEXT)''')
+    c.execute('''CREATE TABLE IF NOT EXISTS event_announcements_db
+                 (attendeeUsername TEXT, attendeeRole TEXT, title TEXT, 
+                 start_time TEXT, end_time TEXT, start_date TEXT, 
+                 end_date TEXT, senderName TEXT, senderRole TEXT)''')
 
 
-def createAttendee(title, news_1, news_2, news_4, news_5, news_6):
-    initializeClubsDb()
+def createAttendee(attendeeUsername, attendeeRole, title, start_time, end_time, start_date, end_date, sender, role):
     c, conn = Repo.getCursorAndConnection()
-    c.execute("INSERT INTO clubs_db VALUES (?, ?, ?, ?, ?, ?)",
-              (title, news_1, news_2, news_4, news_5, news_6))
+    c.execute("INSERT INTO event_announcements_db VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+              (attendeeUsername, attendeeRole, title, start_time, end_time, start_date, end_date, sender, role))
 
     conn.commit()
     conn.close()
+    
+    
+def checkPreviousAttendance(username: str, event_title: str, event_start_time, event_end_time, event_start_date, event_end_date):
+    cursor, connection = Repo.getCursorAndConnection()
+    cursor.execute("SELECT attendeeUsername FROM event_announcements_db WHERE start_time = ? AND end_time = ? AND start_date = ? AND end_date = ? AND title = ?",
+                   (event_start_time, event_end_time, event_start_date, event_end_date, event_title))
+    result = cursor.fetchone()
+
+    if result and result[0] == username:
+        connection.close()
+        return True
+
+    connection.close()
+    return False
+
+
+    
    

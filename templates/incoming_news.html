@@ -32,14 +32,15 @@
             <td>{{ news_item[5] }} ({{ news_item[6] }})</td>
             <td>{{ news_item[0] }}</td>
             <td>
-              <form action="/seeNewsInfo" method="POST">
+              <form action="/openEventAttendanceScreen" method="POST">
                 <input type="hidden" name="title" value="{{ news_item[0] }}" />
-                <input type="hidden" name="news_1" value="{{ news_item[2] }}" />
-                <input type="hidden" name="news_2" value="{{ news_item[3] }}" />
-                <input type="hidden" name="news_4" value="{{ news_item[4] }}" />
-                <input type="hidden" name="news_5" value="{{ news_item[5] }}" />
-                <input type="hidden" name="news_6" value="{{ news_item[6] }}" />
-                <button class="right_most">></button>
+                <input type="hidden" name="start_time" value="{{ news_item[1] }}" />
+                <input type="hidden" name="start_date" value="{{ news_item[2] }}" />
+                <input type="hidden" name="end_time" value="{{ news_item[3] }}" />
+                <input type="hidden" name="end_date" value="{{ news_item[4] }}" />
+                <input type="hidden" name="sender" value="{{ news_item[5] }}" />
+                <input type="hidden" name="role" value="{{ news_item[6] }}" />
+                <button class="eventAttendance">></button>
               </form>
             </td>
           </tr>
@@ -52,5 +53,3 @@
     </div>
   </body>
 </html>
-
-

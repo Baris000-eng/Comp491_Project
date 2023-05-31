@@ -20,6 +20,8 @@ app.config['SECRET_KEY'] = '491'
 socketio = SocketIO(app)
 DEBUG = True
 
+app.route("/drop")(US.drop)
+
 app.route("/viewInsidesOfClassrooms")(US.getClassroomView)
 app.route('/viewFloors')(US.viewFloors)
 app.route(
@@ -154,17 +156,13 @@ def joinOrLeaveReservation():
     return RS.joinOrLeaveReservation(joinType, reserv_id, username)
     
     
-
 app.route('/already_reserved_classes',
           methods=['POST'])(RS.see_already_reserved_classes)
 app.route('/OpenReserveScreen', methods=['POST'])(RS.OpenReserveScreen)
 ###########################################################################################################
 
-
-
-app.route('/attend_or_not')(US.attend_or_not)
-
-app.route('/seeNewsInfo', methods=['POST'])(US.seeNewsInfo)
+app.route('/attend_or_not', methods=["POST"])(US.attend_or_not)
+app.route('/openEventAttendanceScreen', methods=['POST'])(US.openEventAttendanceScreen)
 
 app.route('/openITReportScreen',
           methods=['GET'])(US.openITReportScreen)
