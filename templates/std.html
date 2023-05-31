@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>View Inside of Classrooms Via Pagination</title>
     <link rel="stylesheet" type="text/css" href="../static/pagination_classroom_view.css" />
     <script type="text/javascript" src="../static/pagination_classroom_view.js"></script>
 </head>
-
 <body>
     {% if 'role' in session %} {% if session['role'] == 'teacher' %}
     <form action="teacher/dashboard">
@@ -32,8 +30,6 @@
         <h2>Press classroom image to reserve the classroom.</h2>
     </div>
     <div id="image-container">
-
-
         <img src="../static/images/STD432.png" width="300" height="300"
             onclick="redirectToReservationScreen('STD 432', '{{ session.role }}')" name="openStudentReservationScreen"
             value="openStudentReservationScreen" />
@@ -43,12 +39,9 @@
         <img src="../static/images/STDB335.png" width="300" height="300"
             onclick="redirectToReservationScreen('STD B335', '{{ session.role }}')" name="openStudentReservationScreen"
             value="openStudentReservationScreen" />
-
-
     </div>
     <div id="pagination">
         <a href="#" onclick="showPage(1)">1</a>
     </div>
 </body>
-
 </html>

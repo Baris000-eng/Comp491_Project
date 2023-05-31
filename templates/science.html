@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>View Inside of Classrooms Via Pagination</title>
   <link rel="stylesheet" type="text/css" href="../static/pagination_classroom_view.css" />
   <script type="text/javascript" src="../static/pagination_classroom_view.js"></script>
 </head>
-
 <body>
   {% if 'role' in session %} {% if session['role'] == 'teacher' %}
   <form action="teacher/dashboard">
@@ -32,14 +30,6 @@
     <h2>Press classroom image to reserve the classroom.</h2>
   </div>
   <div id="image-container">
-
-
-
-
-
-
-
-
     <img src="../static/images/SCIZ42.png" width="300" height="300"
       onclick="redirectToReservationScreen('SCI Z42', '{{ session.role }}')" name="openStudentReservationScreen"
       value="openStudentReservationScreen" />
@@ -76,9 +66,6 @@
     <img src="../static/images/SCI103.png" width="300" height="300"
       onclick="redirectToReservationScreen('SCI 103', '{{ session.role }}')" name="openStudentReservationScreen"
       value="openStudentReservationScreen" />
-
-
-
     <img src="../static/images/SNAA43.png" width="300" height="300"
       onclick="redirectToReservationScreen('SNA A43', '{{ session.role }}')" name="openStudentReservationScreen"
       value="openStudentReservationScreen" />
@@ -157,43 +144,11 @@
     <img src="../static/images/SNA103.png" width="300" height="300"
       onclick="redirectToReservationScreen('SNA 103', '{{ session.role }}')" name="openStudentReservationScreen"
       value="openStudentReservationScreen" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </div>
   <div id="pagination">
     <a href="#" onclick="showPage(1)">1</a>
     <a href="#" onclick="showPage(2)">2</a>
     <a href="#" onclick="showPage(3)">3</a>
-    <a href="#" onclick="showPage(4)">4</a>
-    <a href="#" onclick="showPage(5)">5</a>
-    <a href="#" onclick="showPage(6)">6</a>
-    <a href="#" onclick="showPage(7)">7</a>
-    <a href="#" onclick="showPage(8)">8</a>
-    <a href="#" onclick="showPage(9)">9</a>
-    <a href="#" onclick="showPage(10)">10</a>
-    <a href="#" onclick="showPage(11)">11</a>
-    <a href="#" onclick="showPage(12)">12</a>
-    <a href="#" onclick="showPage(13)">13</a>
-    <a href="#" onclick="showPage(14)">14</a>
-    <a href="#" onclick="showPage(15)">15</a>
   </div>
 </body>
-
 </html>

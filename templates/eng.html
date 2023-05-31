@@ -1,40 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/select_floor.css">
-    <title>Please select floor</title>
+  <title>View Inside of Classrooms Via Pagination</title>
+  <link rel="stylesheet" type="text/css" href="../static/pagination_classroom_view.css" />
+  <script type="text/javascript" src="../static/pagination_classroom_view.js"></script>
 </head>
-
 <body>
-    <h1>Select your floor</h1>
-    <div class="all_floors">
-        <br>
-        <label for="">Floors above ground floor.</label>
-        <br>
-        <div class="floors_div">
-
-            <br>
-            <form action="/viewInsidesOfClassrooms2"><button>Floor : 3</button></form>
-            <form action="/viewInsidesOfClassrooms2"><button>Floor : 2</button></form>
-            <form action="/viewInsidesOfClassrooms2"><button>Floor : 1</button></form>
-        </div>
-        <div class="floors_div">
-            <form action="/viewInsidesOfClassrooms2"><button>Ground Floor</button></form>
-        </div>
-        <br>
-        <label for="">Floors above ground floor.</label>
-        <br>
-        <div class="floors_div">
-
-            <form action="/viewInsidesOfClassrooms2"><button>Floor : -1</button></form>
-            <form action="/viewInsidesOfClassrooms2"><button>Floor : -2</button></form>
-            <form action="/viewInsidesOfClassrooms2"><button>Floor : -3</button></form>
-        </div>
+  {% if 'role' in session %} {% if session['role'] == 'teacher' %}
+  <form action="teacher/dashboard">
+    <div class="button_container">
+      <button>Go To Teacher Dashboard</button>
     </div>
+  </form>
+  {% elif session['role'] == 'it_staff' %}
+  <form action="it_staff/dashboard">
+    <div class="button_container">
+      <button>Go To IT Staff Dashboard</button>
+    </div>
+  </form>
+  {% elif session['role'] == 'student' %}
+  <form action="redirect_student_dashboard">
+    <div class="button_container">
+      <button>Go To Student Dashboard</button>
+    </div>
+  </form>
+  {% endif %} {% endif %}
+  <br />
+  <div class="center-container">
+    <h2>Press classroom image to reserve the classroom.</h2>
+  </div>
+  <div id="image-container">
+    <img src="../static/images/ENGB210.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG 210', '{{ session.role }}')" />
+    <img src="../static/images/ENG114.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG 114', '{{ session.role }}')" />
+    <img src="../static/images/ENGB50.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B50', '{{ session.role }}')" />
+    <img src="../static/images/ENG128.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG 128', '{{ session.role }}')" />
+    <img src="../static/images/ENGZ21.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG Z21', '{{ session.role }}')" />
+    <img src="../static/images/ENGB19.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B19', '{{ session.role }}')" />
+    <img src="../static/images/ENGZ15.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG Z15', '{{ session.role }}')" />
+    <img src="../static/images/ENGZ27.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG Z27', '{{ session.role }}')" />
+    <img src="../static/images/ENGZ50.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG Z50', '{{ session.role }}')" />
+    <img src="../static/images/ENGB30.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B30', '{{ session.role }}')" />
+    <img src="../static/images/ENGZ21A.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG Z21A', '{{ session.role }}')" />
+    <img src="../static/images/ENGB42.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B42', '{{ session.role }}')" />
+    <img src="../static/images/ENGB32.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B32', '{{ session.role }}')" />
+    <img src="../static/images/ENGB29.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B29', '{{ session.role }}')" />
+    <img src="../static/images/ENGB21.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B21', '{{ session.role }}')" name="openStudentReservationScreen"
+      value="openStudentReservationScreen" />
+    <img src="../static/images/ENGB20B.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B20B', '{{ session.role }}')" name="openStudentReservationScreen"
+      value="openStudentReservationScreen" />
+    <img src="../static/images/ENGB20A.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B20A', '{{ session.role }}')" name="openStudentReservationScreen"
+      value="openStudentReservationScreen" />
+    <img src="../static/images/ENGB18.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B18', '{{ session.role }}')" name="openStudentReservationScreen"
+      value="openStudentReservationScreen" />
+    <img src="../static/images/ENGB16.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B16', '{{ session.role }}')" name="openStudentReservationScreen"
+      value="openStudentReservationScreen" />
+    <img src="../static/images/ENGB15.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B15', '{{ session.role }}')" name="openStudentReservationScreen"
+      value="openStudentReservationScreen" />
+    <img src="../static/images/ENGB11.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B11', '{{ session.role }}')" name="openStudentReservationScreen"
+      value="openStudentReservationScreen" />
+    <img src="../static/images/ENGB06.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B06', '{{ session.role }}')" name="openStudentReservationScreen"
+      value="openStudentReservationScreen" />
+    <img src="../static/images/ENGB05.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B05', '{{ session.role }}')" name="openStudentReservationScreen"
+      value="openStudentReservationScreen" />
+    <img src="../static/images/ENG120.png" width="300" height="300"
+      onclick="redirectToReservationScreen('ENG B120', '{{ session.role }}')" name="openStudentReservationScreen"
+      value="openStudentReservationScreen" />
+    <img src="../static/images/LIBB16B.png" width="300" height="300"
+      onclick="redirectToReservationScreen('LIB B16B', '{{ session.role }}')" name="openStudentReservationScreen"
+      value="openStudentReservationScreen" />
+    <img src="../static/images/LIB212E.png" width="300" height="300"
+      onclick="redirectToReservationScreen('LIB 212E', '{{ session.role }}')" name="openStudentReservationScreen"
+      value="openStudentReservationScreen" />
+    <img src="../static/images/LIB212D.png" width="300" height="300"
+      onclick="redirectToReservationScreen('LIB 212D' , '{{ session.role }}')" name="openStudentReservationScreen"
+      value="openStudentReservationScreen" />
+  </div>
+  <div id="pagination">
+    <a href="#" onclick="showPage(1)">1</a>
+    <a href="#" onclick="showPage(2)">2</a>
+   
+  </div>
 </body>
-
 </html>
