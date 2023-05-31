@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Already Attended Event</title>
     <link rel="stylesheet" type="text/css" href="../static/IT_report_success_screen.css">
-    <script type="text/javascript" src="../static/successful_reservation.js"></script>
 </head>
-<h1>Your have already attended this event.</h1>
+<h1>You have already attended this event.</h1>
 {% if 'role' in session %}
 {% if session['role'] == 'teacher' %}
 <form action="teacher/dashboard">

@@ -161,8 +161,8 @@ app.route('/already_reserved_classes',
 app.route('/OpenReserveScreen', methods=['POST'])(RS.OpenReserveScreen)
 ###########################################################################################################
 
-app.route('/attend_or_not', methods=["POST"])(US.attend_or_not)
-app.route('/openEventAttendanceScreen', methods=['POST'])(US.openEventAttendanceScreen)
+app.route('/attend_or_not', methods=['GET','POST'])(US.attend_or_not)
+app.route('/openEventAttendanceScreen', methods=['GET','POST'])(US.openEventAttendanceScreen)
 
 app.route('/openITReportScreen',
           methods=['GET'])(US.openITReportScreen)

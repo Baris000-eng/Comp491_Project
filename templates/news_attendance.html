@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,9 +8,7 @@
     <title>Inside The News</title>
 </head>
 <body>
-    <div class="top_header">If you want to attend in this event, please click on attend.</div>
-    <div class="middle_middle">
-        </form>
+    <h1>If you want to attend in this event, please click on attend.</h1>
         <form action="/attend_or_not" method="POST">
             <input type="hidden" name="title" value="{{title}}">
             <input type="hidden" name="start_time" value="{{start_time}}">
@@ -20,11 +17,10 @@
             <input type="hidden" name="end_date" value="{{end_date}}">
             <input type="hidden" name="sender" value="{{sender}}">
             <input type="hidden" name="role" value="{{role}}">
-            <button>Yes, I want to attend</button>
+            <button>Yes, I want to attend this event</button>
         </form>
-            <form action="/redirect_student_dashboard">
-                <button>No, I do not want to attend</button>
-            </form>
-    </div>
+        <form action="/redirect_student_dashboard">
+                <button>No, I do not want to attend this event</button>
+        </form>
 </body>
 </html>

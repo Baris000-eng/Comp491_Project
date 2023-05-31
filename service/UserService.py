@@ -700,6 +700,8 @@ def openEventAttendanceScreen():
                                end_date=end_date,
                                sender=sender,
                                role=role)
+    else:
+        return render_template("incoming_news.html")
     
 
 ########################for convenience in table field updating######################
@@ -736,6 +738,8 @@ def attend_or_not():
             role=role
             )
             return render_template("success_message_attendance.html")
+    else:
+        return render_template("news_attendance.html")
             
 def openSCI():
     return render_template("science.html")
