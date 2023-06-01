@@ -1,94 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/reservation_single_class.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../static/reservation_single_class.css"
+    />
     <script src="../static/reservation_single_class.js"></script>
     <title>Already-Reserved Classrooms</title>
-</head>
-<br>
-<div class="filterReservations">
-    <form action="/reservations" method="GET">
-        <input type="radio" name="reservationType" id="allReservations" value="allReservations" {% if not reservation_type %}checked{% endif %}>
-        <label for="allReservations">See all reservations</label>
-        <br>
-        <input type="radio" name="reservationType" id="myReservations" value="myReservations"{% if reservation_type == 'myReservations' %}checked{% endif %}>
-        <label for="myReservations">See only my reservations</label>
-        <br>
-        <input type="radio" name="reservationType" id="joinedReservations" value="joinedReservations"{% if reservation_type == 'joinedReservations' %}checked{% endif %}>
-        <label for="joinedReservations">See only joined reservations</label>
-        <br>
-        <br>
-        <button class = "record_changes_button">Record changes</button>
+  </head>
+  <body>
+    {% if 'role' in session %} {% if session['role'] == 'teacher' %}
+    <form action=" /teacher/dashboard">
+      <div class="dashboard-button-container">
+        <button class="teacher_class">Go To Teacher Dashboard</button>
+      </div>
     </form>
-</div>
-<br>
-<div class="box">
-    <div class="content">
+    {% elif session['role'] == 'student' %}
+    <form action="redirect_student_dashboard">
+      <div class="dashboard-button-container">
+        <button class="student_class">Go To Student Dashboard</button>
+      </div>
+    </form>
+    {% endif %} {% endif %}
+    <br />
+    <div class="filterReservations">
+      <form action="/reservations" method="GET">
+        <input
+          type="radio"
+          name="reservationType"
+          id="allReservations"
+          value="allReservations"
+          {%
+          if
+          not
+          reservation_type
+          %}checked{%
+          endif
+          %}
+        />
+        <label for="allReservations">See all reservations</label>
+        <br />
+        <input type="radio" name="reservationType" id="myReservations"
+        value="myReservations"{% if reservation_type == 'myReservations'
+        %}checked{% endif %}>
+        <label for="myReservations">See only my reservations</label>
+        <br />
+        <input type="radio" name="reservationType" id="joinedReservations"
+        value="joinedReservations"{% if reservation_type == 'joinedReservations'
+        %}checked{% endif %}>
+        <label for="joinedReservations">See only joined reservations</label>
+        <br />
+        <br />
+        <button class="record_changes_button">Record changes</button>
+      </form>
+    </div>
+    <br />
+    <div class="box">
+      <div class="content">
         {% for row in rows|reverse %}
-            <h3> Reservation </h3>
-            <ul>
-                <li>Role: {{ row[1] }}</li>
-                <li>Date: {{ row[2] }}</li>
-                <li>Start Time: {{ row[3] }}</li>
-                <li>End Time: {{ row[4] }}</li>
-                <li>Username: {{ row[5] }}</li>
-                <li>Reservation Purpose: {{ row[6] }}</li>
-                <li>Classroom: {{ row[7] }}</li>
-                <li>Priority Reserved: {{ row[8] }}</li>
-            </ul>
+        <h3>Reservation</h3>
+        <ul>
+          <li>Role: {{ row[1] }}</li>
+          <li>Date: {{ row[2] }}</li>
+          <li>Start Time: {{ row[3] }}</li>
+          <li>End Time: {{ row[4] }}</li>
+          <li>Username: {{ row[5] }}</li>
+          <li>Reservation Purpose: {{ row[6] }}</li>
+          <li>Classroom: {{ row[7] }}</li>
+          <li>Priority Reserved: {{ row[8] }}</li>
+        </ul>
         <div class="reservation_edit">
-            <form action="/enterChat" method="GET">
-                <input type="hidden" name="row_data" value="{{ row|join(',') }}">
-                <input type="hidden" name="classroom" value="{{ row[7] }}">
-                <button class="chatting">Enter Chat for This Classroom</button>
-            </form>
+          <form action="/enterChat" method="GET">
+            <input type="hidden" name="row_data" value="{{ row|join(',') }}" />
+            <input type="hidden" name="classroom" value="{{ row[7] }}" />
+            <button class="chatting">Enter Chat for This Classroom</button>
+          </form>
 
-            <form action="/editReservedClassroom" method="GET">
-                <input type="hidden" name="row_data" value="{{ row|join(',') }}">
-                {% if reservation_type %}
-                {% if reservation_type == 'myReservations' %}
-                <br>
-                <button class="editing">Edit your reservation</button>
-                {% endif %}
-                {% endif %}
-            </form>
+          <form action="/editReservedClassroom" method="GET">
+            <input type="hidden" name="row_data" value="{{ row|join(',') }}" />
+            {% if reservation_type %} {% if reservation_type == 'myReservations'
+            %}
+            <br />
+            <button class="editing">Edit your reservation</button>
+            {% endif %} {% endif %}
+          </form>
 
-            <form action="/joinOrLeaveReservation" method="POST">
-                <input type="hidden" name="row_data" value="{{ row|join(',') }}">
-                {% if reservation_type %}
-                {% if reservation_type == 'joinedReservations' %}
-                <br>
-                <input type="hidden" name="joinOrLeave" value="leave">
-                <button class="editing">Leave reservation</button>
-                {% endif %}
-                {% else %}
-                <br>
-                <input type="hidden" name="joinOrLeave" value="join">
-                <button class="editing">Join reservation</button>
-                {% endif %}
-            </form>
-            
+          <form action="/joinOrLeaveReservation" method="POST">
+            <input type="hidden" name="row_data" value="{{ row|join(',') }}" />
+            {% if reservation_type %} {% if reservation_type ==
+            'joinedReservations' %}
+            <br />
+            <input type="hidden" name="joinOrLeave" value="leave" />
+            <button class="editing">Leave reservation</button>
+            {% endif %} {% else %}
+            <br />
+            <input type="hidden" name="joinOrLeave" value="join" />
+            <button class="editing">Join reservation</button>
+            {% endif %}
+          </form>
         </div>
         {% endfor %}
+      </div>
     </div>
-</div>
-{% if 'role' in session %}
-{% if session['role'] == 'teacher' %}
-<form action=" /teacher/dashboard">
-  <div class="dashboard-button-container">
-    <button class="teacher_class">Go To Teacher Dashboard</button>
-  </div>
-</form>
-{% elif session['role'] == 'student' %}
-<form action="redirect_student_dashboard">
-  <div class="dashboard-button-container">
-    <button class="student_class">Go To Student Dashboard</button>
-  </div>
-</form>
-{% endif %}
-{% endif %}
-</body>
+  </body>
 </html>
