@@ -430,11 +430,11 @@ def report_it():
 
 def open_it_report_success():
     newsCount = request.args.get('newsCount')
-    return render_template("it_staff_pages/it_report_success_screen.html", newsCount=newsCount)
+    return render_template("it_staff_pages/IT_report_success_screen.html", newsCount=newsCount)
     
 def seeITReport():
     rows = UR.getAllITReports()
-    return render_template('it_staff_pages/it_report_list.html', rows=rows)
+    return render_template('it_staff_pages/IT_report_list.html', rows=rows)
 
 
 def chat_action():
