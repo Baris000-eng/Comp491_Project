@@ -27,18 +27,18 @@
 <br>
 <div class="box">
     <div class="content">
-        {% for row in rows %}
-        <h3> Reservation </h3>
-        <ul>
-            <li>Role: {{ row[1] }}</li>
-            <li>Date: {{ row[2] }}</li>
-            <li>Start Time: {{ row[3] }}</li>
-            <li>End Time: {{ row[4] }}</li>
-            <li>Username: {{ row[5] }}</li>
-            <li>Reservation Purpose: {{ row[6] }}</li>
-            <li>Classroom: {{ row[7] }}</li>
-            <li>Priority Reserved: {{ row[8] }}</li>
-        </ul>
+        {% for row in rows|reverse %}
+            <h3> Reservation </h3>
+            <ul>
+                <li>Role: {{ row[1] }}</li>
+                <li>Date: {{ row[2] }}</li>
+                <li>Start Time: {{ row[3] }}</li>
+                <li>End Time: {{ row[4] }}</li>
+                <li>Username: {{ row[5] }}</li>
+                <li>Reservation Purpose: {{ row[6] }}</li>
+                <li>Classroom: {{ row[7] }}</li>
+                <li>Priority Reserved: {{ row[8] }}</li>
+            </ul>
         <div class="reservation_edit">
             <form action="/enterChat" method="GET">
                 <input type="hidden" name="row_data" value="{{ row|join(',') }}">
